@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
     using static Common.EntityValidation.RentCarEntity;
+    using Infrastructure.Data.Enums;
 
     public class RentCar
     {
