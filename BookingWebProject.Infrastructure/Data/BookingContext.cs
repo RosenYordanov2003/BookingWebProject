@@ -30,6 +30,7 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.ApplyConfiguration(new HotelBenefitsConfiguration());
             builder.ApplyConfiguration(new RoomBasisEntityConfiguration());
             builder.ApplyConfiguration(new HotelEntityConfiguration());
