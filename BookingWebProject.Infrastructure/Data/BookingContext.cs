@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingWebProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class BookingContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BookingContext(DbContextOptions<BookingContext> options)
             : base(options)
         {
         }
