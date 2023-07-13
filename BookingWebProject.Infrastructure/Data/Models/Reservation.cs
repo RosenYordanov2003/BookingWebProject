@@ -23,6 +23,7 @@
         public RentCar? RentCar { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
         [Required]
         [MaxLength(UserFirstNameMaxValue)]
         public string FirstName { get; set; } = null!;
