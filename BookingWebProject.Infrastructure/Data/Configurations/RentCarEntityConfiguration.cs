@@ -1,10 +1,10 @@
-﻿using BookingWebProject.Infrastructure.Data.Enums;
-using BookingWebProject.Infrastructure.Data.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-
-namespace BookingWebProject.Infrastructure.Data.Configurations
+﻿namespace BookingWebProject.Infrastructure.Data.Configurations
 {
+    using Enums;
+    using Models;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Microsoft.EntityFrameworkCore;
+
     public class RentCarEntityConfiguration : IEntityTypeConfiguration<RentCar>
     {
         public void Configure(EntityTypeBuilder<RentCar> builder)

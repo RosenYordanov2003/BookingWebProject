@@ -1,6 +1,6 @@
 ﻿namespace BookingWebProject.Infrastructure.Data.Configurations
 {
-    using Infrastructure.Data.Models;
+    using Models;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Microsoft.EntityFrameworkCore;
 
