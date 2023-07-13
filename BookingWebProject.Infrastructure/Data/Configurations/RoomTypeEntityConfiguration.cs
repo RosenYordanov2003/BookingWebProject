@@ -3,7 +3,7 @@
     using Models;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Microsoft.EntityFrameworkCore;
-    public class RoomTypeEntityConfiguration
+    public class RoomTypeEntityConfiguration: IEntityTypeConfiguration<RoomType>
     {
         public void Configure(EntityTypeBuilder<RoomType> builder)
         {

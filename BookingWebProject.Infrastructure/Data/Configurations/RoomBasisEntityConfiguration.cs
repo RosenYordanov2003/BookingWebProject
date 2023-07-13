@@ -2,7 +2,9 @@
 {
     using Models;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    public class RoomBasisEntityConfiguration
+    using Microsoft.EntityFrameworkCore;
+
+    public class RoomBasisEntityConfiguration: IEntityTypeConfiguration<RoomBasis>
     {
         public void Configure(EntityTypeBuilder<RoomBasis> builder)
         {
