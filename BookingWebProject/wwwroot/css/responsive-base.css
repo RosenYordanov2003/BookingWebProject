@@ -1,0 +1,159 @@
+﻿@media screen and (min-width:450px) and (max-width:700px) {
+
+    header {
+       display: flex;
+       align-items: center;
+       justify-content: center
+    }
+
+    .navigation {
+       display: none;
+    }
+
+    #menu-btn, #logo2 {
+       display: block;
+    }
+
+    .content-logo {
+       font-size: 1.5rem;
+    }
+
+    .content-title {
+      font-size: 1.4rem;
+    }
+
+    .title {
+       font-size: 1.6rem;
+    }
+    .content-section p {
+        font-size: 1.2rem;
+    }
+
+    .input-container label {
+       font-size: 1.3rem;
+    }
+
+    .input-container input {
+       width: auto;
+       font-size: 0.9rem
+    }
+
+    input::placeholder {
+       opacity: 0.5;
+    }
+
+    .form-container {
+       width: 90%;
+       margin-top: 4rem;
+       flex-direction: column;
+       gap: 2rem;
+    }
+
+    .register-form {
+       width: 60%;
+       margin-bottom: 2rem;
+    }
+    .submit-btn{
+      padding: 0.8rem 0rem 0.8rem 0rem;
+      width: 80%;
+    }
+}
+/*under 450px*/
+@media screen and (min-width:280px) and (max-width:450px) {
+
+    header {
+       display: flex;
+       align-items: center;
+       justify-content: center
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    #menu-btn, #logo2 {
+       display: block;
+    }
+
+    .content-logo {
+       font-size: 2rem;
+    }
+
+    .content-title {
+       font-size: 1.2rem;
+    }
+
+    .title {
+       font-size: 1rem;
+    }
+
+    .input-container label {
+       font-size: 1rem;
+    }
+    .content-section p {
+       font-size: 1rem;
+    }
+
+    .input-container input {
+        width: auto;
+        font-size: 0.9rem
+    }
+
+    input::placeholder {
+        opacity: 0.5;
+    }
+
+    .form-container {
+        width: 90%;
+        margin-top: 4rem;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .register-form {
+        width: 60%;
+        margin-bottom: 2rem;
+    }
+}
+/*between 701px command 1000px*/
+@media screen and (min-width:701px) and (max-width:1200px) {
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    #menu-btn, #logo2 {
+        display: block;
+    }
+
+    .content-logo {
+        font-size: 2.2rem;
+    }
+
+    .content-title {
+        font-size: 2rem;
+    }
+
+    .form-container {
+        margin-top: 3rem;
+        width: 85%;
+        gap: 2.5rem;
+        flex-direction: column;
+    }
+
+    .content-section p {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (min-width:1201px) {
+    .drop-down-menu {
+        display: none;
+    }
+}
