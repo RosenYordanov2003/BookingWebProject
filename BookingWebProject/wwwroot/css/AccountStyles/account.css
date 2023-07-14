@@ -1,0 +1,173 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+    outline: none;
+}
+
+header {
+    background-color: transparent;
+    position: relative;
+    z-index: 3;
+}
+
+
+body {
+    background-image: url('../../img/Booking project register-background img.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.form-container {
+    position: absolute;
+    max-height: 90vh;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.content-section {
+    width: 60%;
+}
+
+.content-title {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.content-section p {
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+span {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+    max-width: 300px
+}
+
+.register-form .input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container label {
+    font-size: 1.5rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.shift {
+    transform: translateY(-10px);
+    font-size: 1.3em;
+}
+
+.input-container input {
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    width: 300px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.submit-btn {
+    background: #00BFFF;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: rgba(0,0,0,0.4);
+    border: 1px solid black;
+    margin-top: 1.6rem;
+    margin-bottom: 2rem;
+    width: 90%;
+    padding: 1rem 0rem 1rem 0rem;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.7s ease;
+}
+
+input::placeholder {
+    color: white;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.drop-down-menu {
+  background-color: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.drop-down-menu li a {
+ color: white;
+}
+
+input[type="text"]:focus, input[type="text"]:active {
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+section:not(:last-of-type) {
+  margin-bottom: 1.4rem;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+.submit-btn:active {
+  opacity: 0.4;
+}
+
+.error-container ul {
+  margin-top: 3rem;
+}
+
+.error-container ul li {
+ font-size: 1.7rem;
+ color: red;
+ font-weight: bolder;
+ list-style: none;
+}
+
+.create-account-msg {
+  font-size: 1.6rem;
+  color: white;
+  font-weight: bold;
+}
+
+.create-account-msg a {
+  color: white;
+}
+
+.content-logo {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header .navigation {
+    padding: 25px 6.2rem;
+}

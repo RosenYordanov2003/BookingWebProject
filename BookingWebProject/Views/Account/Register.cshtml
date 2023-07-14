@@ -1,0 +1,46 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<link rel="stylesheet" href="~/css/AccountStyles/account.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="form-container">
+    <section class="content-section">
+        <h1 class="content-logo"><i class="fa-solid fa-plane"></i> Travel</h1>
+        <h2 class="content-title">Welcome to our booking platform!</h2>
+        <p>
+            Thank you for choosing our reservation platform.
+        </p>
+    </section>
+    <form class="register-form" method="post">
+        <h1 class="title">@ViewData["Title"]</h1>
+        <section class="input-container">
+            <label asp-for="@Model.Username">Username</label>
+            <input type="text" autocomplete="username" aria-required="true" placeholder="Enter username..." asp-for="@Model.Username" />
+            <span asp-validation-for="@Model.Username" class="text-danger"></span>
+        </section>
+        <section class="input-container">
+            <label asp-for="@Model.Email">Email</label>
+            <input type="text" autocomplete="email" aria-required="true" placeholder="Enter email..." asp-for="@Model.Email" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </section>
+        <section class="input-container">
+            <label asp-for="@Model.Password">Password</label>
+            <input type="password" autocomplete="password" aria-required="true" placeholder="Enter password" asp-for="@Model.Password" />
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </section>
+        <section class="input-container">
+            <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
+            <input type="password" placeholder="Repeat password..." aria-required="true" asp-for="@Model.ConfirmPassword" />
+            <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+        </section>
+        <button class="submit-btn" type="submit">Register</button>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
+    </form>
+
+</div>
+<script src="~/js/account.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

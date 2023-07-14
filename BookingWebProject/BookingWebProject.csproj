@@ -20,8 +20,4 @@
     <ProjectReference Include="..\BookingWebProject.Infrastructure\BookingWebProject.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
-  </ItemGroup>
-
 </Project>
