@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookingWebProject.Core\BookingWebProject.Core.csproj" />
     <ProjectReference Include="..\BookingWebProject.Infrastructure\BookingWebProject.Infrastructure.csproj" />
   </ItemGroup>
 
