@@ -1,6 +1,7 @@
+using BookingWebProject.Core.Contracts;
+using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
 using BookingWebProject.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddEntityFrameworkStores<BookingContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IHotelService, HotelService>();
 
 var app = builder.Build();
 

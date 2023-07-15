@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookingWebProject.Common\BookingWebProject.Common.csproj" />
+    <ProjectReference Include="..\BookingWebProject.Infrastructure\BookingWebProject.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
