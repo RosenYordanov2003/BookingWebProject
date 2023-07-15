@@ -1,8 +1,78 @@
-﻿@{
+﻿@model IEnumerable<HotelCardViewModel>
+
+
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="~/css/HomeStyles/Home.css" asp-append-version="true" />
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<section class="introduction-section">
+    <h2 class="intro-title">Travel in comfort</h2>
+    <p class="intro-content">
+        Experience the epitome of luxury and adventure with our exceptional travel application.
+        Discover a handpicked selection of exquisite hotels, where personalized service and breathtaking surroundings
+        merge to create a truly unforgettable journey
+    </p>
+    <a asp-controller="Hotel" asp-action="All" class="intro-link">Get started</a>
+</section>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="services">
+    <h2 class="service-title">Start Your Vacation with our Services</h2>
+    <p class="service-description">
+        Discover a world of possibilities with our travel application.
+        Explore a wide selection of hotels and car rentals tailored to your preferences and budget.
+        Plan your dream getaway with ease and convenience, all at your fingertips.
+    </p>
+    <section class="cards">
+        <div class="card">
+            <div class="img-container">
+                <a asp-controller="Hotel" asp-action="All"><img src="~/img/hotel-img.png" /></a>
+            </div>
+            <div class="card-content">
+                <p>Book your hotel for your holiday</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="img-container">
+                <a asp-controller="Car" asp-action="All"> <img src="~/img/rent car img.png" /></a>
+            </div>
+            <div class="card-content">
+                <p>Rent a Car for your Holiday</p>
+            </div>
+        </div>
+    </section>
+</section>
+<section class="destinations">
+    <h2 class="title">Our best Hotels</h2>
+    <div class="hotels">
+        @foreach (HotelCardViewModel hotel in Model)
+        {
+            <div class="hotel-container">
+                <div class="hotel-img-container">
+                    <a asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
+                    <p class="original-img-path" style="display:none">@hotel.Pictures[0].Path</p>
+                    <p class="second-img-path" style="display:none">@hotel.Pictures[1].Path</p>
+                    <p class="country">@hotel.Country</p>
+                    <p class="hotel-name">@hotel.Name</p>
+                </div>
+                <div class="content">
+                    <p class="hotel-city"><i class="fa-solid fa-location-dot"></i>@hotel.City</p>
+                    <ul class="star-list">
+                        @for (int i = 0; i < hotel.Stars; i++)
+                        {
+                            <li><i class="fa-solid fa-star"></i></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
