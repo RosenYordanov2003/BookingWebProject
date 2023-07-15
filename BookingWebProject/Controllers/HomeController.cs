@@ -1,4 +1,6 @@
-﻿using BookingWebProject.Models;
+﻿using BookingWebProject.Core.Contracts;
+using BookingWebProject.Core.Models.Hotel;
+using BookingWebProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,21 +8,16 @@ namespace BookingWebProject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHotelService hotelService;
+        public HomeController(IHotelService hotelService)
         {
-            _logger = logger;
+            this.hotelService = hotelService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            IEnumerable<HotelCardViewModel> hotels = await hotelService.GetTopHotelsAsync();
+            return View(hotels);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
