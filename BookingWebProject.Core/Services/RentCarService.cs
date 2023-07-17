@@ -38,6 +38,20 @@
                 Cars = carViewModels
             };
         }
+        public async Task<int> GetCarsCountAsync(CarQuerViewModel model)
+        {
+            IQueryable<RentCar> cars = bookingContext.RentCars.Where(rc => !rc.IsDeleted).AsQueryable();
+            cars = FilterCars(model, cars);
+
+            return await cars.CountAsync();
+        }
+
+        public async Task<IEnumerable<string>> GetAllBrandsAsync()
+        {
+            IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
+                .ToArrayAsync();
+            return brands;
+        }
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
         {
             if (carQuerViewModel.DoorsCount.HasValue)

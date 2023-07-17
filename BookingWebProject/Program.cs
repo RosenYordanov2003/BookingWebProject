@@ -24,9 +24,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
+        //This filter adds a guid to the forms
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
     });
 builder.Services.AddScoped<IHotelService, HotelService>();
+builder.Services.AddScoped<IRentCarService, RentCarService>();
 
 var app = builder.Build();
 

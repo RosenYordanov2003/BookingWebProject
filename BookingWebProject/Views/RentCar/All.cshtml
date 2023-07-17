@@ -1,0 +1,188 @@
+﻿@model CarQuerViewModel
+
+<link rel="stylesheet" href="~/css/RentCarStyles/All.css" asp-append-version="true" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/CarStyles/Responsive/All.css" asp-append-version="true" />
+
+<section class="intro">
+    <h2 class="title">Rent a car</h2>
+    <p class="content">"Rent a Car" service provides convenient and flexible transportation options for your travel needs.</p>
+</section>
+<section class="about">
+    <h1 class="title">About Rent Car Services</h1>
+    <div class="container">
+        <div class="content-container">
+            <p class="content">
+                "Rent a Car" service offers you the convenience and freedom to explore your destination at your own pace.
+                Whether you're a leisure traveler or a business professional, our diverse fleet of vehicles provides options to suit your needs.
+                From compact cars for urban adventures to spacious SUVs for family getaways, we have the perfect car to enhance your travel
+                experience. Enjoy the flexibility and convenience of "Rent a Car" service and make the most out of your journey.
+            </p>
+            <div class="benefits-container">
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i>Convenience and Mobility</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Flexibility and Freedom</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Wide Selection</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Hassle-Free Travel</li>
+                </ul>
+            </div>
+        </div>
+        <div class="img-container">
+            <img src="~/img/Car section img.jpg" />
+        </div>
+    </div>
+</section>
+<form method="get" class="form-container">
+    <p><i class="fa-solid fa-arrow-up-wide-short"></i>Sort By</p>
+    <select id="selectedOption" asp-for="@Model.CarSortOption">
+        <option value="0">Default</option>
+        <option value="1">Price Ascending</option>
+        <option value="2">Price Descending</option>
+        <option value="3">Year Ascending</option>
+        <option value="4">Year Descending</option>
+        <option value="5">Make Type Ascending</option>
+        <option value="6">Make Type Descending</option>
+    </select>
+    <input type="hidden" name="doorsCount" value="@Model.DoorsCount" />
+    <input type="hidden" name="minYear" value="@Model.MinYear" />
+    <input type="hidden" name="maxYear" value="@Model.MaxYear" />
+    <input type="hidden" name="minPrice" value="@Model.MinPrice" />
+    <input type="hidden" name="maxPrice" value="@Model.MaxPrice" />
+    <input type="hidden" name="brand" value="@Model.Brand" />
+    <button type="submit">Sort</button>
+</form>
+
+<form method="get" class="filter-container" asp-controller="RentCar" asp-action="All">
+    <div class="title-container">
+        <img class="filter-img" src="~/img/FilterIcon.png" />
+        <h3 class="filter-title"> Filters</h3>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.DoorsCount">Doors count</label>
+        <input asp-for="@Model.DoorsCount" type="number">
+        <span asp-validation-for="@Model.DoorsCount"></span>
+        <input type="hidden" name="doorsCount" value="@Model.DoorsCount" />
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MinYear">Start Year</label>
+        <input asp-for="@Model.MinYear" type="number" min="2000">
+        <span asp-validation-for="@Model.MinYear"></span>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MaxYear">End Year</label>
+        <input asp-for="@Model.MaxYear" type="number" max="@DateTime.Now.Year"></>
+        <span asp-validation-for="@Model.MaxYear"></span>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MinPrice">Min Price</label>
+        <input asp-for="@Model.MinPrice" type="number"></>
+        <span asp-validation-for="@Model.MinPrice"></span>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.MaxPrice">Max Price</label>
+        <input asp-for="@Model.MaxPrice" type="number"></>
+        <span asp-validation-for="@Model.MaxPrice"></span>
+    </div>
+    <div class="container">
+        <label asp-for="@Model.Brand">Brand</label>
+        <select asp-for="@Model.Brand">
+            @foreach (string brand in Model.Brands)
+            {
+                <option value="@brand">@brand</option>
+            }
+            <option value="default">All</option>
+        </select>
+    </div>
+    <input type="hidden" name="carSortOption" value="@Model.CarSortOption" />
+    <button type="submit" class="filter-btn">Filter</button>
+</form>
+<section class="cars">
+    @if (!Model.Cars.Any())
+    {
+        <h1 class="title">no matches found</h1>
+    }
+    else
+    {
+        <h1 class="title">Our Offers</h1>
+    }
+    @* May become partial view*@
+    <div class="cars-container">
+        @foreach (CarViewModel car in Model.Cars)
+        {
+            <div class="card">
+                <div class="car-img-container">
+                    <img src="@car.CarImg">
+                </div>
+                <p class="car-name">@car.MakeType @car.Model</p>
+                <p class="car-year">Year: @car.Year</p>
+                <p class="price">$@car.PricePerDay / Day</p>
+                <p class="car-location"><i class="fa-solid fa-location-dot"></i>@car.Location</p>
+                <div class="btn-container">
+                    <a class="details-btn" asp-controller="RentCar" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                    <a class="rent-btn" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@car.Id">Rent</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+<div class="pagination-container">
+    @if (Model.Pager.TotalPages > 0)
+    {
+        <ul class="page-list">
+            @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("All", "RentCar", new
+                {
+                    currentPage = Model.Pager.CurrentPage - 1,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">Previous</a>
+                </li>
+            }
+            @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="page-item">
+                    <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+               href="@Url.Action("All", "RentCar", new
+                {
+                    currentPage = page,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">@(page)</a>
+                </li>
+            }
+            @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("All", "RentCar", new
+                {
+                    currentPage = Model.Pager.CurrentPage + 1,
+                    carSortOption = (int)Model.CarSortOption,
+                    doorsCount = Model.DoorsCount,
+                    minPrice = Model.MinPrice,
+                    maxPrice = Model.MaxPrice,
+                    brand = Model.Brand,
+                    minYear = Model.MinYear,
+                    maxYear = Model.MaxYear
+                })">Next</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
