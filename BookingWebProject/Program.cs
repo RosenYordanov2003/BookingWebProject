@@ -2,6 +2,7 @@ using BookingWebProject.Core.Contracts;
 using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
 using BookingWebProject.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireUppercase = false;
 })
     .AddEntityFrameworkStores<BookingContext>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddMvcOptions(options =>
+    {
+        options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+    });
 builder.Services.AddScoped<IHotelService, HotelService>();
 
 var app = builder.Build();

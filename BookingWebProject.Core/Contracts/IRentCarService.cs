@@ -3,6 +3,6 @@
     using Models.RentCar;
     public interface IRentCarService
     {
-        Task<AllCarsSortedAndFilteredDataModel> AllCarsSortedAndFilteredDataModelAsync(CarQueryViewModel carQuerViewModel);
+        Task<AllCarsSortedAndFilteredDataModel> AllCarsSortedAndFilteredDataModelAsync(CarQuerViewModel carQuerViewModel);
     }
 }
