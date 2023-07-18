@@ -1,0 +1,148 @@
+﻿@media all and (min-width:280px) and (max-width:700px) {
+
+    .intro {
+        height: auto;
+    }
+
+    header {
+        padding: 0.7rem 3rem;
+    }
+
+    .intro .content {
+        width: 100%;
+        font-size: 1.3rem;
+    }
+
+    .intro .title {
+        font-size: 2.5rem;
+    }
+
+    .about .title {
+        font-size: 2rem;
+    }
+
+    .about .container {
+        flex-direction: column;
+    }
+
+    .about .content-container {
+        width: 90%;
+    }
+
+    .about .content {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .about .benefits-container ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about .benefits-container .ul li {
+        font-size: 1rem;
+    }
+
+    .img-container {
+        width: 280px;
+        margin-top: 1.4rem;
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .title-container {
+        margin-bottom: 2rem;
+    }
+
+    .filter-container .container label {
+        margin-bottom: 0.4rem;
+    }
+
+    .pagination-container {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 1.8rem;
+    }
+
+    .card .car-img-container {
+        width: 200px;
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .car-name, .price, .car-year, .car-location {
+        font-size: 1rem;
+    }
+
+    .cars-container .card .btn-container a {
+        width: 120px;
+        font-size: 1rem;
+    }
+
+    .cars .title {
+        font-size: 1.8rem;
+    }
+
+    .page-list .page-link {
+        font-size: 1rem;
+    }
+
+    .pagination-container .page-list {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .page-list .page-link {
+        padding: 0.6rem 0.9rem;
+    }
+}
+
+@media all and (min-width: 701px) and (max-width:1000px) {
+    header {
+        padding: 1.2rem 3rem;
+    }
+
+    .about .content {
+        font-size: 1.3rem;
+        line-height: 1.4;
+    }
+
+    .about .title {
+        font-size: 2.4rem;
+    }
+
+    .about .benefits-container ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cars .title {
+        font-size: 2.5rem;
+    }
+
+    .filter-container label {
+        margin-bottom: 0.3rem;
+        font-size: 1.1rem;
+    }
+
+    .pagination-container {
+        justify-content: flex-start;
+    }
+
+    .page-list .page-link {
+        padding: 0.9rem 1rem;
+    }
+
+    .card .car-img-container {
+        width: 400px;
+        text-align: center;
+    }
+}
