@@ -6,6 +6,7 @@
     using Infrastructure.Data.Models;
     using Contracts;
     using Microsoft.EntityFrameworkCore;
+    using BookingWebProject.Infrastructure.Data.Enums;
 
     public class RentCarService : IRentCarService
     {
@@ -51,6 +52,29 @@
             IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
                 .ToArrayAsync();
             return brands;
+        }
+        public async Task<CarDetailsViewModel> FindCarByIdAsync(int carId)
+        {
+            CarDetailsViewModel carToFind = await bookingContext.RentCars
+                  .Select(rc => new CarDetailsViewModel()
+                  {
+                      Id = rc.Id,
+                      MakeType = rc.MakeType,
+                      Model = rc.ModelType,
+                      PeopleCapacity = rc.PeopleCapacity,
+                      Location = rc.Location,
+                      Longitude = rc.Longitude,
+                      Latitude = rc.Lattitude,
+                      CarImg = rc.CarImg,
+                      DoorsCount = rc.DoorsCount,
+                      FuelCapacity = rc.FuelCapacity,
+                      FuelConsumption = rc.FuelConsumption,
+                      PricePerDay = rc.PricePerDay,
+                      Year = rc.Year,
+                      TransmissionType = rc.TransmissionType == TransmissionType.AutomaticTransmission ? "Automatic Transmission" : "Manual Transmission"
+                  })
+                .FirstAsync(c => c.Id == carId);
+            return carToFind;
         }
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
         {
@@ -110,5 +134,6 @@
 
             return cars;
         }
+
     }
 }
