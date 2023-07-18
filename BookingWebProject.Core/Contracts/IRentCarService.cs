@@ -7,5 +7,6 @@
         Task<int> GetCarsCountAsync(CarQuerViewModel carQuerViewModel);
         Task<CarDetailsViewModel> FindCarByIdAsync(int carId);
         Task<IEnumerable<string>> GetAllBrandsAsync();
+        Task<bool> IsCarExistAsync(int carId);
     }
 }

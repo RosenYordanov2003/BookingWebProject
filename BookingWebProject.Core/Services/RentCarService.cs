@@ -76,6 +76,10 @@
                 .FirstAsync(c => c.Id == carId);
             return carToFind;
         }
+        public async Task<bool> IsCarExistAsync(int carId)
+        {
+            return await bookingContext.RentCars.AnyAsync(c => !c.IsDeleted && c.Id == carId);
+        }
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
         {
             if (carQuerViewModel.DoorsCount.HasValue)
