@@ -25,5 +25,15 @@
             carQuerViewModel.Brands = await carService.GetAllBrandsAsync();
             return View(carQuerViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!await carService.IsCarExistAsync(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+            CarDetailsViewModel carDetailsViewModel = await carService.FindCarByIdAsync(id);
+            return View(carDetailsViewModel);
+        }
     }
 }
