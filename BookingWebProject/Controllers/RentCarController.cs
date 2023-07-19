@@ -35,5 +35,11 @@
             CarDetailsViewModel carDetailsViewModel = await carService.FindCarByIdAsync(id);
             return View(carDetailsViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult>CarsByBrand(string brand = "", int id = 0)
+        {
+            IEnumerable<CarBrandViewModel> carsByBrand = await carService.GetCarsByBrandAsync(brand, id);
+            return PartialView("_CarsByBrand", carsByBrand);
+        }
     }
 }

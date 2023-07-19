@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CarBrandViewModel>
+
+
+@foreach (CarBrandViewModel car in Model)
+{
+    <section class="card">
+        <div class="img-container">
+            <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id"> <img src="@car.CarImg" /></a>
+        </div>
+        <div class="card-content">
+            <p>@car.MakeType @car.Model</p>
+        </div>
+    </section>
+}
+

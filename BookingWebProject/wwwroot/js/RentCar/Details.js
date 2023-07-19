@@ -3,19 +3,22 @@
 const url = new URL(window.location.href);
 //Get the last element from URL path
 let id = url.pathname.split('/').pop();
-const baseUrl = '/Car/CarsByBrand';
+const baseUrl = '/RentCar/CarsByBrand?';
 getCarsByBrand(makeType, baseUrl, id);
 
 
 async function getCarsByBrand(brand, baseUrl, id) {
+
+    const data = {
+        brand: brand,
+        id: id
+    };
+    const queryString = Object.keys(data)
+        .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+
     try {
-        const response = await fetch(baseUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `brand=${encodeURIComponent(brand)}&id=${encodeURIComponent(id)}`
-        });
+        const response = await fetch(baseUrl + queryString);
 
         if (response.ok) {
             const data = await response.text();
