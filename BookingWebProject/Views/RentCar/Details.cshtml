@@ -1,0 +1,103 @@
+﻿@model CarDetailsViewModel
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/RentCarStyles/Details.css" asp-append-version="true" />
+
+<div class="main-container">
+    <section class="main-section">
+        <div class="img-container">
+            <img src="@Model.CarImg" />
+        </div>
+        <div class="benefits">
+            <ul class="benefit-list">
+                <li>
+                    <div class="benefit-icon">
+                        <img src="~/img/Cars/CarDor-img.png" />
+                    </div>
+                    <div class="benefit-description">
+                        <h5 class="benefit-title">Doors Count</h5>
+                        <p class="benefit-value">@Model.DoorsCount</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">
+                        @{
+                            string imgSource = Model.TransmissionType.Contains("Automatic")
+                            ? "/img/Cars/AutomaticTransmissionType.png" : "/img/Cars/ManualTransmissionType-img.png";
+                        }
+                        <img src="@imgSource" />
+                    </div>
+                    <div class="benefit-description">
+                        <h5 class="benefit-title">Transmission</h5>
+                        <p class="benefit-value">@Model.TransmissionType</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">
+                        <img src="~/img/Cars/FuelConsumption.png" />
+                    </div>
+                    <div class="benefit-description">
+                        <h5 class="benefit-title">Fuel Consumption</h5>
+                        <p class="benefit-value">@Model.FuelConsumption</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">
+                        @for (int i = 1; i <= Model.PeopleCapacity; i++)
+                        {
+                            <i class="fa-solid fa-person"></i>
+                        }
+                    </div>
+                    <div class="benefit-description">
+                        <h5 class="benefit-title">People Capacity</h5>
+                        <p class="benefit-value">@Model.PeopleCapacity</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="order-section">
+        <h2 class="order-title">@Model.MakeType @Model.Model</h2>
+        <p class="order-price">Price per day: @string.Format($"{Model.PricePerDay:F2}$")</p>
+        <p class="order-location"><i class="fa-solid fa-location-dot"></i>@Model.Location</p>
+        <a class="order-btn" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@Model.Id">Rent</a>
+    </section>
+</div>
+
+
+<h3 class="more-title">More about the car</h3>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Fuel tank capacity</th>
+                <th>Location</th>
+                <th>Year</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.MakeType</td>
+                <td>@Model.Model</td>
+                <td>@string.Format($"{Model.FuelCapacity:F2}")</td>
+                <td>@Model.Location</td>
+                <td>@Model.Year</td>
+                <td>@string.Format($"{Model.PricePerDay:F2}$")</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h2 class="suggest-title">other suggestions</h2>
+<section class="suggest-section">
+    <button class="left-arrow"><i class="fa-solid fa-arrow-left"></i></button>
+    <section id="other-cars"></section>
+    <button class="right-arrow"><i class="fa-solid fa-arrow-right-long"></i></button>
+</section>
+
