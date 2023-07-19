@@ -1,0 +1,187 @@
+﻿@media all and (min-width: 280px) and (max-width: 750px) {
+    .main-container {
+        flex-direction: column;
+        margin-top: 3rem;
+    }
+
+    .benefit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .main-section {
+        width: 90%;
+        margin-top: 4rem;
+    }
+
+    .benefit-list .benefit-icon {
+        width: 80px;
+        height: auto;
+    }
+
+    .benefit-list li {
+        gap: 1.3rem;
+    }
+
+    .img-container {
+        width: 100%;
+        height: auto;
+    }
+
+   .img-container img {
+       object-position: center;
+   }
+
+    .benefit-title {
+        font-size: 1.3rem;
+    }
+
+    .benefit-value {
+        font-size: 1.1rem;
+    }
+
+    .order-title {
+        font-size: 1.7rem;
+    }
+
+    .order-section {
+        width: 80%;
+        padding: 3.5rem;
+    }
+
+    .order-price, .order-location {
+        font-size: 1.3rem;
+    }
+
+    .more-title {
+        font-size: 1.7rem;
+        margin: 2.2rem 0rem 2.2rem 0rem;
+    }
+
+    table {
+        overflow: visible;
+        width: 50%;
+    }
+
+   table th {
+       font-size: 1rem;
+       width: 100px;
+       padding: 0.4rem;
+   }
+
+   table td {
+       font-size: 1rem;
+       padding: 0.4rem;
+   }
+
+    .table-container {
+        justify-content: flex-start;
+    }
+
+    .suggest-title {
+        font-size: 1.7rem;
+    }
+
+    .suggest-section {
+        flex-direction: column;
+    }
+
+    .left-arrow, .right-arrow {
+        transform: rotate(90deg);
+        margin: 1.1rem;
+    }
+
+    #other-cars {
+        flex-direction: column;
+    }
+
+    #other-cars .img-container {
+        width: 400px;
+        height: auto;
+    }
+}
+
+@media all and (min-width: 751px) and (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .benefit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .main-section {
+        width: 90%;
+    }
+
+    .benefit-list .benefit-icon {
+        width: 100px;
+        height: auto;
+    }
+
+    .benefit-list li {
+        gap: 1.3rem;
+    }
+
+    .img-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .benefit-title {
+        font-size: 1.7rem;
+    }
+
+    .benefit-value {
+        font-size: 1.4rem;
+    }
+
+    .order-title {
+        font-size: 2.4rem;
+    }
+
+    .order-section {
+        width: 86%;
+        padding: 4.5rem;
+    }
+
+    .order-price, .order-location {
+        font-size: 1.3rem;
+    }
+
+    .more-title {
+        font-size: 2.3rem;
+        margin: 2.2rem 0rem 2.2rem 0rem;
+    }
+
+    table {
+        width: 75%;
+    }
+
+    table th {
+        font-size: 1.4rem;
+        width: 300px;
+        padding: 1rem;
+    }
+
+    table td {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+
+    .table-container {
+        justify-content: center;
+    }
+
+    .suggest-title {
+        font-size: 2.3rem;
+    }
+
+    #other-cars .img-container {
+        width: 280px;
+        height: auto;
+    }
+}
