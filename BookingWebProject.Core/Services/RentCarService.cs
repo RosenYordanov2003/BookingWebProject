@@ -6,7 +6,7 @@
     using Infrastructure.Data.Models;
     using Contracts;
     using Microsoft.EntityFrameworkCore;
-    using BookingWebProject.Infrastructure.Data.Enums;
+    using Infrastructure.Data.Enums;
 
     public class RentCarService : IRentCarService
     {
@@ -80,6 +80,22 @@
         {
             return await bookingContext.RentCars.AnyAsync(c => !c.IsDeleted && c.Id == carId);
         }
+        public async Task<IEnumerable<CarBrandViewModel>> GetCarsByBrandAsync(string brand, int carId)
+        {
+            brand = brand.ToLower();
+            IEnumerable<CarBrandViewModel> cars = await bookingContext.RentCars
+                .Where(rc => rc.MakeType.ToLower() == brand && rc.Id != carId && !rc.IsDeleted)
+                .Select(rc => new CarBrandViewModel()
+                {
+                    Id = rc.Id,
+                    MakeType = rc.MakeType,
+                    Model = rc.ModelType,
+                    CarImg = rc.CarImg
+                }).ToArrayAsync();
+            return cars;
+        }
+
+
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
         {
             if (carQuerViewModel.DoorsCount.HasValue)

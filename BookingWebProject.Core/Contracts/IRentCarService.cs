@@ -8,5 +8,6 @@
         Task<CarDetailsViewModel> FindCarByIdAsync(int carId);
         Task<IEnumerable<string>> GetAllBrandsAsync();
         Task<bool> IsCarExistAsync(int carId);
+        Task<IEnumerable<CarBrandViewModel>> GetCarsByBrandAsync(string brand, int carId);
     }
 }
