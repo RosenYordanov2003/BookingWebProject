@@ -95,7 +95,21 @@
             return cars;
         }
 
-
+        public async Task<CarViewModel> GetOrderCarAsync(int carId)
+        {
+            CarViewModel carToGet = await bookingContext.RentCars
+                 .Select(rc => new CarViewModel()
+                 {
+                     Id = rc.Id,
+                     CarImg = rc.CarImg,
+                     Location = rc.Location,
+                     MakeType = rc.MakeType,
+                     Model = rc.ModelType,
+                     PricePerDay = rc.PricePerDay,
+                     Year = rc.Year
+                 }).FirstAsync(rc => rc.Id == carId);
+            return carToGet;
+        }
         private static IQueryable<RentCar> FilterCars(CarQuerViewModel carQuerViewModel, IQueryable<RentCar> cars)
         {
             if (carQuerViewModel.DoorsCount.HasValue)
