@@ -1,8 +1,10 @@
 ﻿namespace BookingWebProject.Controllers
 {
-    using Core.Models.Reservation;
-    using Core.Contracts;
     using Microsoft.AspNetCore.Mvc;
+    using Extensions;
+    using Core.Contracts;
+    using Core.Models.Reservation;
+
     public class ReservationController : Controller
     {
         private readonly IRentCarService rentCarService;
