@@ -4,6 +4,8 @@
     using Extensions;
     using Core.Contracts;
     using Core.Models.Reservation;
+    using static BookingWebProject.Common.NotificationKeys;
+    using static BookingWebProject.Common.NotificationMessages;
 
     public class ReservationController : Controller
     {
@@ -27,6 +29,6 @@
             rentCarReservation.User = await userService.GetUserByIdAsync(this.User.GetId());
             return View(rentCarReservation);
         }
-
+       
     }
 }
