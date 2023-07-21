@@ -30,6 +30,7 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddScoped<IHotelService, HotelService>();
 builder.Services.AddScoped<IRentCarService, RentCarService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 var app = builder.Build();
 
