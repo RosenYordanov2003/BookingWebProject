@@ -1,0 +1,85 @@
+﻿@model RentCarReservationViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/ReservationStyles/RentCarReservation.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+
+<h1 class="title">Complete your rent</h1>
+<div class="order-container">
+    <form class="user-order-info" method="post">
+        <div class="input-container">
+            <label asp-for="@Model.User.FirstName">First Name</label>
+            <input type="text" asp-for="@Model.User.FirstName" aria-required="true" placeholder="Enter First Name" />
+            <span asp-validation-for="@Model.User.FirstName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.LastName">Last Name</label>
+            <input type="text" asp-for="@Model.User.LastName" aria-required="true" placeholder="Enter Last Name" />
+            <span asp-validation-for="@Model.User.LastName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.PhoneNumber>Phone Number">Phone Number</label>
+            <input type="text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
+            <span asp-validation-for="@Model.User.PhoneNumber"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.Email">Email</label>
+            <input type="text" asp-for="@Model.User.Email" value="@Model.User.Email" readonly />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.StartRentDate">Start Date</label>
+            <input type="date" asp-for="@Model.StartRentDate" class="start-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+            <span asp-validation-for="@Model.StartRentDate"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.StartRentDate">End Date</label>
+            <input type="date" asp-for="@Model.EndRentDate" class="end-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+            <span asp-validation-for="@Model.EndRentDate"></span>
+        </div>
+        <button class="rent-btn" type="submit">Rent</button>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
+    </form>
+    <section class="order-info">
+        <h2 class="order-title">@Model.CarlViewModel.MakeType @Model.CarlViewModel.Model</h2>
+        <div class="img-container">
+            <img src="@Model.CarlViewModel.CarImg" />
+        </div>
+        <hr />
+        <p class="model-year">Model Year: @Model.CarlViewModel.Year</p>
+        <p class="location">Location:<i class="fa-solid fa-location-dot"></i> @Model.CarlViewModel.Location</p>
+        <p class="price">Price per day: @Model.CarlViewModel.PricePerDay$</p>
+        <hr />
+        <p class="price total-price"></p>
+    </section>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+    <script>
+        const endDataInputElement = document.querySelector(".end-date");
+        const startDateInputElement = document.querySelector(".start-date");
+        endDataInputElement.addEventListener('change', () =>{
+            if(startDateInputElement.value >= endDataInputElement.value){
+                document.querySelector(".order-info .total-price").textContent = '';
+                return;
+            }
+            let pricePerDay = '@Model.CarlViewModel.PricePerDay';
+            let endDate = new Date(endDataInputElement.value);
+            let startDate = new Date(startDateInputElement.value);
+            // return the difference in milliseconds
+            let difference = endDate.getTime() - startDate.getTime();
+            //convert milliseconds to days (1000 = total milliseconds in second, 3600 = total seconds in hour, 24 = total hours per day)
+            let dayDifference = Math.ceil(difference/(1000 * 3600 * 24));
+            let totalPrice = pricePerDay * dayDifference;
+            document.querySelector(".order-info .total-price").textContent = `Total Price: ${totalPrice.toFixed(2)}$`;
+
+        });
+    </script>
+    <script src="~/js/account.js"></script>
