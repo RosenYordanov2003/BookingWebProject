@@ -48,8 +48,19 @@
             }
             if (await reservationService.CheckCarIsAlreadyReservedAsync(id, model.StartRentDate, model.EndRentDate))
             {
-                TempData[ErrorMessage] = string.Format(CarIsAlreadyRentedInThisPeriodMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
+                TempData[WarningMessage] = string.Format(CarIsAlreadyRentedInThisPeriodMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
                 return View(model);
+            }
+            try
+            {
+                await reservationService.RentCarAsync(id, model);
+                TempData[SuccessMessage] = string.Format(SuccessfullRentCarMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
+                return RedirectToAction("All", "RentCar");
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
             }
         }
     }
