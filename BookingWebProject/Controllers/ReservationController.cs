@@ -6,7 +6,6 @@
     using Core.Models.Reservation;
     using static BookingWebProject.Common.NotificationKeys;
     using static BookingWebProject.Common.NotificationMessages;
-    using Microsoft.AspNetCore.Cors.Infrastructure;
 
     public class ReservationController : Controller
     {
