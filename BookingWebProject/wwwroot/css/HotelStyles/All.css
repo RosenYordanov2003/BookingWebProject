@@ -1,0 +1,319 @@
+﻿*,
+*::before,
+*::after {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+label,
+input,
+span {
+    font-family: 'Paytone One', sans-serif;
+}
+
+header {
+    background-color: transparent;
+}
+
+.intro-section {
+    padding: 8.2rem 4.5rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url('/img/Hotels/Spa Hotel Dvoretsa/Spa Hotel Dvoretsa.jpg');
+    margin-bottom: 5rem;
+    min-height: 70vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.intro-section .title {
+    font-size: 3rem;
+    color: white;
+    text-transform: capitalize;
+}
+
+.intro-section .content {
+    font-size: 1.6rem;
+    color: white;
+    width: 40%;
+    line-height: 1.5;
+    margin-top: 2rem;
+}
+
+.hotels {
+    padding: 3.5rem;
+}
+
+.hotel-card {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    border: 2px solid #ededed;
+    width: 70%;
+    padding: 2rem;
+    margin-bottom: 2.3rem;
+    transition: 0.5s ease all;
+}
+
+.hotel-card .img-container {
+    width: 550px;
+    position: relative;
+}
+
+.hotel-card .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.hotel-name {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hotel-location {
+    font-size: 1.5rem;
+    margin-bottom: 0.7rem;
+}
+
+.star-container {
+    display: flex;
+    gap: 1.3rem;
+    align-items: center;
+}
+
+.star-list {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.star-list li i {
+    font-size: 1.5rem;
+    color: #feba02;
+}
+
+.star-title {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+.view-link {
+    color: white;
+    background-color: #0071c2;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    transition: 0.5s ease all;
+}
+
+.view-link:hover {
+    opacity: 0.7;
+    transform: scale(1.05);
+}
+
+.hotel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 5px 30px 56.1276px rgb(55 55 55 / 12%);
+    border: 1px solid transparent;
+}
+
+.hotel-card:hover .favorite, .hotel-card:hover .img-title {
+    opacity: 1;
+}
+
+.hotel-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.7rem;
+}
+
+.hotels-title {
+    text-transform: capitalize;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.favorite {
+    font-size: 2.5rem;
+    color: #ea2da1;
+    position: absolute;
+    right: 5px;
+    opacity: 0;
+    transition: 0.5s ease all;
+}
+
+.img-container .img-title {
+    font-size: 1.2rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.7rem;
+    position: absolute;
+    width: 100%;
+    color: white;
+    font-family: 'Arial Rounded MT';
+    opacity: 0;
+    transition: 0.5s ease all;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3.4rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.pagination-container .page-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.page-list .page-link {
+    color: #aaaaaa;
+    font-size: 1.2rem;
+    border: 2px solid #eeeeee;
+    padding: 1rem 1.3rem;
+    border-radius: 40px;
+    transition: all 0.5s ease;
+    text-decoration: none;
+}
+
+.page-list .active {
+    background-color: #4da1fa;
+    color: white;
+    border: none;
+}
+
+.page-list .page-link:hover {
+    opacity: 0.5;
+}
+
+select {
+    color: dimgrey;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid black;
+    text-transform: capitalize;
+}
+
+.sort-container {
+    margin-bottom: 5rem;
+}
+
+.sort-container button {
+    padding: 5px 14px;
+    border-radius: 4px;
+    border: 1px solid black;
+    color: white;
+    background-color: #cc2952;
+    font-size: 1.1rem;
+    transition: all 0.5s ease;
+}
+
+.sort-container button:hover, .filter-button:hover {
+    opacity: 0.7;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.4rem;
+    border: solid 1px black;
+    width: 20%;
+    padding: 1rem;
+    margin-bottom: 3rem;
+}
+
+.filter-title {
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-title img {
+    width: auto;
+    height: 20px;
+    object-fit: cover;
+}
+
+.benefit-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.benefit-container i {
+    margin-right: 0.2rem;
+}
+
+.filter-button {
+    font-size: 1.1rem;
+    padding: 8px 14px;
+    min-width: 100px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    background-color: #3a93dd;
+    transition: all 0.5s ease;
+}
+
+.benefit-container label, .input-container label {
+    font-size: 1.3rem;
+}
+
+.no-matches {
+    font-size: 2.4rem;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.field-validation-error {
+    color: red;
+    margin-top: 0.5rem;
+    width: 90%;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.input-container input {
+    width: 80%;
+    border: 1px solid black;
+    margin-top: 0.4rem;
+}
+
+.link-container {
+    display: flex;
+    gap: 6rem;
+    align-items: center;
+}
+
+.cheapest-room {
+    text-decoration: none;
+    background-color: forestgreen;
+    color: white;
+    padding: 10px 14px;
+    text-align: center;
+}

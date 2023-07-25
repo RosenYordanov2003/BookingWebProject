@@ -29,7 +29,9 @@
         </section>
         <button class="submit-btn" type="submit">Login</button>
         <p class="create-account-msg">Don't have an account? <a asp-action="Register" asp-controller="Account">Create Now</a></p>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
     </form>
+
 </div>
 
 <script src="~/js/account.js"></script>

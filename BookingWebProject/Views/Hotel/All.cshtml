@@ -1,0 +1,150 @@
+﻿@model HotelQueryViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/HotelStyles/All.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section class="intro-section">
+    <h1 class="title">Book from our hotels</h1>
+    <p class="content">
+        Experience luxury and comfort at our exquisite hotel,
+        offering breathtaking views, world-class amenities, and exceptional service
+    </p>
+</section>
+<h1 class="hotels-title">Our hotels</h1>
+<section class="hotels">
+
+    <form method="get" class="sort-container">
+        <h2><i class="fa-solid fa-arrow-up-wide-short"></i>Sort By</h2>
+        <select class="sort" asp-for="@Model.HotelSortOption">
+            <option value="0">Order by star rating ascending</option>
+            <option value="1">Order by star rating descending</option>
+            <option value="2">Order by city ascending</option>
+            <option value="3">Order by city descending</option>
+            <option value="4">Order by country ascending</option>
+            <option value="5">Order by country descending</option>
+            <option value="6">default</option>
+        </select>
+        <input type="hidden" name="city" value="@Model.City" />
+        <input type="hidden" name="country" value="@Model.Country" />
+        <input type="hidden" name="minStarsCountFilter" value="@Model.MinStarsCountFilter" />
+        <input type="hidden" name="maxStarsCountFilter" value="@Model.MaxStarsCountFilter" />
+        @if (Model.SelectedBenefitIds.Any())
+        {
+            @foreach (int benefitId in Model.SelectedBenefitIds)
+            {
+                <input type="hidden" name="SelectedBenefitIds" value="@benefitId" />
+
+            }
+        }
+        <button type="submit">Sort</button>
+    </form>
+    <form method="get" class="filter-container">
+        <h2 class="filter-title"> <img src="~/img/FilterIcon.png" /> Filter by benefits</h2>
+        @foreach (BenefitViewModel benefit in Model.Benefits)
+        {
+            <div class="benefit-container">
+                <label><i class="@benefit.BenefitIcon"></i>@benefit.Name</label>
+                <input type="checkbox" value="@benefit.Id" name="SelectedBenefitIds">
+            </div>
+        }
+        <h4 class="filter-title"><img src="~/img/FilterIcon.png" /> Filter by country</h4>
+        <select asp-for="@Model.Country">
+            @foreach (string country in Model.Countries)
+            {
+                <option value="@country">@country</option>
+            }
+            <option value="all">All</option>
+        </select>
+        <h4 class="filter-title"><img src="~/img/FilterIcon.png" /> Filter by city</h4>
+        <select asp-for="@Model.City">
+            @foreach (string city in Model.Cities)
+            {
+                <option value="@city">@city</option>
+            }
+            <option value="all">All</option>
+        </select>
+        <div class="input-container">
+            <label asp-for="@Model.MinStarsCountFilter">Min star rating</label>
+            <input type="number" asp-for="@Model.MinStarsCountFilter" />
+            <span asp-validation-for="@Model.MinStarsCountFilter"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.MaxStarsCountFilter">Max star rating</label>
+            <input type="number" asp-for="@Model.MaxStarsCountFilter" />
+            <span asp-validation-for="@Model.MaxStarsCountFilter"></span>
+        </div>
+        <input type="hidden" name="hotelSortOption" value="@Model.HotelSortOption" />
+        <button class="filter-button" type="submit">Filter</button>
+    </form>
+
+    @if (!Model.HotelViewModels.Any())
+    {
+        <p class="no-matches">No matches</p>
+    }
+    <section class="hotel-cards">
+        <partial name="_AllHotels" model="@Model.HotelViewModels" />
+    </section>
+
+</section>
+<div class="pagination-container">
+    @if (Model.Pager.TotalPages > 0)
+    {
+        <ul class="page-list">
+            @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("All", "Hotel", new
+                {
+                    currentPage = Model.Pager.CurrentPage - 1,
+                    hotelSortOption = (int)Model.HotelSortOption,
+                    country = Model.Country,
+                    city = Model.City,
+                    minStarsCountFilter = Model.MinStarsCountFilter,
+                    maxStarsCountFilter = Model.MaxStarsCountFilter,
+                    SelectedBenefitIds = Model.SelectedBenefitIds
+                })">Previous</a>
+                </li>
+            }
+            @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="page-item">
+                    <a class="page-link @(page == Model.Pager.CurrentPage ? "active" : "")"
+               href="@Url.Action("All", "Hotel", new
+                {
+                    currentPage = page,
+                    hotelSortOption = (int)Model.HotelSortOption,
+                    country = Model.Country,
+                    city = Model.City,
+                    minStarsCountFilter = Model.MinStarsCountFilter,
+                    maxStarsCountFilter = Model.MaxStarsCountFilter,
+                    SelectedBenefitIds = Model.SelectedBenefitIds
+                })">@(page)</a>
+                </li>
+            }
+            @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("All", "Hotel", new
+                {
+                    currentPage = Model.Pager.CurrentPage + 1,
+                    hotelSortOption = (int)Model.HotelSortOption,
+                    country = Model.Country,
+                    city = Model.City,
+                    minStarsCountFilter = Model.MinStarsCountFilter,
+                    maxStarsCountFilter = Model.MaxStarsCountFilter,
+                    SelectedBenefitIds = Model.SelectedBenefitIds
+                })">Next</a>
+                </li>
+            }
+        </ul>
+    }
+</div>

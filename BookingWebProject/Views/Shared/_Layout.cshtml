@@ -27,7 +27,10 @@
                     <a asp-area="" asp-controller="Car" asp-action="All">Cars</a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                    @if (User?.Identity?.IsAuthenticated ?? false)
+                    {
+                      <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                    }
                 </li>
             </ul>
             <partial name="_LoginPartial" />

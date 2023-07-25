@@ -1,0 +1,39 @@
+﻿@model IEnumerable<HotelViewModel>
+
+@foreach (HotelViewModel hotel in Model)
+{
+    <div class="hotel-card">
+        <input type="hidden" value="@hotel.Id">
+        <div class="img-container">
+            <h2 class="img-title">@hotel.Name</h2>
+            @if (hotel.IsFavorite)
+            {
+                <i class="fa-solid fa-heart favorite"></i>
+            }
+            else
+            {
+                <i class="fa-regular fa-heart favorite"></i>
+            }
+            <img src="@hotel.PicturePath">
+        </div>
+        <div class="hotel-card-content">
+            <h1 class="hotel-name">@hotel.Name</h1>
+            <p class="hotel-location"><i class="fa-solid fa-location-dot"></i> @hotel.Country @hotel.City</p>
+            <div class="star-container">
+                <h2 class="star-title">Star rating:</h2>
+                <ul class="star-list">
+                    @for (int i = 1; i <= hotel.StarRating; i++)
+                    {
+                        <li><i class="fa-solid fa-star"></i></li>
+                    }
+                </ul>
+            </div>
+            <div class="link-container">
+                <a class="view-link" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id">View</a>
+                When add the rooms
+                @*<a class="cheapest-room" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@hotel.CheapestHotelRoomViewModel.Id">The Lowest Price $@hotel.CheapestHotelRoomViewModel.PricePerNight</a>*@
+            </div>
+        </div>
+
+    </div>
+}
