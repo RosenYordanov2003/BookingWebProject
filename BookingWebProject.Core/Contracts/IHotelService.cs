@@ -5,5 +5,8 @@
     {
         Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync();
         Task<AllHotelsSortedAndFilteredDataModel> GetAllHotelsSortedAndFilteredAsync(Guid userId, HotelQueryViewModel hotelQueryViewModel);
+        Task<int> GetCountAsync(HotelQueryViewModel hotelQueryViewModel);
+        Task<IEnumerable<string>> GetAllHotelCitiesAsync();
+        Task<IEnumerable<string>> GetAllHotelCountriesAsync();
     }
 }

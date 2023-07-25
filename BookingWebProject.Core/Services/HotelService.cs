@@ -17,6 +17,7 @@
             this.bookingContext = bookingContext;
         }
 
+
         public async Task<AllHotelsSortedAndFilteredDataModel> GetAllHotelsSortedAndFilteredAsync(Guid userId, HotelQueryViewModel hotelQueryViewModel)
         {
             IQueryable<Hotel> hotels = bookingContext.Hotels.AsQueryable();
@@ -40,6 +41,34 @@
             {
                 Hotels = allHotels
             };
+        }
+
+        public Task<int> GetCountAsync(HotelQueryViewModel hotelQueryViewModel)
+        {
+            IQueryable<Hotel> allHotels = bookingContext.Hotels.AsQueryable();
+            allHotels = SortAndFilterHotels(hotelQueryViewModel, allHotels);
+            return allHotels.CountAsync();
+        }
+        public async Task<IEnumerable<string>> GetAllHotelCitiesAsync()
+        {
+            IEnumerable<string> hotelCities = await bookingContext
+                .Hotels
+                .Where(h => !h.IsDeleted)
+                .Select(h => h.City)
+                .Distinct()
+                .ToArrayAsync();
+            return hotelCities;
+        }
+
+        public async Task<IEnumerable<string>> GetAllHotelCountriesAsync()
+        {
+            IEnumerable<string> hotelCountries = await bookingContext
+                  .Hotels
+                  .Where(h => !h.IsDeleted)
+                  .Select(h => h.Country)
+                  .Distinct()
+                  .ToArrayAsync();
+            return hotelCountries;
         }
 
         public async Task<IEnumerable<HotelCardViewModel>> GetTopHotelsAsync()
