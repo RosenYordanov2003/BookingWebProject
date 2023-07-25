@@ -1,5 +1,15 @@
 ﻿@model HotelQueryViewModel
 
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/HotelStyles/All.css" asp-append-version="true" />
@@ -148,3 +158,8 @@
         </ul>
     }
 </div>
+<script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
+
+<script src="~/js/Hotel/All.js"></script>

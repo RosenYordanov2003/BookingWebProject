@@ -1,13 +1,13 @@
 ﻿namespace BookingWebProject.Core.Services
 {
+    using System;
+    using Microsoft.EntityFrameworkCore;
     using Models.Picture;
     using Contracts;
     using Models.Hotel;
-    using BookingWebProject.Data;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using BookingWebProject.Infrastructure.Data.Models;
-    using BookingWebProject.Core.Models.Hotel.Enums;
+    using Data;
+    using Infrastructure.Data.Models;
+    using Models.Hotel.Enums;
 
     public class HotelService : IHotelService
     {
@@ -95,6 +95,30 @@
                  .ToListAsync();
 
             return hotels;
+        }
+        public async Task<bool> IsExist(int hotelId)
+        {
+            return await bookingContext.Hotels
+                  .AnyAsync(h => h.Id == hotelId && !h.IsDeleted);
+        }
+
+        public async Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId)
+        {
+            FavoriteHotels favoriteHotel = new FavoriteHotels()
+            {
+                HotelId = hotelId,
+                UserId = userId
+            };
+            await bookingContext.FavoriteHotels.AddAsync(favoriteHotel);
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId)
+        {
+            FavoriteHotels favoriteHotelToRemove = await bookingContext
+                .FavoriteHotels.FirstAsync(fh => fh.UserId == userId && fh.HotelId == hotelId);
+            bookingContext.FavoriteHotels.Remove(favoriteHotelToRemove);
+            await bookingContext.SaveChangesAsync();
         }
         private IQueryable<Hotel> SortAndFilterHotels(HotelQueryViewModel hotelQueryViewModel, IQueryable<Hotel> hotels)
         {

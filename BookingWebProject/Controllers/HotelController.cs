@@ -2,6 +2,8 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using static BookingWebProject.Common.NotificationKeys;
+    using static BookingWebProject.Common.NotificationMessages;
     using Core.Contracts;
     using Core.Models.Hotel;
     using Core.Models.Pager;
@@ -34,6 +36,47 @@
             hotelQueryViewModel.Cities = await hotelService.GetAllHotelCitiesAsync();
             hotelQueryViewModel.Countries = await hotelService.GetAllHotelCountriesAsync();
             return View(hotelQueryViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddToFavorite(int id)
+        {
+            if (!await hotelService.IsExist(id))
+            {
+                TempData[ErrorMessage] = HotelDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+            try
+            {
+                await hotelService.AddHotelToUserFavoriteHotels(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyAddHotelToUserFavorites;
+                return Ok();
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromFavorite(int id)
+        {
+            if (!await hotelService.IsExist(id))
+            {
+                TempData[ErrorMessage] = HotelDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+            try
+            {
+                await hotelService.RemoveHotelFromUserFavoriteHotels(id, User.GetId());
+                TempData[SuccessMessage] = SuccessfullyRemoveHotelFromUserFavoriteHotels;
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
         }
     }
 }
