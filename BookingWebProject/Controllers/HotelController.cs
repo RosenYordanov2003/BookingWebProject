@@ -23,7 +23,8 @@
                 hotelQueryViewModel.CurrentPage = 1;
             }
             Guid userId = User.GetId();
-           
+          
+            return View(hotelQueryViewModel);
         }
     }
 }
