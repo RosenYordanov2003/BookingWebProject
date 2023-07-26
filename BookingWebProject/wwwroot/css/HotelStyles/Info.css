@@ -1,0 +1,354 @@
+﻿*,
+*::before,
+*::after {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+label,
+input,
+button
+span {
+    font-family: 'Paytone One', sans-serif;
+}
+
+.intro-section {
+    padding: 8.2rem 4.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+    .intro-section .title {
+        font-size: 3rem;
+    }
+
+.star-list {
+    display: flex;
+    gap: 1rem;
+    font-size: 3rem;
+    color: #feba02;
+}
+
+.hotel-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+}
+
+    .hotel-card .img-container {
+        width: 45%;
+        position: relative;
+        height: 460px;
+    }
+
+.img-container img {
+    width: 100%;
+    transition: all 0.5s ease;
+    display: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-container .active {
+    display: block;
+}
+
+.benefits .title {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+    text-transform: capitalize;
+}
+
+.benefits .benefit-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+.benefit-list .benefit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.benefit-container .benefit-title, .benefit-container i {
+    font-size: 1.7rem;
+}
+
+.hotel-description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    width: 80%;
+    padding: 3rem;
+}
+
+.description-title {
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.fa-arrow-left, .fa-arrow-right {
+    position: absolute;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background-color: rgb(190,190,190, 0.7);
+    top: 50%;
+    border-radius: 40px;
+}
+
+.fa-arrow-left {
+    left: 10px;
+}
+
+.fa-arrow-right {
+    right: 10px;
+}
+
+    .fa-arrow-left:hover, .fa-arrow-right:hover {
+        opacity: 0.8;
+    }
+
+.comments-title {
+    font-size: 2.5rem;
+    margin: 3rem 0rem 3rem 0rem;
+    text-align: center;
+}
+
+.comments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10rem;
+    padding: 3rem;
+    margin: 4rem 0rem 4rem 0rem;
+}
+
+.comment-card {
+    border: 1px solid #ededed;
+    padding: 3rem;
+    transition: all 0.5s ease;
+    width: 600px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.user-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-card .img-container {
+    max-width: 250px;
+}
+
+.comment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 30px 56.1276px rgb(55 55 55 / 12%);
+    border: 1px solid transparent;
+}
+
+.comment-card .profile-img-container i {
+    width: 100%;
+    padding: 1rem;
+    font-size: 2.4rem;
+}
+
+.comment-card .profile-img-container img {
+    width: 74px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+    text-transform: capitalize;
+}
+
+.date {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: rgb(184,184,184, 0.5);
+}
+
+.comment-description {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    width: 70%;
+}
+
+.button-container {
+    margin-top: 2rem;
+}
+
+    .button-container button {
+        font-size: 1.2rem;
+        border: none;
+        padding: 10px 14px;
+        min-width: 80px;
+        border-radius: 4px;
+        transition: 0.5s ease all;
+    }
+
+textarea {
+    border: 1px solid black;
+}
+
+#cancel-button {
+    background-color: #3a93dd;
+    color: white;
+}
+
+.button-container .edit {
+    color: black;
+    background-color: rgb(244,202,22);
+    margin-right: 0.7rem;
+}
+
+.button-container button[disabled] {
+    opacity: 0.4;
+}
+
+.button-container .delete {
+    background-color: #F40009;
+    color: white;
+}
+
+.button-container button:not([disabled]):hover, .post-button:hover {
+    opacity: 0.7;
+    transform: scale(1.050);
+}
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.post-button {
+    font-size: 1.2rem;
+    padding: 12px 18px;
+    min-width: 80px;
+    border-radius: 8px;
+    border: 2px solid #3ab29a;
+    transition: 0.5s ease all;
+    color: #3ab29a;
+    background-color: white;
+}
+
+    .post-button:hover {
+        opacity: 0.9;
+        color: white;
+        background-color: #3ab29a;
+    }
+
+#confirm-edit {
+    text-align: center;
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px 14px;
+    min-width: 100px;
+    border-radius: 4px;
+    transition: 0.5s ease all;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: white;
+    background-color: #3ab29a;
+    margin: 0rem 0.6rem 0rem 0.6rem;
+}
+
+.comments .fa-circle-arrow-left, .comments .fa-circle-arrow-right {
+    position: absolute;
+    top: 50%;
+}
+
+.comments .fa-circle-arrow-left {
+    left: 130px;
+}
+
+.comments .fa-circle-arrow-right {
+    right: 130px;
+}
+
+.rooms-link, .distance-button {
+    display: inline-block;
+    margin: 3rem;
+    text-decoration: none;
+    font-size: 1.3rem;
+    background-color: #3a93dd;
+    color: white;
+    border-radius: 6px;
+    padding: 15px 16px;
+    letter-spacing: 2px;
+    border: none;
+    transition: 0.5s ease all;
+}
+
+    .rooms-link:hover, .distance-button:hover {
+        opacity: 0.8;
+        transform: scale(1.050);
+    }
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3.4rem 2rem;
+    margin-bottom: 2rem;
+}
+
+    .pagination-container .page-list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+.page-list .page-link {
+    color: #aaaaaa;
+    font-size: 1.2rem;
+    border: 2px solid #eeeeee;
+    padding: 1rem 1.3rem;
+    border-radius: 40px;
+    transition: all 0.5s ease;
+    text-decoration: none;
+}
+
+.page-list .active {
+    background-color: #4da1fa;
+    color: white;
+    border: none;
+}
+
+.page-list .page-link:hover {
+    opacity: 0.5;
+}
+

@@ -1,0 +1,150 @@
+﻿@using BookingWebProject.Core.Models.Comment
+@using BookingWebProject.Core.Models.Picture
+@using System.Security.Claims
+@model HotelInfoViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/HotelStyles/Info.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/user-menu.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section class="intro-section">
+    <h1 class="title">@Model.Name</h1>
+    <ul class="star-list">
+        @for (int i = 1; i <= 5; i++)
+        {
+            <li><i class="fa-solid fa-star"></i></li>
+        }
+    </ul>
+</section>
+<section class="hotel-card">
+    <div class="img-container">
+        <i class="fa-solid fa-arrow-left"></i>
+        @{
+            int count = 1;
+            @foreach (PictureViewModel picture in Model.Pictures)
+            {
+                if (count == 1)
+                {
+
+                    <img class="active" src="@picture.Path">
+                }
+                else
+                {
+                    <img src="@picture.Path">
+                }
+                count++;
+            }
+        }
+        <i class="fa-solid fa-arrow-right"></i>
+    </div>
+    <div class="benefits">
+        <h2 class="title">@Model.Name benefits</h2>
+        <ul class="benefit-list">
+            @foreach (BenefitViewModel benefit in Model.Benefits)
+            {
+                <li class="benefit-container">
+                    <h3 class="benefit-title">@benefit.Name</h3>
+                    <i class="@benefit.BenefitIcon"></i>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <h2 class="description-title">@Model.Name description</h2>
+    <p class="hotel-description">@Model.Description</p>
+}
+<a asp-controller="Room" asp-action="GetHotelRooms" asp-route-id="@Model.Id" class="rooms-link">See Rooms</a>
+<section class="location-section">
+    <h3 class="location-title"><i class="fa-solid fa-location-dot"></i> Hotel Location</h3>
+    <div id="map">
+        <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+    </div>
+    <button class="distance-button">See distance difference</button>
+</section>
+<h2 class="comments-title">Comments</h2>
+<section class="comments">
+    @foreach (CommentViewModel comment in Model.Comments)
+    {
+        <article class="comment-card">
+            <div class="user-info">
+                <div class="profile-img-container">
+                    @if (string.IsNullOrWhiteSpace(comment.UserPicturePath))
+                    {
+                        <i class="fa-regular fa-user" id="user-icon"></i>
+                    }
+                    else
+                    {
+                        <img src="~/@comment.UserPicturePath" alt="Profile picture">
+                    }
+                </div>
+                <div class="user-content">
+                    <p class="username">@comment.UserName</p>
+                    <p class="date">Created on: @comment.CreatedOn.ToString("MM/dd/yyyy hh:mm")</p>
+                </div>
+            </div>
+            <p class="comment-description">@comment.Description</p>
+            @if (Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == comment.UserId)
+            {
+                <input type="hidden" value="@comment.Id">
+                <div class="button-container">
+                    <button type="submit" asp-action="Edit" asp-controller="Comment" class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                </div>
+            }
+        </article>
+    }
+</section>
+
+<div class="pagination-container">
+    @if (Model.CommentsPager.TotalPages > 0)
+    {
+        <ul class="page-list">
+            @if (Model.CommentsPager.CurrentPage > Model.CommentsPager.StartPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("Info", "Hotel", new
+                {
+                    pg = Model.CommentsPager.CurrentPage - 1,
+                    id = Model.Id
+                })">Previous</a>
+                </li>
+            }
+            @for (int page = Model.CommentsPager.StartPage; page <= Model.CommentsPager.EndPage; page++)
+            {
+                <li class="page-item">
+                    <a class="page-link @(page == Model.CommentsPager.CurrentPage ? "active" : "")"
+               href="@Url.Action("Info", "Hotel", new
+                {
+                    pg = page,
+                    id = Model.Id
+                })">@(page)</a>
+                </li>
+            }
+            @if (Model.CommentsPager.CurrentPage < Model.CommentsPager.EndPage)
+            {
+                <li class="page-item">
+                    <a class="page-link"
+               href="@Url.Action("Info", "Hotel", new
+                {
+                    pg = Model.CommentsPager.CurrentPage + 1,
+                    id = Model.Id
+                })">Next</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+<div class="comment-container">
+    <textarea rows="10" cols="60" placeholder="Write a comment..."></textarea>
+    <button class="post-button">Post</button>
+</div>
