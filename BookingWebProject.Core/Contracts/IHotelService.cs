@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Core.Contracts
 {
+    using BookingWebProject.Core.Models.Pager;
     using Models.Hotel;
     public interface IHotelService
     {
@@ -11,5 +12,7 @@
         Task<bool> IsExist(int hotelId);
         Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId);
         Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId);
+        Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId, Pager pager);
+        Task<int> GetHotelCommentsCountAsync(int hotelId);  
     }
 }

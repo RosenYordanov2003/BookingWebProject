@@ -32,7 +32,12 @@ builder.Services.AddScoped<IRentCarService, RentCarService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IBenefitService, BenefitService>();
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Home/Index";
+    options.ExpireTimeSpan = TimeSpan.FromDays(2);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

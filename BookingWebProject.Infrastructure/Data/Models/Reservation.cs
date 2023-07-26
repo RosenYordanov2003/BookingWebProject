@@ -11,6 +11,9 @@
         }
         [Key]
         public Guid Id { get; set; }
+        [ForeignKey(nameof(RoomPackage))]
+        public int? RoomPackageId { get; set; }
+        public RoomPackage? RoomPackage { get; set; }
         public int CountNights { get; set; }
         [ForeignKey(nameof(Room))]
         public int? RoomId { get; set; }
@@ -23,7 +26,6 @@
         public RentCar? RentCar { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
         [Required]
         [MaxLength(UserFirstNameMaxValue)]
         public string FirstName { get; set; } = null!;

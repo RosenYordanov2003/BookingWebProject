@@ -8,6 +8,9 @@
     using Data;
     using Infrastructure.Data.Models;
     using Models.Hotel.Enums;
+    using BookingWebProject.Core.Models.Pager;
+    using BookingWebProject.Core.Models.Benefits;
+    using BookingWebProject.Core.Models.Comment;
 
     public class HotelService : IHotelService
     {
@@ -119,6 +122,48 @@
                 .FavoriteHotels.FirstAsync(fh => fh.UserId == userId && fh.HotelId == hotelId);
             bookingContext.FavoriteHotels.Remove(favoriteHotelToRemove);
             await bookingContext.SaveChangesAsync();
+        }
+        public async Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId, Pager pager)
+        {
+            int recordsToSkip = (pager.CurrentPage - 1) * pager.PageSize;
+            HotelInfoViewModel hotel = await bookingContext
+                 .Hotels
+                 .Select(h => new HotelInfoViewModel()
+                 {
+                     Id = h.Id,
+                     City = h.City,
+                     Country = h.Country,
+                     Name = h.Name,
+                     Description = h.Description,
+                     StarRating = h.StarRating,
+                     Latitude = h.Latitude,
+                     Longitude = h.Longitude,
+                     Benefits = h.HotelBenefits.Where(b => b.HotelId == hotelId).Select(b => new BenefitViewModel()
+                     {
+                         Name = b.Benefit.Name,
+                         BenefitIcon = b.Benefit.ClassIcon
+                     }).ToArray(),
+                     Pictures = h.Pictures.Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
+                     Comments = h.Comments.Where(c => !c.IsDeleted).Select(c => new CommentViewModel()
+                     {
+                         Id = c.Id,
+                         CreatedOn = c.CreatedDate,
+                         Description = c.Description,
+                         UserName = c.UserName,
+                         UserId = c.UserId,
+                         UserPicturePath = c.User.ProfilePicturePath
+
+                     }).
+                     Skip(recordsToSkip)
+                    .Take(pager.PageSize)
+                 }).FirstAsync(h => h.Id == hotelId);
+            return hotel;
+        }
+        public async Task<int> GetHotelCommentsCountAsync(int hotelId)
+        {
+            return await bookingContext.Comments
+                .Where(c => c.HotelId == hotelId && !c.IsDeleted)
+                .CountAsync();
         }
         private IQueryable<Hotel> SortAndFilterHotels(HotelQueryViewModel hotelQueryViewModel, IQueryable<Hotel> hotels)
         {

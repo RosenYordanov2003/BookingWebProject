@@ -1,16 +1,16 @@
 ﻿namespace BookingWebProject.Infrastructure.Data.Configurations
 {
-    using Models;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Microsoft.EntityFrameworkCore;
+    using Models;
 
     public class PackageEntityConfiguration : IEntityTypeConfiguration<RoomPackage>
     {
         public void Configure(EntityTypeBuilder<RoomPackage> builder)
         {
-            builder.HasMany(p => p.Rooms)
-                 .WithOne(r => r.Package)
-                 .OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(p => p.Reservations)
+                .WithOne(r => r.RoomPackage)
+                .OnDelete(DeleteBehavior.NoAction);
             ICollection<RoomPackage> roomPackages = CreateRoomPackages();
 
             builder.HasData(roomPackages);

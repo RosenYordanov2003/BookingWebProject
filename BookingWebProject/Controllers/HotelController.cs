@@ -78,5 +78,31 @@
                 return RedirectToAction(nameof(All));
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Info(int id, int pg = 1)
+        {
+            if (pg <= 0)
+            {
+                pg = 1;
+            }
+            int hotelCommentsCount = await hotelService.GetHotelCommentsCountAsync(id);
+            Pager pager = new Pager(hotelCommentsCount, pg);
+            if (!await hotelService.IsExist(id))
+            {
+                TempData[ErrorMessage] = HotelDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+            try
+            {
+                HotelInfoViewModel hotel = await hotelService.GetHotelByIdAsync(id, pager);
+                hotel.CommentsPager = pager;
+                return View(hotel);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
+        }
     }
 }

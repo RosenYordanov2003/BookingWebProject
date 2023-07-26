@@ -1,7 +1,7 @@
 ﻿namespace BookingWebProject.Infrastructure.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public class User : IdentityUser<Guid>
     {
         public User()
@@ -16,8 +16,6 @@
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<FavoriteHotels> FavoriteHotels { get; set; }
-        [ForeignKey(nameof(ProfilePicture))]
-        public int? PictureId { get; set; }
-        public Picture? ProfilePicture { get; set; }
+        public string? ProfilePicturePath { get; set; }
     }
 }

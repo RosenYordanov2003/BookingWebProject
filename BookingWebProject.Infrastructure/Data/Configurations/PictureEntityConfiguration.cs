@@ -15,10 +15,6 @@
                 .WithMany(h => h.Pictures)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(p => p.User)
-                .WithOne(u => u.ProfilePicture)
-                .OnDelete(DeleteBehavior.NoAction);
-
             ICollection<Picture> pictures = CreatePictures();
             builder.HasData(pictures);
         }
