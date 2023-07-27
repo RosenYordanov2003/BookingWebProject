@@ -39,5 +39,11 @@
 
             return true;
         }
+        public async Task EditCommentAsync(EditCommentViewModel editCommentViewModel)
+        {
+            Comment commentToEdit = await bookingContext.Comments.FirstAsync(c => c.Id == editCommentViewModel.Id);
+            commentToEdit.Description = editCommentViewModel.Description;
+            await bookingContext.SaveChangesAsync();
+        }
     }
 }

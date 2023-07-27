@@ -61,5 +61,33 @@
                 return Json(new { success = false });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromBody] EditCommentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Keys
+               .SelectMany(key => ModelState[key].Errors
+               .Select(x => new { Key = key, Error = x.ErrorMessage }))
+               .ToList();
+                return Json(new { success = false, errors = errors });
+            }
+            if (!await commentService.IsExist(model.Id))
+            {
+                TempData[ErrorMessage] = CommentDoesNotExist;
+                return Json(new { success = false });
+            }
+            try
+            {
+                await commentService.EditCommentAsync(model);
+                TempData[SuccessMessage] = SuccessEditedComment;
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                TempData[WarningMessage] = DefaultErrorMessage;
+                return Json(new { success = false });
+            }
+        }
     }
 }
