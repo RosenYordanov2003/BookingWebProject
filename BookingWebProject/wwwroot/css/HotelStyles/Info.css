@@ -51,11 +51,11 @@ span {
     margin-bottom: 3.5rem;
 }
 
-    .hotel-card .img-container {
-        width: 45%;
-        position: relative;
-        height: 460px;
-    }
+.hotel-card .img-container {
+    width: 45%;
+    position: relative;
+    height: 460px;
+}
 
 .img-container img {
     width: 100%;
@@ -124,9 +124,9 @@ span {
     right: 10px;
 }
 
-    .fa-arrow-left:hover, .fa-arrow-right:hover {
-        opacity: 0.8;
-    }
+.fa-arrow-left:hover, .fa-arrow-right:hover {
+    opacity: 0.8;
+}
 
 .comments-title {
     font-size: 2.5rem;
@@ -207,14 +207,14 @@ span {
     margin-top: 2rem;
 }
 
-    .button-container button {
-        font-size: 1.2rem;
-        border: none;
-        padding: 10px 14px;
-        min-width: 80px;
-        border-radius: 4px;
-        transition: 0.5s ease all;
-    }
+.button-container button {
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px 14px;
+    min-width: 80px;
+    border-radius: 4px;
+    transition: 0.5s ease all;
+}
 
 textarea {
     border: 1px solid black;
@@ -265,11 +265,11 @@ textarea {
     background-color: white;
 }
 
-    .post-button:hover {
-        opacity: 0.9;
-        color: white;
-        background-color: #3ab29a;
-    }
+.post-button:hover {
+    opacity: 0.9;
+    color: white;
+    background-color: #3ab29a;
+}
 
 #confirm-edit {
     text-align: center;
@@ -313,10 +313,10 @@ textarea {
     transition: 0.5s ease all;
 }
 
-    .rooms-link:hover, .distance-button:hover {
-        opacity: 0.8;
-        transform: scale(1.050);
-    }
+.rooms-link:hover, .distance-button:hover {
+    opacity: 0.8;
+    transform: scale(1.050);
+}
 
 .pagination-container {
     display: flex;
@@ -325,12 +325,12 @@ textarea {
     margin-bottom: 2rem;
 }
 
-    .pagination-container .page-list {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
+.pagination-container .page-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
 
 .page-list .page-link {
     color: #aaaaaa;
@@ -352,3 +352,30 @@ textarea {
     opacity: 0.5;
 }
 
+#map {
+    width: 70%;
+    height: 400px;
+    margin: 5rem;
+    display: flex;
+    z-index: 2;
+}
+
+.location-title {
+    font-size: 1.7rem;
+}
+
+.location-section {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-paragraph {
+    color: red;
+    margin-top: 2rem;
+}
+
+.distance {
+    font-size: 1.4rem;
+}

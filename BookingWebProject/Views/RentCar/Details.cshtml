@@ -1,4 +1,5 @@
 ﻿@model CarDetailsViewModel
+@inject IConfiguration Configuration
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,4 +102,22 @@
     <section id="other-cars"></section>
     <button class="right-arrow"><i class="fa-solid fa-arrow-right-long"></i></button>
 </section>
+<section class="location-section">
+    <h3 class="location-title"><i class="fa-solid fa-location-dot"></i> Car Location</h3>
+    <div id="map">
+        <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+    </div>
+    <button class="distance-button">See distance difference</button>
+</section>
+
 <script src="~/js/RentCar/Details.js"></script>
+
+<script src="~/js/map.js"></script>
+<script>
+    const latitude = '@Model.Latitude';
+    const longitude = '@Model.Longitude';
+    const message = "This is the location where you have to pick up the car";
+    const apiKey = '@Configuration["MapTilerApiKey"]';
+    initializeMap(latitude, longitude, message, apiKey);
+</script>
+

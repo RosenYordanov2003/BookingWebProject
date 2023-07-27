@@ -1,7 +1,5 @@
-﻿@using BookingWebProject.Core.Models.Comment
-@using BookingWebProject.Core.Models.Picture
-@using System.Security.Claims
-@model HotelInfoViewModel
+﻿@model HotelInfoViewModel
+@inject IConfiguration Configuration
 
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
@@ -9,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="~/css/user-menu.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,16 +25,16 @@
         <i class="fa-solid fa-arrow-left"></i>
         @{
             int count = 1;
-            @foreach (PictureViewModel picture in Model.Pictures)
+                @foreach (PictureViewModel picture in Model.Pictures)
             {
                 if (count == 1)
                 {
 
-                    <img class="active" src="@picture.Path">
+                        <img class="active" src="@picture.Path">
                 }
                 else
                 {
-                    <img src="@picture.Path">
+                        <img src="@picture.Path">
                 }
                 count++;
             }
@@ -148,3 +145,14 @@
     <textarea rows="10" cols="60" placeholder="Write a comment..."></textarea>
     <button class="post-button">Post</button>
 </div>
+
+
+<script src="~/js/map.js"></script>
+<script>
+    const latitude = '@Model.Latitude';
+    const longitude = '@Model.Longitude';
+    const message = "This is @Model.Name location";
+    const apiKey = '@Configuration["MapTilerApiKey"]';
+    initializeMap(latitude, longitude, message, apiKey);
+</script>
+

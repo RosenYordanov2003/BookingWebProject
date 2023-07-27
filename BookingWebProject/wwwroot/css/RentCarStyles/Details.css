@@ -226,3 +226,39 @@ table td {
 .left-arrow:hover, .right-arrow:hover {
     opacity: 1;
 }
+#map {
+    width: 70%;
+    height: 400px;
+    margin: 5rem;
+    display: flex;
+    z-index: 2;
+}
+
+.location-title {
+    font-size: 1.7rem;
+}
+
+.location-section {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.distance-button {
+    display: inline-block;
+    margin: 3rem;
+    text-decoration: none;
+    font-size: 1.3rem;
+    background-color: #3a93dd;
+    color: white;
+    border-radius: 6px;
+    padding: 15px 16px;
+    letter-spacing: 2px;
+    border: none;
+    transition: 0.5s ease all;
+}
+
+.distance {
+    font-size: 1.4rem;
+}
+

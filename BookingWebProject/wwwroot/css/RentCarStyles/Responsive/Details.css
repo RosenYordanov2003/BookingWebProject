@@ -100,6 +100,9 @@
         width: 400px;
         height: auto;
     }
+    .leaflet-popup-content{
+       width: 30%;
+    }
 }
 
 @media all and (min-width: 751px) and (max-width: 1200px) {
