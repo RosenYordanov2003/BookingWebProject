@@ -24,4 +24,8 @@
     <ProjectReference Include="..\BookingWebProject.Infrastructure\BookingWebProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Comment\" />
+  </ItemGroup>
+
 </Project>

@@ -1,9 +1,21 @@
 ﻿@model HotelInfoViewModel
 @inject IConfiguration Configuration
 
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions
+{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/HotelStyles/Info.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/HotelStyles/Responsive/Info.css" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
@@ -25,16 +37,16 @@
         <i class="fa-solid fa-arrow-left"></i>
         @{
             int count = 1;
-                @foreach (PictureViewModel picture in Model.Pictures)
+            @foreach (PictureViewModel picture in Model.Pictures)
             {
                 if (count == 1)
                 {
 
-                        <img class="active" src="@picture.Path">
+                    <img class="active" src="@picture.Path">
                 }
                 else
                 {
-                        <img src="@picture.Path">
+                    <img src="@picture.Path">
                 }
                 count++;
             }
@@ -59,6 +71,7 @@
     <h2 class="description-title">@Model.Name description</h2>
     <p class="hotel-description">@Model.Description</p>
 }
+<p class="about-room-link">If @Model.Name has caught your attention, below you will see the button to view the rooms and their packages</p>
 <a asp-controller="Room" asp-action="GetHotelRooms" asp-route-id="@Model.Id" class="rooms-link">See Rooms</a>
 <section class="location-section">
     <h3 class="location-title"><i class="fa-solid fa-location-dot"></i> Hotel Location</h3>
@@ -147,6 +160,7 @@
 </div>
 
 
+<script src="~/js/Hotel/Info.js"></script>
 <script src="~/js/map.js"></script>
 <script>
     const latitude = '@Model.Latitude';
@@ -155,4 +169,11 @@
     const apiKey = '@Configuration["MapTilerApiKey"]';
     initializeMap(latitude, longitude, message, apiKey);
 </script>
+
+<script>
+    const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
+<script src="~/js/Comment/PostComment.js"></script>
+<script src="~/js/Comment/DeleteComment.js"></script>
+<script src="~/js/Comment/EditComment.js"></script>
 

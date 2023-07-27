@@ -1,0 +1,144 @@
+﻿@media screen and (min-width: 280px) and (max-width:700px) {
+    .container {
+        width: 100%;
+    }
+
+    section,
+    p,
+    article,
+    ul,
+    li,
+    h1,
+    h2 {
+        width: 100%
+    }
+
+    .intro-section {
+        flex-direction: column;
+    }
+
+    .intro-section .title {
+        font-size: 2rem;
+    }
+
+    .star-list {
+        font-size: 2.1rem;
+    }
+
+    .benefits .title {
+        font-size: 1.7rem;
+    }
+
+    .benefits {
+        text-align: center;
+    }
+
+   .benefits .benefit-list {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap: 0.7rem;
+       justify-content: center;
+   }
+
+    .benefit-list .benefit-container {
+        gap: 0.5rem;
+    }
+
+    .benefit-container .benefit-title {
+        font-size: 1.3rem;
+    }
+
+    .description-title {
+        font-size: 1.7rem;
+        padding: 3rem;
+    }
+
+    .hotel-description, .about-room-link {
+        width: 90%;
+        text-align: center;
+    }
+
+    .leaflet-popup-content {
+        width: 60%;
+    }
+
+    .hotel-card {
+        flex-direction: column;
+    }
+
+    .hotel-card .img-container {
+        width: 90%;
+    }
+
+    .rooms-link {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 3rem 0rem;
+    }
+
+    .comment-description, .date, .distance-button {
+        font-size: 1rem;
+    }
+
+    .username {
+        font-size: 1.2rem;
+    }
+
+    .button-container button {
+        min-width: 70px;
+        font-size: 1rem;
+    }
+
+    .pagination-container .page-list {
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 4rem;
+    }
+
+    textarea {
+        width: 90%;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1200px){
+    .intro-section .title {
+        font-size: 2.4rem;
+    }
+
+    .star-list {
+        font-size: 2.3rem;
+    }
+    .hotel-card{
+      flex-direction: column;
+    }
+    .hotel-card .img-container{
+       width: 90%;
+    }
+    .benefits .title{
+       font-size: 1.9rem;
+       margin: 3rem 0rem;
+    }
+    .rooms-link {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 3rem 0rem;
+    }
+    .pagination-container {
+        justify-content: flex-start;
+    }
+    .description-title{
+      font-size: 2rem;
+    }
+
+}
+@media screen and (min-width: 1201px) and (max-width: 1620px){
+    .hotel-card {
+        flex-direction: column;
+    }
+
+    .hotel-card .img-container {
+        width: 90%;
+    }
+}
