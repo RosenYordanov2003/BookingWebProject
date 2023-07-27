@@ -1,5 +1,7 @@
-﻿namespace BookingWebProject.Core.Models.Hotel
+﻿
+namespace BookingWebProject.Core.Models.Hotel
 {
+    using Room;
     public class HotelViewModel
     {
         public HotelViewModel()
@@ -14,7 +16,6 @@
         public string Country { get; set; } = null!;
         public string PicturePath { get; set; } = null!;
 
-        //When add the rooms
-        //public CheapestHotelRoomViewModel CheapestHotelRoomViewModel { get; set; } = null!;
+        public CheapestHotelRoomViewModel? CheapestHotelRoomViewModel { get; set; }
     }
 }

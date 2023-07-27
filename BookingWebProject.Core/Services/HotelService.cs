@@ -11,6 +11,7 @@
     using BookingWebProject.Core.Models.Pager;
     using BookingWebProject.Core.Models.Benefits;
     using BookingWebProject.Core.Models.Comment;
+    using BookingWebProject.Core.Models.Room;
 
     public class HotelService : IHotelService
     {
@@ -38,8 +39,11 @@
                       Country = h.Country,
                       PicturePath = h.Pictures.First().Path,
                       IsFavorite = h.FavoriteHotels.Any(fv => fv.HotelId == h.Id && fv.UserId == userId),
-                  })
-                  .ToArrayAsync();
+                      CheapestHotelRoomViewModel = h.Rooms
+                     .Select(r => new CheapestHotelRoomViewModel() { Id = r.Id, PricePerNight = r.PricePerNight })
+                     .OrderBy(r => r.PricePerNight)
+                     .FirstOrDefault()
+                  }).ToArrayAsync();
             return new AllHotelsSortedAndFilteredDataModel()
             {
                 Hotels = allHotels

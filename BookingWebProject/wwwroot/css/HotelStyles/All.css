@@ -314,6 +314,7 @@ select {
     text-decoration: none;
     background-color: forestgreen;
     color: white;
-    padding: 10px 14px;
+    padding: 20px 16px;
     text-align: center;
+    border-radius: 6px;
 }
