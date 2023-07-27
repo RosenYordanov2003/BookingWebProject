@@ -41,5 +41,25 @@
                 return Json(new { success = false });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!await commentService.IsExist(id))
+            {
+                TempData[ErrorMessage] = CommentDoesNotExist;
+                return Json(new { success = false });
+            }
+            try
+            {
+                await commentService.DeleteCommentAsync(id);
+                TempData[SuccessMessage] = SuccessRemoveMessage;
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                TempData[WarningMessage] = DefaultErrorMessage;
+                return Json(new { success = false });
+            }
+        }
     }
 }

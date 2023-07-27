@@ -4,6 +4,8 @@
     using Data;
     using Contracts;
     using Models.Comment;
+    using Microsoft.EntityFrameworkCore;
+
     public class CommentService : ICommentService
     {
         private readonly BookingContext bookingContext;
@@ -23,6 +25,19 @@
             };
             await bookingContext.Comments.AddAsync(comment);
             await bookingContext.SaveChangesAsync();
+        }
+        public async Task<bool> IsExist(int commentId)
+        {
+            return await bookingContext.Comments.AnyAsync(c => c.Id == commentId && !c.IsDeleted);
+        }
+
+        public async Task<bool> DeleteCommentAsync(int commentId)
+        {
+            Comment commentToDelete = await bookingContext.Comments.FirstAsync(c => c.Id == commentId);
+            commentToDelete.IsDeleted = true;
+            await bookingContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }
