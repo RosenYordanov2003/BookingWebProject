@@ -32,6 +32,7 @@ builder.Services.AddScoped<IRentCarService, RentCarService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IBenefitService, BenefitService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";

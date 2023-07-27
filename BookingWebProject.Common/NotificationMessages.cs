@@ -9,5 +9,9 @@
         public const string HotelDoesNotExist = "Hotel with this id does not exist";
         public const string SuccessfullyAddHotelToUserFavorites = "You have successfully add hotel to your favorite hotels";
         public const string SuccessfullyRemoveHotelFromUserFavoriteHotels = "You have successfully remove hotel from your favorite hotels";
+        public const string SuccessFullyPostedComment = "You have successfully posted your comment";
+        public const string CommentDoesNotExist = "Comment with this id does not exist";
+        public const string SuccessEditedComment = "Your comment was successfully edited";
+        public const string SuccessRemoveMessage = "You have successfully deleted your comment";
     }
 }

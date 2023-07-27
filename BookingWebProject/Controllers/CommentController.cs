@@ -1,0 +1,45 @@
+﻿namespace BookingWebProject.Controllers
+{
+    using Core.Models.Comment;
+    using Core.Contracts;
+    using Extensions;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
+
+    [Authorize]
+
+    public class CommentController : Controller
+    {
+        private readonly ICommentService commentService;
+        public CommentController(ICommentService commentService)
+        {
+            this.commentService = commentService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostComment([FromBody] PostCommentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Keys
+               .SelectMany(key => ModelState[key].Errors
+               .Select(x => new { Key = key, Error = x.ErrorMessage }))
+               .ToList();
+                return Json(new { success = false, errors = errors });
+            }
+            try
+            {
+                await commentService.CreateCommentAsync(model, User.GetId(), User.Identity.Name);
+                TempData[SuccessMessage] = SuccessFullyPostedComment;
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                TempData[WarningMessage] = DefaultErrorMessage;
+                return Json(new { success = false });
+            }
+        }
+    }
+}
