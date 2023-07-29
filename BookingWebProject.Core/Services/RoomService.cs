@@ -4,6 +4,9 @@
     using Data;
     using Contracts;
     using Models.Room;
+    using BookingWebProject.Core.Models.Picture;
+    using BookingWebProject.Core.Models.RoomBasis;
+
     public class RoomService : IRoomService
     {
         private readonly BookingContext bookingContext;
@@ -28,6 +31,29 @@
                   })
                   .ToArrayAsync();
             return hotelRooms;
+        }
+
+
+        public async Task<bool> IsRoomExistAsync(int roomId)
+        {
+            return await bookingContext.Rooms.AnyAsync(r => r.Id == roomId && !r.IsDeleted);
+        }
+        public async Task<RoomOrderInfoViewModel> GetORderRoomInfoAsync(int roomId)
+        {
+            RoomOrderInfoViewModel roomOrderInfoViewModel = await bookingContext.Rooms
+                 .Select(r => new RoomOrderInfoViewModel()
+                 {
+                     Id = r.Id,
+                     HotelId = r.HotelId,
+                     Description = r.Description,
+                     Name = r.RoomType.Name,
+                     RoomCapacity = r.Capacity,
+                     Price = r.PricePerNight,
+                     RoomPictures = r.Pictures.Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
+                     RoomBases = r.RoomBases.Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name }).ToArray()
+                 })
+                 .FirstAsync(r => r.Id == roomId);
+            return roomOrderInfoViewModel;
         }
     }
 }
