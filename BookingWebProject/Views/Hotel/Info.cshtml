@@ -72,7 +72,7 @@
     <p class="hotel-description">@Model.Description</p>
 }
 <p class="about-room-link">If @Model.Name has caught your attention, below you will see the button to view the rooms and their packages</p>
-<a asp-controller="Room" asp-action="GetHotelRooms" asp-route-id="@Model.Id" class="rooms-link">See Rooms</a>
+<a asp-controller="Room" asp-action="HotelRooms" asp-route-id="@Model.Id" class="rooms-link">See Rooms</a>
 <section class="location-section">
     <h3 class="location-title"><i class="fa-solid fa-location-dot"></i> Hotel Location</h3>
     <div id="map">

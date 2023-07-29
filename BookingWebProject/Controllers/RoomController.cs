@@ -2,6 +2,8 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Core.Contracts;
+    using Core.Models.Room;
+
     public class RoomController : Controller
     {
         private readonly IRoomService roomService;
@@ -10,6 +12,13 @@
         {
             this.roomService = roomService;
             this.packageService = packageService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> HotelRooms(int id)
+        {
+            IEnumerable<RoomViewModel> hotelRooms = await roomService.GetHotelRooms(id);
+            hotelRooms = hotelRooms.DistinctBy(hr => hr.RoomType);
+            return View(hotelRooms);
         }
     }
 }

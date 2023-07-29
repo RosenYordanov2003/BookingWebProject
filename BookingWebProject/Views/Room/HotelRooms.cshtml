@@ -1,0 +1,56 @@
+﻿@model IEnumerable<RoomViewModel>
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/RoomStyles/HotelRooms.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/RoomStyles/Responsive/HotelRooms.css" asp-append-version="true" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+@if (Model.Any())
+{
+    <h1 class="title">@Model.First().HotelName Rooms</h1>
+}
+else
+{
+    <h1 class="title">This hotel has not rooms</h1>
+}
+<section class="rooms">
+    @foreach (RoomViewModel room in Model)
+    {
+        <div class="room-card">
+            <div class="img-container">
+                <img src="@room.RoomPictures.First().Path" />
+            </div>
+            <div class="content">
+                <div class="title-container">
+                    <h2>@room.RoomType</h2>
+                    <i class="fa-solid fa-angle-down"></i>
+                </div>
+                <ul>
+                    @for (int i = 1; i <= room.RoomCapacity; i++)
+                    {
+                        <li><i class="fa-solid fa-user"></i></li>
+                    }
+                </ul>
+                <p class="description">@room.Description</p>
+                <p class="price-per-night">From @(string.Format($"{room.PricePerNight:F2}$"))  price per night</p>
+            </div>
+            <a class="packages-link" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@room.Id">See packages</a>
+        </div>
+    }
+</section>
+
+<script>
+    const arrowElement = document.querySelectorAll('.fa-angle-down').forEach((arrow) => {
+        arrow.addEventListener('click', function (event) {
+            event.target.classList.toggle('active');
+           event.target.parentElement.parentElement.children[2].classList.toggle('active-description');
+        })
+    });
+
+</script>

@@ -1,0 +1,127 @@
+﻿*,
+*::before,
+*::after {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+label,
+input,
+span {
+    font-family: 'Paytone One', sans-serif;
+}
+
+main {
+    margin-top: 10rem;
+}
+
+body {
+    background-color: #e0e0e0
+}
+
+.title {
+    text-align: center;
+}
+
+.rooms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5rem 3rem;
+    gap: 2rem;
+}
+
+.room-card {
+    background-color: white;
+    width: 600px;
+}
+
+.room-card .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.3rem;
+    padding: 1rem 2rem;
+}
+
+.img-container {
+    width: 100%;
+    padding: 0rem;
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.content ul {
+    display: flex;
+    gap: 1rem;
+}
+
+.price-per-night {
+    text-transform: capitalize;
+    font-size: 1.4rem;
+}
+
+.content ul li i {
+    font-size: 1.2rem;
+}
+
+.packages-link {
+    display: inline-block;
+    margin: 1rem 1.5rem;
+    background-color: #99952b;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 1.2rem;
+    transition: all 0.5s ease;
+    text-decoration: none;
+}
+
+.packages-link:hover {
+    opacity: 0.7;
+}
+
+.description {
+    display: none;
+}
+
+.room-card .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.room-card .title-container i {
+    font-size: 1.3rem;
+    transition: 0.5s ease all;
+    padding: 0.8rem;
+}
+
+.room-card .title-container i:hover {
+    background-color: #e8e8e8;
+    border-radius: 30px;
+}
+
+.title-container .active {
+    transform: rotate(180deg);
+}
+
+.content .active-description {
+    display: inline-block;
+}
