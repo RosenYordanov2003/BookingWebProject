@@ -1,8 +1,8 @@
 ﻿namespace BookingWebProject.Core.Services
 {
-    using BookingWebProject.Data;
-    using Contracts;
     using Microsoft.EntityFrameworkCore;
+    using Data;
+    using Contracts;
     using Models.Room;
     public class RoomService : IRoomService
     {
