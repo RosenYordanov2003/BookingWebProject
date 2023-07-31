@@ -2,6 +2,7 @@ using BookingWebProject.Core.Contracts;
 using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
 using BookingWebProject.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 })
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<BookingContext>();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
