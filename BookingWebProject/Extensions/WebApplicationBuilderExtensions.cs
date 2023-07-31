@@ -25,6 +25,7 @@
 
                 User userToFind = await userManagaer.FindByIdAsync(userId);
                 await userManagaer.AddToRoleAsync(userToFind, AdminRoleName);
+
             })
                 .GetAwaiter()
                 .GetResult();
