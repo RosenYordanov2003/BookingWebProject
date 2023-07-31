@@ -34,6 +34,7 @@
                 NormalizedEmail = "ADMIN@GMAIL.COM",
             };
             userOne.PasswordHash = passwordHasher.HashPassword(userOne, "test12345");
+            adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "admin12345");
             List<User> users = new List<User>() { userOne, adminUser };
 
             return users;
