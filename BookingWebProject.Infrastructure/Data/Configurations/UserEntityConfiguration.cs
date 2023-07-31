@@ -6,7 +6,7 @@
     using Models;
     using Microsoft.AspNetCore.Identity;
 
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -29,9 +29,9 @@
             {
                 Id = Guid.Parse("ED842FDC-C71B-4FBC-8DF5-6F97CB73D622"),
                 UserName = "Admin",
-                NormalizedUserName = "Admin",
+                NormalizedUserName = "АDMIN",
                 Email = "admin123@gmail.com",
-                NormalizedEmail = "ADMIN@GMAIL.COM",
+                NormalizedEmail = "ADMIN123@GMAIL.COM",
             };
             userOne.PasswordHash = passwordHasher.HashPassword(userOne, "test12345");
             adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "admin12345");

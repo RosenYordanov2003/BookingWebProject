@@ -42,8 +42,8 @@
             builder.ApplyConfiguration(new RoomBasesConfiguration());
             builder.ApplyConfiguration(new PictureEntityConfiguration());
             builder.ApplyConfiguration(new FavoriteHotelsEntityConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
-            //builder.ApplyConfiguration(new CommentEntityConfiguration());
+            builder.ApplyConfiguration(new UserEntityConfiguration());
+            builder.ApplyConfiguration(new CommentEntityConfiguration());
         }
     }
 }

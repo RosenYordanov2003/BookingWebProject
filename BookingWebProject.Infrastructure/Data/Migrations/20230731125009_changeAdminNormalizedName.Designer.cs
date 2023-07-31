@@ -4,6 +4,7 @@ using BookingWebProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingWebProject.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230731125009_changeAdminNormalizedName")]
+    partial class changeAdminNormalizedName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,68 +142,6 @@ namespace BookingWebProject.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 13,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2381),
-                            Description = "Test Comment",
-                            HotelId = 1,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2417),
-                            Description = "Test Comment",
-                            HotelId = 2,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2419),
-                            Description = "Test Comment",
-                            HotelId = 3,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2421),
-                            Description = "Test Comment",
-                            HotelId = 4,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2423),
-                            Description = "Test Comment",
-                            HotelId = 5,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CreatedDate = new DateTime(2023, 7, 31, 16, 4, 44, 399, DateTimeKind.Local).AddTicks(2455),
-                            Description = "Test Comment",
-                            HotelId = 6,
-                            IsDeleted = false,
-                            UserId = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
-                            UserName = "Test User"
-                        });
                 });
 
             modelBuilder.Entity("BookingWebProject.Infrastructure.Data.Models.FavoriteHotels", b =>
@@ -2671,13 +2611,13 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4727cf5b-d8bc-447d-8841-0030566da367",
+                            ConcurrencyStamp = "ab7addb5-9ded-4e53-bbc0-b4e92c970878",
                             Email = "testuser123@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER123@GMAIL.COM",
                             NormalizedUserName = "TEST USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAENPzWKlK6m7gExVd75V4nKvk3dHUqrs6p9BwCT8UAVuKWbtm4jAym9g9RcnPKDJK0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELhfVzCbAkm/YFnQlCL8iZqq56XVtdgHHWzrxCKazXUSYhQcKwxUW3DouIugab8Jag==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "Test User"
@@ -2686,13 +2626,13 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2ee0f98c-ccac-4639-875c-10bd9cf1483c",
+                            ConcurrencyStamp = "a1c025a8-5c13-4a57-b298-17fff616bab4",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN123@GMAIL.COM",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOW9pIPaqmzH6NeEpLICYtj3id20KxKU4mKA02zqqBGbtnVFtTR1SYEqnQUr1Bq/xg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENUwd4VONpKCg6QvKuiYfwiLDvUYzY0avsGgDKlVlRKnrYXeHbny15WHp914rsF7RA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -2839,13 +2779,13 @@ namespace BookingWebProject.Infrastructure.Migrations
                     b.HasOne("BookingWebProject.Infrastructure.Data.Models.Hotel", "Hotel")
                         .WithMany("Comments")
                         .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BookingWebProject.Infrastructure.Data.Models.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Hotel");

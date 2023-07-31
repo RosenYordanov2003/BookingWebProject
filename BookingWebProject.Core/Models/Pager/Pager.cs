@@ -1,8 +1,8 @@
 ﻿namespace BookingWebProject.Core.Models.Pager
 {
+    using static Common.GeneralAplicationConstants;
     public class Pager
     {
-        private const int _PageSize = 5;
         public Pager(int totalItems, int currentPage)
         {
             Configure(totalItems, currentPage);
@@ -10,7 +10,7 @@
 
         private void Configure(int totalItems, int currentPage)
         {
-            int totalPages = (int)Math.Ceiling((double)totalItems / _PageSize);
+            int totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
             int startPage = Math.Max(1, currentPage - 2);
             int endPage = Math.Min(startPage + 3, totalPages);
 
@@ -23,7 +23,7 @@
 
             TotalPages = totalPages;
             CurrentPage = currentPage;
-            PageSize = _PageSize;
+            PageSize = PageSize;
             StartPage = startPage;
             EndPage = endPage;
             TotalItems = totalItems;

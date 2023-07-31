@@ -1,6 +1,7 @@
 using BookingWebProject.Core.Contracts;
 using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
+using BookingWebProject.Extensions;
 using BookingWebProject.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -64,6 +65,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.SeedAdministrator("ED842FDC-C71B-4FBC-8DF5-6F97CB73D622");
 
 app.MapControllerRoute(
     name: "default",
