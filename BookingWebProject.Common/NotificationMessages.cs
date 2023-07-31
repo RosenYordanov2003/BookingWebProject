@@ -13,5 +13,7 @@
         public const string CommentDoesNotExist = "Comment with this id does not exist";
         public const string SuccessEditedComment = "Your comment was successfully edited";
         public const string SuccessRemoveMessage = "You have successfully deleted your comment";
+        public const string NoAvalilableRoom = "There is no available room for this period";
+        public const string SuccessBookedRoom = "You have successfully booked a room";
     }
 }

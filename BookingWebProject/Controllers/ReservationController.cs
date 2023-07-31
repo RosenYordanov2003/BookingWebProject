@@ -8,6 +8,7 @@
     using Core.Models.RoomPackage;
     using static BookingWebProject.Common.NotificationKeys;
     using static BookingWebProject.Common.NotificationMessages;
+    using System.ComponentModel.DataAnnotations;
 
     public class ReservationController : Controller
     {
@@ -87,6 +88,40 @@
                 };
 
                 return View(roomToReserve);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> BookRoom(RoomReservationViewModel roomReservationViewModel)
+        {
+            var validationResults = roomReservationViewModel.Validate(new ValidationContext(roomReservationViewModel));
+            roomReservationViewModel.User.Id = this.User.GetId();
+            if (!ModelState.IsValid || validationResults.Any())
+            {
+                foreach (ValidationResult validationResult in validationResults)
+                {
+                    foreach (string memberName in validationResult.MemberNames)
+                    {
+                        ModelState.AddModelError(memberName, validationResult.ErrorMessage);
+                    }
+                }
+                return View(roomReservationViewModel);
+            }
+            if (!await reservationService.IsThereAvalilableRoomAsync(roomReservationViewModel.Room.HotelId, roomReservationViewModel.Room.Name, roomReservationViewModel.StartDate, roomReservationViewModel.EndDate))
+            {
+                TempData[WarningMessage] = NoAvalilableRoom;
+                return View(roomReservationViewModel);
+            }
+            try
+            {
+                await reservationService.BookRoomAsync(roomReservationViewModel, this.User.GetId());
+                TempData[SuccessMessage] = SuccessBookedRoom;
+                //Should change the redirect
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {
