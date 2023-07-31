@@ -1,0 +1,94 @@
+﻿@model RoomReservationViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/ReservationStyles/BookRoom.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/ReservationStyles/Responsive/RoomReservation.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+
+<h1 class="title">Complete your book</h1>
+<div class="order-container">
+    <form class="user-order-info" method="post">
+        <div class="input-container">
+            <label asp-for="@Model.User.FirstName">First Name</label>
+            <input type="text" asp-for="@Model.User.FirstName" aria-required="true" placeholder="Enter First Name" />
+            <span asp-validation-for="@Model.User.FirstName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.LastName">Last Name</label>
+            <input type="text" asp-for="@Model.User.LastName" aria-required="true" placeholder="Enter Last Name" />
+            <span asp-validation-for="@Model.User.LastName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.PhoneNumber>Phone Number">Phone Number</label>
+            <input type="text" asp-for="@Model.User.PhoneNumber" placeholder="Enter Phone Number" />
+            <span asp-validation-for="@Model.User.PhoneNumber"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.User.Email">Email</label>
+            <input type="text" asp-for="@Model.User.Email" value="@Model.User.Email" readonly />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.StartDate">Start Date</label>
+            <input type="date" asp-for="@Model.StartDate" class="start-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+            <span asp-validation-for="@Model.StartDate"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.EndDate">End Date</label>
+            <input type="date" asp-for="@Model.EndDate" class="end-date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")"
+                   value="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
+            <span asp-validation-for="@Model.EndDate"></span>
+        </div>
+        <input type="hidden" asp-for="@Model.Room.Name" value="@Model.Room.Name" />
+        <input type="hidden" asp-for="@Model.Room.Price" value="@Model.Room.Price" />
+        <input type="hidden" asp-for="@Model.Room.SelectedPackage" value="@Model.Room.SelectedPackage" />
+        <input type="hidden" asp-for="@Model.Room.HotelId" value="@Model.Room.HotelId" />
+        <input type="hidden" asp-for="@Model.Room.AdultsCount" value="@Model.Room.AdultsCount" />
+        <input type="hidden" asp-for="@Model.Room.ChildrenCount" value="@Model.Room.ChildrenCount" />
+        <input type="hidden" asp-for="@Model.Room.SelectedPackage.Id" value="@Model.Room.SelectedPackage.Id" />
+        <input type="hidden" asp-for="@Model.Room.SelectedPackage.Name" value="@Model.Room.SelectedPackage.Name" />
+        <input type="hidden" asp-for="@Model.Room.SelectedPackage.Price" value="@Model.Room.SelectedPackage.Price" />
+        <input type="hidden" asp-for="@Model.Room.RoomPicture.Path" value="@Model.Room.RoomPicture.Path" />
+        <button class="book-btn" type="submit">Book</button>
+        <div asp-validation-summary="ModelOnly" class="error-container"></div>
+    </form>
+    <section class="order-info">
+        <h2 class="order-title">@Model.Room.Name with @Model.Room.SelectedPackage.Name Package</h2>
+        <div class="img-container">
+            <img src="@Model.Room.RoomPicture.Path" />
+        </div>
+        <p class="book-guests-title">Your Book is for: @Model.Room.AdultsCount adults @(Model.Room.ChildrenCount > 0 ? string.Format(" " + "and" + " " + Model.Room.ChildrenCount.ToString() + " " + "children") : "") </p>
+        <hr />
+        <p class="price">Price per day: @Model.Room.Price$</p>
+        <hr />
+        <p class="price total-price"></p>
+    </section>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+    <script>
+        const endDataInputElement = document.querySelector(".end-date");
+        const startDateInputElement = document.querySelector(".start-date");
+        endDataInputElement.addEventListener('change', () => {
+            if (startDateInputElement.value >= endDataInputElement.value) {
+                document.querySelector(".order-info .total-price").textContent = '';
+                return;
+            }
+            let pricePerDay = '@Model.Room.Price';
+            let endDate = new Date(endDataInputElement.value);
+            let startDate = new Date(startDateInputElement.value);
+            // return the difference in milliseconds
+            let difference = endDate.getTime() - startDate.getTime();
+            //convert milliseconds to days (1000 = total milliseconds in second, 3600 = total seconds in hour, 24 = total hours per day)
+            let dayDifference = Math.ceil(difference / (1000 * 3600 * 24));
+            let totalPrice = pricePerDay * dayDifference;
+            document.querySelector(".order-info .total-price").textContent = `Total Price: ${totalPrice.toFixed(2)}$`;
+
+        });
+    </script>
+    <script src="~/js/account.js"></script>

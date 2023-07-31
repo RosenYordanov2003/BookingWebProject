@@ -1,0 +1,101 @@
+﻿@media all and (min-width: 280px) and (max-width: 700px) {
+    .order-container {
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .user-order-info, .container {
+        width: 100%;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    main {
+        margin: 9rem 1rem 1rem 1rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .input-container label {
+        font-size: 1rem;
+    }
+
+    .input-container input {
+        min-width: 200px;
+    }
+
+    .user-order-info, .order-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .order-title {
+        font-size: 1.4rem;
+    }
+
+    .img-container {
+        max-width: 200px;
+    }
+
+    .order-info .model-year, .order-info .location, .book-guests-title {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+
+    .order-info .price {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+
+    .book-btn {
+        font-size: 1rem;
+        margin-bottom: 1.6rem;
+    }
+}
+
+@media all and (min-width: 701px) and (max-width: 1000px) {
+    .order-title {
+        font-size: 1.4rem;
+    }
+
+    .order-container {
+        padding: 3rem 2.8rem;
+    }
+
+    .img-container {
+        max-width: 240px;
+    }
+
+    .order-info .model-year, .order-info .location, .book-guests-title {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+
+    .order-info .price {
+        font-size: 1.4rem;
+    }
+
+    .user-order-info, .order-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .input-container input {
+        min-width: 160px;
+    }
+}
+
+@media all and (min-width: 1001px) and (max-width: 1200px) {
+    .img-container {
+        max-width: 400px;
+    }
+}
