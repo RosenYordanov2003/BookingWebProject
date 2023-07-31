@@ -6,6 +6,7 @@
     using Models.Room;
     using BookingWebProject.Core.Models.Picture;
     using BookingWebProject.Core.Models.RoomBasis;
+    using BookingWebProject.Core.Models.RoomPackage;
 
     public class RoomService : IRoomService
     {
@@ -54,6 +55,29 @@
                  })
                  .FirstAsync(r => r.Id == roomId);
             return roomOrderInfoViewModel;
+        }
+        public async Task<BookRoomViewModel> GetRoomToBookAsync(RoomOrderInfoViewModel roomOrderInfoViewModel, RoomPackageViewModel package)
+        {
+            BookRoomViewModel roomToBook = new BookRoomViewModel()
+            {
+                AdultsCount = roomOrderInfoViewModel.AdultsCount,
+                ChildrenCount = roomOrderInfoViewModel.ChildrenCount,
+                HotelId = roomOrderInfoViewModel.HotelId,
+                Name = roomOrderInfoViewModel.Name,
+                SelectedPackage = package
+            };
+            decimal childrenPrice = roomOrderInfoViewModel.ChildrenCount > 0 ? (roomOrderInfoViewModel.Price - (roomOrderInfoViewModel.Price * 60 / 100)) * roomOrderInfoViewModel.ChildrenCount : 0;
+            roomToBook.Price = (roomOrderInfoViewModel.Price * roomOrderInfoViewModel.AdultsCount) + childrenPrice;
+
+            roomToBook.RoomPicture = await bookingContext.Pictures
+                .Where(p => p.RoomId == roomOrderInfoViewModel.Id)
+                .Select(p => new PictureViewModel()
+                {
+                    Path = p.Path
+                })
+                .FirstAsync();
+
+            return roomToBook;
         }
     }
 }

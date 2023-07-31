@@ -4,6 +4,8 @@
     using Extensions;
     using Core.Contracts;
     using Core.Models.Reservation;
+    using Core.Models.Room;
+    using Core.Models.RoomPackage;
     using static BookingWebProject.Common.NotificationKeys;
     using static BookingWebProject.Common.NotificationMessages;
 
@@ -12,11 +14,17 @@
         private readonly IRentCarService rentCarService;
         private readonly IUserService userService;
         private readonly IReservationService reservationService;
-        public ReservationController(IRentCarService rentCarService, IUserService userService, IReservationService reservationService)
+        private readonly IPackageService packageService;
+        private readonly IRoomService roomService;
+        public ReservationController(IRentCarService rentCarService, IUserService userService,
+            IReservationService reservationService, IPackageService packageService
+            ,IRoomService roomService)
         {
             this.rentCarService = rentCarService;
             this.userService = userService;
             this.reservationService = reservationService;
+            this.packageService = packageService;
+            this.roomService = roomService;
         }
 
         [HttpGet]
@@ -55,6 +63,30 @@
                 await reservationService.RentCarAsync(id, model);
                 TempData[SuccessMessage] = string.Format(SuccessfullRentCarMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
                 return RedirectToAction("All", "RentCar");
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> BookRoom(RoomOrderInfoViewModel room)
+        {
+            if (!await roomService.IsRoomExistAsync(room.Id))
+            {
+                return NotFound();
+            }
+            try
+            {
+                RoomPackageViewModel roomSelectedPackage = await packageService.GetPackageByIdAsync(room.PackageId);
+                RoomReservationViewModel roomToReserve = new RoomReservationViewModel()
+                {
+                    User = await userService.GetUserByIdAsync(this.User.GetId()),
+                    Room = await roomService.GetRoomToBookAsync(room, roomSelectedPackage)
+                };
+
+                return View(roomToReserve);
             }
             catch (Exception)
             {

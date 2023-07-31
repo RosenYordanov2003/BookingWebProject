@@ -1,8 +1,8 @@
 ﻿namespace BookingWebProject.Core.Services
 {
-    using BookingWebProject.Data;
-    using Contracts;
     using Microsoft.EntityFrameworkCore;
+    using Data;
+    using Contracts;
     using Models.RoomPackage;
     public class PackageService : IPackageService
     {
@@ -23,6 +23,19 @@
                   }).ToArrayAsync();
 
             return allRoomPackages;
+        }
+        public async Task<RoomPackageViewModel> GetPackageByIdAsync(int packageId)
+        {
+            RoomPackageViewModel roomPackage = await bookingContext
+                 .RoomPackages
+                 .Select(p => new RoomPackageViewModel()
+                 {
+                     Id = p.Id,
+                     Name = p.Name,
+                     Price = p.Price
+                 })
+                 .FirstAsync(p => p.Id == packageId);
+            return roomPackage;
         }
     }
 }
