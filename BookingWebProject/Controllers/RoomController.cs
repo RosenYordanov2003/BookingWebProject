@@ -5,6 +5,7 @@
     using static Common.NotificationMessages;
     using Core.Contracts;
     using Core.Models.Room;
+    using System.ComponentModel.DataAnnotations;
 
     public class RoomController : Controller
     {
@@ -41,6 +42,30 @@
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home");
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoomOrder(RoomOrderInfoViewModel roomOrderInfoViewModel)
+        {
+            var validationResults = roomOrderInfoViewModel.Validate(new ValidationContext(roomOrderInfoViewModel));
+            if (!ModelState.IsValid || validationResults.Any())
+            {
+                RoomOrderInfoViewModel model = await roomService.GetORderRoomInfoAsync(roomOrderInfoViewModel.Id);
+                model.Packages = await packageService.GetAllPackagesAsync();
+                model.AdultsCount = roomOrderInfoViewModel.AdultsCount;
+                model.ChildrenCount = roomOrderInfoViewModel.ChildrenCount;
+                model.PackageId = roomOrderInfoViewModel.PackageId;
+
+                foreach (ValidationResult validationResult in validationResults)
+                {
+                    foreach (string memberName in validationResult.MemberNames)
+                    {
+                        ModelState.AddModelError(memberName, validationResult.ErrorMessage);
+                    }
+                }
+
+                return View(model);
+            }
+            return RedirectToAction("BookRoom", "Reservation", roomOrderInfoViewModel);
         }
     }
 }

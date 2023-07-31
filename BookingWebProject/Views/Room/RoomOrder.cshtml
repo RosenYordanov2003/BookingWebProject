@@ -1,0 +1,90 @@
+﻿@model RoomOrderInfoViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/RoomStyles/RoomOrder.css" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="room-order-container">
+    <section class="room-info">
+        <div class="img-container">
+            <i class="fa-solid fa-arrow-left"></i>
+            @foreach (PictureViewModel picture in Model.RoomPictures)
+            {
+                <img src="@picture.Path" />
+            }
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
+        <div class="content">
+            <p class="room-description">@Model.Description</p>
+        </div>
+        <ul class="room-benefits-ul">
+            <h4 class="title">Benefits</h4>
+            @foreach (RoomBasisViewModel item in Model.RoomBases)
+            {
+                <li>@item.Name <i class="fa-solid fa-circle-check"></i></li>
+            }
+        </ul>
+        <div class="button-container">
+            <button class="see-more-button">See more</button>
+            <i class="fa-solid fa-angle-down"></i>
+        </div>
+    </section>
+
+    <section class="packages">
+        @foreach (RoomPackageViewModel package in Model.Packages)
+        {
+            <div class="package">
+                <h3 class="title">@package.Name</h3>
+                <ul class="capacity-ul">
+                    @for (int i = 1; i <= Model.RoomCapacity; i++)
+                    {
+                        <li><i class="fa-solid fa-user"></i></li>
+                    }
+                </ul>
+                <p class="about">The price is per person and includes: </p>
+                <ul class="benefits-ul">
+                    @foreach (RoomBasisViewModel item in Model.RoomBases)
+                    {
+                        <li>@item.Name <i class="fa-solid fa-circle-check"></i></li>
+                    }
+                </ul>
+                <div class="order-container">
+                    <p class="price">$@(Model.Price + package.Price) per night</p>
+                    <button class="choose-button"><i class="fa-solid fa-arrow-down"></i> Choose</button>
+                </div>
+                <form class="order-form" method="post">
+                    <div class="input-container">
+                        <label asp-for="@Model.AdultsCount">Adults Count</label>
+                        <input type="number" min="0" asp-for="@Model.AdultsCount">
+                        @if (package.Id == Model.PackageId)
+                        {
+                            <span asp-validation-for="@Model.AdultsCount" class="text-danger"></span>
+                        }
+                    </div>
+                    <div class="input-container">
+                        <label asp-for="@Model.ChildrenCount">Children Count</label>
+                        <input type="number" min="0" asp-for="@Model.ChildrenCount">
+                        @if (package.Id == Model.PackageId)
+                        {
+                            <span asp-validation-for="@Model.ChildrenCount" class="text-danger"></span>
+                        }
+                    </div>
+                    <input type="hidden" asp-for="@Model.PackageId" value="@package.Id">
+                    <input type="hidden" asp-for="@Model.Price" value="@(Model.Price + package.Price)">
+                    <input type="hidden" asp-for="@Model.RoomCapacity" value="@Model.RoomCapacity">
+                    <input type="hidden" asp-for="@Model.Name" value="@Model.Name">
+                    <input type="hidden" asp-for="@Model.HotelId" value="@Model.HotelId">
+                    <button class="book-button" type="submit">Book</button>
+                </form>
+            </div>
+        }
+    </section>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+    <script src="~/js/Room/RoomOrder.js"></script>
