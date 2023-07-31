@@ -18,18 +18,13 @@
             {
                 if (await roleManager.RoleExistsAsync(AdminRoleName))
                 {
-                    User userToFind = await userManagaer.FindByEmailAsync("admin123@gmail.com");
-                    if (userToFind == null)
-                    {
-                        Console.WriteLine("null");
-                        return;
-                    }
-                    await userManagaer.AddToRoleAsync(userToFind, AdminRoleName);
                     return;
                 }
                 IdentityRole<Guid> role = new IdentityRole<Guid>(AdminRoleName);
                 await roleManager.CreateAsync(role);
-                
+
+                User userToFind = await userManagaer.FindByIdAsync(userId);
+                await userManagaer.AddToRoleAsync(userToFind, AdminRoleName);
             })
                 .GetAwaiter()
                 .GetResult();
