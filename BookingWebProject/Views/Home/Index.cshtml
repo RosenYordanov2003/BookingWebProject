@@ -21,7 +21,7 @@
         Discover a handpicked selection of exquisite hotels, where personalized service and breathtaking surroundings
         merge to create a truly unforgettable journey
     </p>
-    <a asp-controller="Hotel" asp-action="All" class="intro-link">Get started</a>
+    <a asp-area = "" asp-controller="Hotel" asp-action="All" class="intro-link">Get started</a>
 </section>
 
 <section class="services">
@@ -34,7 +34,7 @@
     <section class="cards">
         <div class="card">
             <div class="img-container">
-                <a asp-controller="Hotel" asp-action="All"><img src="~/img/hotel-img.png" /></a>
+                <a asp-area="" asp-controller="Hotel" asp-action="All"><img src="~/img/hotel-img.png" /></a>
             </div>
             <div class="card-content">
                 <p>Book your hotel for your holiday</p>
@@ -42,7 +42,7 @@
         </div>
         <div class="card">
             <div class="img-container">
-                <a asp-controller="RentCar" asp-action="All"> <img src="~/img/rent car img.png" /></a>
+                <a asp-area="" asp-controller="RentCar" asp-action="All"> <img src="~/img/rent car img.png" /></a>
             </div>
             <div class="card-content">
                 <p>Rent a Car for your Holiday</p>
@@ -57,7 +57,7 @@
         {
             <div class="hotel-container">
                 <div class="hotel-img-container">
-                    <a asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
+                    <a asp-area="" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
                     <p class="original-img-path" style="display:none">@hotel.Pictures[0].Path</p>
                     <p class="second-img-path" style="display:none">@hotel.Pictures[1].Path</p>
                     <p class="country">@hotel.Country</p>

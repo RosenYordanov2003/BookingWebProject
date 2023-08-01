@@ -48,11 +48,11 @@
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <li>
-                        <a asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+                        <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
                     </li>
 
                     <li>
-                        <a asp-action="Logout" asp-controller="Account">Logout</a>
+                        <a asp-area = "" asp-action="Logout" asp-controller="Account">Logout</a>
                     </li>
 
                 }

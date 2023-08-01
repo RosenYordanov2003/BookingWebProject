@@ -12,6 +12,7 @@
         {
             IEnumerable<User> users = CreateUsers();
             builder.HasData(users);
+            builder.Property(u => u.JoinTime).HasDefaultValue(DateTime.Now);
         }
 
         private IEnumerable<User> CreateUsers()

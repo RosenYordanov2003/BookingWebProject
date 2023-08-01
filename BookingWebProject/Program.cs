@@ -1,3 +1,5 @@
+using BookingWebProject.Areas.Admin.Contracts;
+using BookingWebProject.Areas.Admin.Services;
 using BookingWebProject.Core.Contracts;
 using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
@@ -38,6 +40,8 @@ builder.Services.AddScoped<IBenefitService, BenefitService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPackageService, PackageService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IUserAdminService, UserAdminService>();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
@@ -68,9 +72,27 @@ app.UseAuthorization();
 
 app.SeedAdministrator("ED842FDC-C71B-4FBC-8DF5-6F97CB73D622");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+//app.MapControllerRoute(
+
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapRazorPages();
+
+app.UseEndpoints(config =>
+{
+    config.MapControllerRoute(
+        name: "areas",
+        pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+    config.MapControllerRoute(
+        name: "default",
+     pattern: "{controller=Home}/{action=Index}/{id?}");
+       
+
+    config.MapDefaultControllerRoute();
+
+    config.MapRazorPages();
+});
 
 app.Run();

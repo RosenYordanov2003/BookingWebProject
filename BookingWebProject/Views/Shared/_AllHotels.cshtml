@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <div class="link-container">
-                <a class="view-link" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id">View</a>
+                <a class="view-link" asp-area = "" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id">View</a>
                 @if (hotel.CheapestHotelRoomViewModel == null)
                 {
                     <a class="cheapest-room">
@@ -38,7 +38,7 @@
                 }
                 else
                 {
-                    <a class="cheapest-room" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@hotel.CheapestHotelRoomViewModel.Id">The Lowest Price $@hotel.CheapestHotelRoomViewModel.PricePerNight</a>
+                    <a class="cheapest-room" asp-area="" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@hotel.CheapestHotelRoomViewModel.Id">The Lowest Price $@hotel.CheapestHotelRoomViewModel.PricePerNight</a>
                 }
             </div>
         </div>

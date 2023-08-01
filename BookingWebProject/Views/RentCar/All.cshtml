@@ -56,7 +56,7 @@
     <button type="submit">Sort</button>
 </form>
 
-<form method="get" class="filter-container" asp-controller="RentCar" asp-action="All">
+<form method="get" class="filter-container" asp-area="" asp-controller="RentCar" asp-action="All">
     <div class="title-container">
         <img class="filter-img" src="~/img/FilterIcon.png" />
         <h3 class="filter-title"> Filters</h3>
@@ -122,8 +122,8 @@
                 <p class="price">$@car.PricePerDay / Day</p>
                 <p class="car-location"><i class="fa-solid fa-location-dot"></i>@car.Location</p>
                 <div class="btn-container">
-                    <a class="details-btn" asp-controller="RentCar" asp-action="Details" asp-route-id="@car.Id">Details</a>
-                    <a class="rent-btn" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@car.Id">Rent</a>
+                    <a class="details-btn" asp-area="" asp-controller="RentCar" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                    <a class="rent-btn" asp-area="" asp-controller="Reservation" asp-action="RentCar" asp-route-id="@car.Id">Rent</a>
                 </div>
             </div>
         }

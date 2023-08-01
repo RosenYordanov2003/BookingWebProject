@@ -4,5 +4,6 @@
     {
         public const int DefaultPageSize = 5;
         public const string AdminRoleName = "Administrator";
+        public const string AdminAreaName = "Admin";
     }
 }

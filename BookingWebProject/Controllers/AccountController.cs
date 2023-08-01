@@ -1,10 +1,10 @@
 ﻿namespace BookingWebProject.Controllers
 {
-    using Core.Models.Account;
-    using Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Infrastructure.Data.Models;
+    using Core.Models.Account;
 
     [Authorize]
     public class AccountController : Controller

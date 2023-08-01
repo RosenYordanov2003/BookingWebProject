@@ -40,7 +40,7 @@ else
                 <p class="description">@room.Description</p>
                 <p class="price-per-night">From @(string.Format($"{room.PricePerNight:F2}$"))  price per night</p>
             </div>
-            <a class="packages-link" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@room.Id">See packages</a>
+            <a class="packages-link" asp-area="" asp-controller="Room" asp-action="RoomOrder" asp-route-id="@room.Id">See packages</a>
         </div>
     }
 </section>
