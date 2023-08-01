@@ -82,5 +82,8 @@
         left: 0;
         width: 100%;
     }
+    .top-menu i{
+      font-size: 1rem;
+    }
 
 }

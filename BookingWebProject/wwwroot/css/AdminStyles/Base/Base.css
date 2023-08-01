@@ -223,8 +223,11 @@ body.dark .switch:before {
     padding: 10px 14px;
     background-color: var(--panel-color);
     transition: var(--tran-05);
-    z-index: 10;
     overflow: hidden;
+    padding: 1rem;
+}
+.top-menu i{
+  font-size: 1.3rem;
 }
 .top-menu-short {
     left: 120px;

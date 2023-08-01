@@ -1,18 +1,19 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
-    using BookingWebProject.Areas.Admin.Models.User;
-    using Contracts;
     using Microsoft.AspNetCore.Mvc;
-
+    using Models;
+    using Contracts;
     using static BookingWebProject.Common.NotificationKeys;
     using static BookingWebProject.Common.NotificationMessages;
 
     public class HomeController : BaseAdminController
     {
         private readonly IUserAdminService userAdminService;
-        public HomeController(IUserAdminService userAdminService)
+        private readonly IAdminService adminService;
+        public HomeController(IUserAdminService userAdminService, IAdminService adminService)
         {
             this.userAdminService = userAdminService;
+            this.adminService = adminService;
         }
 
         [HttpGet]
@@ -20,8 +21,10 @@
         {
             try
             {
-                IEnumerable<AllUsersViewModel> allUsers = await userAdminService.GetAllUsersAsync();
-                return View(allUsers);
+                HomeAdminPageViewModel homeAdminPageViewModel = await adminService.GetStatisticsInfoAsync();
+
+                homeAdminPageViewModel.AllUsers = await userAdminService.GetAllUsersAsync();
+                return View(homeAdminPageViewModel);
             }
             catch (Exception)
             {

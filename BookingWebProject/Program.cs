@@ -41,6 +41,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IPackageService, PackageService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
 builder.Services.AddScoped<IUserAdminService, UserAdminService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

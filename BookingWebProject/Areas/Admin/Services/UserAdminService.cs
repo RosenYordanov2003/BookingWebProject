@@ -17,11 +17,13 @@
             return await this.bookingContext.Users
                  .Select(u => new AllUsersViewModel()
                  {
+                     Id = u.Id,
                      UserName = u.UserName,
                      UserEmail = u.Email,
                      FirstName = u.FirstName,
                      LastName = u.LastName,
-                     JoinTime = u.JoinTime
+                     JoinTime = u.JoinTime,
+                     ReservationsCount = u.Reservations.Count,
                  })
                  .ToArrayAsync();
         }

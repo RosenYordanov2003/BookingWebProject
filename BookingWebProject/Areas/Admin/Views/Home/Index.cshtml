@@ -1,5 +1,79 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using BookingWebProject.Infrastructure.Data.Models
+@using Microsoft.AspNetCore.Identity
+@using static BookingWebProject.Common.GeneralAplicationConstants
+@model HomeAdminPageViewModel
+@inject UserManager<User> userManager
+
+<link rel="stylesheet" href="~/css/AdminStyles/Home/Home.css" asp-append-version="true" />
+
+
+<div class="content-container">
+    <h1 class="title">Dashboard</h1>
+
+    <section class="statistics">
+        <div class="statistics-container">
+            <i class="fa-solid fa-file-lines"></i>
+            <p>Total Reservations: @Model.TotalReservationCount</p>
+        </div>
+        <div class="statistics-container">
+            <i class="fa-solid fa-hotel"></i>
+            <p>Total Hotel Reservations: @Model.HotelReservationsCount</p>
+        </div>
+        <div class="statistics-container">
+            <i class="fa-solid fa-car"></i>
+            <p>Total Cars Rented: @Model.RentCarsCount</p>
+        </div>
+    </section>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Role</th>
+                <th>User Reservations</th>
+                <th>Change User Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AllUsersViewModel user in Model.AllUsers)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@(string.Format($"{user.FirstName}  {user.LastName}"))</td>
+                    <td>@user.UserEmail</td>
+                    <td>@user.JoinTime.ToString("yyyy-MM-dd")</td>
+                    @{
+                        string value = "";
+                        User userToGet = await userManager.FindByIdAsync(user.Id.ToString());
+                        if (!await userManager.IsInRoleAsync(userToGet, AdminRoleName))
+                        {
+                            value = "Member";
+                        }
+                        else
+                        {
+                            value = "Admin";
+                        }
+                    }
+                    <td>@value</td>
+                    <td>@user.ReservationsCount</td>
+                    @if (value == "Member")
+                    {
+                        <td>
+                            <a class="role-link moderator" asp-area="" asp-controller="Account" asp-action="ChangeRole"
+                             asp-route-id="@user.Id" asp-route-role="@AdminRoleName">Make Moderator</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a class="role-link member" asp-area="" asp-controller="Account" asp-action="ChangeRole"
+                             asp-route-id="@user.Id">Make Member</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
