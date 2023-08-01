@@ -1,0 +1,86 @@
+﻿@media screen and (min-width: 700px) and (max-width: 1000px) {
+    nav {
+        width: 73px;
+    }
+
+     nav.close {
+         width: 250px;
+     }
+
+     nav .title {
+         opacity: 0;
+         pointer-events: none;
+     }
+
+     nav.close .title{
+         opacity: 1;
+         pointer-events: auto;
+     }
+
+     nav li a .link-name {
+         opacity: 0;
+         pointer-events: none;
+     }
+
+     nav.close li a .link-name {
+         opacity: 1;
+         pointer-events: auto;
+     }
+
+     nav ~ .dashboard {
+         left: 73px;
+         width: calc(100% - 73px);
+     }
+
+     nav.close ~ .dashboard {
+         left: 250px;
+         width: calc(100% - 250px);
+     }
+
+     nav ~ .dashboard .top-menu {
+         left: 73px;
+         width: calc(100% - 73px);
+     }
+
+     
+}
+
+@media screen and (min-width: 280px) and (max-width: 700px) {
+    nav {
+        width: 0px;
+        opacity: 0;
+    }
+
+    nav.close {
+        width: 73px;
+        opacity: 1;
+    }
+
+    nav .title {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    nav.close .title {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    nav li a .link-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    nav.close li a .link-name {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .fa-moon{
+        opacity: 0;
+    }
+    .top-menu {
+        left: 0;
+        width: 100%;
+    }
+
+}

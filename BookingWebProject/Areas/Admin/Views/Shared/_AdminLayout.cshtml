@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="~/css/AdminStyles/Home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminStyles/Base/Base.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminStyles/Base/Responsive/Base.css" asp-append-version="true" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,7 +18,7 @@
     <header>
         <nav>
             <div class="logo-name">
-                  <h2 class="title">Booking System</h2>
+                <h2 class="title">Booking System</h2>
             </div>
             <div class="menu-items">
                 <ul class="nav-links">
@@ -28,21 +29,25 @@
                     </li>
                     <li>
                         <a href="#">
+                            <i class="fa-solid fa-hotel"></i>
                             <span class="link-name">Hotels</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
+                            <i class="fa-solid fa-file-lines"></i>
                             <span class="link-name">Reservations</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
+                            <i class="fa-solid fa-car"></i>
                             <span class="link-name">Rent Cars</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
+                            <i class="fa-solid fa-bed"></i>
                             <span class="link-name">Rooms</span>
                         </a>
                     </li>
@@ -50,7 +55,7 @@
 
                 <ul class="logout-mode">
                     <li>
-                        <a asp-area = "" asp-controller = "Account" asp-action="Logout">
+                        <a asp-area="" asp-controller="Account" asp-action="Logout">
                             <i class="fa-solid fa-door-open"></i>
                             <span class="link-name">Logout</span>
                         </a>
@@ -71,13 +76,20 @@
     <partial name="_NotificationPartial" />
     <div class="container">
         <main role="main" class="pb-3">
+            <div class="top-menu">
+                <i class="fa-solid fa-bars sidebar-toggle"></i>
+
+                <div class="img-container">
+                    <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+                </div>
+            </div>
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
     </footer>
-    <script src="~/js/base.js" asp-append-version="true"></script>
+    <script src="~/js/Admin/base.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

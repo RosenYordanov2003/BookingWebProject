@@ -25,6 +25,7 @@
 
 body {
     min-height: 100vh;
+    background-color:var(--panel-color);
 }
 
 body.dark {
@@ -40,7 +41,7 @@ body.dark {
     --title-icon-color: #CCC;
 }
 
-/*::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 8px;
 }
 
@@ -56,7 +57,7 @@ body.dark {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #0b3cc1;
-}*/
+}
 
 body.dark::-webkit-scrollbar-thumb:hover,
 body.dark .activity-data::-webkit-scrollbar-thumb:hover {
@@ -113,9 +114,6 @@ nav .menu-items {
 .menu-items li {
     list-style: none;
 }
-.menu-items .nav-links {
-    padding: 1rem 3rem;
-}
 
 .menu-items li a {
     display: flex;
@@ -157,8 +155,11 @@ nav.close li a .link-name {
 }
 
 body.dark .nav-links li a:hover i,
-body.dark .nav-links li a:hover .link-name {
+body.dark .nav-links li a:hover .link-name, body.dark i {
     color: var(--text-color);
+}
+body.dark .nav-links li a:hover{
+  opacity: 0.7;
 }
 
 .menu-items .logout-mode {
@@ -203,4 +204,29 @@ body.dark .nav-links li a:hover .link-name {
     background-color: var(--panel-color);
     border-radius: 50%;
     transition: var(--tran-03);
+}
+body.dark .switch:before {
+    left: 20px;
+}
+.top-menu img-container {
+    width: 40px;
+    border-radius: 50%;
+}
+.top-menu {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    display: flex;
+    width: calc(100% - 250px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    transition: var(--tran-05);
+    z-index: 10;
+    overflow: hidden;
+}
+.top-menu-short {
+    left: 120px;
+    width: calc(100% - 150px);
 }
