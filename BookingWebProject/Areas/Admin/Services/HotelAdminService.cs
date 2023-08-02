@@ -5,6 +5,7 @@
     using Contracts;
     using Models.Hotel;
     using Infrastructure.Data.Models;
+    using BookingWebProject.Core.Models.Picture;
 
     public class HotelAdminService : IHotelAdminService
     {
@@ -19,7 +20,7 @@
             IEnumerable<HotelAllViewModel> allHotels = await bookingContext.Hotels
                 .Select(h => new HotelAllViewModel()
                 {
-                    HotelId = h.Id,
+                    Id = h.Id,
                     HotelName = h.Name,
                     StarsCount = h.StarRating,
                     IsDeleted = h.IsDeleted,
@@ -57,6 +58,29 @@
         {
             return await bookingContext.Hotels
                 .AnyAsync(h => h.IsDeleted && h.Id == hotelId);
+        }
+
+        public async Task<EditHotelViewModel> GetHotelToEditAsync(int hotelId)
+        {
+            EditHotelViewModel editHotelViewModel = await bookingContext.Hotels
+                 .Where(h => h.Id == hotelId)
+                 .Select(h => new EditHotelViewModel()
+                 {
+                     Id = h.Id,
+                     StarRating = h.StarRating,
+                     City = h.City,
+                     Country = h.Country,
+                     Description = h.Description,
+                     HotelName = h.Name,
+                     Pictures = h.Pictures.Select(p => new PictureViewModel()
+                     {
+                         Path = p.Path
+                     })
+                     .ToArray()
+                 })
+                 .FirstAsync();
+
+            return editHotelViewModel;
         }
     }
 }

@@ -6,6 +6,7 @@
     list-style: none;
     text-decoration: none;
 }
+
 :root {
     /*Colors*/
     --primary-color: #0E4BF1;
@@ -22,10 +23,12 @@
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
 }
+
 .wrapper {
     margin-top: 10rem;
     margin-left: 17rem;
 }
+
 body {
     min-height: 100vh;
     background-color: var(--panel-color);
@@ -58,9 +61,10 @@ body.dark {
     transition: all 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #0b3cc1;
-}
+    ::-webkit-scrollbar-thumb:hover {
+        background: #0b3cc1;
+    }
+
 .dark h1,
 .dark h2,
 .dark h3,
@@ -69,11 +73,13 @@ body.dark {
 .dark h6,
 .dark p,
 .dark span
-body .dark i,
+.dark i,
 .dark li,
-.dark a{
+.dark a,
+.dark label{
     color: var(--text-color);
 }
+
 #toast-container {
     font-size: 1.4rem;
     position: fixed;

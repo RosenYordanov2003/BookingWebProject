@@ -8,5 +8,6 @@
         Task DeleteHotelByIdAsync(int hotelId);
         Task RecoverHotelByIdAsync(int hotelId);
         Task<bool> CheckIsHotelForRecoverExistByIdAsync(int hotelId);
+        Task<EditHotelViewModel>GetHotelToEditAsync(int hotelId);
     }
 }

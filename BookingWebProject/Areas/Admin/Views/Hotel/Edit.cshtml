@@ -1,0 +1,55 @@
+﻿@model EditHotelViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Base/Reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminStyles/Hotel/EditHotel.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <form method="post" asp-route-id="@Model.Id">
+        <div class="input-container">
+            <label asp-for="@Model.HotelName">Hotel Name</label>
+            <input asp-for="@Model.HotelName" value="@Model.HotelName" />
+            <span asp-validation-for="@Model.HotelName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Description">Hotel Description</label>
+            <textarea asp-for="@Model.Description" rows="10" cols="33">></textarea>
+            <span asp-validation-for="@Model.Description"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Country">Hotel Country</label>
+            <input asp-for="@Model.Country" value="@Model.Country" />
+            <span asp-validation-for="@Model.Country"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.City">Hotel City</label>
+            <input asp-for="@Model.City" value="@Model.City" />
+            <span asp-validation-for="@Model.City"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.City">Hotel Star Rating</label>
+            <input asp-for="@Model.StarRating" value="@Model.StarRating" />
+            <span asp-validation-for="@Model.StarRating"></span>
+        </div>
+        <button class="edit-button" type="submit">Edit</button>
+    </form>
+    <section class="hotel-pictures">
+        @foreach (PictureViewModel picture in Model.Pictures)
+        {
+            <div class="img-container">
+                <img src="@picture.Path" />
+            </div>
+        }
+    </section>
+</div>
+
+@*Add this js library to decode Hotel Description if it is on bulgarion language*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
+<script>
+    const decodedText = he.decode('@Model.Description');
+    document.querySelector('textarea').value = decodedText;
+</script>
+
+<script src="~/js/input.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
