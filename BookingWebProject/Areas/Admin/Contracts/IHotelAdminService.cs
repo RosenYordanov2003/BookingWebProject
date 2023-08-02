@@ -4,5 +4,9 @@
     public interface IHotelAdminService
     {
         Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync();
+        Task<bool> CheckIfHotelIsAlredyDeletedAsync(int hotelId);
+        Task DeleteHotelByIdAsync(int hotelId);
+        Task RecoverHotelByIdAsync(int hotelId);
+        Task<bool> CheckIsHotelForRecoverExistByIdAsync(int hotelId);
     }
 }

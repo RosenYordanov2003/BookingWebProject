@@ -74,3 +74,10 @@ body .dark i,
 .dark a{
     color: var(--text-color);
 }
+#toast-container {
+    font-size: 1.4rem;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}

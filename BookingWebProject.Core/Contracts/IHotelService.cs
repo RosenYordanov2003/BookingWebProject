@@ -9,7 +9,7 @@
         Task<int> GetCountAsync(HotelQueryViewModel hotelQueryViewModel);
         Task<IEnumerable<string>> GetAllHotelCitiesAsync();
         Task<IEnumerable<string>> GetAllHotelCountriesAsync();
-        Task<bool> IsExist(int hotelId);
+        Task<bool> CheckIsHotelExistAsync(int hotelId);
         Task AddHotelToUserFavoriteHotels(int hotelId, Guid userId);
         Task RemoveHotelFromUserFavoriteHotels(int hotelId, Guid userId);
         Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId, Pager pager);

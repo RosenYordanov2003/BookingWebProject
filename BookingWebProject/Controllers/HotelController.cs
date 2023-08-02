@@ -40,7 +40,7 @@
         [HttpPost]
         public async Task<IActionResult> AddToFavorite(int id)
         {
-            if (!await hotelService.IsExist(id))
+            if (!await hotelService.CheckIsHotelExistAsync(id))
             {
                 TempData[ErrorMessage] = HotelDoesNotExist;
                 return RedirectToAction(nameof(All));
@@ -61,7 +61,7 @@
         [HttpPost]
         public async Task<IActionResult> RemoveFromFavorite(int id)
         {
-            if (!await hotelService.IsExist(id))
+            if (!await hotelService.CheckIsHotelExistAsync(id))
             {
                 TempData[ErrorMessage] = HotelDoesNotExist;
                 return RedirectToAction(nameof(All));
@@ -87,7 +87,7 @@
             }
             int hotelCommentsCount = await hotelService.GetHotelCommentsCountAsync(id);
             Pager pager = new Pager(hotelCommentsCount, pg);
-            if (!await hotelService.IsExist(id))
+            if (!await hotelService.CheckIsHotelExistAsync(id))
             {
                 TempData[ErrorMessage] = HotelDoesNotExist;
                 return RedirectToAction(nameof(All));

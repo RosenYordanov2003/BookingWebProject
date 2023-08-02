@@ -43,7 +43,7 @@
   border: none;
   padding: 10px 14px;
   min-width: 80px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: var(--tran-05);
   text-align: center;
 }
@@ -51,7 +51,7 @@
   color: black;
   background-color: rgb(244,202,22);
 }
-.button-container a:hover, .delete-button:hover, .recover-button{
+.button-container a:hover, .delete-button:hover, .recover-button:hover{
   opacity: 0.7;
   transform:scale(1.050);
 }

@@ -24,12 +24,11 @@
 
         public async Task<AllHotelsSortedAndFilteredDataModel> GetAllHotelsSortedAndFilteredAsync(Guid userId, HotelQueryViewModel hotelQueryViewModel)
         {
-            IQueryable<Hotel> hotels = bookingContext.Hotels.AsQueryable();
+            IQueryable<Hotel> hotels = bookingContext.Hotels.Where(h => !h.IsDeleted).AsQueryable();
             hotels = SortAndFilterHotels(hotelQueryViewModel, hotels);
             int recordsToSkip = (hotelQueryViewModel.Pager.CurrentPage - 1) * hotelQueryViewModel.Pager.PageSize;
             IEnumerable<HotelViewModel> allHotels = await hotels.Skip(recordsToSkip)
                 .Take(hotelQueryViewModel.Pager.PageSize)
-                  .Where(h => !h.IsDeleted)
                   .Select(h => new HotelViewModel()
                   {
                       Id = h.Id,
@@ -52,7 +51,7 @@
 
         public Task<int> GetCountAsync(HotelQueryViewModel hotelQueryViewModel)
         {
-            IQueryable<Hotel> allHotels = bookingContext.Hotels.AsQueryable();
+            IQueryable<Hotel> allHotels = bookingContext.Hotels.Where(h => !h.IsDeleted).AsQueryable();
             allHotels = SortAndFilterHotels(hotelQueryViewModel, allHotels);
             return allHotels.CountAsync();
         }
@@ -103,7 +102,7 @@
 
             return hotels;
         }
-        public async Task<bool> IsExist(int hotelId)
+        public async Task<bool> CheckIsHotelExistAsync(int hotelId)
         {
             return await bookingContext.Hotels
                   .AnyAsync(h => h.Id == hotelId && !h.IsDeleted);

@@ -27,14 +27,14 @@
                         @if (!hotel.IsDeleted)
                         {
                             <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Delete">
-                                <input type="hidden" value="@hotel.HotelId">
+                                <input type="hidden" name="hotelId" value="@hotel.HotelId">
                                 <button class="delete-button" type="submit">Delete</button>
                             </form>
                         }
                         else
                         {
                             <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Recover">
-                                <input type="hidden" value="@hotel.HotelId">
+                                <input type="hidden" name="hotelId" value="@hotel.HotelId">
                                 <button class="recover-button" type="submit">Recover</button>
                             </form>
                         }

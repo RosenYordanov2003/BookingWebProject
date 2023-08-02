@@ -15,5 +15,8 @@
         public const string SuccessRemoveMessage = "You have successfully deleted your comment";
         public const string NoAvalilableRoom = "There is no available room for this period";
         public const string SuccessBookedRoom = "You have successfully booked a room";
+        public const string HotelIsAlreadyDeleted = "Hotel with this id is already deleted";
+        public const string SuccessfullyDeletedHotel = "You have successfully deleted hotel";
+        public const string SuccessfullyRecoveredHotel = "You have successfully recovered hotel";
     }
 }

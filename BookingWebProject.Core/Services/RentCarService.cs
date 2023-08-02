@@ -1,12 +1,12 @@
 ﻿namespace BookingWebProject.Core.Services
 {
-    using Models.RentCar;
-    using Models.RentCar.Enums;
-    using Data;
-    using Infrastructure.Data.Models;
-    using Contracts;
     using Microsoft.EntityFrameworkCore;
+    using Infrastructure.Data.Models;
     using Infrastructure.Data.Enums;
+    using Models.RentCar.Enums;
+    using Models.RentCar;
+    using Contracts;
+    using Data;
 
     public class RentCarService : IRentCarService
     {
