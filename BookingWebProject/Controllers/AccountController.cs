@@ -5,17 +5,21 @@
     using Microsoft.AspNetCore.Identity;
     using Infrastructure.Data.Models;
     using Core.Models.Account;
+    using static Common.GeneralAplicationConstants;
 
     [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole<Guid>> roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
+            RoleManager<IdentityRole<Guid>> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -74,6 +78,35 @@
         {
             await signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangeRole(Guid id, string? role = null)
+        {
+            User userToFind = await userManager.FindByIdAsync(id.ToString());
+            if (!string.IsNullOrWhiteSpace(role))
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    IdentityRole<Guid> newRole = new IdentityRole<Guid>(role);
+                    await roleManager.CreateAsync(newRole);
+                }
+                if (!await userManager.IsInRoleAsync(userToFind, role))
+                {
+                    await userManager.AddToRoleAsync(userToFind, role);
+                }
+            }
+            else
+            {
+                if (await userManager.IsInRoleAsync(userToFind, ModeratorRoleName))
+                {
+                    await userManager.RemoveFromRoleAsync(userToFind, ModeratorRoleName);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
         }
     }
 }

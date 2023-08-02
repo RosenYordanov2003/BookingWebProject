@@ -41,8 +41,13 @@
          left: 73px;
          width: calc(100% - 73px);
      }
-
-     
+    .top-menu-short {
+        left: 250px;
+    }
+  
+    table {
+        overflow-X: scroll;
+    }
 }
 
 @media screen and (min-width: 280px) and (max-width: 700px) {
@@ -85,5 +90,7 @@
     .top-menu i{
       font-size: 1rem;
     }
-
+    table {
+        overflow-X: scroll;
+    }
 }

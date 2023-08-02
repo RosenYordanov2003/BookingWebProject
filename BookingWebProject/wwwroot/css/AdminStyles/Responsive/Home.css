@@ -1,0 +1,16 @@
+﻿@media screen and (min-width: 280px) and (max-width: 1000px){
+    .statistics{
+       flex-direction: column;
+    }
+    .statistics-container{
+       min-width: 350px;
+       font-size: 1.4rem;
+       gap: 1rem;
+    }
+    table th {
+       font-size: 1.1rem;
+    }
+    table td{
+      font-size: 1.2rem;
+    }
+}

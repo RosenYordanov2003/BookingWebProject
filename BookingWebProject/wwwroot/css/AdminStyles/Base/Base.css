@@ -65,7 +65,7 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover {
 }
 
 nav {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100%;
@@ -76,11 +76,12 @@ nav {
     transition: var(--tran-05);
 }
 
+
 nav.close {
     width: 73px;
 }
 
-nav .logo-name {
+nav .logo-container {
     display: flex;
     align-items: center;
     width: 2.5rem;
@@ -90,7 +91,7 @@ nav .logo-name {
 }
 
 
-nav .logo-name .title {
+nav .logo-container .title {
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--text-color);

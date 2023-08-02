@@ -44,6 +44,9 @@
 table{
   margin-top: 4rem;
 }
+.dark table td, .dark p, .dark .title {
+    color: var(--black-light-color);
+}
 table th {
     padding: 1rem;
     width: 300px;
@@ -57,8 +60,8 @@ table td {
     padding: 1rem;
     text-align: center;
 }
-.dark table td, .dark p, .dark .title{
-   color: var(--black-light-color);
+table {
+    overflow-X: scroll;
 }
 
 .table-container {
@@ -69,12 +72,32 @@ table td {
    text-decoration: none;
    color: white;
    display: inline-block;
-   padding: 10px 14px;
-   border-radius: 20px;
+   padding: 14px 20px;
+   border-radius: 26px;
+   border: none;
+   font-size: 1.3rem;
+   transition: var(--tran-03);
+}
+.role-link:hover{
+  opacity: 0.6;
+  transform: scale(1.050);
 }
 .member{
     background-color: red;
 }
 .moderator{
    background-color: cornflowerblue;
+}
+.title-container{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.title-container img{
+  width: 90px;
+  height: auto;
+  object-fit: cover;
+}
+.title{
+  font-size: 2.5rem;
 }

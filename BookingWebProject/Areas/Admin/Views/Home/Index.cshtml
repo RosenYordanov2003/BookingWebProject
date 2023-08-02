@@ -5,10 +5,13 @@
 @inject UserManager<User> userManager
 
 <link rel="stylesheet" href="~/css/AdminStyles/Home/Home.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="~/css/AdminStyles/Responsive/Home.css" asp-append-version="true" />
 
 <div class="content-container">
-    <h1 class="title">Dashboard</h1>
+    <div class="title-container">
+        <h1 class="title">Dashboard</h1>
+        <img src="~/img/Dashboard icon.webp" />
+    </div>
 
     <section class="statistics">
         <div class="statistics-container">
@@ -47,30 +50,40 @@
                     @{
                         string value = "";
                         User userToGet = await userManager.FindByIdAsync(user.Id.ToString());
-                        if (!await userManager.IsInRoleAsync(userToGet, AdminRoleName))
+                        if (await userManager.IsInRoleAsync(userToGet, AdminRoleName))
                         {
-                            value = "Member";
+                            value = "Admin";
+                        }
+                        else if (await userManager.IsInRoleAsync(userToGet, "Moderator"))
+                        {
+                            value = "Moderator";
                         }
                         else
                         {
-                            value = "Admin";
+                            value = "Member";
                         }
                     }
                     <td>@value</td>
                     <td>@user.ReservationsCount</td>
-                    @if (value == "Member")
+                    @if (this.User.IsInRole(AdminRoleName))
                     {
-                        <td>
-                            <a class="role-link moderator" asp-area="" asp-controller="Account" asp-action="ChangeRole"
-                             asp-route-id="@user.Id" asp-route-role="@AdminRoleName">Make Moderator</a>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <a class="role-link member" asp-area="" asp-controller="Account" asp-action="ChangeRole"
-                             asp-route-id="@user.Id">Make Member</a>
-                        </td>
+                        @if (value == "Member")
+                        {
+                            <td>
+                                <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id" asp-route-role="Moderator">
+                                    <button type="submit" class="role-link moderator">Promote</button>
+                                </form>
+                            </td>
+                        }
+                        else if(value == "Moderator")
+                        {
+                            <td>
+                                <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id">
+                                    <button type="submit" class="role-link member">Demote</button>
+                                </form>
+                               
+                            </td>
+                        }
                     }
                 </tr>
             }
