@@ -1,0 +1,59 @@
+﻿.title{
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 5rem;
+}
+.hotel-card{
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 2.3rem;
+}
+.hotel-name{
+  text-transform: capitalize;
+  font-size: 1.7rem;
+
+}
+.img-container img{
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+}
+.star-list{
+  display: flex;
+  gap: 1rem;
+}
+.button-container{
+  display: flex;
+  gap: 1.3rem;
+}
+.button-container a, .delete-button{
+  font-size: 1.2rem;
+  border: none;
+  padding: 10px 14px;
+  min-width: 80px;
+  border-radius: 4px;
+  transition: var(--tran-05);
+  text-align: center;
+}
+.button-container a {
+  color: black;
+  background-color: rgb(244,202,22);
+}
+.button-container a:hover, .delete-button:hover{
+  opacity: 0.7;
+  transform:scale(1.050);
+}
+.delete-button{
+  background-color: red;
+  color: white;
+}
+.star-list li {
+  color: #feba02;
+  font-size: 1.4rem;
+}

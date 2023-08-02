@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HotelAllViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/Base/Reset.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminStyles/Hotel/Index.css" asp-append-version="true" />
+<div class="wrapper">
+    <h1 class="title">All Hotels</h1>
+    <section class="hotels">
+        @foreach (HotelAllViewModel hotel in Model)
+        {
+            <div class="hotel-card">
+                <div class="img-container">
+                    <img src="@hotel.ImgPath" alt="hotel image">
+                </div>
+                <div class="content">
+                    <h3 class="hotel-name">@hotel.HotelName</h3>
+                    <ul class="star-list">
+                        @for (int i = 1; i <= hotel.StarsCount; i++)
+                        {
+                            <li><i class="fa-solid fa-star"></i></li>
+                        }
+                    </ul>
+                    <div class="button-container">
+                        <a asp-area="Admin" asp-controller="Hotle" asp-action="Edit">Edit</a>
+                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Delete">
+                            <input type="hidden" value="@hotel.HotelId">
+                            <button class="delete-button" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+</div>

@@ -1,28 +1,7 @@
-﻿:root {
-    /*Colors*/
-    --primary-color: #0E4BF1;
-    --panel-color: #FFF;
-    --text-color: #000;
-    --black-light-color: #707070;
-    --border-color: #e6e5e5;
-    --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
-    --box2-color: #FFE6AC;
-    --box3-color: #E7D1FC;
-    --title-icon-color: #fff;
-    /* Transition*/
-    --tran-05: all 0.5s ease;
-    --tran-03: all 0.3s ease;
-}
-
-.content-container {
-    margin-top: 10rem;
-    margin-left: 17rem;
-}
-.statistics{
-  display: flex;
-  gap: 1rem;
-  margin-top: 4rem;
+﻿.statistics{
+   display: flex;
+   gap: 1rem;
+   margin-top: 4rem;
 }
 .statistics-container {
     display: flex;
@@ -34,6 +13,10 @@
     background-color: var(--box1-color);
     transition: var(--tran-05);
     font-size: 2rem;
+}
+.statistics-container i{
+   color: var(--text-color);
+   margin-bottom: 0.4rem;
 }
 .statistics-container:nth-child(2){
     background-color: var(--box2-color);
@@ -100,4 +83,7 @@ table {
 }
 .title{
   font-size: 2.5rem;
+}
+.dark .title-container img{
+  color: white;
 }
