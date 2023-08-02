@@ -6,6 +6,8 @@
     using Infrastructure.Data.Models;
     using Core.Models.Account;
     using static Common.GeneralAplicationConstants;
+    using Microsoft.EntityFrameworkCore;
+    using BookingWebProject.Data;
 
     [Authorize]
     public class AccountController : Controller
@@ -13,13 +15,16 @@
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole<Guid>> roleManager;
+        //To save the changes on SeedUsers
+        private readonly BookingContext bookingContext;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
-            RoleManager<IdentityRole<Guid>> roleManager)
+            RoleManager<IdentityRole<Guid>> roleManager, BookingContext bookingContext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.bookingContext = bookingContext;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -80,6 +85,7 @@
             return RedirectToAction(nameof(Login));
         }
         [HttpPost]
+        [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> ChangeRole(Guid id, string? role = null)
         {
             User userToFind = await userManager.FindByIdAsync(id.ToString());
@@ -93,6 +99,8 @@
                 if (!await userManager.IsInRoleAsync(userToFind, role))
                 {
                     await userManager.AddToRoleAsync(userToFind, role);
+                    //To save the changes on SeedUsers
+                    await bookingContext.SaveChangesAsync();
                 }
             }
             else
@@ -100,6 +108,8 @@
                 if (await userManager.IsInRoleAsync(userToFind, ModeratorRoleName))
                 {
                     await userManager.RemoveFromRoleAsync(userToFind, ModeratorRoleName);
+                    //To save the changes on SeedUsers
+                    await bookingContext.SaveChangesAsync();
                 }
                 else
                 {

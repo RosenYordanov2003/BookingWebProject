@@ -5,7 +5,7 @@
     using static Common.GeneralAplicationConstants;
     
     [Area(AdminAreaName)]
-    [Authorize(Roles = AdminRoleName)]
+    [Authorize(Roles = AdminRoleName + "," + ModeratorRoleName)]
     public class BaseAdminController : Controller
     {
         

@@ -36,7 +36,10 @@
                 <th>Joined</th>
                 <th>Role</th>
                 <th>User Reservations</th>
-                <th>Change User Role</th>
+                @if (this.User.IsInRole(AdminRoleName))
+                {
+                    <th>Change User Role</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -75,13 +78,13 @@
                                 </form>
                             </td>
                         }
-                        else if(value == "Moderator")
+                        else if (value == "Moderator")
                         {
                             <td>
                                 <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id">
                                     <button type="submit" class="role-link member">Demote</button>
                                 </form>
-                               
+
                             </td>
                         }
                     }

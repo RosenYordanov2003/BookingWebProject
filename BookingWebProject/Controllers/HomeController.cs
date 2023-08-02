@@ -16,7 +16,7 @@
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if (this.User.IsInRole(AdminRoleName))
+            if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
             {
                 return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
