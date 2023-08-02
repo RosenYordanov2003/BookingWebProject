@@ -1,4 +1,10 @@
-﻿.title{
+﻿.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title{
   text-align: center;
   font-size: 2rem;
   margin-bottom: 5rem;
@@ -32,7 +38,7 @@
   display: flex;
   gap: 1.3rem;
 }
-.button-container a, .delete-button{
+.button-container a, .delete-button, .recover-button{
   font-size: 1.2rem;
   border: none;
   padding: 10px 14px;
@@ -45,9 +51,13 @@
   color: black;
   background-color: rgb(244,202,22);
 }
-.button-container a:hover, .delete-button:hover{
+.button-container a:hover, .delete-button:hover, .recover-button{
   opacity: 0.7;
   transform:scale(1.050);
+}
+.recover-button {
+   color: white;
+   background-color: #0071c2;
 }
 .delete-button{
   background-color: red;

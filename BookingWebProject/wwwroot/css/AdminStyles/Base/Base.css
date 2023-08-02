@@ -11,8 +11,8 @@ nav {
     width: 250px;
     padding: 10px 14px;
     background-color: var(--panel-color);
-    border-right: 1px solid var(--border-color);
     transition: var(--tran-05);
+    border-right: 1px solid var(--border-color);
 }
 
 

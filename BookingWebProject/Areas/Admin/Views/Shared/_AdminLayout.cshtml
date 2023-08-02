@@ -16,62 +16,62 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo-container">
-                <h2 class="title">Booking System</h2>
-            </div>
-            <div class="menu-items">
-                <ul class="nav-links">
-                    <li>
-                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
-                            <span class="link-name">Dahsboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-area="Admin" asp-controller="Hotel" asp-action="Index">
-                            <i class="fa-solid fa-hotel"></i>
-                            <span class="link-name">Hotels</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa-solid fa-file-lines"></i>
-                            <span class="link-name">Reservations</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa-solid fa-car"></i>
-                            <span class="link-name">Rent Cars</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa-solid fa-bed"></i>
-                            <span class="link-name">Rooms</span>
-                        </a>
-                    </li>
-                </ul>
+            <nav>
+                <div class="logo-container">
+                    <h2 class="title">Booking System</h2>
+                </div>
+                <div class="menu-items">
+                    <ul class="nav-links">
+                        <li>
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                <span class="link-name">Dahsboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Hotel" asp-action="Index">
+                                <i class="fa-solid fa-hotel"></i>
+                                <span class="link-name">Hotels</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <span class="link-name">Reservations</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-car"></i>
+                                <span class="link-name">Rent Cars</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-bed"></i>
+                                <span class="link-name">Rooms</span>
+                            </a>
+                        </li>
+                    </ul>
 
-                <ul class="logout-mode">
-                    <li>
-                        <a asp-area="" asp-controller="Account" asp-action="Logout">
-                            <i class="fa-solid fa-door-open"></i>
-                            <span class="link-name">Logout</span>
-                        </a>
-                    </li>
-                    <li class="mode">
-                        <a href="#">
-                            <i class="fa-solid fa-moon"></i>
-                            <span class="link-name">Dark Mode</span>
-                        </a>
-                        <div class="mode-toggle">
-                            <span class="switch"></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                    <ul class="logout-mode">
+                        <li>
+                            <a asp-area="" asp-controller="Account" asp-action="Logout">
+                                <i class="fa-solid fa-door-open"></i>
+                                <span class="link-name">Logout</span>
+                            </a>
+                        </li>
+                        <li class="mode">
+                            <a href="#">
+                                <i class="fa-solid fa-moon"></i>
+                                <span class="link-name">Dark Mode</span>
+                            </a>
+                            <div class="mode-toggle">
+                                <span class="switch"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
     </header>
     <partial name="_NotificationPartial" />
     <div class="container">

@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="~/css/AdminStyles/Base/Reset.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/AdminStyles/Hotel/Index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminStyles/Hotel/Responsive/Index.css" asp-append-version="true" />
+
 <div class="wrapper">
     <h1 class="title">All Hotels</h1>
     <section class="hotels">
@@ -20,11 +22,22 @@
                         }
                     </ul>
                     <div class="button-container">
-                        <a asp-area="Admin" asp-controller="Hotle" asp-action="Edit">Edit</a>
-                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Delete">
-                            <input type="hidden" value="@hotel.HotelId">
-                            <button class="delete-button" type="submit">Delete</button>
-                        </form>
+                        <a asp-area="Admin" asp-controller="Hotel" asp-action="Edit">Edit</a>
+
+                        @if (!hotel.IsDeleted)
+                        {
+                            <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Delete">
+                                <input type="hidden" value="@hotel.HotelId">
+                                <button class="delete-button" type="submit">Delete</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="Recover">
+                                <input type="hidden" value="@hotel.HotelId">
+                                <button class="recover-button" type="submit">Recover</button>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>

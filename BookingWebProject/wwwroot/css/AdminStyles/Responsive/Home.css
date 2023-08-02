@@ -1,4 +1,13 @@
 ﻿@media screen and (min-width: 280px) and (max-width: 1000px){
+    .wrapper {
+        margin-left: 6rem;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+    .title-container img{
+       width: 66px;
+    }
     .statistics{
        flex-direction: column;
     }

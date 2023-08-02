@@ -1,0 +1,55 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+    .wrapper{
+       margin-left: 6rem;
+    }
+    .title {
+        font-size: 1.3rem;
+    }
+    .hotel-card {
+        flex-direction: column;
+    }
+    .img-container img{
+       max-width: 250px;
+    }
+    .hotel-name{
+        font-size: 1.2rem;
+    }
+    .star-list li{
+       font-size: 1.1rem;
+    }
+    .button-container a, .delete-button {
+        font-size: 1rem;
+        min-width: 40px;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1200px) {
+    wrapper {
+        margin-left: 6rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .hotel-card {
+        flex-direction: column;
+    }
+
+    .img-container img {
+        max-width: 400px;
+    }
+
+    .hotel-name {
+        font-size: 1.2rem;
+    }
+
+    .star-list li {
+        font-size: 1.1rem;
+    }
+
+    .button-container a, .delete-button {
+        font-size: 1rem;
+        min-width: 40px;
+    }
+}
+
