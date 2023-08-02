@@ -14,6 +14,7 @@
             builder.HasOne(p => p.Hotel)
                 .WithMany(h => h.Pictures)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(p => p.IsDeleted).HasDefaultValue(false);
 
             ICollection<Picture> pictures = CreatePictures();
             builder.HasData(pictures);

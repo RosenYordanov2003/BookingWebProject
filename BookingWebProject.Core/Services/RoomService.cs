@@ -1,12 +1,12 @@
 ﻿namespace BookingWebProject.Core.Services
 {
     using Microsoft.EntityFrameworkCore;
-    using Data;
-    using Contracts;
     using Models.Room;
-    using BookingWebProject.Core.Models.Picture;
-    using BookingWebProject.Core.Models.RoomBasis;
-    using BookingWebProject.Core.Models.RoomPackage;
+    using Models.Picture;
+    using Models.RoomBasis;
+    using Models.RoomPackage;
+    using Contracts;
+    using Data;
 
     public class RoomService : IRoomService
     {
@@ -28,7 +28,7 @@
                       RoomCapacity = r.Capacity,
                       RoomType = r.RoomType.Name,
                       HotelName = r.Hotel.Name,
-                      RoomPictures = r.Pictures.Select(p => new Models.Picture.PictureViewModel() { Path = p.Path }).ToArray()
+                      RoomPictures = r.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray()
                   })
                   .ToArrayAsync();
             return hotelRooms;
@@ -50,7 +50,7 @@
                      Name = r.RoomType.Name,
                      RoomCapacity = r.Capacity,
                      Price = r.PricePerNight,
-                     RoomPictures = r.Pictures.Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
+                     RoomPictures = r.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
                      RoomBases = r.RoomBases.Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name }).ToArray()
                  })
                  .FirstAsync(r => r.Id == roomId);

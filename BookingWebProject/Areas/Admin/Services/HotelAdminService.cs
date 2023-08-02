@@ -6,6 +6,7 @@
     using Models.Hotel;
     using Infrastructure.Data.Models;
     using BookingWebProject.Core.Models.Picture;
+    using BookingWebProject.Areas.Admin.Models.Picture;
 
     public class HotelAdminService : IHotelAdminService
     {
@@ -47,8 +48,7 @@
 
         public async Task RecoverHotelByIdAsync(int hotelId)
         {
-            Hotel hotelToRecover = await bookingContext.Hotels
-               .FirstAsync(h => h.Id == hotelId);
+            Hotel hotelToRecover = await FindHotelByIdAsync(hotelId);
             hotelToRecover.IsDeleted = false;
 
             await bookingContext.SaveChangesAsync();
@@ -72,15 +72,37 @@
                      Country = h.Country,
                      Description = h.Description,
                      HotelName = h.Name,
-                     Pictures = h.Pictures.Select(p => new PictureViewModel()
+                     Pictures = h.Pictures.Select(p => new PictureAdminViewModel()
                      {
-                         Path = p.Path
+                         Id = p.Id,
+                         Path = p.Path,
+                         IsDeleted = p.IsDeleted,
                      })
                      .ToArray()
                  })
                  .FirstAsync();
 
             return editHotelViewModel;
+        }
+
+        public async Task EditHotelByIdAsync(int hotelId, EditHotelViewModel editHotelViewModel)
+        {
+            Hotel hotelToEdit = await FindHotelByIdAsync(hotelId);
+            hotelToEdit.Name = editHotelViewModel.HotelName;
+            hotelToEdit.StarRating = editHotelViewModel.StarRating;
+            hotelToEdit.City = editHotelViewModel.City;
+            hotelToEdit.Country = editHotelViewModel.Country;
+            hotelToEdit.Description = editHotelViewModel.Description;
+
+            await bookingContext.SaveChangesAsync();
+        }
+
+        private async Task<Hotel> FindHotelByIdAsync(int hotelId)
+        {
+             Hotel hotelToEdit = await bookingContext.Hotels
+                .FirstAsync(h => h.Id == hotelId);
+
+            return hotelToEdit;
         }
     }
 }

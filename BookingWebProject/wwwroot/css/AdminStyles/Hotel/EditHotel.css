@@ -46,10 +46,59 @@ textarea {
     opacity: 0.7;
     transform: scale(1.050);
 }
+.img-container{
+  position: relative;
+}
 .img-container img{
   max-width: 380px;
   height: auto;
   object-fit: cover;
   margin-bottom: 1.2rem;
+}
+span{
+  color: red;
+  margin-top: 1rem;
+  display: inline-block;
+  font-size: 1.1rem;
+}
+.img-form{
+  position: absolute;
+  right: 4px;
+  bottom: 24px;
+  opacity: 0;
+  transition: var(--tran-05);
+}
+.active-img-form{
+    opacity: 1;
+}
+.active-img-container {
+    
+    box-shadow: -2px -8px 44px 4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -2px -8px 44px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px -8px 44px 4px rgba(0,0,0,0.75);
+}
+.img-form button{
+  font-size: 1.1rem;
+  border: none;
+  padding: 8px 12px;
+  min-width: 80px;
+  border-radius: 6px;
+  transition: var(--tran-05);
+  text-align: center;
+  color: white;
+}
+.delete-btn:hover, .recover-btn:hover {
+    opacity: 0.7;
+    transform: scale(1.050);
+}
+
+.recover-btn {
+    color: white;
+    background-color: #0071c2;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
 }
 

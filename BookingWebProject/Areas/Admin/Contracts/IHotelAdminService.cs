@@ -9,5 +9,6 @@
         Task RecoverHotelByIdAsync(int hotelId);
         Task<bool> CheckIsHotelForRecoverExistByIdAsync(int hotelId);
         Task<EditHotelViewModel>GetHotelToEditAsync(int hotelId);
+        Task EditHotelByIdAsync(int hotelId, EditHotelViewModel editHotelViewModel);
     }
 }

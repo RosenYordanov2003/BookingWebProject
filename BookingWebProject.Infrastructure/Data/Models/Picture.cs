@@ -14,6 +14,7 @@
         [ForeignKey(nameof(Room))]
         public int? RoomId { get; set; }
         public Room? Room { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 }

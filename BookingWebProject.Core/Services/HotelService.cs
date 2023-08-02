@@ -36,7 +36,7 @@
                       StarRating = h.StarRating,
                       City = h.City,
                       Country = h.Country,
-                      PicturePath = h.Pictures.First().Path,
+                      PicturePath = h.Pictures.Where(p => !p.IsDeleted).First().Path,
                       IsFavorite = h.FavoriteHotels.Any(fv => fv.HotelId == h.Id && fv.UserId == userId),
                       CheapestHotelRoomViewModel = h.Rooms
                      .Select(r => new CheapestHotelRoomViewModel() { Id = r.Id, PricePerNight = r.PricePerNight })
@@ -91,10 +91,11 @@
                     Country = h.Country,
                     City = h.City,
                     Stars = h.StarRating,
-                    Pictures = h.Pictures.Select(p => new PictureViewModel()
+                    Pictures = h.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel()
                     {
                         Path = p.Path,
-                    }).ToList()
+                    })
+                    .ToList()
                 })
 
                  .Take(4)
@@ -124,6 +125,7 @@
             FavoriteHotels favoriteHotelToRemove = await bookingContext
                 .FavoriteHotels.FirstAsync(fh => fh.UserId == userId && fh.HotelId == hotelId);
             bookingContext.FavoriteHotels.Remove(favoriteHotelToRemove);
+
             await bookingContext.SaveChangesAsync();
         }
         public async Task<HotelInfoViewModel> GetHotelByIdAsync(int hotelId, Pager pager)
@@ -146,7 +148,7 @@
                          Name = b.Benefit.Name,
                          BenefitIcon = b.Benefit.ClassIcon
                      }).ToArray(),
-                     Pictures = h.Pictures.Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
+                     Pictures = h.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
                      Comments = h.Comments.Where(c => !c.IsDeleted).Select(c => new CommentViewModel()
                      {
                          Id = c.Id,
@@ -159,7 +161,8 @@
                      }).
                      Skip(recordsToSkip)
                     .Take(pager.PageSize)
-                 }).FirstAsync(h => h.Id == hotelId);
+                 })
+                 .FirstAsync(h => h.Id == hotelId);
             return hotel;
         }
         public async Task<int> GetHotelCommentsCountAsync(int hotelId)

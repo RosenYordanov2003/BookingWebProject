@@ -96,5 +96,29 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditHotelViewModel editHotelViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editHotelViewModel);
+            }
+            if (!await hotelService.CheckIsHotelExistAsync(id) && !await hotelAdminService.CheckIsHotelForRecoverExistByIdAsync(id))
+            {
+                return NotFound();
+            }
+            try
+            {
+                await hotelAdminService.EditHotelByIdAsync(id, editHotelViewModel);
+                TempData[SuccessMessage] = SuccesfullyEditedHotel;
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

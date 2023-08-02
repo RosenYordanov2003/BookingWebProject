@@ -18,5 +18,10 @@
         public const string HotelIsAlreadyDeleted = "Hotel with this id is already deleted";
         public const string SuccessfullyDeletedHotel = "You have successfully deleted hotel";
         public const string SuccessfullyRecoveredHotel = "You have successfully recovered hotel";
+        public const string SuccesfullyEditedHotel = "You have successfully edited hotel";
+        public const string PictureIsAlreadyDeleted = "Picture with this id is already deleted";
+        public const string SuccessfullyDeletedPicture = "You have successfully deleted a picture";
+        public const string PictureIsAlreadyRecovered = "Picture with this id is already recovered";
+        public const string SuccessfullyRecoveredPicture = "You have successfully recovered a picture";
     }
 }
