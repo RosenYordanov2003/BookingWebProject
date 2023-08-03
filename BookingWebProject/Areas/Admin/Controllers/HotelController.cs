@@ -129,7 +129,7 @@
                 {
                     return NotFound();
                 }
-                if (!await hotelAdminService.CheckIsHotelBenefitIsAlreadyDeleted(benefitId, hotelId))
+                if (!await hotelAdminService.CheckIsHotelBenefitIsAlreadyDeletedAsync(benefitId, hotelId))
                 {
                     TempData[WarningMessage] = HotelBenefitIsAlreadyDeleted;
                     return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
@@ -138,6 +138,31 @@
                 TempData[SuccessMessage] = SuccessfullyDeleteHotelBenefit;
 
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RecoverBenefit([FromForm] int benefitId, int hotelId)
+        {
+            try
+            {
+                if (!await hotelAdminService.CheckIsHotelBenefitExistAsync(benefitId, hotelId))
+                {
+                    return NotFound();
+                }
+                if (await hotelAdminService.CheckIsHotelBenefitIsAlreadyRecovoredAsync(benefitId, hotelId))
+                {
+                    TempData[WarningMessage] = HotelBenefitIsAlreadyRecovored;
+                    return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+                }
+                await hotelAdminService.RecoverHotelBenefitAsync(benefitId, hotelId);
+                TempData[SuccessMessage] = SuccessfullyRecoverHotelBenefit;
+
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
             catch (Exception)
             {
