@@ -1,0 +1,77 @@
+﻿@model EditRentCarViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/RentCar/Edit.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <form method="post">
+        <div class="input-container">
+            <label asp-for="@Model.MakeType">Brand</label>
+            <input asp-for="@Model.MakeType" value="@Model.MakeType" />
+            <span asp-validation-for="@Model.MakeType"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.MakeType">Model</label>
+            <input asp-for="@Model.Model" value="@Model.Model" />
+            <span asp-validation-for="@Model.Model"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.DoorsCount">Doors</label>
+            <input asp-for="@Model.DoorsCount" value="@Model.DoorsCount" />
+            <span asp-validation-for="@Model.DoorsCount"></span>
+        </div>
+         <div class="input-container">
+            <label asp-for="@Model.PeopleCapacity">People Capacity</label>
+            <input asp-for="@Model.PeopleCapacity" value="@Model.PeopleCapacity" />
+            <span asp-validation-for="@Model.PeopleCapacity"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Location">Location</label>
+            <input asp-for="@Model.Location" value="@Model.Location" />
+            <span asp-validation-for="@Model.Location"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Longitude">Longitude</label>
+            <input asp-for="@Model.Longitude" value="@Model.Longitude" />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Lattitude">Lattitude</label>
+            <input asp-for="@Model.Lattitude" value="@Model.Lattitude" />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Year">Year</label>
+            <input asp-for="@Model.Year" value="@Model.Year" />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Price">Price Per Day</label>
+            <input asp-for="@Model.Price" value="@Model.Price" />
+            <span asp-validation-for="@Model.Price"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.FuelConsumption">Fuel Consumption</label>
+            <input asp-for="@Model.FuelConsumption" value="@Model.FuelConsumption" />
+            <span asp-validation-for="@Model.FuelConsumption"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.FuelCapacity">Fuel Capacity</label>
+            <input asp-for="@Model.FuelCapacity" value="@Model.FuelCapacity" />
+            <span asp-validation-for="@Model.FuelCapacity"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.CarImg">Img Link</label>
+            <input asp-for="@Model.CarImg" value="@Model.CarImg" />
+        </div>
+        <div class="input-container">
+            <label asp-for="Transmission">Transmission</label>
+            <select asp-for="@Model.Transmission">
+                <option value="0">Automatic</option>
+                <option value="1">Manual</option>
+            </select>
+        </div>
+        <button type="submit" class="edit-button">Edit</button>
+    </form>
+</div>
+
+<script>
+    document.querySelector("select").value = '@((int)Model.Transmission)'
+</script>
+<script src="~/js/input.js"></script>

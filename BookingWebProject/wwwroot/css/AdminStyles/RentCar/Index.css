@@ -41,7 +41,7 @@
 .button-container a, .button-container button{
   font-size: 1.2rem;
   border: none;
-  padding: 10px 14px;
+  padding: 10px 16px;
   min-width: 80px;
   border-radius: 6px;
   transition: var(--tran-05);
@@ -50,6 +50,10 @@
 .dark .edit-button, .edit-button {
    background-color: rgb(244,202,22);
    color: black;
+}
+.edit-button:hover, .delete-button:hover, .recover-button:hover{
+   opacity: 0.8;
+   transform: scale(1.050);
 }
 .delete-button {
     background-color: red;

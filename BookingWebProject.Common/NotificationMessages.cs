@@ -27,5 +27,6 @@
         public const string SuccessfullyDeleteHotelBenefit = "You have successfully deleted hotel benefit";
         public const string SuccessfullyRecoverHotelBenefit = "You have successfully recovered hotel benefit";
         public const string SuccessfullyCreatedHotel = "You have successfully created a hotel";
+        public const string SuccessfullyEditedCar = "You have successfully edited car";
     }
 }

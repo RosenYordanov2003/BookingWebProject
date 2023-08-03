@@ -17,7 +17,7 @@
                     <p class="content">Year: @car.Year</p>
                     <p class="content">Rents: @car.RentCount</p>
                     <div class="button-container">
-                        <a asp-area="Admin" asp-controller="RentCar" asp-action="Edit" class="edit-button">Edit</a>
+                        <a asp-area="Admin" asp-controller="RentCar" asp-action="Edit" asp-route-id="@car.Id" class="edit-button">Edit</a>
                         @if (!car.IsDeleted)
                         {
                             <form method="post" asp-area="Admin" asp-controller="RentCar" asp-action="Delete" asp-route-id="@car.Id">

@@ -30,6 +30,7 @@
         public TransmissionType TransmissionType { get; set; }
         public bool IsDeleted { get; set; }
         [Required]
+        [MaxLength(LocationMaxValue)]
         public string Location { get; set; } = null!;
         [Column(TypeName = "decimal(17, 15)")]
         public decimal Longitude { get; set; }

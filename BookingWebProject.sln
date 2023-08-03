@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingWebProject.Common", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingWebProject.Infrastructure", "BookingWebProject.Infrastructure\BookingWebProject.Infrastructure.csproj", "{8464A4D0-FB6D-4CB5-9262-26A514B0C903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingWebProject.Core", "BookingWebProject.Core\BookingWebProject.Core.csproj", "{5A56DA0C-F96D-4C97-B422-1197BDAD235D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingWebProject.Core", "BookingWebProject.Core\BookingWebProject.Core.csproj", "{5A56DA0C-F96D-4C97-B422-1197BDAD235D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

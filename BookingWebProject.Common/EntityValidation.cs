@@ -47,6 +47,11 @@
             public const double MinFuelConsuptionValue = 5;
             public const double MaxFuelConsuptionValue = 22;
 
+            public const int MinPriceValue = 10;
+
+            public const int LocationMinValue = 4;
+            public const int LocationMaxValue = 100;
+
         }
         public static class HotelEntity
         {

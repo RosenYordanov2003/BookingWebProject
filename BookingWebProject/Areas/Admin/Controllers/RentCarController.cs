@@ -3,9 +3,12 @@
     using Microsoft.AspNetCore.Mvc;
     using Models.RentCar.Data_Models;
     using Contracts;
-    using static BookingWebProject.Common.NotificationKeys;
-    using static BookingWebProject.Common.NotificationMessages;
-    using BookingWebProject.Core.Models.Pager;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
+    using static Common.GeneralAplicationConstants;
+    using Core.Models.Pager;
+    using BookingWebProject.Areas.Admin.Models.RentCar;
+    using BookingWebProject.Areas.Admin.Models.Hotel;
 
     public class RentCarController : BaseAdminController
     {
@@ -31,6 +34,47 @@
 
             };
             return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (!await rentCarAdminService.IsCarExistByIdAsync(id))
+            {
+                return NotFound();
+            }
+            try
+            {
+                EditRentCarViewModel carToEdit = await rentCarAdminService.GetRentCarToEditAsync(id);
+                return View(carToEdit);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditRentCarViewModel editRentCarViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editRentCarViewModel);
+            }
+            if (!await rentCarAdminService.IsCarExistByIdAsync(id))
+            {
+                return NotFound();
+            }
+            try
+            {
+                await rentCarAdminService.EditCarAsync(id, editRentCarViewModel);
+                TempData[SuccessMessage] = SuccessfullyEditedCar;
+                return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
         }
     }
 }
