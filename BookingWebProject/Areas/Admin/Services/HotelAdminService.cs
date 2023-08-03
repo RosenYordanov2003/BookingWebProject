@@ -79,7 +79,7 @@
                          IsDeleted = p.IsDeleted,
                      })
                      .ToArray(),
-                     CurrentHotelBenefits = h.HotelBenefits.Select(hb => new BenefitViewModel()
+                     CurrentHotelBenefits = h.HotelBenefits.Where(hb => !hb.IsDeleted).Select(hb => new BenefitViewModel()
                      {
                          Id = hb.BenefitId,
                          BenefitIcon = hb.Benefit.ClassIcon,
@@ -102,6 +102,21 @@
             hotelToEdit.Country = editHotelViewModel.Country;
             hotelToEdit.Description = editHotelViewModel.Description;
 
+            if (editHotelViewModel.SelectedBenefitIds.Any())
+            {
+                foreach (int benefitId in editHotelViewModel.SelectedBenefitIds)
+                {
+                    if (await CheckIsHotelBenefitExistAsync(benefitId, editHotelViewModel.Id))
+                    {
+                        await RecoverHotelBenefitAsync(benefitId, hotelId);
+                    }
+                    else
+                    {
+                        await bookingContext.HotelBenefits.AddAsync(new HotelBenefits() { HotelId = editHotelViewModel.Id, BenefitId = benefitId });
+                        await bookingContext.SaveChangesAsync();
+                    }
+                }
+            }
             await bookingContext.SaveChangesAsync();
         }
 
@@ -134,13 +149,7 @@
             await bookingContext.SaveChangesAsync();
         }
 
-        public async Task<bool> CheckIsHotelBenefitIsAlreadyRecovoredAsync(int benefitId, int hotelId)
-        {
-            return await bookingContext.HotelBenefits
-               .AnyAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId && !hb.IsDeleted);
-        }
-
-        public async Task RecoverHotelBenefitAsync(int benefitId, int hotelId)
+        private async Task RecoverHotelBenefitAsync(int benefitId, int hotelId)
         {
             HotelBenefits hotelBenefit = await bookingContext.HotelBenefits
                  .FirstAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId);

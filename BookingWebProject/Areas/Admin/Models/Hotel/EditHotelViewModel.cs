@@ -1,8 +1,8 @@
 ﻿namespace BookingWebProject.Areas.Admin.Models.Hotel
 {
     using System.ComponentModel.DataAnnotations;
-    using BookingWebProject.Areas.Admin.Models.Picture;
-    using BookingWebProject.Core.Models.Benefits;
+    using Picture;
+    using Core.Models.Benefits;
     using static Common.EntityValidation.HotelEntity;
 
     public class EditHotelViewModel
@@ -11,6 +11,8 @@
         {
             Pictures = new List<PictureAdminViewModel>();
             CurrentHotelBenefits = new List<BenefitViewModel>();
+            SelectedBenefitIds = new List<int>();
+            BenefitsToAdd = new List<BenefitViewModel>();
         }
         public int Id { get; init; }
         [StringLength(MaxHotelNameValue, MinimumLength = MinHotelNameValue)]
@@ -30,6 +32,9 @@
         [Display(Name = "Hotel City")]
         [Required]
         public string City { get; set; } = null!;
+        public string? ImgUrl { get; set; }
+        public List<int> SelectedBenefitIds { get; set; }
+        public IEnumerable<BenefitViewModel> BenefitsToAdd { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
         public IEnumerable<BenefitViewModel> CurrentHotelBenefits { get; set; }
     }

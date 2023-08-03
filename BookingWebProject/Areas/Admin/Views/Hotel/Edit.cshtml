@@ -31,6 +31,18 @@
             <input asp-for="@Model.StarRating" value="@Model.StarRating" />
             <span asp-validation-for="@Model.StarRating"></span>
         </div>
+        @if (Model.BenefitsToAdd.Any())
+        {
+            <h2 class="title benefits-title">Add Benefits</h2>
+            @foreach (BenefitViewModel benefit in Model.BenefitsToAdd)
+            {
+                <div class="benefit-container">
+                    <label><i class="@benefit.BenefitIcon"></i> @benefit.Name</label>
+                    <input type="checkbox" value="@benefit.Id" name="SelectedBenefitIds">
+                </div>
+            }
+        }
+
         <button class="edit-button" type="submit">Edit</button>
     </form>
     <section class="hotel-pictures">
@@ -63,23 +75,11 @@
                 <li>
                     <p>@benefit.Name</p>
                     <i class="@benefit.BenefitIcon"></i>
-                    @if (!benefit.IsDeleted)
-                    {
-                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="RemoveHotelBenefit">
-                            <input type="hidden" name="benefitId" value="@benefit.Id">
-                            <input type="hidden" name="hotelId" value="@Model.Id">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="RecoverBenefit">
-                            <input type="hidden" name="benefitId" value="@benefit.Id">
-                            <input type="hidden" name="hotelId" value="@Model.Id">
-                            <button type="submit" class="recover-btn">Recover</button>
-                        </form>
-                    }
-
+                    <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="RemoveHotelBenefit">
+                        <input type="hidden" name="benefitId" value="@benefit.Id">
+                        <input type="hidden" name="hotelId" value="@Model.Id">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
                 </li>
             }
         </ul>

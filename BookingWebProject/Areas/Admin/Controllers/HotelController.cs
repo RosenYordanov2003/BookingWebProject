@@ -12,10 +12,13 @@
     {
         private readonly IHotelAdminService hotelAdminService;
         private readonly IHotelService hotelService;
-        public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService)
+        private readonly IBenefitAdminService benefitAdminService;
+        public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService
+            ,IBenefitAdminService benefitAdminService)
         {
             this.hotelService = hotelService;
             this.hotelAdminService = hotelAdminService;
+            this.benefitAdminService = benefitAdminService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -87,7 +90,7 @@
             try
             {
                 EditHotelViewModel editHotelViewModel = await hotelAdminService.GetHotelToEditAsync(id);
-
+                editHotelViewModel.BenefitsToAdd = await benefitAdminService.GetOtherBenefitsAsync(id);
                 return View(editHotelViewModel);
             }
             catch (Exception)
@@ -138,31 +141,6 @@
                 TempData[SuccessMessage] = SuccessfullyDeleteHotelBenefit;
 
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
-            }
-            catch (Exception)
-            {
-                TempData[ErrorMessage] = DefaultErrorMessage;
-                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
-            }
-        }
-        [HttpPost]
-        public async Task<IActionResult> RecoverBenefit([FromForm] int benefitId, int hotelId)
-        {
-            try
-            {
-                if (!await hotelAdminService.CheckIsHotelBenefitExistAsync(benefitId, hotelId))
-                {
-                    return NotFound();
-                }
-                if (await hotelAdminService.CheckIsHotelBenefitIsAlreadyRecovoredAsync(benefitId, hotelId))
-                {
-                    TempData[WarningMessage] = HotelBenefitIsAlreadyRecovored;
-                    return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
-                }
-                await hotelAdminService.RecoverHotelBenefitAsync(benefitId, hotelId);
-                TempData[SuccessMessage] = SuccessfullyRecoverHotelBenefit;
-
-                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
             catch (Exception)
             {

@@ -13,7 +13,5 @@
         Task <bool> CheckIsHotelBenefitExistAsync(int benefitId, int hotelId);
         Task<bool> CheckIsHotelBenefitIsAlreadyDeletedAsync(int benefitId, int hotelId);
         Task DeleteHotelBenefitAsync(int benefitId, int hotelId);
-        Task <bool> CheckIsHotelBenefitIsAlreadyRecovoredAsync(int benefitId, int hotelId);
-        Task RecoverHotelBenefitAsync(int benefitId, int hotelId);
     }
 }

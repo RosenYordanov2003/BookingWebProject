@@ -44,6 +44,7 @@ builder.Services.AddScoped<IUserAdminService, UserAdminService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IHotelAdminService, HotelAdminService>();
 builder.Services.AddScoped<IPictureService, PictureService>();
+builder.Services.AddScoped<IBenefitAdminService, BenefitAdminService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
