@@ -29,6 +29,7 @@
                     IsDeleted = h.IsDeleted,
                     ImgPath = h.Pictures.First().Path
                 })
+                .OrderBy(h => h.IsDeleted)
                 .ToArrayAsync();
 
             return allHotels;
@@ -155,15 +156,15 @@
 
             if (createHotelViewModel.SelectedBenefitIds.Any())
             {
-                Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == createHotelViewModel.Name);
+                Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == createHotelViewModel.Name && !h.IsDeleted);
                 await AddHotelBenefitsToHotelAsync(hotelToFind.Id, createHotelViewModel.SelectedBenefitIds);
             }
         }
         public async Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel)
         {
             string hotelFolderName = hotelViewModel.Name;
-            Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == hotelViewModel.Name);
-            string uploadPath = Path.Combine(env.WebRootPath, "img", "Hotels", hotelFolderName);
+            Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == hotelViewModel.Name && !h.IsDeleted);
+            string uploadPath = Path.Combine(env.WebRootPath,"img", "Hotels", hotelFolderName);
             if (!Directory.Exists(uploadPath))
             {
                 Directory.CreateDirectory(uploadPath);
@@ -177,7 +178,7 @@
                     string filePath = Path.Combine(uploadPath, fileName);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await bookingContext.Pictures.AddAsync(new Picture() { Path = filePath, HotelId = hotelToFind.Id });
+                        await bookingContext.Pictures.AddAsync(new Picture() { Path = $"/img/Hotels/{hotelFolderName}/{fileName}", HotelId = hotelToFind.Id });
                         await bookingContext.SaveChangesAsync();
                         await file.CopyToAsync(stream);
                     }
