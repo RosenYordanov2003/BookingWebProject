@@ -13,6 +13,7 @@
         Task <bool> CheckIsHotelBenefitExistAsync(int benefitId, int hotelId);
         Task<bool> CheckIsHotelBenefitIsAlreadyDeletedAsync(int benefitId, int hotelId);
         Task DeleteHotelBenefitAsync(int benefitId, int hotelId);
+        Task CreateHotelAsync(CreateHotelViewModel createHotelViewModel);
         Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel);
     }
 }

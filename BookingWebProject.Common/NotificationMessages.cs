@@ -25,7 +25,7 @@
         public const string SuccessfullyRecoveredPicture = "You have successfully recovered a picture";
         public const string HotelBenefitIsAlreadyDeleted = "Hotel benefit is already deleted";
         public const string SuccessfullyDeleteHotelBenefit = "You have successfully deleted hotel benefit";
-        public const string HotelBenefitIsAlreadyRecovored = "Hotel benefit is already recovered";
         public const string SuccessfullyRecoverHotelBenefit = "You have successfully recovered hotel benefit";
+        public const string SuccessfullyCreatedHotel = "You have successfully created a hotel";
     }
 }

@@ -165,11 +165,21 @@
             {
                 return View(createHotelViewModel);
             }
-            if (createHotelViewModel.PicturesFileProvider != null && createHotelViewModel.PicturesFileProvider.Count > 0)
+            try
             {
-                await hotelAdminService.CreateHotelImgsAsync(createHotelViewModel);
+                await hotelAdminService.CreateHotelAsync(createHotelViewModel);
+                TempData[SuccessMessage] = SuccessfullyCreatedHotel;
+                if (createHotelViewModel.PicturesFileProvider != null && createHotelViewModel.PicturesFileProvider.Count > 0)
+                {
+                    await hotelAdminService.CreateHotelImgsAsync(createHotelViewModel);
+                }
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
             }
-            return View(createHotelViewModel);
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
         }
     }
 }

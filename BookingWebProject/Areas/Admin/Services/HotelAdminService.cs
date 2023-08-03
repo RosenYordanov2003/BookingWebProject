@@ -87,7 +87,7 @@
                          BenefitIcon = hb.Benefit.ClassIcon,
                          Name = hb.Benefit.Name,
                          IsDeleted = hb.IsDeleted,
-                         
+
                      })
                  })
                  .FirstAsync();
@@ -106,18 +106,7 @@
 
             if (editHotelViewModel.SelectedBenefitIds.Any())
             {
-                foreach (int benefitId in editHotelViewModel.SelectedBenefitIds)
-                {
-                    if (await CheckIsHotelBenefitExistAsync(benefitId, editHotelViewModel.Id))
-                    {
-                        await RecoverHotelBenefitAsync(benefitId, hotelId);
-                    }
-                    else
-                    {
-                        await bookingContext.HotelBenefits.AddAsync(new HotelBenefits() { HotelId = editHotelViewModel.Id, BenefitId = benefitId });
-                        await bookingContext.SaveChangesAsync();
-                    }
-                }
+                await AddHotelBenefitsToHotelAsync(hotelId, editHotelViewModel.SelectedBenefitIds);
             }
             if (!string.IsNullOrWhiteSpace(editHotelViewModel.ImgUrl))
             {
@@ -135,8 +124,8 @@
 
         public async Task<bool> CheckIsHotelBenefitIsAlreadyDeletedAsync(int benefitId, int hotelId)
         {
-          return await bookingContext.HotelBenefits
-                .AnyAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId && !hb.IsDeleted);
+            return await bookingContext.HotelBenefits
+                  .AnyAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId && !hb.IsDeleted);
         }
 
         public async Task DeleteHotelBenefitAsync(int benefitId, int hotelId)
@@ -146,6 +135,69 @@
 
             hotelBenefit.IsDeleted = true;
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task CreateHotelAsync(CreateHotelViewModel createHotelViewModel)
+        {
+            Hotel hotel = new Hotel()
+            {
+                Name = createHotelViewModel.Name,
+                Country = createHotelViewModel.Country,
+                Longitude = createHotelViewModel.Longitude,
+                Latitude = createHotelViewModel.Latitude,
+                IsDeleted = false,
+                City = createHotelViewModel.City,
+                Description = createHotelViewModel.Description,
+            };
+
+            await bookingContext.Hotels.AddAsync(hotel);
+            await bookingContext.SaveChangesAsync();
+
+            if (createHotelViewModel.SelectedBenefitIds.Any())
+            {
+                Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == createHotelViewModel.Name);
+                await AddHotelBenefitsToHotelAsync(hotelToFind.Id, createHotelViewModel.SelectedBenefitIds);
+            }
+        }
+        public async Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel)
+        {
+            string hotelFolderName = hotelViewModel.Name;
+            Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == hotelViewModel.Name);
+            string uploadPath = Path.Combine(env.WebRootPath, "img", "Hotels", hotelFolderName);
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            foreach (var file in hotelViewModel.PicturesFileProvider!)
+            {
+                if (file.Length > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string filePath = Path.Combine(uploadPath, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await bookingContext.Pictures.AddAsync(new Picture() { Path = filePath, HotelId = hotelToFind.Id });
+                        await bookingContext.SaveChangesAsync();
+                        await file.CopyToAsync(stream);
+                    }
+                }
+            }
+        }
+        private async Task AddHotelBenefitsToHotelAsync(int hotelId, IEnumerable<int> benefitIds)
+        {
+            foreach (int benefitId in benefitIds)
+            {
+                if (await CheckIsHotelBenefitExistAsync(benefitId, hotelId))
+                {
+                    await RecoverHotelBenefitAsync(benefitId, hotelId);
+                }
+                else
+                {
+                    await bookingContext.HotelBenefits.AddAsync(new HotelBenefits() { HotelId = hotelId, BenefitId = benefitId });
+                    await bookingContext.SaveChangesAsync();
+                }
+            }
         }
         private async Task<Hotel> FindHotelByIdAsync(int hotelId)
         {
@@ -161,29 +213,6 @@
 
             hotelBenefit.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
-        }
-
-        public async Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel)
-        {
-            string hotelFolderName = hotelViewModel.Name;
-            string uploadPath = Path.Combine(env.WebRootPath, "img", "Hotels", hotelFolderName);
-            if (!Directory.Exists(uploadPath))
-            {
-                Directory.CreateDirectory(uploadPath);
-            }
-
-            foreach (var file in hotelViewModel.PicturesFileProvider!)
-            {
-                if (file.Length > 0)
-                {
-                    string fileName = Path.GetFileName(file.FileName);
-                    string filePath = Path.Combine(uploadPath, fileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-                }
-            }
         }
     }
 }
