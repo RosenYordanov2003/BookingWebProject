@@ -5,8 +5,7 @@
     using Contracts;
     using Models.RentCar;
     using Core.Models.Pager;
-    using BookingWebProject.Areas.Admin.Models.Hotel;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
 
     public class RentCarAdminService : IRentCarAdminService
     {
@@ -92,6 +91,29 @@
             await bookingContext.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckCarIsAlreadyDeleted(int carId)
+        {
+            return await bookingContext.RentCars.AnyAsync(rc => rc.Id == carId && rc.IsDeleted);
+        }
+
+        public async Task DeleteCarByIdAsync(int carId)
+        {
+            RentCar carToDelete = await FindCarByIdAsync(carId);
+            carToDelete.IsDeleted = true;
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public Task<bool> CheckCarIsAlreadyRecoveredAsync(int carId)
+        {
+            return bookingContext.RentCars.AnyAsync(rc => rc.Id == carId && !rc.IsDeleted);
+        }
+
+        public async Task RecoverCarByIdAsync(int carId)
+        {
+            RentCar carToRecover = await FindCarByIdAsync(carId);
+            carToRecover.IsDeleted = false;
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RentCar> FindCarByIdAsync(int carId)
         {
             RentCar carToFind = await bookingContext.RentCars

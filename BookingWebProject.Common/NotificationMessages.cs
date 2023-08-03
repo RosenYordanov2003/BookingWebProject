@@ -28,5 +28,9 @@
         public const string SuccessfullyRecoverHotelBenefit = "You have successfully recovered hotel benefit";
         public const string SuccessfullyCreatedHotel = "You have successfully created a hotel";
         public const string SuccessfullyEditedCar = "You have successfully edited car";
+        public const string CarIsAlreadyDeleted = "Car with this id is already deleted";
+        public const string SuccessfulyDeleteCar = "You have successfully deleted a car";
+        public const string CarIsAlreadyRecovored = "Car with this id is already recovered";
+        public const string SuccessfullyRecoverCar = "You have successfully recovered a car";
     }
 }

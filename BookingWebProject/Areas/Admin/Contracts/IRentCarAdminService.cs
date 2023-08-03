@@ -1,6 +1,5 @@
 ﻿namespace BookingWebProject.Areas.Admin.Contracts
 {
-    using BookingWebProject.Areas.Admin.Models.Hotel;
     using Core.Models.Pager;
     using Models.RentCar;
     public interface IRentCarAdminService
@@ -10,5 +9,9 @@
         Task<bool> IsCarExistByIdAsync(int carId);
         Task<EditRentCarViewModel> GetRentCarToEditAsync(int carId);
         Task EditCarAsync(int cardId, EditRentCarViewModel editRentCarViewModel);
+        Task<bool> CheckCarIsAlreadyDeleted(int carId);
+        Task DeleteCarByIdAsync(int carId);
+        Task<bool> CheckCarIsAlreadyRecoveredAsync(int carId);
+        Task RecoverCarByIdAsync(int carId);
     }
 }
