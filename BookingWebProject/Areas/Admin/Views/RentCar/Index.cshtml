@@ -1,0 +1,37 @@
+﻿@model IEnumerable<RentCarAdminViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/RentCar/Index.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Cars</h1>
+    <section class="cars">
+        @foreach (RentCarAdminViewModel car in Model)
+        {
+            <div class="car-card">
+                <div class="img-container">
+                    <img src="@car.ImgPath" alt="car image">
+                </div>
+                <div class="content-container">
+                    <h2 class="car-title">@car.MakeType  @car.Model</h2>
+                    <p class="content">Year: @car.Year</p>
+                    <p class="content">Rents: @car.RentCount</p>
+                    <div class="button-container">
+                        <a asp-area="Admin" asp-controller="RentCar" asp-action="Edit" class="edit-button">Edit</a>
+                        @if (!car.IsDeleted)
+                        {
+                            <form method="post" asp-area="Admin" asp-controller="RentCar" asp-action="Delete" asp-route-id="@car.Id">
+                                <button class="delete-button" type="submit">Delete</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-area="Admin" asp-controller="RentCar" asp-action="Recover" asp-route-id="@car.Id">
+                                <button class="recover-button" type="submit">Recover</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+</div>

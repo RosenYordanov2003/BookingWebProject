@@ -16,11 +16,6 @@
             <span asp-validation-for="@Model.StarRating"></span>
         </div>
         <div class="input-container">
-            <label asp-for="@Model.Description">Hotel Description</label>
-            <input asp-for="@Model.Description" />
-            <span asp-validation-for="@Model.Description"></span>
-        </div>
-        <div class="input-container">
             <label asp-for="@Model.Country">Hotel Country</label>
             <input asp-for="@Model.Country" />
             <span asp-validation-for="@Model.Country"></span>
@@ -39,6 +34,11 @@
             <label asp-for="@Model.Latitude">Hotel Latitude</label>
             <input asp-for="@Model.Latitude" />
             <span asp-validation-for="@Model.Latitude"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Description">Hotel Description</label>
+            <textarea asp-for="@Model.Description" rows="10" cols="60">></textarea>
+            <span asp-validation-for="@Model.Description"></span>
         </div>
         <h2 class="benefit-title">Add Benefits</h2>
         @foreach (BenefitViewModel benefit in Model.AllBenefits)

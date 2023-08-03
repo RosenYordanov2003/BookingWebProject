@@ -149,6 +149,7 @@
                 IsDeleted = false,
                 City = createHotelViewModel.City,
                 Description = createHotelViewModel.Description,
+                StarRating = createHotelViewModel.StarRating,
             };
 
             await bookingContext.Hotels.AddAsync(hotel);
