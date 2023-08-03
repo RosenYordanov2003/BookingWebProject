@@ -32,9 +32,9 @@ span {
     margin-top: 4rem;
 }
 
-    .intro-section .title {
-        font-size: 3rem;
-    }
+.intro-section .title {
+    font-size: 3rem;
+}
 
 .star-list {
     display: flex;

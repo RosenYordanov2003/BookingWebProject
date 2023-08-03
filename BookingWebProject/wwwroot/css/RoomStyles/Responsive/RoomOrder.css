@@ -1,0 +1,47 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+   .room-order-container{
+       flex-direction: column;
+       align-items: center;
+       gap: 2rem;
+   }
+   .room-info{
+      width: 80%;
+   }
+    .packages{
+       width: 80%;
+    }
+    .room-benefits-ul .title{
+       font-size: 1.1rem;
+    }
+    .package .title{
+        font-size: 1.2rem;
+    }
+    .benefits-ul li,
+    .price,
+    .about,
+    .room-benefits-ul li,
+    .button-container .see-more-button,
+    .choose-button {
+        font-size: 1rem;
+    }
+    .order-container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+    .room-order-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .room-info {
+        width: 80%;
+    }
+
+    .packages {
+        width: 80%;
+    }
+}
