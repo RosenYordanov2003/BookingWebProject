@@ -1,4 +1,5 @@
-﻿@model EditHotelViewModel
+﻿@using BookingWebProject.Core.Models.Benefits
+@model EditHotelViewModel
 
 <link rel="stylesheet" href="~/css/AdminStyles/Base/Reset.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/AdminStyles/Hotel/EditHotel.css" asp-append-version="true" />
@@ -37,7 +38,7 @@
         {
             <div class="img-container">
                 <img src="@picture.Path" />
-                @if(!picture.IsDeleted)
+                @if (!picture.IsDeleted)
                 {
                     <form class="img-form" asp-area="Admin" asp-controller="Picture" asp-action="Delete">
                         <input type="hidden" value="@picture.Id" name="pictureId">
@@ -54,9 +55,38 @@
             </div>
         }
     </section>
+    <section class="benefit-section">
+        <h2 class="title">Hotel Benefits</h2>
+        <ul class="benefit-list">
+            @foreach (BenefitViewModel benefit in Model.CurrentHotelBenefits)
+            {
+                <li>
+                    <p>@benefit.Name</p>
+                    <i class="@benefit.BenefitIcon"></i>
+                    @if (!benefit.IsDeleted)
+                    {
+                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="RemoveHotelBenefit">
+                            <input type="hidden" name="benefitId" value="@benefit.Id">
+                            <input type="hidden" name="hotelId" value="@Model.Id">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-area="Admin" asp-controller="Hotel" asp-action="RecoverBenefit">
+                            <input type="hidden" name="benefitId" value="@benefit.Id">
+                            <input type="hidden" name="hotelId" value="@Model.Id">
+                            <button type="submit" class="recover-btn">Recover</button>
+                        </form>
+                    }
+
+                </li>
+            }
+        </ul>
+    </section>
 </div>
 
-@*Add this js library to decode Hotel Description if it is on bulgarion language*@
+@*Add this js library to decode Hotel Description if it is on Bulgarian language*@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
 <script>
     const decodedText = he.decode('@Model.Description');

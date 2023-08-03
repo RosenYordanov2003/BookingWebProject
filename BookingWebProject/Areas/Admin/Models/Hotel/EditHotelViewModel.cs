@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using BookingWebProject.Areas.Admin.Models.Picture;
-    using Core.Models.Picture;
+    using BookingWebProject.Core.Models.Benefits;
     using static Common.EntityValidation.HotelEntity;
 
     public class EditHotelViewModel
@@ -10,8 +10,8 @@
         public EditHotelViewModel()
         {
             Pictures = new List<PictureAdminViewModel>();
+            CurrentHotelBenefits = new List<BenefitViewModel>();
         }
-
         public int Id { get; init; }
         [StringLength(MaxHotelNameValue, MinimumLength = MinHotelNameValue)]
         [Display(Name = "Hotel Name")]
@@ -20,7 +20,6 @@
         [MaxLength(MaxDescriptionValue)]
         public string? Description { get; set; }
         [Range(MinStarValue, MaxStarValue)]
-
         [Display(Name = "Hotel Stars Rating")]
         public int StarRating { get; set; }
         [StringLength(MaxCountryValue, MinimumLength = MinCountryValue)]
@@ -32,5 +31,6 @@
         [Required]
         public string City { get; set; } = null!;
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
+        public IEnumerable<BenefitViewModel> CurrentHotelBenefits { get; set; }
     }
 }

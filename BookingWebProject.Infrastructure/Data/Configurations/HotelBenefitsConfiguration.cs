@@ -9,6 +9,7 @@
         public void Configure(EntityTypeBuilder<HotelBenefits> builder)
         {
             builder.HasKey(ck => new { ck.HotelId, ck.BenefitId });
+            builder.Property(hb => hb.IsDeleted).HasDefaultValue(false);
             builder.HasOne(hb => hb.Benefit).WithMany(b => b.HotelBenefits).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(hb => hb.Hotel).WithMany(h => h.HotelBenefits).OnDelete(DeleteBehavior.NoAction);
             ICollection<HotelBenefits> hotelBenefits = CreateHotelBenefits();

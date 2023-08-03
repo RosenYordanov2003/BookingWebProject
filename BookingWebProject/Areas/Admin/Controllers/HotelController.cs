@@ -120,5 +120,30 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> RemoveHotelBenefit([FromForm] int benefitId, int hotelId)
+        {
+            try
+            {
+                if (!await hotelAdminService.CheckIsHotelBenefitExistAsync(benefitId, hotelId))
+                {
+                    return NotFound();
+                }
+                if (!await hotelAdminService.CheckIsHotelBenefitIsAlreadyDeleted(benefitId, hotelId))
+                {
+                    TempData[WarningMessage] = HotelBenefitIsAlreadyDeleted;
+                    return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+                }
+                await hotelAdminService.DeleteHotelBenefitAsync(benefitId, hotelId);
+                TempData[SuccessMessage] = SuccessfullyDeleteHotelBenefit;
+
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

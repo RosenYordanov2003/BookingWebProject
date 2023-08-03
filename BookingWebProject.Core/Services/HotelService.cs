@@ -143,7 +143,7 @@
                      StarRating = h.StarRating,
                      Latitude = h.Latitude,
                      Longitude = h.Longitude,
-                     Benefits = h.HotelBenefits.Where(b => b.HotelId == hotelId).Select(b => new BenefitViewModel()
+                     Benefits = h.HotelBenefits.Where(hb => hb.HotelId == hotelId && !hb.IsDeleted).Select(b => new BenefitViewModel()
                      {
                          Name = b.Benefit.Name,
                          BenefitIcon = b.Benefit.ClassIcon

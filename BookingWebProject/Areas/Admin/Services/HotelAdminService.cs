@@ -7,6 +7,7 @@
     using Infrastructure.Data.Models;
     using BookingWebProject.Core.Models.Picture;
     using BookingWebProject.Areas.Admin.Models.Picture;
+    using BookingWebProject.Core.Models.Benefits;
 
     public class HotelAdminService : IHotelAdminService
     {
@@ -78,7 +79,15 @@
                          Path = p.Path,
                          IsDeleted = p.IsDeleted,
                      })
-                     .ToArray()
+                     .ToArray(),
+                     CurrentHotelBenefits = h.HotelBenefits.Select(hb => new BenefitViewModel()
+                     {
+                         Id = hb.BenefitId,
+                         BenefitIcon = hb.Benefit.ClassIcon,
+                         Name = hb.Benefit.Name,
+                         IsDeleted = hb.IsDeleted,
+                         
+                     })
                  })
                  .FirstAsync();
 
@@ -103,6 +112,27 @@
                 .FirstAsync(h => h.Id == hotelId);
 
             return hotelToEdit;
+        }
+
+        public async Task<bool> CheckIsHotelBenefitExistAsync(int benefitId, int hotelId)
+        {
+            return await bookingContext.HotelBenefits
+                 .AnyAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId);
+        }
+
+        public async Task<bool> CheckIsHotelBenefitIsAlreadyDeleted(int benefitId, int hotelId)
+        {
+          return await bookingContext.HotelBenefits
+                .AnyAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId && !hb.IsDeleted);
+        }
+
+        public async Task DeleteHotelBenefitAsync(int benefitId, int hotelId)
+        {
+            HotelBenefits hotelBenefit = await bookingContext.HotelBenefits
+                 .FirstAsync(hb => hb.HotelId == hotelId && hb.BenefitId == benefitId);
+
+            hotelBenefit.IsDeleted = true;
+            await bookingContext.SaveChangesAsync();
         }
     }
 }

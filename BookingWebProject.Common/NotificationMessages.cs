@@ -23,5 +23,7 @@
         public const string SuccessfullyDeletedPicture = "You have successfully deleted a picture";
         public const string PictureIsAlreadyRecovered = "Picture with this id is already recovered";
         public const string SuccessfullyRecoveredPicture = "You have successfully recovered a picture";
+        public const string HotelBenefitIsAlreadyDeleted = "Hotel benefit is already deleted";
+        public const string SuccessfullyDeleteHotelBenefit = "You have successfully deleted hotel benefit";
     }
 }

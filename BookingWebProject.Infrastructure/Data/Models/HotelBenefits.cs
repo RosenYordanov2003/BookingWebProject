@@ -9,5 +9,6 @@
         [ForeignKey(nameof(Hotel))]
         public int HotelId { get; set; }
         public Hotel Hotel { get; set; } = null!;
+        public bool IsDeleted { get; set; }
     }
 }
