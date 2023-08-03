@@ -47,7 +47,7 @@
   transition: var(--tran-05);
   text-align: center;
 }
-.dark .edit-button {
+.dark .edit-button, .edit-button {
    background-color: rgb(244,202,22);
    color: black;
 }

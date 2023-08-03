@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RentCarAdminViewModel>
+﻿@model RentCarAdminDataModel
 
 <link rel="stylesheet" href="~/css/AdminStyles/RentCar/Index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/PagerStyle/Pager.css" asp-append-version="true" />
 
 <div class="wrapper">
     <h1 class="title">Cars</h1>
     <section class="cars">
-        @foreach (RentCarAdminViewModel car in Model)
+        @foreach (RentCarAdminViewModel car in Model.Cars)
         {
             <div class="car-card">
                 <div class="img-container">
@@ -34,4 +35,29 @@
             </div>
         }
     </section>
+    <div class="pagination-container">
+        @if (Model.Pager.TotalPages > 0)
+        {
+            <ul class="page-list">
+                @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Admin" asp-controller="RentCar" asp-action="Index" asp-route-pg="@(Model.Pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+                @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item">
+                        <a  asp-area="Admin" asp-controller="RentCar" asp-action="Index" asp-route-pg="@(page)" class=" @(page == Model.Pager.CurrentPage ? "active page-link" : "page-link")">@(page)</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Admin" asp-controller="RentCar" asp-action="Index" asp-route-pg="@(Model.Pager.CurrentPage + 1)">Next</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
 </div>

@@ -4,6 +4,7 @@
     using Data;
     using Contracts;
     using Models.RentCar;
+    using Core.Models.Pager;
 
     public class RentCarAdminService : IRentCarAdminService
     {
@@ -13,7 +14,7 @@
             this.bookingContext = bookingContext;
         }
 
-        public async Task<IEnumerable<RentCarAdminViewModel>> GetAllCarsAsync()
+        public async Task<IEnumerable<RentCarAdminViewModel>> GetAllCarsAsync(Pager pager)
         {
             IEnumerable<RentCarAdminViewModel> cars = await bookingContext.RentCars
                  .Select(rc => new RentCarAdminViewModel()
@@ -26,10 +27,17 @@
                      IsDeleted = rc.IsDeleted,
                      Year = rc.Year
                  })
+                 .Skip((pager.CurrentPage - 1) * pager.PageSize)
+                 .Take(pager.PageSize)
                  .OrderBy(rc => rc.IsDeleted)
                  .ToArrayAsync();
 
             return cars;
+        }
+
+        public async Task<int> GetAllCarsCountAsync()
+        {
+            return await bookingContext.RentCars.CountAsync();
         }
     }
 }

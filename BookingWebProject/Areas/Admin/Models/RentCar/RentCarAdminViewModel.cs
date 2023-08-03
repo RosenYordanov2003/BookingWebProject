@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Models.RentCar
 {
+    using Core.Models.Pager;
     public class RentCarAdminViewModel
     {
         public int Id { get; init; }
@@ -9,5 +10,6 @@
         public string ImgPath { get; set; } = null!;
         public bool IsDeleted { get; set; }
         public int RentCount { get; set; }
+
     }
 }
