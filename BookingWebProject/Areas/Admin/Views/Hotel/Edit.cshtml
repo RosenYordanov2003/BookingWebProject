@@ -31,6 +31,10 @@
             <input asp-for="@Model.StarRating" value="@Model.StarRating" />
             <span asp-validation-for="@Model.StarRating"></span>
         </div>
+        <div class="input-container">
+            <label asp-for="@Model.ImgUrl">Add ImgUrl</label>
+            <input asp-for="@Model.ImgUrl" />
+        </div>
         @if (Model.BenefitsToAdd.Any())
         {
             <h2 class="title benefits-title">Add Benefits</h2>

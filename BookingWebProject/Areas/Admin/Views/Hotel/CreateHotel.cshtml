@@ -1,0 +1,66 @@
+﻿@model CreateHotelViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Hotel/CreateHotel.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Create Hotel</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="input-container">
+            <label asp-for="@Model.Name">Hotel Name</label>
+            <input asp-for="@Model.Name" />
+            <span asp-validation-for="@Model.Name"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.StarRating">Hotel Star Rating</label>
+            <input asp-for="@Model.StarRating" />
+            <span asp-validation-for="@Model.StarRating"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Description">Hotel Description</label>
+            <input asp-for="@Model.Description" />
+            <span asp-validation-for="@Model.Description"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Country">Hotel Country</label>
+            <input asp-for="@Model.Country" />
+            <span asp-validation-for="@Model.Country"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.City">Hotel City</label>
+            <input asp-for="@Model.City" />
+            <span asp-validation-for="@Model.City"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Longitude">Hotel Longitude</label>
+            <input asp-for="@Model.Longitude" />
+            <span asp-validation-for="@Model.Longitude"></span>
+        </div>
+         <div class="input-container">
+            <label asp-for="@Model.Latitude">Hotel Latitude</label>
+            <input asp-for="@Model.Latitude" />
+            <span asp-validation-for="@Model.Latitude"></span>
+        </div>
+        <h2 class="benefit-title">Add Benefits</h2>
+        @foreach (BenefitViewModel benefit in Model.AllBenefits)
+        {
+            <div class="benefit-container">
+                <label><i class="@benefit.BenefitIcon"></i> @benefit.Name</label>
+                <input type="checkbox" value="@benefit.Id" name="SelectedBenefitIds">
+            </div>
+        }
+        <div class="file-container">
+            <label for="@Model.PicturesFileProvider">Choose images to upload (PNG, JPG, JPEG)</label>
+            <button class="select-files-button">
+                Select Files
+                <input type="file"
+                       name="picturesFileProvider"
+                       accept=".jpg, .jpeg, .png"
+                       multiple />
+            </button>
+        </div>
+        <button class="create-button" type="submit">Create</button>
+    </form>
+</div>
+<script>
+    document.querySelector("input[type=file]").style.opacity = 0;
+</script>

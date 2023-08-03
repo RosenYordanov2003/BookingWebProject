@@ -10,6 +10,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/AdminStyles/Base/Base.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/AdminStyles/Base/Responsive/Base.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AdminStyles/Base/Reset.css" asp-append-version="true" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -52,6 +53,12 @@
                                 <span class="link-name">Rooms</span>
                             </a>
                         </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="Hotel" asp-action="CreateHotel">
+                            <i class="fa-solid fa-tree-city"></i>
+                            <span class="link-name">Create Hotel</span>
+                        </a>
+                    </li>
                     </ul>
 
                     <ul class="logout-mode">

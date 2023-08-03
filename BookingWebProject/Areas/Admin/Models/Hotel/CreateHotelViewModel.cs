@@ -1,30 +1,28 @@
 ﻿namespace BookingWebProject.Areas.Admin.Models.Hotel
 {
+    using BookingWebProject.Core.Models.Benefits;
     using System.ComponentModel.DataAnnotations;
-    using Picture;
-    using Core.Models.Benefits;
     using static Common.EntityValidation.HotelEntity;
-
-    public class EditHotelViewModel
+    public class CreateHotelViewModel
     {
-        public EditHotelViewModel()
+        public CreateHotelViewModel()
         {
-            Pictures = new List<PictureAdminViewModel>();
-            CurrentHotelBenefits = new List<BenefitViewModel>();
+            PicturesPath = new List<string>();
+            AllBenefits = new List<BenefitViewModel>();
             SelectedBenefitIds = new List<int>();
-            BenefitsToAdd = new List<BenefitViewModel>();
         }
-        public int Id { get; init; }
-
         [StringLength(MaxHotelNameValue, MinimumLength = MinHotelNameValue)]
         [Display(Name = "Hotel Name")]
         [Required]
-        public string HotelName { get; set; } = null!;
+        public string Name { get; set; } = null!;
+
         [MaxLength(MaxDescriptionValue)]
         public string? Description { get; set; }
+
         [Range(MinStarValue, MaxStarValue)]
         [Display(Name = "Hotel Stars Rating")]
         public int StarRating { get; set; }
+
         [StringLength(MaxCountryValue, MinimumLength = MinCountryValue)]
         [Display(Name = "Hotel Country")]
         [Required]
@@ -33,10 +31,11 @@
         [Display(Name = "Hotel City")]
         [Required]
         public string City { get; set; } = null!;
-        public string? ImgUrl { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public IFormFileCollection? PicturesFileProvider { get; set; }
+        public List<string> PicturesPath { get; set; }
+        public IEnumerable<BenefitViewModel> AllBenefits { get; set; }
         public List<int> SelectedBenefitIds { get; set; }
-        public IEnumerable<BenefitViewModel> BenefitsToAdd { get; set; }
-        public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
-        public IEnumerable<BenefitViewModel> CurrentHotelBenefits { get; set; }
     }
 }

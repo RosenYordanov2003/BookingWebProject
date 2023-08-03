@@ -69,7 +69,7 @@ span{
   transition: var(--tran-05);
 }
 .active-img-form{
-    opacity: 1;
+    opacity: 0.8;
 }
 .active-img-container {
     
@@ -90,7 +90,6 @@ span{
 form button{
   max-width: 72px;
   font-size: 1rem;
-
 }
 .delete-btn:hover, .recover-btn:hover {
     opacity: 0.7;
@@ -127,6 +126,6 @@ form button{
   font-size: 1.1rem;
 }
 .benefits-title{
-  margin-bottom: 1.2rem;
+  margin: 2rem 0rem 1.2rem 0rem;
 }
 

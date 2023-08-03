@@ -13,12 +13,14 @@
         private readonly IHotelAdminService hotelAdminService;
         private readonly IHotelService hotelService;
         private readonly IBenefitAdminService benefitAdminService;
+        private readonly IBenefitService benefitService;
         public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService
-            ,IBenefitAdminService benefitAdminService)
+            , IBenefitAdminService benefitAdminService, IBenefitService benefitService)
         {
             this.hotelService = hotelService;
             this.hotelAdminService = hotelAdminService;
             this.benefitAdminService = benefitAdminService;
+            this.benefitService = benefitService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -147,6 +149,27 @@
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> CreateHotel()
+        {
+            CreateHotelViewModel createHotelViewModel = new CreateHotelViewModel();
+            createHotelViewModel.AllBenefits = await benefitService.GetAllBenefitsAsync();
+
+            return View(createHotelViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateHotel(CreateHotelViewModel createHotelViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(createHotelViewModel);
+            }
+            if (createHotelViewModel.PicturesFileProvider != null && createHotelViewModel.PicturesFileProvider.Count > 0)
+            {
+                await hotelAdminService.CreateHotelImgsAsync(createHotelViewModel);
+            }
+            return View(createHotelViewModel);
         }
     }
 }

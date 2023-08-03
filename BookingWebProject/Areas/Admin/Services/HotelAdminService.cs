@@ -11,9 +11,11 @@
     public class HotelAdminService : IHotelAdminService
     {
         private readonly BookingContext bookingContext;
-        public HotelAdminService(BookingContext bookingContext)
+        private readonly IWebHostEnvironment env;
+        public HotelAdminService(BookingContext bookingContext, IWebHostEnvironment env)
         {
             this.bookingContext = bookingContext;
+            this.env = env;
         }
 
         public async Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync()
@@ -117,15 +119,12 @@
                     }
                 }
             }
+            if (!string.IsNullOrWhiteSpace(editHotelViewModel.ImgUrl))
+            {
+                await bookingContext.Pictures.AddAsync(new Picture() { HotelId = editHotelViewModel.Id, Path = editHotelViewModel.ImgUrl });
+                await bookingContext.SaveChangesAsync();
+            }
             await bookingContext.SaveChangesAsync();
-        }
-
-        private async Task<Hotel> FindHotelByIdAsync(int hotelId)
-        {
-             Hotel hotelToEdit = await bookingContext.Hotels
-                .FirstAsync(h => h.Id == hotelId);
-
-            return hotelToEdit;
         }
 
         public async Task<bool> CheckIsHotelBenefitExistAsync(int benefitId, int hotelId)
@@ -148,7 +147,13 @@
             hotelBenefit.IsDeleted = true;
             await bookingContext.SaveChangesAsync();
         }
+        private async Task<Hotel> FindHotelByIdAsync(int hotelId)
+        {
+            Hotel hotelToEdit = await bookingContext.Hotels
+               .FirstAsync(h => h.Id == hotelId);
 
+            return hotelToEdit;
+        }
         private async Task RecoverHotelBenefitAsync(int benefitId, int hotelId)
         {
             HotelBenefits hotelBenefit = await bookingContext.HotelBenefits
@@ -156,6 +161,29 @@
 
             hotelBenefit.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel)
+        {
+            string hotelFolderName = hotelViewModel.Name;
+            string uploadPath = Path.Combine(env.WebRootPath, "img", "Hotels", hotelFolderName);
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            foreach (var file in hotelViewModel.PicturesFileProvider!)
+            {
+                if (file.Length > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string filePath = Path.Combine(uploadPath, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+            }
         }
     }
 }

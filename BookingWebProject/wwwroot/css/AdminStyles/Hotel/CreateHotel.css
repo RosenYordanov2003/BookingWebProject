@@ -1,0 +1,69 @@
+﻿.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    text-align: center;
+}
+.title, .benefit-title{
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.benefit-title{
+    margin-bottom: 2rem;
+}
+.benefit-container{
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.input-container input{
+    border-radius: 4px;
+}
+
+.file-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.select-files-button{
+  background-color: #0077d7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  position: relative;
+  margin-top: 1.1rem;
+  padding: 10px 14px;
+  transition: var( --tran-05);
+  font-size: 1.2rem;
+}
+input[type=file]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+label{
+  font-size: 1.2rem;
+}
+.create-button{
+  margin: 2rem 0rem 3.4rem 0rem;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(244,202,22);
+  transition: var( --tran-05);
+  font-size: 1.2rem;
+}
+.select-files-button:hover,.create-button:hover{
+  opacity: 0.8;
+  transform:scale(1.050);
+}
+
