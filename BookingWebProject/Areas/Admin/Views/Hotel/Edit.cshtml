@@ -108,7 +108,10 @@
                     <p class="content">@(string.Format($"{room.PricePerNight:F2}$"))</p>
                 </div>
                 <div class="button-container">
-                    <a class="edit-button" asp-area="Admin" asp-controller="Room" asp-action="Edit">Edit</a>
+                    <a class="edit-button" asp-area="Admin" asp-controller="Room" asp-action="Edit"
+                   asp-route-roomTypeId="@room.RoomTypeId" asp-route-hotelId="@Model.Id">
+                        Edit
+                    </a>
                     @if (!room.IsDeleted)
                     {
                         <form method="post" asp-area="Admin" asp-controller="Room" asp-action="Delete">
@@ -138,7 +141,7 @@
     document.querySelector('textarea').value = decodedText;
 </script>
 
-<script src="~/js/Admin/Hotel/DeleteHotelImgjs.js"></script>
+<script src="~/js/Admin/Picture/ShowPictureActionPicture.js"></script>
 
 <script src="~/js/input.js"></script>
 @section Scripts {

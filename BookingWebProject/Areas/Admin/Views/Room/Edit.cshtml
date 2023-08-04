@@ -1,0 +1,87 @@
+﻿@model EditRoomViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Room/Edit.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Edit Room</h1>
+    <form method="post">
+        <div class="input-container">
+            <label asp-for="@Model.PeopleCapacity">Room Capacity</label>
+            <input asp-for="@Model.PeopleCapacity" value="@Model.PeopleCapacity" />
+            <span asp-validation-for="@Model.PeopleCapacity"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.PricePerNight">Price Per Night</label>
+            <input asp-for="@Model.PricePerNight" value="@Model.PricePerNight" />
+            <span asp-validation-for="@Model.PricePerNight"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Description">Room Description</label>
+            <textarea asp-for="@Model.Description" rows="10" cols="60"></textarea>
+            <span asp-validation-for="@Model.Description"></span>
+        </div>
+        @if (Model.OtherRoomBasis.Any())
+        {
+            <div class="room-basis-to-add-container">
+
+                <h2 class="room-basis-title">Add Room Basis</h2>
+                @foreach (var roomBasis in Model.OtherRoomBasis)
+                {
+                    <div class="room-basis-container">
+                        <p class="room-basis-name">@roomBasis.Name</p>
+                        <input type="checkbox" value="@roomBasis.Id" name="SelectedRoomBasisIds">
+                    </div>
+                }
+            </div>
+        }
+    </form>
+    <section class="room-pictures">
+        @foreach (PictureAdminViewModel picture in Model.Pictures)
+        {
+            <div class="img-container">
+                <img src="@picture.Path" />
+                @if (!picture.IsDeleted)
+                {
+                    <form class="img-form" asp-area="Admin" asp-controller="Picture" asp-action="Delete">
+                        <input type="hidden" value="@picture.Id" name="pictureId">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                }
+                else
+                {
+                    <form class="img-form" asp-area="Admin" asp-controller="Picture" asp-action="Recover">
+                        <input type="hidden" value="@picture.Id" name="pictureId">
+                        <button class="recover-btn" type="submit">Recover</button>
+                    </form>
+                }
+            </div>
+        }
+    </section>
+    <section class="current-room-basis">
+        <h2 class="title">Room Bases</h2>
+        <ul class="room-basis-list">
+            @foreach (var roomBasis in Model.CurrentRoomBasis)
+            {
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p>@roomBasis.Name</p>
+                    <form method="post" asp-area="Admin" asp-controller="Room" asp-action="RemoveRoomBasis">
+                        <input type="hidden" name="benefitId" value="@roomBasis.Id">
+                        <input type="hidden" name="hotelId" value="@Model.Id">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    </section>
+
+</div>
+@*Add this js library to decode Hotel Description if it is on Bulgarian language*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js"></script>
+<script>
+    const decodedText = he.decode('@Model.Description');
+    document.querySelector('textarea').value = decodedText;
+</script>
+
+<script src="~/js/input.js"></script>
+<script src="~/js/Admin/Picture/ShowPictureActionPicture.js"></script>

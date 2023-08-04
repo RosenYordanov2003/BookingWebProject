@@ -58,7 +58,7 @@
                 {
                     Id = 6,
                     RoomId = 1,
-                    Path = "/img/Rooms/Spa hotel Dvoretsa rooms/Spa Hotel Dvorestsa SingleRoom2.jpg",
+                    Path = "/img/Rooms/Spa Hotel Dvoretsa SingleRoom2.jpg",
                 },
                 new Picture()
                 {

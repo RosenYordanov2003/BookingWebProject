@@ -6,6 +6,8 @@
     using Admin.Contracts;
     using Admin.Models.Room;
     using Data;
+    using Core.Models.RoomBasis;
+    using Models.Picture;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -30,6 +32,34 @@
                 })
                 .ToArrayAsync();
             return hotelRooms;
+        }
+
+        public async Task<bool> IsRoomByGivenTypeExistsInHotel(int hotelId, int roomTypeId)
+        {
+            return await bookingContext.Rooms.AnyAsync(r => r.RoomTypeId == roomTypeId && r.HotelId == hotelId);
+        }
+        public async Task<EditRoomViewModel> GetRoomToEditAsync(int roomTypeId, int hotelId)
+        {
+            EditRoomViewModel roomToEdit = await bookingContext.Rooms
+                .Where(r => r.RoomTypeId == roomTypeId && r.HotelId == hotelId)
+                .Select(r => new EditRoomViewModel()
+                {
+                    Id = r.Id,
+                    PeopleCapacity = r.Capacity,
+                    PricePerNight = r.PricePerNight,
+                    Description = r.Description,
+                    Pictures = r.Pictures.Select(p => new PictureAdminViewModel()
+                    {
+                        Id = p.Id,
+                        IsDeleted = p.IsDeleted,
+                        Path = p.Path
+                    }),
+                    CurrentRoomBasis = r.RoomBases.Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
+                })
+                .FirstAsync();
+
+            return roomToEdit;
+                
         }
     }
 }
