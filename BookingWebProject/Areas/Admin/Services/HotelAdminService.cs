@@ -7,6 +7,7 @@
     using Models.Hotel;
     using Models.Picture;
     using Data;
+    using Core.Models.Pager;
 
     public class HotelAdminService : IHotelAdminService
     {
@@ -18,9 +19,10 @@
             this.env = env;
         }
 
-        public async Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync()
+        public async Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync(Pager pager)
         {
             IEnumerable<HotelAllViewModel> allHotels = await bookingContext.Hotels
+                .OrderBy(h => h.IsDeleted)
                 .Select(h => new HotelAllViewModel()
                 {
                     Id = h.Id,
@@ -28,8 +30,10 @@
                     StarsCount = h.StarRating,
                     IsDeleted = h.IsDeleted,
                     ImgPath = h.Pictures.First().Path
+
                 })
-                .OrderBy(h => h.IsDeleted)
+                .Skip((pager.CurrentPage - 1) * pager.PageSize)
+                .Take(pager.PageSize)
                 .ToArrayAsync();
 
             return allHotels;
@@ -75,6 +79,8 @@
                      Country = h.Country,
                      Description = h.Description,
                      HotelName = h.Name,
+                     Longitude = h.Longitude,
+                     Latitude = h.Latitude,
                      Pictures = h.Pictures.Select(p => new PictureAdminViewModel()
                      {
                          Id = p.Id,
@@ -104,6 +110,8 @@
             hotelToEdit.City = editHotelViewModel.City;
             hotelToEdit.Country = editHotelViewModel.Country;
             hotelToEdit.Description = editHotelViewModel.Description;
+            hotelToEdit.Longitude = editHotelViewModel.Longitude;
+            hotelToEdit.Latitude = editHotelViewModel.Latitude;
 
             if (editHotelViewModel.SelectedBenefitIds.Any())
             {
@@ -165,7 +173,7 @@
         {
             string hotelFolderName = hotelViewModel.Name;
             Hotel hotelToFind = await bookingContext.Hotels.FirstAsync(h => h.Name == hotelViewModel.Name && !h.IsDeleted);
-            string uploadPath = Path.Combine(env.WebRootPath,"img", "Hotels", hotelFolderName);
+            string uploadPath = Path.Combine(env.WebRootPath, "img", "Hotels", hotelFolderName);
             if (!Directory.Exists(uploadPath))
             {
                 Directory.CreateDirectory(uploadPath);
@@ -215,6 +223,11 @@
 
             hotelBenefit.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetAllHotelsCountAsync()
+        {
+            return await bookingContext.Hotels.CountAsync();
         }
     }
 }

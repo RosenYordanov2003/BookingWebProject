@@ -34,6 +34,8 @@
         [Required]
         public string City { get; set; } = null!;
         public string? ImgUrl { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Latitude { get; set; }
         public List<int> SelectedBenefitIds { get; set; }
         public IEnumerable<BenefitViewModel> BenefitsToAdd { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }

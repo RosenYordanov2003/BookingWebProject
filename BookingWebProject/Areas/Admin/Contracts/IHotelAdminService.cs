@@ -1,9 +1,10 @@
 ﻿namespace BookingWebProject.Areas.Admin.Contracts
 {
+    using Core.Models.Pager;
     using Models.Hotel;
     public interface IHotelAdminService
     {
-        Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync();
+        Task<IEnumerable<HotelAllViewModel>> GetAllHotelsAsync(Pager pager);
         Task<bool> CheckIfHotelIsAlredyDeletedAsync(int hotelId);
         Task DeleteHotelByIdAsync(int hotelId);
         Task RecoverHotelByIdAsync(int hotelId);
@@ -15,5 +16,6 @@
         Task DeleteHotelBenefitAsync(int benefitId, int hotelId);
         Task CreateHotelAsync(CreateHotelViewModel createHotelViewModel);
         Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel);
+        Task<int> GetAllHotelsCountAsync();
     }
 }

@@ -32,6 +32,14 @@
             <span asp-validation-for="@Model.StarRating"></span>
         </div>
         <div class="input-container">
+            <label asp-for="@Model.City">Longitude</label>
+            <input asp-for="@Model.Longitude" value="@Model.Longitude" />
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Latitude">Latitude</label>
+            <input asp-for="@Model.Latitude" value="@Model.Latitude" />
+        </div>
+        <div class="input-container">
             <label asp-for="@Model.ImgUrl">Add ImgUrl</label>
             <input asp-for="@Model.ImgUrl" />
         </div>

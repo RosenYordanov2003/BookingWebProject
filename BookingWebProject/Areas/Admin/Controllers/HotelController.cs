@@ -1,13 +1,14 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Models.Hotel.DataModels;
     using Contracts;
     using Models.Hotel;
     using Core.Contracts;
+    using Core.Models.Pager;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-
     public class HotelController : BaseAdminController
     {
         private readonly IHotelAdminService hotelAdminService;
@@ -23,12 +24,22 @@
             this.benefitService = benefitService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
+            if (pg <= 0)
+            {
+                pg = 1;
+            }
             try
             {
-                IEnumerable<HotelAllViewModel> allHotels = await hotelAdminService.GetAllHotelsAsync();
-                return View(allHotels);
+                int totalHotelsCount = await hotelAdminService.GetAllHotelsCountAsync();
+                Pager pager = new Pager(totalHotelsCount, pg);
+                HotelDataModel hotelDataModel = new HotelDataModel()
+                {
+                    AllHotles = await hotelAdminService.GetAllHotelsAsync(pager),
+                    Pager = pager
+                };
+                return View(hotelDataModel);
             }
             catch (Exception)
             {
