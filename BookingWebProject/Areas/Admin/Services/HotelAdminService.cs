@@ -95,7 +95,7 @@
                          Name = hb.Benefit.Name,
                          IsDeleted = hb.IsDeleted,
 
-                     })
+                     }),
                  })
                  .FirstAsync();
 

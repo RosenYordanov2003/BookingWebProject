@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Picture;
+    using Room;
     using Core.Models.Benefits;
     using static Common.EntityValidation.HotelEntity;
 
@@ -13,6 +14,7 @@
             CurrentHotelBenefits = new List<BenefitViewModel>();
             SelectedBenefitIds = new List<int>();
             BenefitsToAdd = new List<BenefitViewModel>();
+            Rooms = new List<RoomAdminViewModel>();
         }
         public int Id { get; init; }
 
@@ -40,5 +42,6 @@
         public IEnumerable<BenefitViewModel> BenefitsToAdd { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
         public IEnumerable<BenefitViewModel> CurrentHotelBenefits { get; set; }
+        public IEnumerable<RoomAdminViewModel> Rooms { get; set; }
     }
 }

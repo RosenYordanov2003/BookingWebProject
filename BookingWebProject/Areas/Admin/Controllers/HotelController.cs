@@ -15,13 +15,16 @@
         private readonly IHotelService hotelService;
         private readonly IBenefitAdminService benefitAdminService;
         private readonly IBenefitService benefitService;
+        private readonly IRoomAdminService roomAdminService;
         public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService
-            , IBenefitAdminService benefitAdminService, IBenefitService benefitService)
+            , IBenefitAdminService benefitAdminService, IBenefitService benefitService,
+            IRoomAdminService roomAdminService)
         {
             this.hotelService = hotelService;
             this.hotelAdminService = hotelAdminService;
             this.benefitAdminService = benefitAdminService;
             this.benefitService = benefitService;
+            this.roomAdminService = roomAdminService;
         }
         [HttpGet]
         public async Task<IActionResult> Index(int pg = 1)
@@ -104,6 +107,7 @@
             {
                 EditHotelViewModel editHotelViewModel = await hotelAdminService.GetHotelToEditAsync(id);
                 editHotelViewModel.BenefitsToAdd = await benefitAdminService.GetOtherBenefitsAsync(id);
+                editHotelViewModel.Rooms = await roomAdminService.GetHotelRoomsByHotelIdAsync(id);
                 return View(editHotelViewModel);
             }
             catch (Exception)
