@@ -74,10 +74,10 @@
             public const int MinRoomCapacity = 1;
             public const int MaxRoomCapacity = 5;
 
-            public const int DescriptionMinLength = 15;
+            public const int MinDescriptionValue = 15;
             public const int MaxDescriptionValue = 1900;
 
-            public const decimal MinPricePerNightValue = 30;
+            public const string MinPricePerNightValue = "30.00";
         }
         public static class RoomTypeEntity
         {

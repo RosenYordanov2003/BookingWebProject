@@ -32,5 +32,6 @@
         public const string SuccessfulyDeleteCar = "You have successfully deleted a car";
         public const string CarIsAlreadyRecovored = "Car with this id is already recovered";
         public const string SuccessfullyRecoverCar = "You have successfully recovered a car";
+        public const string SuccessfullyUpdateRoomsInHotel = "You have successfully updated rooms in hotel";
     }
 }

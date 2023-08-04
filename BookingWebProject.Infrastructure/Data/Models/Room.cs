@@ -13,7 +13,7 @@
         }
         [Key]
         public int Id { get; init; }
-        public int Capacity { get; init; }
+        public int Capacity { get; set; }
         [Required]
         [MaxLength(MaxDescriptionValue)]
         public string Description { get; set; } = null!;

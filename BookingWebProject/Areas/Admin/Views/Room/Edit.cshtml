@@ -33,6 +33,7 @@
                     </div>
                 }
             </div>
+            <button class="edit-button" type="submit">Edit</button>
         }
     </form>
     <section class="room-pictures">
@@ -67,7 +68,7 @@
                     <p>@roomBasis.Name</p>
                     <form method="post" asp-area="Admin" asp-controller="Room" asp-action="RemoveRoomBasis">
                         <input type="hidden" name="benefitId" value="@roomBasis.Id">
-                        <input type="hidden" name="hotelId" value="@Model.Id">
+                        <input type="hidden" name="hotelId" value="@roomBasis.Id">
                         <button type="submit" class="delete-btn">Delete</button>
                     </form>
                 </li>

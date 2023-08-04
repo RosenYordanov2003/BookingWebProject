@@ -8,6 +8,7 @@
     using Data;
     using Core.Models.RoomBasis;
     using Models.Picture;
+    using BookingWebProject.Infrastructure.Data.Models;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -44,7 +45,6 @@
                 .Where(r => r.RoomTypeId == roomTypeId && r.HotelId == hotelId)
                 .Select(r => new EditRoomViewModel()
                 {
-                    Id = r.Id,
                     PeopleCapacity = r.Capacity,
                     PricePerNight = r.PricePerNight,
                     Description = r.Description,
@@ -60,6 +60,30 @@
 
             return roomToEdit;
                 
+        }
+
+        public async Task UpdateRoomsInHotelByRoomTypeIdAsync(int roomTypeId, int hotelId, EditRoomViewModel editRoomViewModel)
+        {
+            IEnumerable<Room> roomsToUpdate = await bookingContext.Rooms
+                .Where(r => r.RoomTypeId == roomTypeId && r.HotelId == hotelId)
+                .ToArrayAsync();
+
+
+            foreach (Room room in roomsToUpdate)
+            {
+                room.PricePerNight = editRoomViewModel.PricePerNight;
+                room.Capacity = editRoomViewModel.PeopleCapacity;
+                room.Description = editRoomViewModel.Description;
+                if (editRoomViewModel.SelectedRoomBasisIds.Any())
+                {
+                    foreach (int roomBasisId in editRoomViewModel.SelectedRoomBasisIds)
+                    {
+                        await bookingContext.RoomsBases.AddAsync(new RoomsBases() { RoomId = room.Id, RoomBasisId = roomBasisId });
+                        await bookingContext.SaveChangesAsync();
+                    }
+                }
+            }
+            await bookingContext.SaveChangesAsync();
         }
     }
 }

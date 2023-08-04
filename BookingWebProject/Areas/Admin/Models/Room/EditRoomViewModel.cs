@@ -2,6 +2,9 @@
 {
     using Picture;
     using Core.Models.RoomBasis;
+    using static Common.EntityValidation.RoomEntity;
+    using System.ComponentModel.DataAnnotations;
+
     public class EditRoomViewModel
     {
         public EditRoomViewModel()
@@ -11,9 +14,11 @@
             OtherRoomBasis = new List<RoomBasisViewModel>();
             Pictures = new List<PictureAdminViewModel>();
         }
-        public int Id { get; init; }
+        [Range(MinRoomCapacity, MaxRoomCapacity)]
         public int PeopleCapacity { get;set; }
+        [Range(typeof(decimal), MinPricePerNightValue,"100000.00" )]
         public decimal PricePerNight { get;set; }
+        [StringLength(MaxDescriptionValue, MinimumLength = MinDescriptionValue)]
         public string Description { get; set; } = null!;
         public IEnumerable<RoomBasisViewModel> CurrentRoomBasis { get; set; }
         public List<int> SelectedRoomBasisIds { get; set; }

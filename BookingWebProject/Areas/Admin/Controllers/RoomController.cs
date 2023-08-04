@@ -29,9 +29,32 @@
                 return View(roomToEdit);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int roomTypeId, int hotelId, EditRoomViewModel editRoomViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editRoomViewModel);
+            }
+            try
+            {
+                if (!await roomAdminService.IsRoomByGivenTypeExistsInHotel(hotelId, roomTypeId))
+                {
+                    return NotFound();
+                }
+                await roomAdminService.UpdateRoomsInHotelByRoomTypeIdAsync(roomTypeId, hotelId, editRoomViewModel);
+                TempData[SuccessMessage] = SuccessfullyUpdateRoomsInHotel;
+
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
