@@ -4,7 +4,7 @@
     using Contracts;
     using Core.Models.RoomBasis;
     using Microsoft.EntityFrameworkCore;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
 
     public class RoomBasisAdminService : IRoomBasisAdminService
     {

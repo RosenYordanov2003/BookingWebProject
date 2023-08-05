@@ -97,6 +97,7 @@
         </ul>
     </section>
     <section class="rooms-section">
+        <h2 class="room-title">Room Types</h2>
         @foreach (var room in Model.Rooms)
         {
             <div class="room-card">
@@ -112,26 +113,21 @@
                    asp-route-roomTypeId="@room.RoomTypeId" asp-route-hotelId="@Model.Id">
                         Edit
                     </a>
-                    @if (!room.IsDeleted)
-                    {
-                        <form method="post" asp-area="Admin" asp-controller="Room" asp-action="Delete">
-                            <input type="hidden" name="hotelId" value="@Model.Id">
-                            <input type="hidden" name="roomTypeId" value="@room.RoomTypeId">
-                            <button type="submit" class="delete-btn">Delete</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form method="post" asp-area="Admin" asp-controller="Room" asp-action="Recover">
-                            <input type="hidden" name="hotelId" value="@Model.Id">
-                            <input type="hidden" name="roomTypeId" value="@room.RoomTypeId">
-                            <button type="submit" class="recover-btn">Recover</button>
-                        </form>
-                    }
+                   @* <form method="post" asp-area="Admin" asp-controller="Room" asp-action="Delete">
+                        <input type="hidden" name="hotelId" value="@Model.Id">
+                        <input type="hidden" name="roomTypeId" value="@room.RoomTypeId">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>*@
+                    <form method="post" asp-area="Admin" asp-controller="Room" asp-action="Add">
+                        <input type="hidden" name="hotelId" value="@Model.Id">
+                        <input type="hidden" name="roomTypeId" value="@room.RoomTypeId">
+                        <button type="submit" class="add-btn">Add</button>
+                    </form>
                 </div>
             </div>
         }
     </section>
+    <a class="all-rooms" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel">See All Hotel Rooms</a>
 </div>
 
 @*Add this js library to decode Hotel Description if it is on Bulgarian language*@

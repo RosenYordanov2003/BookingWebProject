@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\RoomBasis\" />
     <Folder Include="wwwroot\js\Comment\" />
   </ItemGroup>
 

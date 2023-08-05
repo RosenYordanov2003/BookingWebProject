@@ -8,7 +8,7 @@
     using Data;
     using Models.Picture;
     using Infrastructure.Data.Models;
-    using Models.RoomBasis;
+    using Core.Models.RoomBasis;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -54,7 +54,7 @@
                         IsDeleted = p.IsDeleted,
                         Path = p.Path
                     }),
-                    CurrentRoomBasis = r.RoomBases.Where(rb => !rb.IsDeleted).Select(rb => new RoomBasisAdminViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
+                    CurrentRoomBasis = r.RoomBases.Where(rb => !rb.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
                 })
                 .FirstAsync();
 
@@ -91,6 +91,52 @@
                 }
             }
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task AddRoomByGivenRoomTypeInHotelAsync(int hotelId, int roomtypeId)
+        {
+            Room roomToAddCoppy = await GetRoomByGivenRoomTypeAndHotelIdAsync(hotelId, roomtypeId);
+            Room roomToAdd = new Room()
+            {
+                PricePerNight = roomToAddCoppy.PricePerNight,
+                Capacity = roomToAddCoppy.Capacity,
+                Description = roomToAddCoppy.Description,
+                HotelId = roomToAddCoppy.HotelId,
+                RoomTypeId = roomToAddCoppy.RoomTypeId,
+                IsDeleted = false
+            };
+            await bookingContext.Rooms.AddAsync(roomToAdd);
+            await bookingContext.SaveChangesAsync();
+
+            foreach (Picture picture in roomToAddCoppy.Pictures)
+            {
+                roomToAdd.Pictures.Add(new Picture()
+                {
+                    RoomId = roomToAdd.Id,
+                    Path = picture.Path
+                });
+            }
+            foreach (RoomsBases roomBasis in roomToAddCoppy.RoomBases)
+            {
+                roomToAdd.RoomBases.Add(new RoomsBases()
+                {
+                    RoomId = roomToAdd.Id,
+                    RoomBasisId = roomBasis.RoomBasisId,
+                });
+            }
+
+            await bookingContext.SaveChangesAsync();
+
+        }
+        private async Task<Room>GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
+        {
+            Room roomToFind = await bookingContext.Rooms
+                .Where(r => r.RoomTypeId == roomtypeId && r.HotelId == hotelId)
+                .Include(r => r.RoomBases)
+                .Include(r => r.Pictures)
+                .FirstAsync();
+
+            return roomToFind;
         }
     }
 }

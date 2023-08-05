@@ -82,5 +82,25 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Add(int hotelId, int roomTypeId)
+        {
+            try
+            {
+                if (!await roomAdminService.IsRoomByGivenTypeExistsInHotel(hotelId, roomTypeId))
+                {
+                    return NotFound();
+                }
+                await roomAdminService.AddRoomByGivenRoomTypeInHotelAsync(hotelId, roomTypeId);
+                TempData[SuccessMessage] = SuccessfullyAddRoomByGivenRoomTypeInHotel;
+
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

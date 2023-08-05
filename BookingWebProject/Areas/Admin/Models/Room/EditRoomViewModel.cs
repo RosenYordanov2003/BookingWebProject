@@ -1,7 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Models.Room
 {
     using Picture;
-    using RoomBasis;
     using Core.Models.RoomBasis;
     using static Common.EntityValidation.RoomEntity;
     using System.ComponentModel.DataAnnotations;
@@ -10,7 +9,7 @@
     {
         public EditRoomViewModel()
         {
-            CurrentRoomBasis = new List<RoomBasisAdminViewModel>();
+            CurrentRoomBasis = new List<RoomBasisViewModel>();
             SelectedRoomBasisIds = new List<int>();
             OtherRoomBasis = new List<RoomBasisViewModel>();
             Pictures = new List<PictureAdminViewModel>();
@@ -23,7 +22,7 @@
         public string Description { get; set; } = null!;
         public int RoomTypeId { get; set; }
         public int HotelId { get; set; }
-        public IEnumerable<RoomBasisAdminViewModel> CurrentRoomBasis { get; set; }
+        public IEnumerable<RoomBasisViewModel> CurrentRoomBasis { get; set; }
         public List<int> SelectedRoomBasisIds { get; set; }
         public IEnumerable<RoomBasisViewModel> OtherRoomBasis { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }

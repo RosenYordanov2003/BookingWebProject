@@ -34,5 +34,6 @@
         public const string SuccessfullyRecoverCar = "You have successfully recovered a car";
         public const string SuccessfullyUpdateRoomsInHotel = "You have successfully updated rooms in hotel";
         public const string SuccessfullyRemoveRoomBases = "You have successfully remove room bases from rooms in hotel";
+        public const string SuccessfullyAddRoomByGivenRoomTypeInHotel = "You have successfully added room by given room type in hotel";
     }
 }
