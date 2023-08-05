@@ -194,6 +194,10 @@
                 }
             }
         }
+        public async Task<bool> CheckIsHotelExistAsync(int hotelId)
+        {
+            return await bookingContext.Hotels.AnyAsync(h => h.Id == hotelId);
+        }
         private async Task AddHotelBenefitsToHotelAsync(int hotelId, IEnumerable<int> benefitIds)
         {
             foreach (int benefitId in benefitIds)

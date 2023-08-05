@@ -8,5 +8,6 @@
         public bool IsDeleted { get; set; }
         public decimal PricePerNight { get; set; }
         public string ImgPath { get; set; } = null!;
+        public int HotelId { get; set; }
     }
 }

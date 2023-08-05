@@ -3,17 +3,23 @@
     using Microsoft.AspNetCore.Mvc;
     using Models.Room;
     using Contracts;
+    using Models.Room.DataModels;
+    using Core.Models.Pager;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
+
     public class RoomController : BaseAdminController
     {
         private readonly IRoomAdminService roomAdminService;
         private readonly IRoomBasisAdminService roomBasisAdminService;
-        public RoomController(IRoomAdminService roomAdminService, IRoomBasisAdminService roomBasisAdminService)
+        private readonly IHotelAdminService hotelService;
+        public RoomController(IRoomAdminService roomAdminService, IRoomBasisAdminService roomBasisAdminService,
+            IHotelAdminService hotelService)
         {
             this.roomAdminService = roomAdminService;
             this.roomBasisAdminService = roomBasisAdminService;
+            this.hotelService = hotelService;
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int roomTypeId, int hotelId)
@@ -95,6 +101,34 @@
                 TempData[SuccessMessage] = SuccessfullyAddRoomByGivenRoomTypeInHotel;
 
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> AllRoomsInHotel(int Id, int pg = 1)
+        {
+            if (pg <= 0)
+            {
+                pg = 1;
+            }
+            try
+            {
+                if (!await hotelService.CheckIsHotelExistAsync(Id))
+                {
+                    return NotFound();
+                }
+                int totalHotelRoomsCount = await roomAdminService.GetHotelRoomsCountAsync(Id);
+                Pager pager = new Pager(totalHotelRoomsCount, pg);
+                RoomHotelsDataModel roomHotelsDataModel = new RoomHotelsDataModel()
+                {
+                    Rooms = await roomAdminService.GetHotelRoomsByHotelIdAsync(Id, pager),
+                    Pager = pager
+                };
+                return View(roomHotelsDataModel);
             }
             catch (Exception)
             {

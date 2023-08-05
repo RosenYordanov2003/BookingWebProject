@@ -107,7 +107,7 @@
             {
                 EditHotelViewModel editHotelViewModel = await hotelAdminService.GetHotelToEditAsync(id);
                 editHotelViewModel.BenefitsToAdd = await benefitAdminService.GetOtherBenefitsAsync(id);
-                editHotelViewModel.Rooms = await roomAdminService.GetHotelRoomsByHotelIdAsync(id);
+                editHotelViewModel.Rooms = await roomAdminService.GetHotelRoomsByHotelIdAsync(id, new Pager(0, 1));
                 editHotelViewModel.Rooms = editHotelViewModel.Rooms.DistinctBy(r => r.RoomTypeName);
                 return View(editHotelViewModel);
             }

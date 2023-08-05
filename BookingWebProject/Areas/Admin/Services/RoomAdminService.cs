@@ -9,6 +9,7 @@
     using Models.Picture;
     using Infrastructure.Data.Models;
     using Core.Models.RoomBasis;
+    using Core.Models.Pager;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -18,10 +19,11 @@
             this.bookingContext = bookingContext;
         }
 
-        public async Task<IEnumerable<RoomAdminViewModel>> GetHotelRoomsByHotelIdAsync(int hotelId)
+        public async Task<IEnumerable<RoomAdminViewModel>> GetHotelRoomsByHotelIdAsync(int hotelId, Pager pager)
         {
             IEnumerable<RoomAdminViewModel> hotelRooms = await bookingContext.Rooms
                 .Where(r => r.HotelId == hotelId)
+                .OrderBy(r => r.IsDeleted)
                 .Select(r => new RoomAdminViewModel()
                 {
                     Id = r.Id,
@@ -29,8 +31,12 @@
                     RoomTypeName = r.RoomType.Name,
                     ImgPath = r.Pictures.Where(p => !p.IsDeleted).First().Path,
                     IsDeleted = r.IsDeleted,
-                    PricePerNight = r.PricePerNight
+                    PricePerNight = r.PricePerNight,
+                    HotelId = r.HotelId
                 })
+                .Skip((pager.CurrentPage - 1) * pager.PageSize)
+                .Take(pager.PageSize)
+                .OrderBy(r => r.RoomTypeId)
                 .ToArrayAsync();
             return hotelRooms;
         }
@@ -128,7 +134,7 @@
             await bookingContext.SaveChangesAsync();
 
         }
-        private async Task<Room>GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
+        private async Task<Room> GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
         {
             Room roomToFind = await bookingContext.Rooms
                 .Where(r => r.RoomTypeId == roomtypeId && r.HotelId == hotelId)
@@ -137,6 +143,30 @@
                 .FirstAsync();
 
             return roomToFind;
+        }
+
+        public async Task<IEnumerable<RoomAdminViewModel>> GetRoomByHotelIdAsync(int hotelId)
+        {
+            IEnumerable<RoomAdminViewModel> hotelRooms = await bookingContext.Rooms
+                 .Where(r => r.HotelId == hotelId)
+                 .Select(r => new RoomAdminViewModel()
+                 {
+                     Id = r.Id,
+                     RoomTypeName = r.RoomType.Name,
+                     RoomTypeId = r.RoomTypeId,
+                     ImgPath = r.Pictures.Where(p => !p.IsDeleted).First().Path,
+                     IsDeleted = r.IsDeleted,
+                     PricePerNight = r.PricePerNight,
+                     HotelId = r.HotelId
+
+                 })
+                 .ToArrayAsync();
+            return hotelRooms;
+        }
+
+        public async Task<int> GetHotelRoomsCountAsync(int hotelId)
+        {
+            return await bookingContext.Rooms.Where(r => r.HotelId == hotelId).CountAsync();
         }
     }
 }

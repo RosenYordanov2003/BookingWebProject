@@ -19,18 +19,6 @@
 textarea {
     padding: 0.7rem;
 }
-.edit-button, .all-rooms {
-    font-size: 1.2rem;
-    border: none;
-    padding: 10px 14px;
-    min-width: 80px;
-    border-radius: 6px;
-    transition: var(--tran-05);
-    text-align: center;
-    color: white;
-    background-color: #0071c2;
-    margin: 2rem 0rem 3rem 0rem;
-}
 .input-container label {
     font-size: 1.5rem;
     color: white;
@@ -134,32 +122,3 @@ form button{
 .benefit-container a{
   display: inline-block;
 }
-.button-container{
-   display: flex;
-   align-items: center;
-   gap: 1.1rem;
-   margin: 3rem 0rem 3rem 0rem;
-}
-.button-container .delete-btn, .add-btn, .all-rooms{
-  padding: 10px 14px;
-  font-size: 1.2rem;
-}
-.button-container .edit-button{
-  margin: 0px;
-}
-.content{
-  margin-bottom: 0.6rem;
-  font-size: 1.2rem;
-}
-.content-title{
-  font-size: 1.5rem;
-}
-.add-btn {
-    background-color: #FFD700;
-}
-.room-title{
-  text-align: center;
-  margin: 3rem 0rem;
-  font-size: 2rem;
-}
-

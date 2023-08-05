@@ -1,0 +1,95 @@
+﻿.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-container, .img-container-room {
+    position: relative;
+}
+
+.img-container img, .img-container-room img {
+    max-width: 380px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 1.2rem;
+}
+.img-form button, form button {
+    font-size: 1.1rem;
+    border: none;
+    padding: 8px 12px;
+    min-width: 100px;
+    border-radius: 6px;
+    transition: var(--tran-05);
+    text-align: center;
+    color: white;
+}
+
+form button {
+    max-width: 72px;
+    font-size: 1rem;
+}
+
+.recover-btn {
+    color: white;
+    background-color: #0071c2;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+}
+.room-title {
+    text-align: center;
+    margin: 3rem 0rem;
+    font-size: 2rem;
+}
+.content {
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+}
+
+.content-title {
+    font-size: 1.5rem;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin: 3rem 0rem 3rem 0rem;
+}
+
+.button-container .delete-btn, .add-btn, .all-rooms {
+    padding: 10px 14px;
+    font-size: 1.2rem;
+}
+.add-btn {
+    background-color: #FFD700;
+}
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin: 3rem 0rem 3rem 0rem;
+}
+
+.button-container .delete-btn, .add-btn, .all-rooms {
+    padding: 10px 14px;
+    font-size: 1.2rem;
+}
+
+.button-container .edit-button {
+    margin: 0px;
+}
+.edit-button, .all-rooms {
+    font-size: 1.2rem;
+    border: none;
+    padding: 10px 14px;
+    min-width: 80px;
+    border-radius: 6px;
+    transition: var(--tran-05);
+    text-align: center;
+    color: white;
+    background-color: #0071c2;
+    margin: 2rem 0rem 3rem 0rem;
+}

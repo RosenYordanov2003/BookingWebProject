@@ -1,0 +1,67 @@
+﻿@model RoomHotelsDataModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Room/HotelRooms.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/PagerStyle/Pager.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <section class="rooms-section">
+        <h2 class="room-title">Room Types</h2>
+        @foreach (var room in Model.Rooms)
+        {
+            <div class="room-card">
+                <div class="img-container-room">
+                    <img src="@room.ImgPath" alt="room image" />
+                </div>
+                <div class="content-container">
+                    <p class="content content-title">@room.RoomTypeName</p>
+                    <p class="content">@(string.Format($"{room.PricePerNight:F2}$"))</p>
+                </div>
+                <div class="button-container">
+                    <a class="edit-button" asp-area="Admin" asp-controller="Room" asp-action="Edit"
+                   asp-route-roomTypeId="@room.RoomTypeId" asp-route-hotelId="@room.HotelId">
+                        Edit
+                    </a>
+                    @if (!room.IsDeleted)
+                    {
+                        <form class="img-form" asp-area="Admin" asp-controller="Room" asp-action="Delete">
+                            <input type="hidden" value="@room.Id" name="pictureId">
+                            <button class="delete-btn" type="submit">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="img-form" asp-area="Admin" asp-controller="Room" asp-action="Recover">
+                            <input type="hidden" value="@room.Id" name="pictureId">
+                            <button class="delete-btn" type="submit">Recover</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </section>
+    <div class="pagination-container">
+        @if (Model.Pager.TotalPages > 0)
+        {
+            <ul class="page-list">
+                @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id = "@Model.Rooms.First().Id" asp-route-pg="@(Model.Pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+                @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="page-item">
+                        <a asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().Id" asp-route-pg="@(page)" class=" @(page == Model.Pager.CurrentPage ? "active page-link" : "page-link")">@(page)</a>
+                    </li>
+                }
+                @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().Id" asp-route-pg="@(Model.Pager.CurrentPage + 1)">Next</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
