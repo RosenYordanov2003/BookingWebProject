@@ -24,15 +24,15 @@
                     @if (!room.IsDeleted)
                     {
                         <form class="img-form" asp-area="Admin" asp-controller="Room" asp-action="Delete">
-                            <input type="hidden" value="@room.Id" name="pictureId">
+                            <input type="hidden" value="@room.Id" name="roomId">
                             <button class="delete-btn" type="submit">Delete</button>
                         </form>
                     }
                     else
                     {
                         <form class="img-form" asp-area="Admin" asp-controller="Room" asp-action="Recover">
-                            <input type="hidden" value="@room.Id" name="pictureId">
-                            <button class="delete-btn" type="submit">Recover</button>
+                            <input type="hidden" value="@room.Id" name="roomId">
+                            <button class="recover-btn" type="submit">Recover</button>
                         </form>
                     }
                 </div>
@@ -46,19 +46,19 @@
                 @if (Model.Pager.CurrentPage > Model.Pager.StartPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id = "@Model.Rooms.First().Id" asp-route-pg="@(Model.Pager.CurrentPage - 1)">Previous</a>
+                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id = "@Model.Rooms.First().HotelId" asp-route-pg="@(Model.Pager.CurrentPage - 1)">Previous</a>
                     </li>
                 }
                 @for (int page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
                 {
                     <li class="page-item">
-                        <a asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().Id" asp-route-pg="@(page)" class=" @(page == Model.Pager.CurrentPage ? "active page-link" : "page-link")">@(page)</a>
+                        <a asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().HotelId" asp-route-pg="@(page)" class=" @(page == Model.Pager.CurrentPage ? "active page-link" : "page-link")">@(page)</a>
                     </li>
                 }
                 @if (Model.Pager.CurrentPage < Model.Pager.EndPage)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().Id" asp-route-pg="@(Model.Pager.CurrentPage + 1)">Next</a>
+                        <a class="page-link" asp-area="Admin" asp-controller="Room" asp-action="AllRoomsInHotel" asp-route-id="@Model.Rooms.First().HotelId" asp-route-pg="@(Model.Pager.CurrentPage + 1)">Next</a>
                     </li>
                 }
             </ul>

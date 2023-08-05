@@ -136,5 +136,28 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpPost]
+        public async Task<IActionResult>Delete(int roomId)
+        {
+            try
+            {
+                if (!await roomAdminService.CheckIsRoomExistByIdAsync(roomId))
+                {
+                    return NotFound();
+                }
+                if (await roomAdminService.CheckIfRoomIsAlreadyDeletedByGivenIdAsync(roomId))
+                {
+                    TempData[WarningMessage] = RoomIsAlreadyDeleted;
+                }
+                await roomAdminService.DeleteRoomByIdAsync(roomId);
+                TempData[SuccessMessage] = SuccessfullyDeleteRoom;
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

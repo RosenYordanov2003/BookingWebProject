@@ -11,5 +11,9 @@
         Task AddRoomByGivenRoomTypeInHotelAsync(int hotelId, int roomtypeId);
         Task<IEnumerable<RoomAdminViewModel>> GetRoomByHotelIdAsync(int hotelId);
         Task<int> GetHotelRoomsCountAsync(int hotelId);
+        Task<IEnumerable<RoomAdminViewModel>> GetRoomTypesInHotelByHotelIdAsync(int hotelId);
+        Task<bool> CheckIsRoomExistByIdAsync(int roomId);
+        Task<bool> CheckIfRoomIsAlreadyDeletedByGivenIdAsync(int roomId);
+        Task DeleteRoomByIdAsync(int roomId);
     }
 }

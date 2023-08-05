@@ -15,9 +15,9 @@
     margin-bottom: 1.2rem;
 }
 .img-form button, form button {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     min-width: 100px;
     border-radius: 6px;
     transition: var(--tran-05);
@@ -92,4 +92,12 @@ form button {
     color: white;
     background-color: #0071c2;
     margin: 2rem 0rem 3rem 0rem;
+}
+.edit-button:hover,
+.all-rooms:hover,
+.add-btn:hover,
+.delete-btn:hover,
+.recover-btn:hover {
+    opacity: 0.7;
+    transform: scale(1.050);
 }

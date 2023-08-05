@@ -134,16 +134,6 @@
             await bookingContext.SaveChangesAsync();
 
         }
-        private async Task<Room> GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
-        {
-            Room roomToFind = await bookingContext.Rooms
-                .Where(r => r.RoomTypeId == roomtypeId && r.HotelId == hotelId)
-                .Include(r => r.RoomBases)
-                .Include(r => r.Pictures)
-                .FirstAsync();
-
-            return roomToFind;
-        }
 
         public async Task<IEnumerable<RoomAdminViewModel>> GetRoomByHotelIdAsync(int hotelId)
         {
@@ -167,6 +157,53 @@
         public async Task<int> GetHotelRoomsCountAsync(int hotelId)
         {
             return await bookingContext.Rooms.Where(r => r.HotelId == hotelId).CountAsync();
+        }
+
+        public async Task<IEnumerable<RoomAdminViewModel>> GetRoomTypesInHotelByHotelIdAsync(int hotelId)
+        {
+            IEnumerable<RoomAdminViewModel> hotelRooms = await bookingContext.Rooms
+                  .Where(r => r.HotelId == hotelId)
+                  .Select(r => new RoomAdminViewModel()
+                  {
+                      Id = r.Id,
+                      RoomTypeName = r.RoomType.Name,
+                      RoomTypeId = r.RoomTypeId,
+                      ImgPath = r.Pictures.Where(p => !p.IsDeleted).First().Path,
+                      IsDeleted = r.IsDeleted,
+                      PricePerNight = r.PricePerNight,
+                      HotelId = r.HotelId
+
+                  })
+                  .ToArrayAsync();
+            return hotelRooms.DistinctBy(r => r.RoomTypeId);
+        }
+
+        public async Task<bool> CheckIsRoomExistByIdAsync(int roomId)
+        {
+            return await bookingContext.Rooms.AnyAsync(r => r.Id == roomId);
+        }
+
+        public async Task<bool> CheckIfRoomIsAlreadyDeletedByGivenIdAsync(int roomId)
+        {
+            return await bookingContext.Rooms.AnyAsync(r => r.Id == r.Id && r.IsDeleted);
+        }
+
+        public async Task DeleteRoomByIdAsync(int roomId)
+        {
+            Room roomToDelete = await bookingContext.Rooms.FirstAsync(r => r.Id == roomId);
+            roomToDelete.IsDeleted = true;
+
+            await bookingContext.SaveChangesAsync();
+        }
+        private async Task<Room> GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
+        {
+            Room roomToFind = await bookingContext.Rooms
+                .Where(r => r.RoomTypeId == roomtypeId && r.HotelId == hotelId)
+                .Include(r => r.RoomBases)
+                .Include(r => r.Pictures)
+                .FirstAsync();
+
+            return roomToFind;
         }
     }
 }
