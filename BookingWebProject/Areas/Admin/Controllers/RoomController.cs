@@ -148,6 +148,7 @@
                 if (await roomAdminService.CheckIfRoomIsAlreadyDeletedByGivenIdAsync(roomId))
                 {
                     TempData[WarningMessage] = RoomIsAlreadyDeleted;
+                    return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
                 }
                 await roomAdminService.DeleteRoomByIdAsync(roomId);
                 TempData[SuccessMessage] = SuccessfullyDeleteRoom;
@@ -155,8 +156,32 @@
             }
             catch (Exception)
             {
-
-                throw;
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Recover(int roomId)
+        {
+            try
+            {
+                if (!await roomAdminService.CheckIsRoomExistByIdAsync(roomId))
+                {
+                    return NotFound();
+                }
+                if (await roomAdminService.CheckIfRoomIsAlreadyRecoveredByIdAsync(roomId))
+                {
+                    TempData[WarningMessage] = RoomIsAlreadyRecovered;
+                    return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+                }
+                await roomAdminService.RecoverRoomByIdAsync(roomId);
+                TempData[SuccessMessage] = SuccessfullyRecoverRoom;
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
     }

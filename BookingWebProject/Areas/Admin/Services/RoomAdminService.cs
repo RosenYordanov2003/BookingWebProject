@@ -190,9 +190,20 @@
 
         public async Task DeleteRoomByIdAsync(int roomId)
         {
-            Room roomToDelete = await bookingContext.Rooms.FirstAsync(r => r.Id == roomId);
+            Room roomToDelete = await FindRoomByIdAsync(roomId);
             roomToDelete.IsDeleted = true;
+            await bookingContext.SaveChangesAsync();
+        }
 
+        public async Task<bool> CheckIfRoomIsAlreadyRecoveredByIdAsync(int roomId)
+        {
+            return await bookingContext.Rooms.AnyAsync(r => r.Id == roomId && !r.IsDeleted);
+        }
+
+        public async Task RecoverRoomByIdAsync(int roomId)
+        {
+            Room roomToRecover = await FindRoomByIdAsync(roomId);
+            roomToRecover.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
         }
         private async Task<Room> GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
@@ -204,6 +215,11 @@
                 .FirstAsync();
 
             return roomToFind;
+        }
+        private async Task<Room> FindRoomByIdAsync(int roomId)
+        {
+            Room room = await bookingContext.Rooms.FirstAsync(r => r.Id == roomId);
+            return room;
         }
     }
 }

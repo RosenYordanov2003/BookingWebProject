@@ -37,5 +37,7 @@
         public const string SuccessfullyAddRoomByGivenRoomTypeInHotel = "You have successfully added room by given room type in hotel";
         public const string RoomIsAlreadyDeleted = "Room with this id is already deleted";
         public const string SuccessfullyDeleteRoom = "You have successfully deleted a room";
+        public const string RoomIsAlreadyRecovered = "Room with this id is already recovered";
+        public const string SuccessfullyRecoverRoom = "You have successfully recovered a room";
     }
 }

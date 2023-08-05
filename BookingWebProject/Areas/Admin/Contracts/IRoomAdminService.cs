@@ -15,5 +15,7 @@
         Task<bool> CheckIsRoomExistByIdAsync(int roomId);
         Task<bool> CheckIfRoomIsAlreadyDeletedByGivenIdAsync(int roomId);
         Task DeleteRoomByIdAsync(int roomId);
+        Task<bool> CheckIfRoomIsAlreadyRecoveredByIdAsync(int roomId);
+        Task RecoverRoomByIdAsync(int roomId);
     }
 }
