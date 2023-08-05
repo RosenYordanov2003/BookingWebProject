@@ -51,7 +51,7 @@
                      RoomCapacity = r.Capacity,
                      Price = r.PricePerNight,
                      RoomPictures = r.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
-                     RoomBases = r.RoomBases.Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name }).ToArray()
+                     RoomBases = r.RoomBases.Where(rb => !rb.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name }).ToArray()
                  })
                  .FirstAsync(r => r.Id == roomId);
             return roomOrderInfoViewModel;
@@ -70,7 +70,7 @@
             roomToBook.Price = (roomOrderInfoViewModel.Price * roomOrderInfoViewModel.AdultsCount) + childrenPrice;
 
             roomToBook.RoomPicture = await bookingContext.Pictures
-                .Where(p => p.RoomId == roomOrderInfoViewModel.Id)
+                .Where(p => p.RoomId == roomOrderInfoViewModel.Id && !p.IsDeleted)
                 .Select(p => new PictureViewModel()
                 {
                     Path = p.Path

@@ -9,5 +9,6 @@
         [ForeignKey(nameof(RoomBasis))]
         public int RoomBasisId { get; set; }
         public RoomBasis RoomBasis { get; set; } = null!;
+        public bool IsDeleted { get; set; }
     }
 }

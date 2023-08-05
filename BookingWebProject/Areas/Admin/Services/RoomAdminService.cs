@@ -6,9 +6,9 @@
     using Admin.Contracts;
     using Admin.Models.Room;
     using Data;
-    using Core.Models.RoomBasis;
     using Models.Picture;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
+    using Models.RoomBasis;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -54,12 +54,12 @@
                         IsDeleted = p.IsDeleted,
                         Path = p.Path
                     }),
-                    CurrentRoomBasis = r.RoomBases.Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
+                    CurrentRoomBasis = r.RoomBases.Where(rb => !rb.IsDeleted).Select(rb => new RoomBasisAdminViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
                 })
                 .FirstAsync();
 
             return roomToEdit;
-                
+
         }
 
         public async Task UpdateRoomsInHotelByRoomTypeIdAsync(int roomTypeId, int hotelId, EditRoomViewModel editRoomViewModel)
@@ -78,8 +78,15 @@
                 {
                     foreach (int roomBasisId in editRoomViewModel.SelectedRoomBasisIds)
                     {
-                        await bookingContext.RoomsBases.AddAsync(new RoomsBases() { RoomId = room.Id, RoomBasisId = roomBasisId });
-                        await bookingContext.SaveChangesAsync();
+                        if (await bookingContext.RoomsBases.AnyAsync(rb => rb.RoomId == room.Id && rb.RoomBasisId == roomBasisId))
+                        {
+                            RoomsBases roomBases = await bookingContext.RoomsBases.FirstAsync(rb => rb.RoomId == room.Id && rb.RoomBasisId == roomBasisId);
+                            roomBases.IsDeleted = false;
+                        }
+                        else
+                        {
+                            await bookingContext.RoomsBases.AddAsync(new RoomsBases() { RoomId = room.Id, RoomBasisId = roomBasisId });
+                        }
                     }
                 }
             }

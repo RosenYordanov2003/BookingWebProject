@@ -11,6 +11,7 @@
             builder.HasKey(ck => new { ck.RoomBasisId, ck.RoomId });
             builder.HasOne(rb => rb.Room).WithMany(r => r.RoomBases).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(rb => rb.RoomBasis).WithMany(rb => rb.RoomBases).OnDelete(DeleteBehavior.NoAction);
+            builder.Property(rb => rb.IsDeleted).HasDefaultValue(false);
             ICollection<RoomsBases> roomsBases = CreateRoomsBases();
             builder.HasData(roomsBases);
         }

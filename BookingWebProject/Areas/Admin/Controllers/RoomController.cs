@@ -26,6 +26,8 @@
                 }
                 EditRoomViewModel roomToEdit = await roomAdminService.GetRoomToEditAsync(roomTypeId, hotelId);
                 roomToEdit.OtherRoomBasis = await roomBasisAdminService.GetOtherRoomBasisAsync(hotelId, roomTypeId);
+                roomToEdit.RoomTypeId = roomTypeId;
+                roomToEdit.HotelId = hotelId;
                 return View(roomToEdit);
 
             }
@@ -55,6 +57,27 @@
             }
             catch (Exception)
             {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveRoomBasis(int roomBasisId, int hotelId, int roomTypeId)
+        {
+            try
+            {
+                if (!await roomBasisAdminService.IsRoomBasisExist(hotelId, roomTypeId, roomBasisId))
+                {
+                    return NotFound();
+                }
+                await roomBasisAdminService.RemoveRoomBasisFromRoomsInHotelByGivenRoomTypeAsync(hotelId, roomTypeId, roomBasisId);
+                TempData[SuccessMessage] = SuccessfullyRemoveRoomBases;
+
+                return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }

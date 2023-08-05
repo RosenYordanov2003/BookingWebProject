@@ -67,8 +67,9 @@
                     <i class="fa-solid fa-circle-check"></i>
                     <p>@roomBasis.Name</p>
                     <form method="post" asp-area="Admin" asp-controller="Room" asp-action="RemoveRoomBasis">
-                        <input type="hidden" name="benefitId" value="@roomBasis.Id">
-                        <input type="hidden" name="hotelId" value="@roomBasis.Id">
+                        <input type="hidden" name="roomBasisId" value="@roomBasis.Id">
+                        <input type="hidden" name="hotelId" value="@Model.HotelId">
+                        <input type="hidden" name="roomTypeId" value="@Model.RoomTypeId">
                         <button type="submit" class="delete-btn">Delete</button>
                     </form>
                 </li>
