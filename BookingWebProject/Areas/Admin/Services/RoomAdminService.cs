@@ -247,13 +247,13 @@
             {
                 Directory.CreateDirectory(uploadPath);
             }
-            foreach (var file in createRoomViewModel.PicturesFileProvider!)
+            foreach (IFormFile file in createRoomViewModel.PicturesFileProvider!)
             {
                 if (file.Length > 0)
                 {
                     string fileName = Path.GetFileName(file.FileName);
                     string filePath = Path.Combine(uploadPath, fileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
                     {
                         await bookingContext.Pictures.AddAsync(new Picture() { Path = $"/img/Rooms/{roomFolderName}/{fileName}", RoomId = roomId });
                         await bookingContext.SaveChangesAsync();

@@ -40,5 +40,6 @@
         public const string RoomIsAlreadyRecovered = "Room with this id is already recovered";
         public const string SuccessfullyRecoverRoom = "You have successfully recovered a room";
         public const string SuccessfullyCreateRoom = "You have successfully created a room";
+        public const string BenefitIsAlreadyDeleted = "Benefit by this id is already deleted";
     }
 }

@@ -3,8 +3,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using Contracts;
-    using static BookingWebProject.Common.NotificationKeys;
-    using static BookingWebProject.Common.NotificationMessages;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
 
     public class HomeController : BaseAdminController
     {

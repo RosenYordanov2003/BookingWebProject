@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BenefitViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/HotelBenefits/Index.css" asp-append-version="true" />
+<div class="wrapper">
+    <h1 class="title">All Hotel Benefits</h1>
+    @foreach (BenefitViewModel benefit in Model)
+    {
+        <section class="benefit-container">
+            <div class="content-container">
+                <p class="content">@benefit.Name</p>
+                <i class="@benefit.BenefitIcon"></i>
+            </div>
+            <div class="button-container">
+                @if (!benefit.IsDeleted)
+                {
+                    <form method="post" asp-area="Admin" asp-controller="HotelBenefit" asp-action="Delete" asp-route-id="@benefit.Id">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-area="Admin" asp-controller="HotelBenefit" asp-action="Recover" asp-route-id="@benefit.Id">
+                        <button type="submit" class="recover-btn">Recover</button>
+                    </form>
+                }
+                <a class="edit-btn" asp-area="Admin" asp-controller="HotelBenefit" asp-action="Edit" asp-route-id="@benefit.Id">Edit</a>
+            </div>
+        </section>
+    }
+    <form method="post" asp-area="Admin" asp-controller="HotelBenefit"asp-action="Create">
+        <button type="submit" class="create-btn">Create</button>
+    </form>
+</div>

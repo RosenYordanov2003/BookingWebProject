@@ -88,7 +88,7 @@
                          IsDeleted = p.IsDeleted,
                      })
                      .ToArray(),
-                     CurrentHotelBenefits = h.HotelBenefits.Where(hb => !hb.IsDeleted).Select(hb => new BenefitViewModel()
+                     CurrentHotelBenefits = h.HotelBenefits.Where(hb => !hb.IsDeleted && !hb.Benefit.IsDeleted).Select(hb => new BenefitViewModel()
                      {
                          Id = hb.BenefitId,
                          BenefitIcon = hb.Benefit.ClassIcon,
@@ -179,13 +179,13 @@
                 Directory.CreateDirectory(uploadPath);
             }
 
-            foreach (var file in hotelViewModel.PicturesFileProvider!)
+            foreach (IFormFile file in hotelViewModel.PicturesFileProvider!)
             {
                 if (file.Length > 0)
                 {
                     string fileName = Path.GetFileName(file.FileName);
                     string filePath = Path.Combine(uploadPath, fileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
                     {
                         await bookingContext.Pictures.AddAsync(new Picture() { Path = $"/img/Hotels/{hotelFolderName}/{fileName}", HotelId = hotelToFind.Id });
                         await bookingContext.SaveChangesAsync();
