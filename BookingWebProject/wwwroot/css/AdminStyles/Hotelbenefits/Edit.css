@@ -1,0 +1,52 @@
+﻿.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title{
+  text-transform: capitalize;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+}
+form{
+  text-align: center;
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+}
+label{
+  font-size: 1.1rem;
+  margin-bottom: 0.9rem;
+  transition: 0.5s ease all;
+}
+input{
+    padding: 0.4rem;
+    margin-bottom: 2rem;
+}
+.edit-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    transition: var( --tran-05);
+    font-size: 1.1rem;
+    background-color: rgb(244,202,22);
+    color: black;
+    margin-top: 2.5rem;
+    min-width: 80px;
+    text-align: center;
+    transition: 0.5s ease all;
+}
+.edit-btn:hover{
+    opacity: 0.8;
+    transform:scale(1.050);
+}
+.shift {
+    transform: translateY(-10px);
+    font-size: 1.3em;
+}
+span{
+  color: red;
+  display: block;
+}

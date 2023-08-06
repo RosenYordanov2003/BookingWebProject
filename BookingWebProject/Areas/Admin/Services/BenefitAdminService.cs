@@ -1,10 +1,12 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
+    using Microsoft.EntityFrameworkCore;
     using Data;
     using Contracts;
     using Core.Models.Benefits;
-    using Microsoft.EntityFrameworkCore;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
+    using Models;
+    using BookingWebProject.Areas.Admin.Models.Benefit;
 
     public class BenefitAdminService : IBenefitAdminService
     {
@@ -58,6 +60,35 @@
         {
             Benefit benefit = await FindBenefitByIdAsync(benefitId);
             benefit.IsDeleted = true;
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckIfBenefitIsAlreadyRecoveredByIdAsync(int benefitId)
+        {
+            return await bookingContext.Benefits.AnyAsync(b => b.Id == benefitId && !b.IsDeleted);
+        }
+
+        public async Task RecoverBenefitAsync(int benefitId)
+        {
+            Benefit benefit = await FindBenefitByIdAsync(benefitId);
+            benefit.IsDeleted = false;
+            await bookingContext.SaveChangesAsync();
+        }
+        public async Task<EditBenefitViewModel> GetBenefitToEditAsync(int benefitId)
+        {
+            Benefit benefitToEdit =  await FindBenefitByIdAsync(benefitId);
+            return new EditBenefitViewModel()
+            {
+                BenefitName = benefitToEdit.Name,
+                BenefitClassIcon = benefitToEdit.ClassIcon,
+            };
+        }
+
+        public async Task EditBenefitByIdAsync(int benefitId, EditBenefitViewModel editBenefitViewModel)
+        {
+            Benefit benefitToEdit = await FindBenefitByIdAsync(benefitId);
+            benefitToEdit.Name = editBenefitViewModel.BenefitName;
+            benefitToEdit.ClassIcon = editBenefitViewModel.BenefitClassIcon;
             await bookingContext.SaveChangesAsync();
         }
         private async Task<Benefit> FindBenefitByIdAsync(int benefitId)

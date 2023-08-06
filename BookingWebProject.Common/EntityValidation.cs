@@ -118,5 +118,12 @@
             public const string MinPriceAsDecimal = "10";
             public const string MaxPriceAsDecimal = "100000";
         }
+        public static class BenefitEntity
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 50;
+
+            public const int ClassIconMaxLength = 60;
+        }
     }
 }
