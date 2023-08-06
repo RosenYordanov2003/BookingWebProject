@@ -10,13 +10,16 @@
     using Infrastructure.Data.Models;
     using Core.Models.RoomBasis;
     using Core.Models.Pager;
+    using BookingWebProject.Core.Models.Hotel;
 
     public class RoomAdminService : IRoomAdminService
     {
+        private readonly IWebHostEnvironment env;
         private readonly BookingContext bookingContext;
-        public RoomAdminService(BookingContext bookingContext)
+        public RoomAdminService(BookingContext bookingContext, IWebHostEnvironment env)
         {
             this.bookingContext = bookingContext;
+            this.env = env;
         }
 
         public async Task<IEnumerable<RoomAdminViewModel>> GetHotelRoomsByHotelIdAsync(int hotelId, Pager pager)
@@ -205,6 +208,59 @@
             Room roomToRecover = await FindRoomByIdAsync(roomId);
             roomToRecover.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<int> CreateRoomAsync(CreateRoomViewModel createRoomViewModel)
+        {
+            Room roomToCreate = new Room()
+            {
+                Capacity = createRoomViewModel.PeopleCapacity,
+                RoomTypeId = createRoomViewModel.RoomTypeId,
+                HotelId = createRoomViewModel.HotelId,
+                Description = createRoomViewModel.Description,
+                PricePerNight = createRoomViewModel.PricePerNight,
+                IsDeleted = false,
+            };
+            await bookingContext.Rooms.AddAsync(roomToCreate);
+            await bookingContext.SaveChangesAsync();
+
+            if (createRoomViewModel.SelectedRoomBasesIds.Any())
+            {
+                foreach (int roomBasisId in createRoomViewModel.SelectedRoomBasesIds)
+                {
+                    await bookingContext.RoomsBases.AddAsync(new RoomsBases() { RoomBasisId = roomBasisId, RoomId = roomToCreate.Id });
+                }
+            }
+            await bookingContext.SaveChangesAsync();
+            return roomToCreate.Id;
+        }
+
+        public async Task CreateRoomImgsAsync(int roomId, CreateRoomViewModel createRoomViewModel)
+        {
+            Room roomToGet = await bookingContext.Rooms
+                .Include(r => r.Hotel)
+            .FirstAsync(r => r.Id == roomId);
+
+            string roomFolderName = $"{roomToGet.Hotel.Name} rooms";
+            string uploadPath = Path.Combine(env.WebRootPath, "img", "Rooms", roomFolderName);
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            foreach (var file in createRoomViewModel.PicturesFileProvider!)
+            {
+                if (file.Length > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string filePath = Path.Combine(uploadPath, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await bookingContext.Pictures.AddAsync(new Picture() { Path = $"/img/Rooms/{roomFolderName}/{fileName}", RoomId = roomId });
+                        await bookingContext.SaveChangesAsync();
+                        await file.CopyToAsync(stream);
+                    }
+                }
+            }
         }
         private async Task<Room> GetRoomByGivenRoomTypeAndHotelIdAsync(int hotelId, int roomtypeId)
         {

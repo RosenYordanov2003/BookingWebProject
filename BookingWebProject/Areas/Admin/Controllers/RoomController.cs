@@ -8,6 +8,7 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
+    using BookingWebProject.Areas.Admin.Models.Hotel;
 
     public class RoomController : BaseAdminController
     {
@@ -141,7 +142,7 @@
             }
         }
         [HttpPost]
-        public async Task<IActionResult>Delete(int roomId)
+        public async Task<IActionResult> Delete(int roomId)
         {
             try
             {
@@ -198,6 +199,29 @@
                 RoomBasis = await roomBasisService.GetAllRoomBasis()
             };
             return View(createRoomViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateRoomViewModel createRoomViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(createRoomViewModel);
+            }
+            try
+            {
+                int roomId = await roomAdminService.CreateRoomAsync(createRoomViewModel);
+                TempData[SuccessMessage] = SuccessfullyCreateRoom;
+                if (createRoomViewModel.PicturesFileProvider != null && createRoomViewModel.PicturesFileProvider.Count > 0)
+                {
+                    await roomAdminService.CreateRoomImgsAsync(roomId, createRoomViewModel);
+                }
+                return RedirectToAction("Index", "Hotel",  new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
         }
     }
 }

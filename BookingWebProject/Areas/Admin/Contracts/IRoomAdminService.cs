@@ -17,5 +17,7 @@
         Task DeleteRoomByIdAsync(int roomId);
         Task<bool> CheckIfRoomIsAlreadyRecoveredByIdAsync(int roomId);
         Task RecoverRoomByIdAsync(int roomId);
+        Task<int> CreateRoomAsync(CreateRoomViewModel createRoomViewModel);
+        Task CreateRoomImgsAsync(int roomId, CreateRoomViewModel createRoomViewModel);
     }
 }
