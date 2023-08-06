@@ -18,5 +18,6 @@
         Task CreateHotelImgsAsync(CreateHotelViewModel hotelViewModel);
         Task<int> GetAllHotelsCountAsync();
         Task<bool> CheckIsHotelExistAsync(int hotelId);
+        Task<IEnumerable<HotelOptionsViewModel>> GetAllHotelsAsHotelRoomOptionsAsync();
     }
 }

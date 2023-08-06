@@ -1,0 +1,72 @@
+﻿.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form{
+  text-align: center;
+}
+.title{
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.4rem;
+  align-items: center;
+}
+.input-container input, textarea{
+  padding: 0.4rem;
+}
+label{
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+.options-container{
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.file-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input[type=file] {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.select-files-button {
+    background-color: #0077d7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    position: relative;
+    margin-top: 1.1rem;
+    padding: 10px 14px;
+    transition: var( --tran-05);
+    font-size: 1.2rem;
+}
+.create-button {
+    margin: 2rem 0rem 3.4rem 0rem;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(244,202,22);
+    transition: var( --tran-05);
+    font-size: 1.2rem;
+}
+
+    .select-files-button:hover, .create-button:hover {
+        opacity: 0.8;
+        transform: scale(1.050);
+    }
+
+

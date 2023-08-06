@@ -1,0 +1,63 @@
+﻿@model CreateRoomViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Room/Create.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Create Room</h1>
+    <form method="post" enctype="multipart/form-data">
+        <div class="input-container">
+            <label asp-for="@Model.PricePerNight">Price Per Night</label>
+            <input asp-for="@Model.PricePerNight" />
+            <span asp-validation-for="@Model.PricePerNight"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.PeopleCapacity">Room Capacity</label>
+            <input asp-for="@Model.PeopleCapacity" />
+            <span asp-validation-for="@Model.PeopleCapacity"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Description">Room Description</label>
+            <textarea asp-for="@Model.Description" rows="10" cols="50"></textarea>
+            <span asp-validation-for="@Model.Description"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.RoomTypeId">Room Type</label>
+            <select asp-for="@Model.RoomTypeId">
+                @foreach (var roomType in Model.RoomTypes)
+                {
+                    <option value="@roomType.Id">@roomType.Name</option>
+                }
+            </select>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.HotelId">Hotel</label>
+            <select asp-for="@Model.HotelId">
+                @foreach (var hotel in Model.HotelOptions)
+                {
+                    <option value="@hotel.Id">@hotel.Name</option>
+                }
+            </select>
+        </div>
+        <div class="input-container">
+            <label>Select RoomBasis</label>
+            @foreach (var roomBasis in Model.RoomBasis)
+            {
+               <div class="options-container">
+                    <p>@roomBasis.Name</p>
+                    <input type="checkbox" value="@roomBasis.Id" name="SelectedRoomBasesIds" />
+               </div>
+            }
+        </div>
+        <div class="file-container">
+            <label for="@Model.PicturesFileProvider">Choose images to upload (PNG, JPG, JPEG)</label>
+            <button class="select-files-button">
+                Select Files
+                <input type="file"
+                       name="picturesFileProvider"
+                       accept=".jpg, .jpeg, .png, .webp"
+                       multiple />
+            </button>
+        </div>
+        <button class="create-button" type="submit">Create</button>
+    </form>
+</div>

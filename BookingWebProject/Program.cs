@@ -48,6 +48,8 @@ builder.Services.AddScoped<IBenefitAdminService, BenefitAdminService>();
 builder.Services.AddScoped<IRentCarAdminService, RentCarAdminService>();
 builder.Services.AddScoped<IRoomAdminService, RoomAdminService>();
 builder.Services.AddScoped<IRoomBasisAdminService, RoomBasisAdminService>();
+builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
+builder.Services.AddScoped<IRoomBasisService, RoomBasisService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

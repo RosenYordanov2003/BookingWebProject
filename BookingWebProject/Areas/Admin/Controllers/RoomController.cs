@@ -13,13 +13,17 @@
     {
         private readonly IRoomAdminService roomAdminService;
         private readonly IRoomBasisAdminService roomBasisAdminService;
-        private readonly IHotelAdminService hotelService;
+        private readonly IHotelAdminService hotelAdminService;
+        private readonly IRoomTypeService roomTypeService;
+        private readonly IRoomBasisService roomBasisService;
         public RoomController(IRoomAdminService roomAdminService, IRoomBasisAdminService roomBasisAdminService,
-            IHotelAdminService hotelService)
+            IHotelAdminService hotelService, IRoomTypeService roomTypeService, IRoomBasisService roomBasisService)
         {
             this.roomAdminService = roomAdminService;
             this.roomBasisAdminService = roomBasisAdminService;
-            this.hotelService = hotelService;
+            this.hotelAdminService = hotelService;
+            this.roomTypeService = roomTypeService;
+            this.roomBasisService = roomBasisService;
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int roomTypeId, int hotelId)
@@ -117,7 +121,7 @@
             }
             try
             {
-                if (!await hotelService.CheckIsHotelExistAsync(Id))
+                if (!await hotelAdminService.CheckIsHotelExistAsync(Id))
                 {
                     return NotFound();
                 }
@@ -183,6 +187,17 @@
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            CreateRoomViewModel createRoomViewModel = new CreateRoomViewModel()
+            {
+                HotelOptions = await hotelAdminService.GetAllHotelsAsHotelRoomOptionsAsync(),
+                RoomTypes = await roomTypeService.GetAllRoomTypesAsync(),
+                RoomBasis = await roomBasisService.GetAllRoomBasis()
+            };
+            return View(createRoomViewModel);
         }
     }
 }

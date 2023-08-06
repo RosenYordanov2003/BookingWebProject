@@ -198,20 +198,21 @@
         {
             return await bookingContext.Hotels.AnyAsync(h => h.Id == hotelId);
         }
-        private async Task AddHotelBenefitsToHotelAsync(int hotelId, IEnumerable<int> benefitIds)
+
+        public async Task<int> GetAllHotelsCountAsync()
         {
-            foreach (int benefitId in benefitIds)
-            {
-                if (await CheckIsHotelBenefitExistAsync(benefitId, hotelId))
-                {
-                    await RecoverHotelBenefitAsync(benefitId, hotelId);
-                }
-                else
-                {
-                    await bookingContext.HotelBenefits.AddAsync(new HotelBenefits() { HotelId = hotelId, BenefitId = benefitId });
-                    await bookingContext.SaveChangesAsync();
-                }
-            }
+            return await bookingContext.Hotels.CountAsync();
+        }
+        public async Task<IEnumerable<HotelOptionsViewModel>> GetAllHotelsAsHotelRoomOptionsAsync()
+        {
+            IEnumerable<HotelOptionsViewModel> hotelOptions = await bookingContext.Hotels
+                  .Select(h => new HotelOptionsViewModel()
+                  {
+                      Id = h.Id,
+                      Name = h.Name
+                  })
+                  .ToArrayAsync();
+            return hotelOptions;
         }
         private async Task<Hotel> FindHotelByIdAsync(int hotelId)
         {
@@ -228,10 +229,20 @@
             hotelBenefit.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
         }
-
-        public async Task<int> GetAllHotelsCountAsync()
+        private async Task AddHotelBenefitsToHotelAsync(int hotelId, IEnumerable<int> benefitIds)
         {
-            return await bookingContext.Hotels.CountAsync();
+            foreach (int benefitId in benefitIds)
+            {
+                if (await CheckIsHotelBenefitExistAsync(benefitId, hotelId))
+                {
+                    await RecoverHotelBenefitAsync(benefitId, hotelId);
+                }
+                else
+                {
+                    await bookingContext.HotelBenefits.AddAsync(new HotelBenefits() { HotelId = hotelId, BenefitId = benefitId });
+                    await bookingContext.SaveChangesAsync();
+                }
+            }
         }
     }
 }
