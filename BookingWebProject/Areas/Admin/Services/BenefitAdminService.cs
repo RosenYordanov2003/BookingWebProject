@@ -91,6 +91,17 @@
             benefitToEdit.ClassIcon = editBenefitViewModel.BenefitClassIcon;
             await bookingContext.SaveChangesAsync();
         }
+
+        public async Task CreateBenefitAsync(EditBenefitViewModel benefit)
+        {
+           Benefit benefitToCreate = new Benefit()
+           {
+               Name = benefit.BenefitName,
+               ClassIcon = benefit.BenefitClassIcon,
+           };
+            await bookingContext.Benefits.AddAsync(benefitToCreate);
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<Benefit> FindBenefitByIdAsync(int benefitId)
         {
             Benefit benefit = await bookingContext.Benefits.FirstAsync(b => b.Id == benefitId);

@@ -111,5 +111,29 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult>Create(EditBenefitViewModel editBenefitViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editBenefitViewModel);
+            }
+            try
+            {
+                await benefitAdminService.CreateBenefitAsync(editBenefitViewModel);
+                TempData[SuccessMessage] = SuccessfullyCreateBenefit;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

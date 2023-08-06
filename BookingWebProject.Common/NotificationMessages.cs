@@ -43,5 +43,6 @@
         public const string BenefitIsAlreadyDeleted = "Benefit by this id is already deleted";
         public const string BenefitIsAlreaduRecovered = "Benefit by this id is already recovered";
         public const string SuccessfullyUpdateBenefit = "You have successfully updated hotel benefit";
+        public const string SuccessfullyCreateBenefit = "You have successfully created a benefit";
     }
 }

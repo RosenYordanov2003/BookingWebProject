@@ -1,0 +1,22 @@
+﻿@model EditBenefitViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/Hotelbenefits/Edit.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Create Benefit</h1>
+    <form method="post">
+        <div class="input-container">
+            <label asp-for="@Model.BenefitName">Benefit Name</label>
+            <input asp-for="@Model.BenefitName" value="@Model.BenefitName" />
+            <span asp-validation-for="@Model.BenefitName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.BenefitClassIcon">Benefit Icon</label>
+            <input asp-for="@Model.BenefitClassIcon" value="@Model.BenefitClassIcon" />
+            <span asp-validation-for="@Model.BenefitClassIcon"></span>
+        </div>
+        <button class="edit-btn create-btn" type="submit">Create</button>
+    </form>
+</div>
+
+<script src="~/js/input.js"></script>

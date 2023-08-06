@@ -14,5 +14,7 @@ namespace BookingWebProject.Areas.Admin.Contracts
         Task RecoverBenefitAsync(int benefitId);
         Task<EditBenefitViewModel>GetBenefitToEditAsync(int benefitId);
         Task EditBenefitByIdAsync(int benefitId, EditBenefitViewModel benefit);
+        //Can change
+        Task CreateBenefitAsync(EditBenefitViewModel benefit);
     }
 }
