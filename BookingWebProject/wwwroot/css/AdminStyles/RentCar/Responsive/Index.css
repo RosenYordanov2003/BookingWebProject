@@ -1,0 +1,71 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+    .wrapper {
+        margin-left: 6rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .car-card {
+        flex-direction: column;
+    }
+
+    .img-container {
+        width: 260px;
+    }
+
+    .car-title {
+        font-size: 1.3rem;
+    }
+
+    .content {
+        font-size: 1.1rem;
+    }
+
+    .button-container a, .button-container button {
+        font-size: 1rem;
+        max-width: 60px;
+    }
+
+    .pagination-container .page-list {
+        flex-direction: column;
+        gap: 2.7rem;
+    }
+    .dark .page-list .page-link, .page-list .page-link{
+       font-size: 1rem;
+       padding: 0.7rem 1rem;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+    .wrapper {
+        margin-left: 6rem;
+    }
+
+    .title {
+        font-size: 1.7rem;
+    }
+
+    .car-card {
+        flex-direction: column;
+    }
+
+    .img-container {
+        width: 260px;
+    }
+
+    .car-title {
+        font-size: 1.6rem;
+    }
+
+    .content {
+        font-size: 1.3rem;
+    }
+
+    .pagination-container .page-list {
+        flex-direction: column;
+        gap: 2.7rem;
+    }
+
+}
+

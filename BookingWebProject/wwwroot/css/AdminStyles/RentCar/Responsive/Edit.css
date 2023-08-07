@@ -1,0 +1,16 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+    .wrapper {
+        margin-left: 4.3rem;
+    }
+
+    .input-container {
+        width: 80%;
+    }
+
+    .input-container label {
+        font-size: 1.2rem;
+    }
+    .edit-button{
+      max-width: 60px;
+    } 
+}

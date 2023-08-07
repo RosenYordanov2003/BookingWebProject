@@ -1,0 +1,39 @@
+﻿@media screen and (min-width: 280px) and (max-with: 700px){
+    .wrapper {
+        margin-left: 4.3rem;
+    }
+
+    .room-title {
+        font-size: 1.5rem;
+    }
+
+    .img-container img,
+    .img-container-room img {
+        max-width: 260px;
+    }
+
+    .content-title {
+        font-size: 1.2rem;
+    }
+
+    .content {
+        font-size: 1rem;
+    }
+
+    .pagination-container .page-list {
+        flex-direction: column;
+        gap: 2.7rem;
+    }
+
+    .dark .page-list .page-link, .page-list .page-link {
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1000px){
+    .img-container img,
+    .img-container-room img {
+        max-width: 300px;
+    }
+}

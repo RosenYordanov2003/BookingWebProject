@@ -1,0 +1,30 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+
+    .wrapper {
+        margin-left: 7rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    textarea{
+        max-width: 240px;
+    }
+    label{
+        font-size: 1rem;
+    }
+    .input-container{
+        width: 80%;
+    }
+    select{
+        width: 80%;
+    }
+    .select-files-button, .create-button {
+        font-size: 1rem;
+    }
+    .options-container{
+        font-size: 1rem;
+    }
+
+}
