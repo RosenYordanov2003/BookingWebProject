@@ -85,10 +85,20 @@
             roomBasisToEdit.ClassIcon = editRoomBasisViewModel.ClassIcon;
             await bookingContext.SaveChangesAsync();
         }
+
+        public async Task CreateRoomBasisAsync(EditRoomBasisViewModel editRoomBasisViewModel)
+        {
+            RoomBasis roomBais = new RoomBasis()
+            {
+                Name = editRoomBasisViewModel.Name,
+                ClassIcon = editRoomBasisViewModel.ClassIcon
+            };
+            await bookingContext.RoomBasis.AddAsync(roomBais);
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RoomBasis> FindRoomBasisByIdAsync(int roomBasisId)
         {
             return await bookingContext.RoomBasis.FirstAsync(rb => rb.Id == roomBasisId);
         }
-
     }
 }

@@ -151,6 +151,9 @@ form button {
   margin-bottom: 1.4rem;
   font-size: 1.5rem;
 }
-textarea{
+.room-basis-name i{
+  margin: 0rem 0.4rem 0rem 0.4rem;
+}
+textarea {
     padding: 0.5rem;
 }

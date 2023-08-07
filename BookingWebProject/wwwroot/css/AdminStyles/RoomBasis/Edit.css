@@ -28,7 +28,7 @@ label{
     transform: translateY(-10px);
     font-size: 1.3em;
 }
-.edit-btn {
+.edit-btn, .create-btn {
     margin: 2rem 0rem 3.4rem 0rem;
     padding: 8px 14px;
     border: none;
@@ -39,7 +39,7 @@ label{
     color: white;
 }
 
-.edit-btn:hover {
+.edit-btn:hover, .create-btn:hover {
     opacity: 0.8;
     transform: scale(1.050);
 }

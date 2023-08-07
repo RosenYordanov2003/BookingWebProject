@@ -1,0 +1,22 @@
+﻿@model EditRoomBasisViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/Edit.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Create Room Basis</h1>
+    <form method="post">
+        <div class="input-container">
+            <label asp-for="@Model.Name">Name</label>
+            <input asp-for="@Model.Name" />
+            <span asp-validation-for="@Model.Name"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.ClassIcon">Icon</label>
+            <input asp-for="@Model.ClassIcon" />
+            <span asp-validation-for="@Model.ClassIcon"></span>
+        </div>
+        <button class="create-btn" type="submit">Create</button>
+    </form>
+</div>
+
+<script src="~/js/input.js"></script>

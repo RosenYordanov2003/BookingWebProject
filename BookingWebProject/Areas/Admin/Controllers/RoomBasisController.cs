@@ -110,5 +110,29 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult>Create(EditRoomBasisViewModel roomBasis)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(roomBasis);
+            }
+            try
+            {
+                await roomBasisService.CreateRoomBasisAsync(roomBasis);
+                TempData[SuccessMessage] = SuccessfullyCreateRoomBasis;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

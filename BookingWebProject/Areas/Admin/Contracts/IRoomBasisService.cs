@@ -13,5 +13,6 @@
         Task RecoverRoomBasisByIdAsync(int roomBasisId);
         Task<EditRoomBasisViewModel>GetRoomBasisToEditByIdAsync(int roomBasisId);
         Task EditRoomBasisAsync(int roomBasisId, EditRoomBasisViewModel editRoomBasisViewModel);
+        Task CreateRoomBasisAsync(EditRoomBasisViewModel editRoomBasisViewModel);
     }
 }

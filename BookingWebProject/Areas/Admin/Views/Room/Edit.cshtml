@@ -28,7 +28,7 @@
                 @foreach (var roomBasis in Model.OtherRoomBasis)
                 {
                     <div class="room-basis-container">
-                        <p class="room-basis-name">@roomBasis.Name</p>
+                        <p class="room-basis-name">@roomBasis.Name <i class="@roomBasis.ClassIcon"></i></p>
                         <input type="checkbox" value="@roomBasis.Id" name="SelectedRoomBasisIds">
                     </div>
                 }

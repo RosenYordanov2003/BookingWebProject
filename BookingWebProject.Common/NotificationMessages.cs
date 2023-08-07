@@ -49,5 +49,6 @@
         public const string RoomBasisIsAlreadyRecovered = "Room basis with this id is already recovered";
         public const string SuccessfullyRecoveredRoomBasis = "You have successfully recovered room basis";
         public const string SuccessfullyEditRoomBasis = "You have successfully edited room basis";
+        public const string SuccessfullyCreateRoomBasis = "You have successfully created room basis";
     }
 }
