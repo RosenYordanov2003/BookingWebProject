@@ -4,7 +4,7 @@
     using Data;
     using Contracts;
     using Models.RoomType;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
 
     public class RoomTypeService : IRoomTypeService
     {
@@ -70,6 +70,20 @@
         private async Task<RoomType> FindRoomTypeByIdAsync(int roomTypeId)
         {
             return await bookingContext.RoomTypes.FirstAsync(rt => rt.Id == roomTypeId);
+        }
+
+        public async Task<EditRoomTypeViewModel> GetRoomTypeToEditAsync(int roomTypeId)
+        {
+            RoomType roomTypeToEdit = await FindRoomTypeByIdAsync(roomTypeId);
+            return new EditRoomTypeViewModel { Name = roomTypeToEdit.Name, PercentageIncrease = roomTypeToEdit.IncreasePercentage };
+        }
+
+        public async Task EditRoomTypeAsync(int roomTypeId, EditRoomTypeViewModel editRoomTypeViewModel)
+        {
+            RoomType roomTypeToEdit = await FindRoomTypeByIdAsync(roomTypeId);
+            roomTypeToEdit.Name = editRoomTypeViewModel.Name;
+            roomTypeToEdit.IncreasePercentage = editRoomTypeViewModel.PercentageIncrease;
+            await bookingContext.SaveChangesAsync();
         }
     }
 }

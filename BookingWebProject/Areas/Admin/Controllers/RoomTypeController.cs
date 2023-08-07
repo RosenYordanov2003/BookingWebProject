@@ -75,6 +75,43 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpGet]
+        public async Task<IActionResult>Edit(int id)
+        {
+            try
+            {
+                if (!await roomTypeService.CheckIfRoomTypeExistByIdAsync(id))
+                {
+                    return NotFound();
+                }
+                EditRoomTypeViewModel editRoomTypeViewModel = await roomTypeService.GetRoomTypeToEditAsync(id);
+                return View(editRoomTypeViewModel);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult>Edit(int id, EditRoomTypeViewModel editRoomTypeViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editRoomTypeViewModel);
+            }
+            try
+            {
+                await roomTypeService.EditRoomTypeAsync(id, editRoomTypeViewModel);
+                TempData[SuccessMessage] = SuccessfullyEditRoomType;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
         
     }
 }

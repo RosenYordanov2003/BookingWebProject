@@ -83,6 +83,9 @@
         {
             public const int RoomTypeNameMinValue = 5;
             public const int RoomTypeNameMaxValue = 25;
+
+            public const string MinPerentageIncrease = "0.00";
+            public const string MaxPerentageIncrease = "70.00";
         }
         public static class ReservationEntity
         {

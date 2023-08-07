@@ -10,5 +10,7 @@
         Task DeleteRoomTypeAsync(int roomTypeId);
         Task<bool> CheckIfRoomTypeIsAlreadyRecoveredByIdAsync(int roomTypeId);
         Task RecoverRoomTypeAsync(int roomTypeId);
+        Task<EditRoomTypeViewModel> GetRoomTypeToEditAsync(int roomTypeId);
+        Task EditRoomTypeAsync(int roomTypeId, EditRoomTypeViewModel editRoomTypeViewMode);
     }
 }

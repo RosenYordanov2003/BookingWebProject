@@ -54,5 +54,6 @@
         public const string SuccessfullyDeleteRoomType = "You have successfully deleted room type";
         public const string RoomTypeIsAlreadyRecovered = "Room type with this id is already recovered";
         public const string SuccessfullyRecoveredRoomType = "You have successfully recovered room type";
+        public const string SuccessfullyEditRoomType = "You have successfully edited room type";
     }
 }
