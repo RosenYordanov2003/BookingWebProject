@@ -63,7 +63,7 @@
                         IsDeleted = p.IsDeleted,
                         Path = p.Path
                     }),
-                    CurrentRoomBasis = r.RoomBases.Where(rb => !rb.IsDeleted && !rb.RoomBasis.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name }).ToArray(),
+                    CurrentRoomBasis = r.RoomBases.Where(rb => !rb.IsDeleted && !rb.RoomBasis.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasisId, Name = rb.RoomBasis.Name, ClassIcon = rb.RoomBasis.ClassIcon }).ToArray(),
                 })
                 .FirstAsync();
 

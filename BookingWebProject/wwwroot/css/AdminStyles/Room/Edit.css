@@ -135,6 +135,9 @@ form button {
   margin-bottom: 1.5rem;
   font-size: 1.2rem;
 }
+.room-basis-list li p i{
+  margin-left: 0.7rem;
+}
 .room-basis-container{
   display: flex;
   align-items: center;

@@ -64,9 +64,9 @@ input[type=file] {
     font-size: 1.2rem;
 }
 
-    .select-files-button:hover, .create-button:hover {
-        opacity: 0.8;
-        transform: scale(1.050);
-    }
+.select-files-button:hover, .create-button:hover {
+    opacity: 0.8;
+    transform: scale(1.050);
+}
 
 

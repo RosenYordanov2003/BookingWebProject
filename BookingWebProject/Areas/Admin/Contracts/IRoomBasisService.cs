@@ -11,5 +11,7 @@
         Task DeleteRoomBasisByIdAsync(int roomBasisId);
         Task<bool> CheckIfRoomBasisIsAlreadyRecoveredAsync(int roomBasisId);
         Task RecoverRoomBasisByIdAsync(int roomBasisId);
+        Task<EditRoomBasisViewModel>GetRoomBasisToEditByIdAsync(int roomBasisId);
+        Task EditRoomBasisAsync(int roomBasisId, EditRoomBasisViewModel editRoomBasisViewModel);
     }
 }

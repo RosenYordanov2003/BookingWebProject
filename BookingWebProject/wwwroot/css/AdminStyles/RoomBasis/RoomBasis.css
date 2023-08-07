@@ -12,6 +12,9 @@
 .content{
   font-size: 1.2rem;
 }
+.content i{
+  margin-left: 0.4rem;
+}
 .room-basis-container {
   display: flex;
   align-items: center;
@@ -50,7 +53,8 @@
 }
 .edit-btn:hover,
 .delete-btn:hover,
-.recover-btn:hover{
+.recover-btn:hover,
+.create-btn:hover{
   opacity: 0.8;
   transform:scale(1.050);
 }

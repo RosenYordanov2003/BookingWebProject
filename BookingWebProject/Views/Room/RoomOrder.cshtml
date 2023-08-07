@@ -29,7 +29,7 @@
             <h4 class="title">Benefits</h4>
             @foreach (RoomBasisViewModel item in Model.RoomBases)
             {
-                <li>@item.Name <i class="fa-solid fa-circle-check"></i></li>
+                <li>@item.Name <i class="@item.ClassIcon"> </i> <i class="fa-solid fa-circle-check"></i></li>
             }
         </ul>
         <div class="button-container">
@@ -53,7 +53,7 @@
                 <ul class="benefits-ul">
                     @foreach (RoomBasisViewModel item in Model.RoomBases)
                     {
-                        <li>@item.Name <i class="fa-solid fa-circle-check"></i></li>
+                        <li>@item.Name <i class="@item.ClassIcon"> </i> <i class="fa-solid fa-circle-check"></i></li>
                     }
                 </ul>
                 <div class="order-container">

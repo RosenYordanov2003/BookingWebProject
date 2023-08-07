@@ -21,7 +21,8 @@
                 .Select(b => new RoomBasisViewModel()
                 {
                     Id = b.Id,
-                    Name = b.Name
+                    Name = b.Name,
+                    ClassIcon = b.ClassIcon
                 })
                 .ToArrayAsync();
 

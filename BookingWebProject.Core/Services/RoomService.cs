@@ -51,7 +51,7 @@
                      RoomCapacity = r.Capacity,
                      Price = r.PricePerNight,
                      RoomPictures = r.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
-                     RoomBases = r.RoomBases.Where(rb => !rb.IsDeleted && !rb.RoomBasis.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name }).ToArray()
+                     RoomBases = r.RoomBases.Where(rb => !rb.IsDeleted && !rb.RoomBasis.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name, ClassIcon = rb.RoomBasis.ClassIcon }).ToArray()
                  })
                  .FirstAsync(r => r.Id == roomId);
             return roomOrderInfoViewModel;

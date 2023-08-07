@@ -65,7 +65,7 @@
             {
                 <li>
                     <i class="fa-solid fa-circle-check"></i>
-                    <p>@roomBasis.Name</p>
+                    <p>@roomBasis.Name <i class="@roomBasis.ClassIcon"></i></p>
                     <form method="post" asp-area="Admin" asp-controller="Room" asp-action="RemoveRoomBasis">
                         <input type="hidden" name="roomBasisId" value="@roomBasis.Id">
                         <input type="hidden" name="hotelId" value="@Model.HotelId">

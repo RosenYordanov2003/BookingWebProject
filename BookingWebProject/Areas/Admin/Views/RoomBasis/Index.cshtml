@@ -7,7 +7,7 @@
         @foreach (var roomBasis in Model)
         {
             <div class="room-basis-container">
-                <p class="content">@roomBasis.Name</p>
+            <p class="content">@roomBasis.Name <i class="@roomBasis.ClassIcon"></i></p>
                 <div class="button-container">
                     @if (!roomBasis.IsDeleted)
                     {

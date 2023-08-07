@@ -136,6 +136,9 @@ body {
 .room-benefits-ul li {
     font-size: 1.3rem;
 }
+.room-benefits-ul li i, .benefits-ul li i{
+  margin-left: 0.5rem;
+}
 
 .room-benefits-ul .title {
     font-size: 1.4rem;

@@ -125,5 +125,12 @@
 
             public const int ClassIconMaxLength = 60;
         }
+        public static class RoomBasisEntity
+        {
+            public const int NameMinLength = 1;
+            public const int NameMaxLength = 50;
+
+            public const int ClassIconMaxLength = 60;
+        }
     }
 }

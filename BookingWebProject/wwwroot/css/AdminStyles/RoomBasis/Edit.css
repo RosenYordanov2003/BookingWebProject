@@ -1,0 +1,49 @@
+﻿.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.title{
+  text-transform: capitalize;
+  margin-bottom: 3rem;
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+}
+form{
+    text-align: center;
+}
+.input-container input{
+  padding: 0.4rem;
+  margin-bottom: 2.2rem;
+}
+label{
+    margin-bottom: 0.7rem;
+    font-size: 1.2rem;
+    transition: 0.5s ease all;
+}
+.shift {
+    transform: translateY(-10px);
+    font-size: 1.3em;
+}
+.edit-btn {
+    margin: 2rem 0rem 3.4rem 0rem;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(244,202,22);
+    transition: var( --tran-05);
+    font-size: 1.2rem;
+    color: white;
+}
+
+.edit-btn:hover {
+    opacity: 0.8;
+    transform: scale(1.050);
+}
+span{
+  display: block;
+  color: red;
+}

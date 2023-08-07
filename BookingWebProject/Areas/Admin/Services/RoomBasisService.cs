@@ -23,7 +23,8 @@
                   .Select(rb => new RoomBasisViewModel()
                   {
                       Id = rb.Id,
-                      Name = rb.Name
+                      Name = rb.Name,
+                      ClassIcon = rb.ClassIcon,
                   })
                   .ToArrayAsync();
 
@@ -37,7 +38,8 @@
                     {
                         Id = rb.Id,
                         Name = rb.Name,
-                        IsDeleted = rb.IsDeleted
+                        IsDeleted = rb.IsDeleted,
+                        ClassIcon = rb.ClassIcon,
                     })
                     .ToArrayAsync();
 
@@ -68,6 +70,19 @@
         {
             RoomBasis roomBasisToRecover = await FindRoomBasisByIdAsync(roomBasisId);
             roomBasisToRecover.IsDeleted = false;
+            await bookingContext.SaveChangesAsync();
+        }
+        public async Task<EditRoomBasisViewModel> GetRoomBasisToEditByIdAsync(int roomBasisId)
+        {
+            RoomBasis roomBasisToEdit = await FindRoomBasisByIdAsync(roomBasisId);
+            return new EditRoomBasisViewModel() { Name = roomBasisToEdit.Name, ClassIcon = roomBasisToEdit.ClassIcon };
+        }
+
+        public async Task EditRoomBasisAsync(int roomBasisId, EditRoomBasisViewModel editRoomBasisViewModel)
+        {
+            RoomBasis roomBasisToEdit = await FindRoomBasisByIdAsync(roomBasisId);
+            roomBasisToEdit.Name = editRoomBasisViewModel.Name;
+            roomBasisToEdit.ClassIcon = editRoomBasisViewModel.ClassIcon;
             await bookingContext.SaveChangesAsync();
         }
         private async Task<RoomBasis> FindRoomBasisByIdAsync(int roomBasisId)
