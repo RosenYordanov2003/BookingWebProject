@@ -80,10 +80,19 @@
             roomTypeToEdit.IncreasePercentage = editRoomTypeViewModel.PercentageIncrease;
             await bookingContext.SaveChangesAsync();
         }
+        public async Task CreateRoomTypeAsync(EditRoomTypeViewModel editRoomTypeViewModel)
+        {
+            RoomType roomType = new RoomType()
+            {
+                Name = editRoomTypeViewModel.Name,
+                IncreasePercentage = editRoomTypeViewModel.PercentageIncrease
+            };
+            await bookingContext.RoomTypes.AddAsync(roomType);
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RoomType> FindRoomTypeByIdAsync(int roomTypeId)
         {
             return await bookingContext.RoomTypes.FirstAsync(rt => rt.Id == roomTypeId);
         }
-
     }
 }

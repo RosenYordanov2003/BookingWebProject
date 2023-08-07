@@ -12,5 +12,6 @@
         Task RecoverRoomTypeAsync(int roomTypeId);
         Task<EditRoomTypeViewModel> GetRoomTypeToEditAsync(int roomTypeId);
         Task EditRoomTypeAsync(int roomTypeId, EditRoomTypeViewModel editRoomTypeViewMode);
+        Task CreateRoomTypeAsync(EditRoomTypeViewModel editRoomTypeViewModel);
     }
 }
