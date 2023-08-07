@@ -1,0 +1,49 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+    .wrapper {
+        margin-left: 5rem;
+    }
+
+    .input-container {
+        align-items: center;
+    }
+
+    .input-container input {
+        width: 80%;
+    }
+
+    textarea {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+
+
+    .input-container {
+        align-items: center;
+    }
+
+    .title {
+        font-size: 1.3rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    .input-container input {
+        width: 80%;
+    }
+
+    textarea {
+        width: 50%;
+    }
+
+    .benefit-title {
+        font-size: 1.3rem;
+    }
+
+    .select-files-button, .create-button {
+        font-size: 1rem;
+    }
+}
+

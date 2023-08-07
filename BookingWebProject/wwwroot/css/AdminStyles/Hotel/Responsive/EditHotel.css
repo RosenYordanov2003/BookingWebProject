@@ -1,0 +1,62 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px) {
+    .wrapper {
+        margin-left: 5rem;
+    }
+
+    .input-container {
+        align-items: center;
+    }
+
+   .input-container input {
+       width: 80%;
+   }
+
+    textarea {
+        width: 70%;
+    }
+    .hotel-pictures{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .benefit-list li{
+        font-size: 1rem;
+    }
+    .img-form button, form button{
+        max-width: 60px;
+    }
+    .img-container, .img-container-room {
+        max-width: 260px;
+    }
+    .img-container img, .img-container-room img{
+       width: 100%;
+    }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+
+    .input-container {
+        align-items: center;
+    }
+    .wrapper{
+       margin-left: 15rem;
+    }
+
+    .input-container input {
+        width: 90%;
+    }
+
+    textarea {
+        width: 80%;
+    }
+
+    .hotel-pictures {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-container, .img-container-room {
+        max-width: 300px;
+    }
+}
