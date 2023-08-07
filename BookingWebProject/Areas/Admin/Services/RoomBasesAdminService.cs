@@ -6,10 +6,10 @@
     using Microsoft.EntityFrameworkCore;
     using Infrastructure.Data.Models;
 
-    public class RoomBasisAdminService : IRoomBasisAdminService
+    public class RoomBasesAdminService : IRoomBasesAdminService
     {
         private readonly BookingContext bookingContext;
-        public RoomBasisAdminService(BookingContext bookingContext)
+        public RoomBasesAdminService(BookingContext bookingContext)
         {
             this.bookingContext = bookingContext;
         }
@@ -17,7 +17,7 @@
         public async Task<IEnumerable<RoomBasisViewModel>> GetOtherRoomBasisAsync(int hotelId, int roomTypeId)
         {
             IEnumerable<RoomBasisViewModel> otherRoomBasis = await bookingContext.RoomBasis
-                .Where(b => !b.RoomBases.Any(rb => rb.Room.RoomType.Id == roomTypeId && rb.Room.HotelId == hotelId && !rb.IsDeleted))
+                .Where(b => !b.IsDeleted && !b.RoomBases.Any(rb => rb.Room.RoomType.Id == roomTypeId && rb.Room.HotelId == hotelId && !rb.IsDeleted))
                 .Select(b => new RoomBasisViewModel()
                 {
                     Id = b.Id,

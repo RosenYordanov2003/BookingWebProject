@@ -1,0 +1,29 @@
+﻿@model IEnumerable<RoomBasisAdminViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/RoomBasis.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">All Room Basis</h1>
+        @foreach (var roomBasis in Model)
+        {
+            <div class="room-basis-container">
+                <p class="content">@roomBasis.Name</p>
+                <div class="button-container">
+                    @if (!roomBasis.IsDeleted)
+                    {
+                        <form method="post" asp-area="Admin" asp-controller="RoomBasis" asp-action="Delete" asp-route-id="@roomBasis.Id">
+                            <button class="delete-btn">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-area="Admin" asp-controller="RoomBasis" asp-action="Recover" asp-route-id="@roomBasis.Id">
+                            <button class="recover-btn">Recover</button>
+                        </form>
+                    }
+                    <a class="edit-btn" asp-area="Admin" asp-controller="RoomBasis" asp-action="Edit" asp-route-id="@roomBasis.Id">Edit</a>
+                </div>
+            </div>
+        }
+        <a class="create-btn" asp-area="Admin" asp-controller="RoomBasis" asp-action="Cretae">Create</a>
+</div>

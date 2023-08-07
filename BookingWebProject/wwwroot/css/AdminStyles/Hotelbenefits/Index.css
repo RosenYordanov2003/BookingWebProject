@@ -41,7 +41,7 @@
     background-color: rgb(244,202,22);
     color: white;
 }
-.dark .edit-btn {
+.dark .edit-btn, .edit-btn {
     background-color: rgb(244,202,22);
     color: black;
 }

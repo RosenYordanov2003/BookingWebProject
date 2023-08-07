@@ -1,0 +1,56 @@
+﻿.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+.content{
+  font-size: 1.2rem;
+}
+.room-basis-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.button-container{
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.button-container button, a{
+    font-size: 1rem;
+    border: none;
+    padding: 8px 10px;
+    min-width: 60px;
+    border-radius: 6px;
+    transition: var(--tran-05);
+    text-align: center;
+    color: white;
+    transition: 0.5s ease all;
+}
+.delete-btn{
+  background-color: red;
+}
+.button-container .edit-btn, .wrapper .create-btn {
+    background-color: #FFD700;
+    color: white;
+}
+.create-btn{
+  margin-top: 3rem;
+}
+.recover-btn {
+    background-color: #0071c2;
+}
+.edit-btn:hover,
+.delete-btn:hover,
+.recover-btn:hover{
+  opacity: 0.8;
+  transform:scale(1.050);
+}

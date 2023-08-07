@@ -6,7 +6,7 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using BookingWebProject.Areas.Admin.Models.Benefit;
+    using Models.Benefit;
 
     public class HotelBenefitController : BaseAdminController
     {

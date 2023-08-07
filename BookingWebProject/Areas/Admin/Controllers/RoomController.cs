@@ -8,16 +8,15 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using BookingWebProject.Areas.Admin.Models.Hotel;
 
     public class RoomController : BaseAdminController
     {
         private readonly IRoomAdminService roomAdminService;
-        private readonly IRoomBasisAdminService roomBasisAdminService;
+        private readonly IRoomBasesAdminService roomBasisAdminService;
         private readonly IHotelAdminService hotelAdminService;
         private readonly IRoomTypeService roomTypeService;
         private readonly IRoomBasisService roomBasisService;
-        public RoomController(IRoomAdminService roomAdminService, IRoomBasisAdminService roomBasisAdminService,
+        public RoomController(IRoomAdminService roomAdminService, IRoomBasesAdminService roomBasisAdminService,
             IHotelAdminService hotelService, IRoomTypeService roomTypeService, IRoomBasisService roomBasisService)
         {
             this.roomAdminService = roomAdminService;
@@ -196,7 +195,7 @@
             {
                 HotelOptions = await hotelAdminService.GetAllHotelsAsHotelRoomOptionsAsync(),
                 RoomTypes = await roomTypeService.GetAllRoomTypesAsync(),
-                RoomBasis = await roomBasisService.GetAllRoomBasis()
+                RoomBasis = await roomBasisService.GetAllAvailableRoomBasisAsync()
             };
             return View(createRoomViewModel);
         }
