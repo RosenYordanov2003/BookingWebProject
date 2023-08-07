@@ -7,6 +7,7 @@
     {
         public void Configure(EntityTypeBuilder<RoomType> builder)
         {
+            builder.Property(p => p.IsDeleted).HasDefaultValue(false);
             ICollection<RoomType> roomTypes = CreateRoomTypes();
             builder.HasMany(rt => rt.Rooms)
                 .WithOne(rt => rt.RoomType)

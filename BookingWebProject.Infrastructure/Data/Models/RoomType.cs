@@ -15,5 +15,6 @@
         public string Name { get; set; } = null!;
         public decimal IncreasePercentage { get; set; }
         public ICollection<Room> Rooms { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
