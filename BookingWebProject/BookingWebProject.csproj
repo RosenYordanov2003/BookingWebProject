@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\AdminStyles\RoomTypes\" />
     <Folder Include="wwwroot\js\Comment\" />
   </ItemGroup>
 

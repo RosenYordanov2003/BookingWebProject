@@ -3,6 +3,12 @@
     using Models.RoomType;
     public interface IRoomTypeService
     {
-        Task<IEnumerable<RoomTypeViewModel>> GetAllRoomTypesAsync();
+        Task<IEnumerable<RoomTypeViewModel>> GetAllAvailableRoomTypesAsync();
+        Task<IEnumerable<RoomTypeAdminViewModel>> GetAllRomTypes();
+        Task<bool> CheckIfRoomTypeExistByIdAsync(int roomTypeId);
+        Task<bool>CheckIfRoomTypeIsAlreadyDeletedByIdAsync(int roomTypeId);
+        Task DeleteRoomTypeAsync(int roomTypeId);
+        Task<bool> CheckIfRoomTypeIsAlreadyRecoveredByIdAsync(int roomTypeId);
+        Task RecoverRoomTypeAsync(int roomTypeId);
     }
 }

@@ -50,5 +50,9 @@
         public const string SuccessfullyRecoveredRoomBasis = "You have successfully recovered room basis";
         public const string SuccessfullyEditRoomBasis = "You have successfully edited room basis";
         public const string SuccessfullyCreateRoomBasis = "You have successfully created room basis";
+        public const string RoomTypeIsAlreadyDeleted = "Room type with this id is already deleted";
+        public const string SuccessfullyDeleteRoomType = "You have successfully deleted room type";
+        public const string RoomTypeIsAlreadyRecovered = "Room type with this id is already recovered";
+        public const string SuccessfullyRecoveredRoomType = "You have successfully recovered room type";
     }
 }

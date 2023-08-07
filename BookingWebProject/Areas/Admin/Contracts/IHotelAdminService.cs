@@ -8,7 +8,7 @@
         Task<bool> CheckIfHotelIsAlredyDeletedAsync(int hotelId);
         Task DeleteHotelByIdAsync(int hotelId);
         Task RecoverHotelByIdAsync(int hotelId);
-        Task<bool> CheckIsHotelForRecoverExistByIdAsync(int hotelId);
+        Task<bool> CheckIfHotelForRecoverExistByIdAsync(int hotelId);
         Task<EditHotelViewModel>GetHotelToEditAsync(int hotelId);
         Task EditHotelByIdAsync(int hotelId, EditHotelViewModel editHotelViewModel);
         Task <bool> CheckIsHotelBenefitExistAsync(int benefitId, int hotelId);

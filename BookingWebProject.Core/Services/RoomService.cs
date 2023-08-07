@@ -19,7 +19,7 @@
         public async Task<IEnumerable<RoomViewModel>> GetHotelRooms(int hotelId)
         {
             var hotelRooms = await bookingContext.Rooms
-                  .Where(r => r.HotelId == hotelId && !r.Hotel.IsDeleted && !r.IsDeleted)
+                  .Where(r => r.HotelId == hotelId && !r.Hotel.IsDeleted && !r.IsDeleted && !r.RoomType.IsDeleted)
                   .Select(r => new RoomViewModel()
                   {
                       Id = r.Id,

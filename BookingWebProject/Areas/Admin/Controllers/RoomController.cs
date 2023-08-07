@@ -194,7 +194,7 @@
             CreateRoomViewModel createRoomViewModel = new CreateRoomViewModel()
             {
                 HotelOptions = await hotelAdminService.GetAllHotelsAsHotelRoomOptionsAsync(),
-                RoomTypes = await roomTypeService.GetAllRoomTypesAsync(),
+                RoomTypes = await roomTypeService.GetAllAvailableRoomTypesAsync(),
                 RoomBasis = await roomBasisService.GetAllAvailableRoomBasisAsync()
             };
             return View(createRoomViewModel);

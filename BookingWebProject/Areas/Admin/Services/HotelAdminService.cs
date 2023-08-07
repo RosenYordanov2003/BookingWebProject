@@ -61,7 +61,7 @@
             await bookingContext.SaveChangesAsync();
         }
 
-        public async Task<bool> CheckIsHotelForRecoverExistByIdAsync(int hotelId)
+        public async Task<bool> CheckIfHotelForRecoverExistByIdAsync(int hotelId)
         {
             return await bookingContext.Hotels
                 .AnyAsync(h => h.IsDeleted && h.Id == hotelId);

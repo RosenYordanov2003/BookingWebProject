@@ -25,7 +25,7 @@
         public async Task<IEnumerable<RoomAdminViewModel>> GetHotelRoomsByHotelIdAsync(int hotelId, Pager pager)
         {
             IEnumerable<RoomAdminViewModel> hotelRooms = await bookingContext.Rooms
-                .Where(r => r.HotelId == hotelId)
+                .Where(r => r.HotelId == hotelId && !r.RoomType.IsDeleted)
                 .OrderBy(r => r.IsDeleted)
                 .Select(r => new RoomAdminViewModel()
                 {
@@ -165,7 +165,7 @@
         public async Task<IEnumerable<RoomAdminViewModel>> GetRoomTypesInHotelByHotelIdAsync(int hotelId)
         {
             IEnumerable<RoomAdminViewModel> hotelRooms = await bookingContext.Rooms
-                  .Where(r => r.HotelId == hotelId)
+                  .Where(r => r.HotelId == hotelId && !r.RoomType.IsDeleted)
                   .Select(r => new RoomAdminViewModel()
                   {
                       Id = r.Id,

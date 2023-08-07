@@ -1,0 +1,30 @@
+﻿@model IEnumerable<RoomTypeAdminViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/RoomTypes/Index.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">All Room Types</h1>
+    @foreach (var roomType in Model)
+    {
+        <div class="room-basis-container">
+            <p class="content">@roomType.Name</p>
+            <p class="content">Increase Percentage: @roomType.IncreasePercentage %</p>
+            <div class="button-container">
+                @if (!roomType.IsDeleted)
+                {
+                    <form method="post" asp-area="Admin" asp-controller="RoomType" asp-action="Delete" asp-route-id="@roomType.Id">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-area="Admin" asp-controller="RoomType" asp-action="Recover" asp-route-id="@roomType.Id">
+                        <button class="recover-btn">Recover</button>
+                    </form>
+                }
+                <a class="edit-btn" asp-area="Admin" asp-controller="RoomType" asp-action="Edit" asp-route-id="@roomType.Id">Edit</a>
+            </div>
+        </div>
+    }
+    <a class="create-btn" asp-area="Admin" asp-controller="RoomType" asp-action="Create">Create</a>
+</div>

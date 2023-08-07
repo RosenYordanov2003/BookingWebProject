@@ -79,7 +79,7 @@
         [HttpPost]
         public async Task<IActionResult> Recover([FromForm] int hotelId)
         {
-            if (!await hotelAdminService.CheckIsHotelForRecoverExistByIdAsync(hotelId))
+            if (!await hotelAdminService.CheckIfHotelForRecoverExistByIdAsync(hotelId))
             {
                 return NotFound();
             }
@@ -99,7 +99,7 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await hotelService.CheckIsHotelExistAsync(id) && !await hotelAdminService.CheckIsHotelForRecoverExistByIdAsync(id))
+            if (!await hotelService.CheckIsHotelExistAsync(id) && !await hotelAdminService.CheckIfHotelForRecoverExistByIdAsync(id))
             {
                 return NotFound();
             }
@@ -123,7 +123,7 @@
             {
                 return View(editHotelViewModel);
             }
-            if (!await hotelService.CheckIsHotelExistAsync(id) && !await hotelAdminService.CheckIsHotelForRecoverExistByIdAsync(id))
+            if (!await hotelService.CheckIsHotelExistAsync(id) && !await hotelAdminService.CheckIfHotelForRecoverExistByIdAsync(id))
             {
                 return NotFound();
             }
