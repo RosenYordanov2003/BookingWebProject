@@ -1,0 +1,22 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+    .wrapper{
+        margin-left: 6rem;
+    }
+    .title{
+      font-size: 1.4rem;
+    }
+    .content, i{
+      font-size: 1rem;
+    }
+
+    .benefit-container, .content-container{
+       flex-direction: column;
+    }
+
+    .create-btn,
+    .edit-btn,
+    .recover-btn,
+    .delete-btn{
+        font-size: 1rem;
+    }
+}
