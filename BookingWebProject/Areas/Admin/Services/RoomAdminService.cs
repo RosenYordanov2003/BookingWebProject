@@ -212,13 +212,14 @@
 
         public async Task<int> CreateRoomAsync(CreateRoomViewModel createRoomViewModel)
         {
+            RoomType roomType = await bookingContext.RoomTypes.FirstAsync(rt => rt.Id == createRoomViewModel.RoomTypeId);
             Room roomToCreate = new Room()
             {
                 Capacity = createRoomViewModel.PeopleCapacity,
                 RoomTypeId = createRoomViewModel.RoomTypeId,
                 HotelId = createRoomViewModel.HotelId,
                 Description = createRoomViewModel.Description,
-                PricePerNight = createRoomViewModel.PricePerNight,
+                PricePerNight = createRoomViewModel.PricePerNight + (createRoomViewModel.PricePerNight * roomType.IncreasePercentage) / 100,
                 IsDeleted = false,
             };
             await bookingContext.Rooms.AddAsync(roomToCreate);

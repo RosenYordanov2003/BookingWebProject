@@ -4,6 +4,7 @@ using BookingWebProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingWebProject.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230807161614_chaneRoomPriceEntity")]
+    partial class chaneRoomPriceEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +149,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3697),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3407),
                             Description = "Test Comment",
                             HotelId = 1,
                             IsDeleted = false,
@@ -157,7 +159,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3703),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3413),
                             Description = "Test Comment",
                             HotelId = 2,
                             IsDeleted = false,
@@ -167,7 +169,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3705),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3415),
                             Description = "Test Comment",
                             HotelId = 3,
                             IsDeleted = false,
@@ -177,7 +179,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3708),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3417),
                             Description = "Test Comment",
                             HotelId = 4,
                             IsDeleted = false,
@@ -187,7 +189,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3710),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3420),
                             Description = "Test Comment",
                             HotelId = 5,
                             IsDeleted = false,
@@ -197,7 +199,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3714),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3423),
                             Description = "Test Comment",
                             HotelId = 6,
                             IsDeleted = false,
@@ -1695,7 +1697,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Стаи в хотела разполагат с плоскоекранен телевизор със сателитна телевизия, Wi-Fi, сейф, саниратен възел с вана или душ.\r\nАпартаментите са подходящи за двойки, семейства или група приятели до 4 човека. Голямата спалня е обзаведена с удобно двойно легло, а в по-малката спалня се намират 2 комфортни единични легла. В банята на апартаментите ще откриете луксозна вана, сешоар и всички необходими принадлежности.",
                             HotelId = 1,
                             IsDeleted = false,
-                            PricePerNight = 190m,
+                            PricePerNight = 247m,
                             RoomTypeId = 3
                         },
                         new
@@ -1705,7 +1707,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Стаи в хотела разполагат с плоскоекранен телевизор със сателитна телевизия, Wi-Fi, сейф, саниратен възел с вана или душ.\r\nАпартаментите са подходящи за двойки, семейства или група приятели до 4 човека. Голямата спалня е обзаведена с удобно двойно легло, а в по-малката спалня се намират 2 комфортни единични легла. В банята на апартаментите ще откриете луксозна вана, сешоар и всички необходими принадлежности.",
                             HotelId = 1,
                             IsDeleted = false,
-                            PricePerNight = 190m,
+                            PricePerNight = 266m,
                             RoomTypeId = 1
                         },
                         new
@@ -1725,7 +1727,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Изживейте лукса и комфорта в стаята си в хотел Infinity. С просторен и стилно обзаведен интериор, стаята предлага уютна атмосфера и модерни удобства, които ще ви осигурят приятен престой.\r\n\r\nРазкройте се в просторната стая в хотел Infinity, където съчетанието от елегантен дизайн и изискани детайли ще ви оставят впечатлени. Отпуснете се и се насладете на комфорта на луксозното легло и удобствата, които предлага тази стилна стая.",
                             HotelId = 2,
                             IsDeleted = false,
-                            PricePerNight = 220m,
+                            PricePerNight = 286m,
                             RoomTypeId = 3
                         },
                         new
@@ -1735,7 +1737,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Изживейте лукса и комфорта в стаята си в хотел Infinity. С просторен и стилно обзаведен интериор, стаята предлага уютна атмосфера и модерни удобства, които ще ви осигурят приятен престой.\r\n\r\nРазкройте се в просторната стая в хотел Infinity, където съчетанието от елегантен дизайн и изискани детайли ще ви оставят впечатлени. Отпуснете се и се насладете на комфорта на луксозното легло и удобствата, които предлага тази стилна стая.",
                             HotelId = 2,
                             IsDeleted = false,
-                            PricePerNight = 200m,
+                            PricePerNight = 280m,
                             RoomTypeId = 1
                         },
                         new
@@ -1745,7 +1747,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Изживейте лукса и комфорта в стаята си в хотел Infinity. С просторен и стилно обзаведен интериор, стаята предлага уютна атмосфера и модерни удобства, които ще ви осигурят приятен престой.\r\n\r\nРазкройте се в просторната стая в хотел Infinity, където съчетанието от елегантен дизайн и изискани детайли ще ви оставят впечатлени. Отпуснете се и се насладете на комфорта на луксозното легло и удобствата, които предлага тази стилна стая.",
                             HotelId = 2,
                             IsDeleted = false,
-                            PricePerNight = 200m,
+                            PricePerNight = 290m,
                             RoomTypeId = 4
                         },
                         new
@@ -1765,7 +1767,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Насладете се на превъзходството на стаята в хотел Маринела София. С елегантен и модерен дизайн, стаята предлага изисканост и комфорт, съчетани с невероятна гледка към града или планината, които ще ви впечатлят.\r\n\r\nОткрийте уют и релаксация в просторната стая в хотел Маринела София. Обзаведена с внимание към детайла и с модерни удобства, тази стая предлага комфортна обстановка, в която можете да се отпуснете и да се насладите на безпроблемен престой в столицата.",
                             HotelId = 3,
                             IsDeleted = false,
-                            PricePerNight = 180m,
+                            PricePerNight = 243m,
                             RoomTypeId = 3
                         },
                         new
@@ -1775,7 +1777,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Насладете се на превъзходството на стаята в хотел Маринела София. С елегантен и модерен дизайн, стаята предлага изисканост и комфорт, съчетани с невероятна гледка към града или планината, които ще ви впечатлят.\r\n\r\nОткрийте уют и релаксация в просторната стая в хотел Маринела София. Обзаведена с внимание към детайла и с модерни удобства, тази стая предлага комфортна обстановка, в която можете да се отпуснете и да се насладите на безпроблемен престой в столицата.",
                             HotelId = 3,
                             IsDeleted = false,
-                            PricePerNight = 180m,
+                            PricePerNight = 252m,
                             RoomTypeId = 1
                         },
                         new
@@ -1785,7 +1787,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Experience the charm and elegance of the rooms at Milano Porta Nuova Hotel. Immerse yourself in a sophisticated ambiance where modern design seamlessly blends with Italian style, creating a welcoming retreat for your stay in Milan.\r\n\r\nDiscover a haven of comfort and tranquility in the rooms of Milano Porta Nuova Hotel. With tasteful decor, contemporary furnishings, and thoughtful amenities, these rooms provide a relaxing atmosphere, allowing you to unwind and enjoy a seamless stay in the vibrant city of Milan.",
                             HotelId = 4,
                             IsDeleted = false,
-                            PricePerNight = 190m,
+                            PricePerNight = 247m,
                             RoomTypeId = 3
                         },
                         new
@@ -1805,7 +1807,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Experience the charm and elegance of the rooms at Milano Porta Nuova Hotel. Immerse yourself in a sophisticated ambiance where modern design seamlessly blends with Italian style, creating a welcoming retreat for your stay in Milan.\r\n\r\nDiscover a haven of comfort and tranquility in the rooms of Milano Porta Nuova Hotel. With tasteful decor, contemporary furnishings, and thoughtful amenities, these rooms provide a relaxing atmosphere, allowing you to unwind and enjoy a seamless stay in the vibrant city of Milan.",
                             HotelId = 4,
                             IsDeleted = false,
-                            PricePerNight = 190m,
+                            PricePerNight = 266m,
                             RoomTypeId = 1
                         },
                         new
@@ -1815,7 +1817,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Потопете се в прегръдката на природата с резервация на стая Deluxe в Maritim Hotel Paradise Blue Albena 5* с гледка към морето или парка. За вашата комфортна почивка вие ще разполагате със стилно обзаведени помещения, включително невероятно удобна спалня от единични легла и мек разтегателен диван с 14 см матрак. Баните са оборудвани с душкабина и вана. Стаите са разположени от 1- ви до 7- ми етаж на хотела и ще ви предложат най-красивите и запомнящи се гледки.\r\n\r\nПодходящи за настаняване на 2 възрастни и 1 дете. Максимално допустимо настаняване 2 възрастни и 2 деца.",
                             HotelId = 5,
                             IsDeleted = false,
-                            PricePerNight = 280m,
+                            PricePerNight = 364m,
                             RoomTypeId = 3
                         },
                         new
@@ -1825,7 +1827,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Студиа Deluxe са обзаведени с разтегателен диван, маса и фотьойли, с две единични легла, работно бюро, стъклена стена и луксозен кухненски бокс. Оборудвани са с баня с вана или душ кабина, LCD дисплей и тоалетна, както и втора тоалетна в отделно помещение. Яркият декор и съчетанието от естествени дървени нюанси с пастелни сини тонове създават комфорт и уют. Студиата са разположени от 1-ви до 7-ми етаж на хотела.",
                             HotelId = 5,
                             IsDeleted = false,
-                            PricePerNight = 280m,
+                            PricePerNight = 378m,
                             RoomTypeId = 2
                         },
                         new
@@ -1835,7 +1837,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Потопете се в несравнимия петзвезден комфорт с резервация на апартамент Deluxe в Maritim Hotel Paradise Blue Albena 5*. Стилните двустайни делукс апартаменти, разполагат с невероятни тераси с изглед към морето или към парка. Състоят се от хол с разтегателен диван, спалня с две единични легла с изключително комфортни матраци за вашия здравословен сън и спално бельо от висококачествени материи, модерни и функционални мебели. Помещенията са подходящи за настаняване на 2 възрастни и 1 дете. Максимално допустимо настаняване 2 възрастни и 2 деца. Банята е с душкабина и вана - 8 кв.м и отделна тоалетна - 1,5 кв. м. Просторната тераса е идеалното място, от което можете да се насладите на лекия и прохладен бриз, докато се любувате на морската панорама. Разположението на апартаментите е от 1- ви до 7- ми етаж.",
                             HotelId = 5,
                             IsDeleted = false,
-                            PricePerNight = 280m,
+                            PricePerNight = 392m,
                             RoomTypeId = 1
                         },
                         new
@@ -1855,7 +1857,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Просторните и луксозно обзаведени апартаменти Делукс с гледка парк са перфектни за семейства. Комфортните възглавници ще ви пренесат в облаците, а от широкия балкон ще можете да се насладите на гледка към оживената централна алея на комплекса, докато отпивате от сутрешното си кафе или чай от селектирани сортове, които ви очакват във всеки апартамент. Или просто можете да релаксирате във ваната или гледайки телевизия на един от двата 49-инчови телевизора. За Вашата сигурност всеки апартамент е оборудван със сейф. На Ваше разположение има и сет за гладене, телефон и мини бар.",
                             HotelId = 6,
                             IsDeleted = false,
-                            PricePerNight = 290m,
+                            PricePerNight = 406m,
                             RoomTypeId = 1
                         },
                         new
@@ -1865,7 +1867,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Резервирайте Стая Executive VIP в Хотел Амелия 5* и получете екслузивен достъп до уникалния басейн на покрива със страхотна панорама и бар с изкушаващи напитки. \r\n\r\nСтаята ще ви очарова с морската си гледка и неповторим дизайнерски лукс. Удобните матраци ще ви гарантират сън, сякаш сте в облаците, а просторът ще допринесе за вашият истински и дълго мечтан релакс.",
                             HotelId = 6,
                             IsDeleted = false,
-                            PricePerNight = 290m,
+                            PricePerNight = 377m,
                             RoomTypeId = 3
                         });
                 });
@@ -2880,7 +2882,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                     b.Property<DateTime>("JoinTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3437));
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 19, 16, 14, 124, DateTimeKind.Local).AddTicks(3027));
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -2938,16 +2940,16 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62e380aa-51f0-4487-8192-91f4157f1039",
+                            ConcurrencyStamp = "0ccfcb4e-390f-49d4-b46a-3e99d249c0da",
                             Email = "testuser123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2023, 8, 7, 19, 33, 38, 623, DateTimeKind.Local).AddTicks(382),
+                            JoinTime = new DateTime(2023, 8, 7, 19, 16, 14, 121, DateTimeKind.Local).AddTicks(9761),
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER123@GMAIL.COM",
                             NormalizedUserName = "TEST USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPA/MYfZJYfcKIi/ZTdfHQx6QNWQ5AZ/WBHFhPZ4VHmcefSHj8sdc1zm95a8midb7Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGHtgK3RcJgT2+ElnuwUqg5I3897qA3mS5e2P9tyejv8zyfgifBta0ee3hHfh8mI8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c63caba7-5191-4b4d-879e-33ac69aea6b4",
+                            SecurityStamp = "a370a39a-f4b8-463d-8df4-c4b439ac5ab0",
                             TwoFactorEnabled = false,
                             UserName = "Test User"
                         },
@@ -2955,16 +2957,16 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb5caaff-246e-4b24-a4a4-2a7319395ba8",
+                            ConcurrencyStamp = "dd58aa39-d611-4d0d-918f-00fb5fb04b94",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2023, 8, 7, 19, 33, 38, 623, DateTimeKind.Local).AddTicks(440),
+                            JoinTime = new DateTime(2023, 8, 7, 19, 16, 14, 121, DateTimeKind.Local).AddTicks(9814),
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ9/6C6Tzpx1mvHQsd6xcpXEEyFNxKD8Lso8oWkMscrwZsUsuRuT1DQRiu5IuWqzAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF45j8NrkAQVVFELC76NuUDQbSzfan+YWHz9x+AR2TlVRChi84fddxvI8iQLaGRJiQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0edb6a62-47d8-455d-99c3-c837b2ca171d",
+                            SecurityStamp = "3d08be6f-16f4-47a7-8e30-5e011a9c1ffd",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

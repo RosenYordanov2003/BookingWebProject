@@ -23,7 +23,7 @@
                   .Select(r => new RoomViewModel()
                   {
                       Id = r.Id,
-                      PricePerNight = r.PricePerNight,
+                      PricePerNight = r.PricePerNight + (r.PricePerNight * r.RoomType.IncreasePercentage) / 100,
                       Description = r.Description,
                       RoomCapacity = r.Capacity,
                       RoomType = r.RoomType.Name,
@@ -49,7 +49,7 @@
                      Description = r.Description,
                      Name = r.RoomType.Name,
                      RoomCapacity = r.Capacity,
-                     Price = r.PricePerNight,
+                     Price = r.PricePerNight + (r.PricePerNight *r.RoomType.IncreasePercentage) / 100,
                      RoomPictures = r.Pictures.Where(p => !p.IsDeleted).Select(p => new PictureViewModel() { Path = p.Path }).ToArray(),
                      RoomBases = r.RoomBases.Where(rb => !rb.IsDeleted && !rb.RoomBasis.IsDeleted).Select(rb => new RoomBasisViewModel() { Id = rb.RoomBasis.Id, Name = rb.RoomBasis.Name, ClassIcon = rb.RoomBasis.ClassIcon }).ToArray()
                  })

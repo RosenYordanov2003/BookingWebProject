@@ -4,6 +4,7 @@ using BookingWebProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingWebProject.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    partial class BookingContextModelSnapshot : ModelSnapshot
+    [Migration("20230807160102_changePriceInRoomEntityConfiguration")]
+    partial class changePriceInRoomEntityConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +149,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3697),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7673),
                             Description = "Test Comment",
                             HotelId = 1,
                             IsDeleted = false,
@@ -157,7 +159,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3703),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7678),
                             Description = "Test Comment",
                             HotelId = 2,
                             IsDeleted = false,
@@ -167,7 +169,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3705),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7681),
                             Description = "Test Comment",
                             HotelId = 3,
                             IsDeleted = false,
@@ -177,7 +179,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3708),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7683),
                             Description = "Test Comment",
                             HotelId = 4,
                             IsDeleted = false,
@@ -187,7 +189,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3710),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7685),
                             Description = "Test Comment",
                             HotelId = 5,
                             IsDeleted = false,
@@ -197,7 +199,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3714),
+                            CreatedDate = new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7689),
                             Description = "Test Comment",
                             HotelId = 6,
                             IsDeleted = false,
@@ -1825,7 +1827,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                             Description = "Студиа Deluxe са обзаведени с разтегателен диван, маса и фотьойли, с две единични легла, работно бюро, стъклена стена и луксозен кухненски бокс. Оборудвани са с баня с вана или душ кабина, LCD дисплей и тоалетна, както и втора тоалетна в отделно помещение. Яркият декор и съчетанието от естествени дървени нюанси с пастелни сини тонове създават комфорт и уют. Студиата са разположени от 1-ви до 7-ми етаж на хотела.",
                             HotelId = 5,
                             IsDeleted = false,
-                            PricePerNight = 280m,
+                            PricePerNight = 378m,
                             RoomTypeId = 2
                         },
                         new
@@ -2880,7 +2882,7 @@ namespace BookingWebProject.Infrastructure.Migrations
                     b.Property<DateTime>("JoinTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 7, 19, 33, 38, 625, DateTimeKind.Local).AddTicks(3437));
+                        .HasDefaultValue(new DateTime(2023, 8, 7, 19, 1, 1, 425, DateTimeKind.Local).AddTicks(7394));
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -2938,16 +2940,16 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("e7d6ee68-2a6d-4a1a-b640-b26fceb74254"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "62e380aa-51f0-4487-8192-91f4157f1039",
+                            ConcurrencyStamp = "f78a454d-98c6-46de-96a4-108bfded74ef",
                             Email = "testuser123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2023, 8, 7, 19, 33, 38, 623, DateTimeKind.Local).AddTicks(382),
+                            JoinTime = new DateTime(2023, 8, 7, 19, 1, 1, 423, DateTimeKind.Local).AddTicks(4447),
                             LockoutEnabled = false,
                             NormalizedEmail = "TESTUSER123@GMAIL.COM",
                             NormalizedUserName = "TEST USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPA/MYfZJYfcKIi/ZTdfHQx6QNWQ5AZ/WBHFhPZ4VHmcefSHj8sdc1zm95a8midb7Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ9PiZz1w99aM2taBOlm4uFmV/eJGoudlLrct4JIrZ52cKEBnuZHDKJzTbHtH++JcQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c63caba7-5191-4b4d-879e-33ac69aea6b4",
+                            SecurityStamp = "ad22a615-1b0a-4fbf-b071-2ff371c408c7",
                             TwoFactorEnabled = false,
                             UserName = "Test User"
                         },
@@ -2955,16 +2957,16 @@ namespace BookingWebProject.Infrastructure.Migrations
                         {
                             Id = new Guid("ed842fdc-c71b-4fbc-8df5-6f97cb73d622"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb5caaff-246e-4b24-a4a4-2a7319395ba8",
+                            ConcurrencyStamp = "80d7f27f-b951-4dd8-9378-ed4a8c44199c",
                             Email = "admin123@gmail.com",
                             EmailConfirmed = false,
-                            JoinTime = new DateTime(2023, 8, 7, 19, 33, 38, 623, DateTimeKind.Local).AddTicks(440),
+                            JoinTime = new DateTime(2023, 8, 7, 19, 1, 1, 423, DateTimeKind.Local).AddTicks(4518),
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN123@GMAIL.COM",
                             NormalizedUserName = "АDMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ9/6C6Tzpx1mvHQsd6xcpXEEyFNxKD8Lso8oWkMscrwZsUsuRuT1DQRiu5IuWqzAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIzgQHGYHJXfvjPDAY9XCtnhT247Z9VHRNMIe5Szx+2znPZ5pyAsXEtHPXnK44OWUQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0edb6a62-47d8-455d-99c3-c837b2ca171d",
+                            SecurityStamp = "cbfd4974-b1af-44ff-bf52-9f4abd7626fe",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

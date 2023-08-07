@@ -57,7 +57,7 @@
                     }
                 </ul>
                 <div class="order-container">
-                    <p class="price">$@(Model.Price + package.Price) per night</p>
+                    <p class="price">$@($"{Model.Price + package.Price:F2}") per night</p>
                     <button class="choose-button"><i class="fa-solid fa-arrow-down"></i> Choose</button>
                 </div>
                 <form class="order-form" method="post">
