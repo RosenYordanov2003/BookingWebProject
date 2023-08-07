@@ -59,9 +59,21 @@
             roomBasisToDelete.IsDeleted = true;
             await bookingContext.SaveChangesAsync();
         }
+        public async Task<bool> CheckIfRoomBasisIsAlreadyRecoveredAsync(int roomBasisId)
+        {
+            return await bookingContext.RoomBasis.AnyAsync(rb => rb.Id == roomBasisId && !rb.IsDeleted);
+        }
+
+        public async Task RecoverRoomBasisByIdAsync(int roomBasisId)
+        {
+            RoomBasis roomBasisToRecover = await FindRoomBasisByIdAsync(roomBasisId);
+            roomBasisToRecover.IsDeleted = false;
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RoomBasis> FindRoomBasisByIdAsync(int roomBasisId)
         {
             return await bookingContext.RoomBasis.FirstAsync(rb => rb.Id == roomBasisId);
         }
+
     }
 }

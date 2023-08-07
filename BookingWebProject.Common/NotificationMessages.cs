@@ -46,5 +46,7 @@
         public const string SuccessfullyCreateBenefit = "You have successfully created a benefit";
         public const string RoomBasisIsAlreadyDeleted = "Room basis with this id is already deleted";
         public const string SuccessfullyRemoveRoomBasis = "You have successfully removed room basis";
+        public const string RoomBasisIsAlreadyRecovered = "Room basis with this id is already recovered";
+        public const string SuccessfullyRecoveredRoomBasis = "You have successfully recovered room basis";
     }
 }

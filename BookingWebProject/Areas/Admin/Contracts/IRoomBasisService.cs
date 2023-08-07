@@ -9,5 +9,7 @@
         Task<bool> CheckIfRoomBasisExistByIdAsync(int roomBasisId);
         Task<bool>CheckIfRoomBasisIsAlreadyDeletedByIdAsync(int roomBasisId);
         Task DeleteRoomBasisByIdAsync(int roomBasisId);
+        Task<bool> CheckIfRoomBasisIsAlreadyRecoveredAsync(int roomBasisId);
+        Task RecoverRoomBasisByIdAsync(int roomBasisId);
     }
 }
