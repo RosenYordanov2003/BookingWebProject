@@ -56,5 +56,6 @@
         public const string SuccessfullyRecoveredRoomType = "You have successfully recovered room type";
         public const string SuccessfullyEditRoomType = "You have successfully edited room type";
         public const string SuccessfullyCreateRoomType = "You have successfully created room type";
+        public const string SuccessfullyCreateCar = "You have successfully created a car";
     }
 }

@@ -123,5 +123,29 @@
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(EditRentCarViewModel editRentCarViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editRentCarViewModel);
+            }
+            try
+            {
+                await rentCarAdminService.CreateCarAsync(editRentCarViewModel);
+                TempData[SuccessMessage] = SuccessfullyCreateCar;
+                return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
     }
 }

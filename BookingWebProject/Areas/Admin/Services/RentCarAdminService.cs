@@ -114,6 +114,28 @@
             carToRecover.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
         }
+        public async Task CreateCarAsync(EditRentCarViewModel editRentCarViewModel)
+        {
+            RentCar rentCar = new RentCar()
+            {
+                CarImg = editRentCarViewModel.CarImg,
+                DoorsCount = editRentCarViewModel.DoorsCount,
+                FuelCapacity = editRentCarViewModel.FuelCapacity,
+                FuelConsumption = editRentCarViewModel.FuelConsumption,
+                IsDeleted = false,
+                Lattitude = editRentCarViewModel.Lattitude,
+                Longitude = editRentCarViewModel.Longitude,
+                Location = editRentCarViewModel.Location,
+                PeopleCapacity = editRentCarViewModel.PeopleCapacity,
+                MakeType = editRentCarViewModel.MakeType,
+                ModelType = editRentCarViewModel.Model,
+                PricePerDay = editRentCarViewModel.Price,
+                Year = editRentCarViewModel.Year,
+                TransmissionType = editRentCarViewModel.Transmission
+            };
+            await bookingContext.RentCars.AddAsync(rentCar);
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RentCar> FindCarByIdAsync(int carId)
         {
             RentCar carToFind = await bookingContext.RentCars
@@ -121,5 +143,6 @@
 
             return carToFind;
         }
+
     }
 }

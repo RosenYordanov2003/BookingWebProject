@@ -13,5 +13,6 @@
         Task DeleteCarByIdAsync(int carId);
         Task<bool> CheckCarIsAlreadyRecoveredAsync(int carId);
         Task RecoverCarByIdAsync(int carId);
+        Task CreateCarAsync(EditRentCarViewModel editRentCarViewModel);
     }
 }

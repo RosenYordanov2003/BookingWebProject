@@ -19,11 +19,11 @@ form{
     font-size: 1rem;
 }
 
-.edit-button {
+.edit-button, .create-button {
     font-size: 1.2rem;
     border: none;
     padding: 10px 14px;
-    min-width: 80px;
+    min-width: 90px;
     border-radius: 6px;
     transition: var(--tran-05);
     text-align: center;
