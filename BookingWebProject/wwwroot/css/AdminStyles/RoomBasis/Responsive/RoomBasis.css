@@ -1,0 +1,35 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+    .wrapper{
+        margin-left: 6rem;
+    }
+    .title{
+       font-size: 1.5rem;
+    }
+    .room-basis-container{
+        flex-direction: column;
+        margin-bottom: 2.1rem;
+    }
+    .content{
+        font-size: 1rem;
+    }
+    .create-btn{
+        display: block;
+        margin-bottom: 3rem;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+   
+    .title {
+        font-size: 2rem;
+    }
+
+    .room-basis-container {
+        flex-direction: column;
+        margin-bottom: 2.1rem;
+    }
+
+    .create-btn {
+        display: block;
+        margin-bottom: 3rem;
+    }
+}

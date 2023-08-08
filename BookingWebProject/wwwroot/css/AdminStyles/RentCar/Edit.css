@@ -31,6 +31,11 @@ form{
     background-color: #0071c2;
     margin: 2rem 0rem 3rem 0rem;
 }
+.edit-button:hover,
+.create-button:hover{
+    opacity: 0.8;
+    transform:scale(1.050);
+}
 
 .input-container label {
     font-size: 1.5rem;
