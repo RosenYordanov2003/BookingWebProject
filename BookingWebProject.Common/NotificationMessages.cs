@@ -57,5 +57,9 @@
         public const string SuccessfullyEditRoomType = "You have successfully edited room type";
         public const string SuccessfullyCreateRoomType = "You have successfully created room type";
         public const string SuccessfullyCreateCar = "You have successfully created a car";
+        public const string RoomPackageIsAlreadyDeleted = "Room package with this id is already deleted";
+        public const string SuccessfullyDeleteRoomPackage = "You have successfully deleted room package";
+        public const string RoomPackageIsAlreadyRecovered = "Room package with this id is already recovered";
+        public const string SuccessfullyRecoverRoomPackage = "You have successfully recover room package";
     }
 }

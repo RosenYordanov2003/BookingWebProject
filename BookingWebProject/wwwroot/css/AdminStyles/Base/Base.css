@@ -13,6 +13,11 @@ nav {
     background-color: var(--panel-color);
     transition: var(--tran-05);
     border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+nav ul .logout-mode{
+    overflow: hidden;
 }
 
 

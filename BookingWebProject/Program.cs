@@ -50,6 +50,7 @@ builder.Services.AddScoped<IRoomAdminService, RoomAdminService>();
 builder.Services.AddScoped<IRoomBasesAdminService, RoomBasesAdminService>();
 builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
 builder.Services.AddScoped<IRoomBasisService, RoomBasisService>();
+builder.Services.AddScoped<IRoomPackageAdminService, RoomPackageAdminService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

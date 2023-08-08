@@ -15,6 +15,7 @@
         public async Task<IEnumerable<RoomPackageViewModel>> GetAllPackagesAsync()
         {
             IEnumerable<RoomPackageViewModel> allRoomPackages = await bookingContext.RoomPackages
+                   .Where(p => !p.IsDeleted)
                   .Select(rp => new RoomPackageViewModel()
                   {
                       Id = rp.Id,
@@ -28,6 +29,7 @@
         {
             RoomPackageViewModel roomPackage = await bookingContext
                  .RoomPackages
+                 .Where(p => !p.IsDeleted)
                  .Select(p => new RoomPackageViewModel()
                  {
                      Id = p.Id,

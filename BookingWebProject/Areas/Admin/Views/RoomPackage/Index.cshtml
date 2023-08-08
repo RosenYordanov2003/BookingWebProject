@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RoomPackageAdminViewModel>
+
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/RoomBasis.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/Responsive/RoomBasis.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">All Room Packages</h1>
+    @foreach (var roomPackage in Model)
+    {
+        <div class="room-basis-container">
+            <p class="content">Package: @roomPackage.Name</p>
+            <p class="content">Package Price: @roomPackage.Price $</p>
+            <div class="button-container">
+                @if (!roomPackage.IsDeleted)
+                {
+                    <form method="post" asp-area="Admin" asp-controller="RoomPackage" asp-action="Delete" asp-route-id="@roomPackage.Id">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-area="Admin" asp-controller="RoomPackage" asp-action="Recover" asp-route-id="@roomPackage.Id">
+                        <button class="recover-btn">Recover</button>
+                    </form>
+                }
+                <a class="edit-btn" asp-area="Admin" asp-controller="RoomPackage" asp-action="Edit" asp-route-id="@roomPackage.Id">Edit</a>
+            </div>
+        </div>
+    }
+    <a class="create-btn" asp-area="Admin" asp-controller="RoomPackage" asp-action="Create">Create</a>
+</div>
