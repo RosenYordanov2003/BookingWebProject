@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BookingWebProject.Extensions
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,9 +10,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="~/css/Reset.css" asp-append-version="true" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -49,13 +50,29 @@
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <li>
-                        <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+                        <div class="user-container">
+                            <a asp-action="Personalization" asp-controller="User">Profile</a>
+                            <i class="fa-solid fa-caret-right"></i>
+                        </div>
+                        <ul class="user-menu-list">
+                            <li>
+                                <a asp-controller="User" asp-action="UserReservations" asp-route-id="@this.User.GetId()">Reservations</a>
+                            </li>
+                            <li>
+                                <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@this.User.GetId()">Favorite Hotels</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li>
-                        <a asp-area = "" asp-action="Logout" asp-controller="Account">Logout</a>
+                        <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
                     </li>
-
+                    <li>
+                        <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
+                    </li>
                 }
                 else
                 {
@@ -66,6 +83,12 @@
                         <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
                     </li>
                 }
+                <li>
+                    <a asp-area="" asp-action="Index" asp-controller="Home">Home</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Car" asp-action="All">Cars</a>
+                </li>
             </ul>
         </div>
     </header>

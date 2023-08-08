@@ -7,13 +7,17 @@
     using Models.User;
     using Core.Models.Hotel;
     using Core.Models.Room;
+    using BookingWebProject.Infrastructure.Data.Models;
+    using Microsoft.AspNetCore.Hosting;
 
     public class UserService : IUserService
     {
         private readonly BookingContext bookingContext;
-        public UserService(BookingContext bookingContext)
+        private readonly IWebHostEnvironment env;
+        public UserService(BookingContext bookingContext, IWebHostEnvironment env)
         {
             this.bookingContext = bookingContext;
+            this.env = env;
         }
 
         public async Task<UserViewModel> GetUserByIdAsync(Guid id)
@@ -71,6 +75,47 @@
                  }).FirstAsync();
 
             return userInfo;
+        }
+
+        public async Task SaveUserInfoAsync(Guid userId, UserInfoViewModel userInfo)
+        {
+            User userToFind = await bookingContext.Users.FirstAsync(u => u.Id == userId);
+            userToFind.FirstName = userInfo.FirstName;
+            userToFind.LastName = userInfo.LastName;
+            userToFind.PhoneNumber = userInfo.PhoneNumber;
+            userToFind.ProfilePicturePath = userInfo.ProfilePicturePath;
+            userToFind.Email = userInfo.Email;
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserProfilePictureAsync(Guid userId, string path)
+        {
+            string profilePictureName = path.Split("\\")[2];
+            string profilePicturesFolderPath = Path.GetFullPath(@"C:\\Users\\Home\\Desktop\\Booking App4\\BookingSystemProject\\wwwroot\\img\\ProfilePictures\\");
+            string[] files = Directory.GetFiles(profilePicturesFolderPath, profilePictureName);
+            if (files.Length > 0)
+            {
+                File.Delete(files[0]);
+            }
+            User user = await bookingContext.Users
+                .FirstAsync(u => u.Id == userId);
+            user.ProfilePicturePath = null;
+
+            await bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<string> UploadUserImageAsync(UserInfoViewModel userInfo, Guid userId)
+        {
+            string uniqueFileName = userId.ToString() + "_" + userInfo.ProfilePictureFile.FileName;
+
+            string newFilePath = Path.Combine("img", "ProfilePictures", uniqueFileName);
+
+
+            using (FileStream stream = new FileStream(Path.Combine(env.WebRootPath, newFilePath), FileMode.Create))
+            {
+                await userInfo.ProfilePictureFile.CopyToAsync(stream);
+            }
+            return newFilePath;
         }
     }
 }

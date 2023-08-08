@@ -1,25 +1,4 @@
-﻿*,
-*:before,
-*::after {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-    outline: none;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-li,
-table {
-    font-family: 'Paytone One', sans-serif;
-}
-
+﻿
 .main-container {
     display: flex;
     align-items: center;

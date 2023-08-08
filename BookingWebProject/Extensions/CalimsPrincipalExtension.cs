@@ -7,5 +7,10 @@
         {
             return Guid.Parse(user.FindFirstValue(ClaimTypes.NameIdentifier));
         }
+        public static string GetProfilePicturePath(this ClaimsPrincipal user)
+        {
+            Claim claim = user.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath");
+            return claim?.Value ?? "";
+        }
     }
 }

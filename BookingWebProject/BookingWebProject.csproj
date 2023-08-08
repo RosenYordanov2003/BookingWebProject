@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\ProfilePictures\" />
     <Folder Include="wwwroot\js\Comment\" />
   </ItemGroup>
 

@@ -63,5 +63,7 @@
         public const string SuccessfullyRecoverRoomPackage = "You have successfully recover room package";
         public const string SuccessfullyEditRoomPackage = "You have successfully edited room package";
         public const string SuccessfullyCreateRoomPackage = "You have successfully created room package";
+        public const string SuccessfullyUpdatedAccount = "You have successfully updated your account";
+        public const string SuccessfullyRemovedProfilePicture = "You have successfully removed your profile picture";
     }
 }

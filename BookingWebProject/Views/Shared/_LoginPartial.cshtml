@@ -13,15 +13,15 @@
     {
         <li>
             <div class="user-container">
-                @if (string.IsNullOrWhiteSpace(""))
+                @if (string.IsNullOrWhiteSpace(this.User.GetProfilePicturePath()))
                 {
                     <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
 
                 }
-              @*  else
+                else
                 {
                     <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><img src="~/@this.User.GetProfilePicturePath()"> </a>
-                }*@
+                }
                 <i class="fa-solid fa-caret-down"></i>
             </div>
             <ul class="user-menu">

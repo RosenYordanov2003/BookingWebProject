@@ -1,28 +1,4 @@
-﻿*,
-*::before,
-*::after {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-    box-sizing: border-box;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-li,
-a,
-label,
-input,
-button
-span {
-    font-family: 'Paytone One', sans-serif;
-}
-
+﻿
 .intro-section {
     padding: 8.2rem 4.5rem;
     display: flex;

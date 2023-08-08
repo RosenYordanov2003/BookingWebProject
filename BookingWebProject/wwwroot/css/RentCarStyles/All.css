@@ -1,24 +1,4 @@
-﻿*,
-*::before, *::after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-li,
-label,
-span {
-    font-family: 'Paytone One', sans-serif;
-}
-
+﻿
 header {
     background-color: transparent;
 }

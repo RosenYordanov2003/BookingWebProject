@@ -5,6 +5,7 @@
     padding: 0px;
     list-style: none;
     box-sizing: border-box;
+    outline: none;
 }
 
 h1,
@@ -18,7 +19,7 @@ li,
 a,
 label,
 input,
-spa,
-button {
+button
+span {
     font-family: 'Paytone One', sans-serif;
 }
