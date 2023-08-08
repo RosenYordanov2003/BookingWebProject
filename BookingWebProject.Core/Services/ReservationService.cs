@@ -49,7 +49,8 @@
         public async Task<bool> IsThereAvalilableRoomAsync(int hotelId, string roomType, DateTime startDate, DateTime endDate)
         {
             ICollection<Room> roomsWithParticularType = await bookingContext
-                  .Rooms.Where(r => r.RoomType.Name == roomType && r.HotelId == hotelId)
+                  .Rooms.Where(r => r.RoomType.Name == roomType && r.HotelId == hotelId && 
+                  !r.IsDeleted && !r.RoomType.IsDeleted && !r.Hotel.IsDeleted)
                   .Include(r => r.Reservations)
                   .ToArrayAsync();
             bool isAvailable = false;

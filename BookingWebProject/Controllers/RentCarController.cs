@@ -1,15 +1,20 @@
 ﻿namespace BookingWebProject.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.AspNetCore.Mvc;
     using Core.Contracts;
     using Core.Models.Pager;
     using Core.Models.RentCar;
-    using Microsoft.AspNetCore.Mvc;
+    using static Common.GeneralAplicationConstants;
+
     public class RentCarController : Controller
     {
         private readonly IRentCarService carService;
-        public RentCarController(IRentCarService carService)
+        private readonly IMemoryCache memoryCache;
+        public RentCarController(IRentCarService carService, IMemoryCache memoryCache)
         {
             this.carService = carService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> All([FromQuery] CarQuerViewModel carQuerViewModel)
@@ -32,7 +37,15 @@
             {
                 return RedirectToAction(nameof(All));
             }
-            CarDetailsViewModel carDetailsViewModel = await carService.FindCarByIdAsync(id);
+            string key = string.Format(RentCarCacheKey, id);
+            CarDetailsViewModel carDetailsViewModel = memoryCache.Get<CarDetailsViewModel>(key);
+            if (carDetailsViewModel == null)
+            {
+                carDetailsViewModel = await carService.FindCarByIdAsync(id);
+                MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(RentCarDetailsCacheTimeDuration));
+                memoryCache.Set(key,carDetailsViewModel, memoryCacheEntryOptions);
+            }
             return View(carDetailsViewModel);
         }
         [HttpGet]

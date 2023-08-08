@@ -18,7 +18,6 @@
             this.memoryCache = memoryCache;
         }
         [HttpGet]
-        [ResponseCache(Duration = 30)]
         public async Task<IActionResult> Index()
         {
             if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))

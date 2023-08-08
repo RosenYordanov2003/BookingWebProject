@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Mvc;
     using Models.RentCar.Data_Models;
     using Contracts;
@@ -12,9 +13,11 @@
     public class RentCarController : BaseAdminController
     {
         private readonly IRentCarAdminService rentCarAdminService;
-        public RentCarController(IRentCarAdminService rentCarAdminService)
+        private readonly IMemoryCache memoryCache;
+        public RentCarController(IRentCarAdminService rentCarAdminService, IMemoryCache memoryCache)
         {
             this.rentCarAdminService = rentCarAdminService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Index(int pg = 1)
@@ -67,6 +70,7 @@
                 }
                 await rentCarAdminService.EditCarAsync(id, editRentCarViewModel);
                 TempData[SuccessMessage] = SuccessfullyEditedCar;
+                this.memoryCache.Remove(string.Format(RentCarCacheKey, id));
                 return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
             }
             catch (Exception)
