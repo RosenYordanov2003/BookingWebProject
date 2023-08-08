@@ -1,0 +1,89 @@
+﻿@media all and (min-width: 280px) and (max-width: 700px) {
+    .user-info-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        width: 80%;
+        padding: 3rem;
+        margin: 3rem;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .input-container {
+        width: 70%;
+    }
+
+    .input-container input {
+        width: 90%;
+        margin-left: 0.7rem;
+    }
+
+    label {
+        text-align: center;
+    }
+
+    input[type = file] {
+        text-align: center;
+        margin: 1rem 0.7rem;
+    }
+
+    .file-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-img-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-img-container img {
+        width: 110px;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    .profile-picture-content {
+        font-size: 1.2rem;
+    }
+
+    .remove-button {
+        font-size: 0.9rem;
+    }
+}
+
+@media all and (min-width: 701px) and (max-width: 1000px) {
+    .user-info-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        width: 90%;
+        padding: 3rem;
+        margin: 3rem;
+    }
+
+    input[type = file] {
+        text-align: center;
+        margin: 3rem 0.7rem;
+    }
+
+    .profile-img-container img {
+        width: 200px;
+        height: auto;
+    }
+
+    .profile-picture-content {
+        font-size: 1.4rem;
+    }
+}

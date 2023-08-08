@@ -36,9 +36,15 @@
         </div>
         <input type="hidden" asp-for="@Model.ProfilePicturePath" value="@Model.ProfilePicturePath" class="file-input" />
         <div class="file-container">
-            <input type="file" name="ProfilePictureFile" />
+            <label for="@Model.ProfilePictureFile">Choose image to upload (PNG, JPG, JPEG, WEBP)</label>
+            <button type="button" class="select-file-button">
+                Select Image
+                <input type="file"
+                       name="ProfilePictureFile"
+                       accept=".jpg, .jpeg, .png, .webp"/>
+            </button>
         </div>
-        <button type="submit">Edit</button>
+        <button class="edit-btn" type="submit">Edit</button>
     </form>
 
     <div class="profile-img-container">

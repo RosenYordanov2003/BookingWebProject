@@ -9,6 +9,7 @@
     using Core.Models.User;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
+    using BookingWebProject.Core.Models.Hotel;
 
     public class UserController : Controller
     {
@@ -45,33 +46,26 @@
             if (userInfoViewModel.ProfilePictureFile != null)
             {
                 string fileExtension = Path.GetExtension(userInfoViewModel.ProfilePictureFile.FileName).ToLower();
-                if (!string.IsNullOrWhiteSpace(userInfoViewModel.ProfilePicturePath) && IsImage(fileExtension))
+                if (!string.IsNullOrWhiteSpace(userInfoViewModel.ProfilePicturePath))
                 {
                     await userService.DeleteUserProfilePictureAsync(this.User.GetId(), userInfoViewModel.ProfilePicturePath);
                 }
-                if (IsImage(fileExtension))
-                {
-                    userInfoViewModel.ProfilePicturePath = await userService.UploadUserImageAsync(userInfoViewModel, this.User.GetId());
-                }
+                userInfoViewModel.ProfilePicturePath = await userService.UploadUserImageAsync(userInfoViewModel, this.User.GetId());
 
                 try
                 {
                     User user = await userManager.FindByIdAsync(this.User.GetId().ToString());
                     await userService.SaveUserInfoAsync(this.User.GetId(), userInfoViewModel);
-                    if (IsImage(fileExtension))
+                    Claim userNameClaim = new Claim("ProfilePicturePath", userInfoViewModel.ProfilePicturePath);
+                    if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
                     {
-                        Claim userNameClaim = new Claim("ProfilePicturePath", userInfoViewModel.ProfilePicturePath);
-                        if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
-                        {
-                            Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath");
-                            await userManager.RemoveClaimAsync(user, claim);
-                        }
-                        TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
-                        await userManager.AddClaimAsync(user, userNameClaim);
-                        await signInManager.SignInAsync(user, isPersistent: false);
-
-                        return RedirectToAction("Index", "Home");
+                        Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath");
+                        await userManager.RemoveClaimAsync(user, claim);
                     }
+                    TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
+                    await userManager.AddClaimAsync(user, userNameClaim);
+                    await signInManager.SignInAsync(user, isPersistent: false);
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception)
@@ -109,13 +103,23 @@
             }
             return NotFound();
         }
-        private bool IsImage(string fileExtension)
+        [HttpGet]
+        public async Task<IActionResult> UserFavoriteHotels(Guid id)
         {
-            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" || fileExtension == ".gif" || fileExtension == ".webp")
+            if (this.User.GetId() != id)
             {
-                return true;
+                return Unauthorized();
             }
-            return false;
+            try
+            {
+                IEnumerable<HotelViewModel> userHotels = await userService.GetUserFavoriteHotelsAsync(id);
+                return View(userHotels);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
