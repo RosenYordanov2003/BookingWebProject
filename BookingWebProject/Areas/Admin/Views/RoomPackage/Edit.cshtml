@@ -1,0 +1,23 @@
+﻿@model EditRoomPackageViewModel
+
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/Edit.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/AdminStyles/RoomBasis/Responsive/Edit.css" asp-append-version="true" />
+
+<div class="wrapper">
+    <h1 class="title">Edit @Model.Name Room Type</h1>
+    <form method="post">
+        <div class="input-container">
+            <label asp-for="@Model.Name">Name</label>
+            <input asp-for="@Model.Name" value="@Model.Name" />
+            <span asp-validation-for="@Model.Name"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Price">Price</label>
+            <input asp-for="@Model.Price" value="@($"{Model.Price:F2}")" />
+            <span asp-validation-for="@Model.Price"></span>
+        </div>
+        <button class="edit-btn" type="submit">Edit</button>
+    </form>
+</div>
+
+<script src="~/js/input.js"></script>

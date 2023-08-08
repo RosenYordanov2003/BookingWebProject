@@ -109,6 +109,9 @@
         {
             public const int NameMinLength = 4;
             public const int NameMaxLength = 20;
+
+            public const string MinPrice = "0.00";
+            public const string MaxPrice = "1000.00";
         }
         public static class ReservationCarEntity
         {

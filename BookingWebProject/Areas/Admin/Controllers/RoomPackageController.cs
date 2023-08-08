@@ -6,6 +6,7 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
+    using Microsoft.Win32;
 
     public class RoomPackageController : BaseAdminController
     {
@@ -62,6 +63,66 @@
                 await roomPackageAdminService.RecoverRoomPackageByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRecoverRoomPackage;
                 return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                if (!await roomPackageAdminService.CheckIfPakcageExistsByIdAsync(id))
+                {
+                    return NotFound();
+                }
+                EditRoomPackageViewModel editRoomPackageViewModel = await roomPackageAdminService.GetRoomPackageToEditByIdAsync(id);
+                return View(editRoomPackageViewModel);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult>Edit(int id, EditRoomPackageViewModel editRoomPackageViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editRoomPackageViewModel);
+            }
+            try
+            {
+                await roomPackageAdminService.EditRoomPackageAsync(id, editRoomPackageViewModel);
+                TempData[SuccessMessage] = SuccessfullyEditRoomPackage;
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(EditRoomPackageViewModel roomPackage)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(roomPackage);
+            }
+            try
+            {
+
             }
             catch (Exception)
             {

@@ -4,8 +4,7 @@
     using Data;
     using Contracts;
     using Models.RoomPackage;
-    using System;
-    using BookingWebProject.Infrastructure.Data.Models;
+    using Infrastructure.Data.Models;
 
     public class RoomPackageAdminService : IRoomPackageAdminService
     {
@@ -56,6 +55,20 @@
             await bookingContext.SaveChangesAsync();
         }
 
+
+        public async Task<EditRoomPackageViewModel> GetRoomPackageToEditByIdAsync(int roomPackageId)
+        {
+            RoomPackage roomPackageToEdit = await FindRoomPackageByIdAsync(roomPackageId);
+            return new EditRoomPackageViewModel() { Name = roomPackageToEdit.Name, Price = roomPackageToEdit.Price };
+        }
+
+        public async Task EditRoomPackageAsync(int roomPackageId, EditRoomPackageViewModel editRoomPackageViewModel)
+        {
+            RoomPackage roomPackageToEdit = await FindRoomPackageByIdAsync(roomPackageId);
+            roomPackageToEdit.Name = editRoomPackageViewModel.Name;
+            roomPackageToEdit.Price = editRoomPackageViewModel.Price;
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RoomPackage> FindRoomPackageByIdAsync(int roomPackageId)
         {
             return await bookingContext.RoomPackages.FirstAsync(rp => rp.Id == roomPackageId);
