@@ -23,6 +23,9 @@ builder.Services.AddDefaultIdentity<User>(options =>
 })
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<BookingContext>();
+
+builder.Services.AddMemoryCache();
+
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
@@ -63,11 +66,6 @@ app.UseAuthorization();
 
 app.SeedAdministrator("ED842FDC-C71B-4FBC-8DF5-6F97CB73D622");
 
-//app.MapControllerRoute(
-
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
-//app.MapRazorPages();
 
 app.UseEndpoints(config =>
 {

@@ -2,6 +2,8 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.Extensions.Caching.Memory;
+    using System.ComponentModel.DataAnnotations;
     using Extensions;
     using Core.Contracts;
     using Core.Models.Reservation;
@@ -9,7 +11,7 @@
     using Core.Models.RoomPackage;
     using static BookingWebProject.Common.NotificationKeys;
     using static BookingWebProject.Common.NotificationMessages;
-    using System.ComponentModel.DataAnnotations;
+    using static Common.GeneralAplicationConstants;
 
     [Authorize]
     public class ReservationController : Controller
@@ -19,15 +21,17 @@
         private readonly IReservationService reservationService;
         private readonly IPackageService packageService;
         private readonly IRoomService roomService;
+        private readonly IMemoryCache memoryCache;
         public ReservationController(IRentCarService rentCarService, IUserService userService,
             IReservationService reservationService, IPackageService packageService
-            ,IRoomService roomService)
+            ,IRoomService roomService, IMemoryCache memoryCache)
         {
             this.rentCarService = rentCarService;
             this.userService = userService;
             this.reservationService = reservationService;
             this.packageService = packageService;
             this.roomService = roomService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -122,7 +126,7 @@
             {
                 await reservationService.BookRoomAsync(roomReservationViewModel, this.User.GetId());
                 TempData[SuccessMessage] = SuccessBookedRoom;
-                //Should change the redirect
+                this.memoryCache.Remove(HomePageCacheKey);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)

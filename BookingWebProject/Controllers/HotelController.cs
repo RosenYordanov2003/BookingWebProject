@@ -2,22 +2,28 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using static BookingWebProject.Common.NotificationKeys;
-    using static BookingWebProject.Common.NotificationMessages;
+    using Microsoft.Extensions.Caching.Memory;
     using Core.Contracts;
     using Core.Models.Hotel;
     using Core.Models.Pager;
     using Extensions;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
+    using static Common.GeneralAplicationConstants;
+
 
     [Authorize]
     public class HotelController : Controller
     {
         private readonly IBenefitService benefitService;
         private readonly IHotelService hotelService;
-        public HotelController(IBenefitService benefitService, IHotelService hotelService)
+        private readonly IMemoryCache memoryCache;
+        public HotelController(IBenefitService benefitService, IHotelService hotelService,
+            IMemoryCache memoryCache)
         {
             this.benefitService = benefitService;
             this.hotelService = hotelService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -27,6 +33,7 @@
             {
                 hotelQueryViewModel.CurrentPage = 1;
             }
+
             Guid userId = User.GetId();
             Pager pager = new Pager(await hotelService.GetCountAsync(hotelQueryViewModel), hotelQueryViewModel.CurrentPage);
             hotelQueryViewModel.Pager = pager;
@@ -35,6 +42,7 @@
             hotelQueryViewModel.Benefits = await benefitService.GetAllBenefitsAsync();
             hotelQueryViewModel.Cities = await hotelService.GetAllHotelCitiesAsync();
             hotelQueryViewModel.Countries = await hotelService.GetAllHotelCountriesAsync();
+
             return View(hotelQueryViewModel);
         }
         [HttpPost]
