@@ -25,15 +25,7 @@
         [HttpGet]
         public async Task<IActionResult> HotelRooms(int id)
         {
-            string cacheKey = string.Format(HotelRoomsCacheKey, id);
-            IEnumerable<RoomViewModel> hotelRooms = this.memoryCache.Get<IEnumerable<RoomViewModel>>(cacheKey);
-            if (hotelRooms == null)
-            {
-                hotelRooms = await roomService.GetHotelRooms(id);
-                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(HotelRoomsCacheDuration));
-                this.memoryCache.Set(cacheKey, hotelRooms, opt);
-            }
+            IEnumerable<RoomViewModel> hotelRooms = await roomService.GetHotelRooms(id);
             hotelRooms = hotelRooms.DistinctBy(hr => hr.RoomType);
             return View(hotelRooms);
         }

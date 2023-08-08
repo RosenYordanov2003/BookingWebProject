@@ -17,7 +17,6 @@
         private readonly IHotelAdminService hotelAdminService;
         private readonly IRoomTypeService roomTypeService;
         private readonly IRoomBasisService roomBasisService;
-        private readonly IMemoryCache memoryCache;
         public RoomController(IRoomAdminService roomAdminService, IRoomBasesAdminService roomBasisAdminService,
             IHotelAdminService hotelService, IRoomTypeService roomTypeService, IRoomBasisService roomBasisService,
             IMemoryCache memoryCache)
@@ -65,7 +64,6 @@
                     return NotFound();
                 }
                 await roomAdminService.UpdateRoomsInHotelByRoomTypeIdAsync(roomTypeId, hotelId, editRoomViewModel);
-                this.memoryCache.Remove(string.Format(HotelRoomsCacheKey, hotelId));
                 TempData[SuccessMessage] = SuccessfullyUpdateRoomsInHotel;
 
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
@@ -108,7 +106,6 @@
                 }
                 await roomAdminService.AddRoomByGivenRoomTypeInHotelAsync(hotelId, roomTypeId);
                 TempData[SuccessMessage] = SuccessfullyAddRoomByGivenRoomTypeInHotel;
-                this.memoryCache.Remove(string.Format(HotelRoomsCacheKey, hotelId));
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
             }
             catch (Exception)
@@ -215,7 +212,6 @@
             {
                 int roomId = await roomAdminService.CreateRoomAsync(createRoomViewModel);
                 TempData[SuccessMessage] = SuccessfullyCreateRoom;
-                this.memoryCache.Remove(string.Format(HotelRoomsCacheKey, createRoomViewModel.HotelId));
                 if (createRoomViewModel.PicturesFileProvider != null && createRoomViewModel.PicturesFileProvider.Count > 0)
                 {
                     await roomAdminService.CreateRoomImgsAsync(roomId, createRoomViewModel);

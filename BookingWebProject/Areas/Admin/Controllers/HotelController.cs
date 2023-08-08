@@ -10,6 +10,7 @@
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
     using Microsoft.Extensions.Caching.Memory;
+    using BookingWebProject.Areas.Admin.Models.User;
 
     public class HotelController : BaseAdminController
     {
@@ -19,9 +20,10 @@
         private readonly IBenefitService benefitService;
         private readonly IRoomAdminService roomAdminService;
         private readonly IMemoryCache memoryCache;
+        private readonly IUserAdminService userAdminService;
         public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService
             , IBenefitAdminService benefitAdminService, IBenefitService benefitService,
-            IRoomAdminService roomAdminService, IMemoryCache memoryCache)
+            IRoomAdminService roomAdminService, IMemoryCache memoryCache, IUserAdminService userAdminService)
         {
             this.hotelService = hotelService;
             this.hotelAdminService = hotelAdminService;
@@ -29,6 +31,7 @@
             this.benefitService = benefitService;
             this.roomAdminService = roomAdminService;
             this.memoryCache = memoryCache;
+            this.userAdminService = userAdminService;
         }
         [HttpGet]
         public async Task<IActionResult> Index(int pg = 1)
@@ -72,6 +75,7 @@
                     await hotelAdminService.DeleteHotelByIdAsync(hotelId);
                     this.memoryCache.Remove(HotelCountriesCacheKey);
                     this.memoryCache.Remove(HotelCitisCacheKey);
+                    await ClearCache();
                     TempData[SuccessMessage] = SuccessfullyDeletedHotel;
                 }
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
@@ -95,6 +99,7 @@
                 this.memoryCache.Remove(HotelCountriesCacheKey);
                 this.memoryCache.Remove(HotelCitisCacheKey);
                 TempData[SuccessMessage] = SuccessfullyRecoveredHotel;
+                await ClearCache();
 
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
             }
@@ -115,7 +120,7 @@
             {
                 EditHotelViewModel editHotelViewModel = await hotelAdminService.GetHotelToEditAsync(id);
                 editHotelViewModel.BenefitsToAdd = await benefitAdminService.GetOtherBenefitsAsync(id);
-                editHotelViewModel.Rooms = await roomAdminService.GetRoomTypesInHotelByHotelIdAsync(id);  
+                editHotelViewModel.Rooms = await roomAdminService.GetRoomTypesInHotelByHotelIdAsync(id);
                 return View(editHotelViewModel);
             }
             catch (Exception)
@@ -206,6 +211,21 @@
             {
                 TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+        }
+        private async Task ClearCache()
+        {
+            IEnumerable<AllUsersViewModel> allUsers = this.memoryCache.Get<IEnumerable<AllUsersViewModel>>(AdminUsersCacheKey);
+            if (allUsers == null)
+            {
+                allUsers = await userAdminService.GetAllUsersAsync();
+                MemoryCacheEntryOptions memoryCacheOptions = new MemoryCacheEntryOptions()
+                   .SetAbsoluteExpiration(TimeSpan.FromMinutes(AdminUsersDuration));
+                this.memoryCache.Set(AdminUsersCacheKey, allUsers, memoryCacheOptions);
+            }
+            foreach (AllUsersViewModel user in allUsers)
+            {
+                this.memoryCache.Remove(string.Format(UserFavoriteHotelsCacheKey, user.Id));
             }
         }
     }
