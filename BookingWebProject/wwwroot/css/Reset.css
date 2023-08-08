@@ -19,7 +19,13 @@ li,
 a,
 label,
 input,
-button
-span {
+button,
+span,
+table,
+td,
+tr,
+th,
+thead,
+tbody{
     font-family: 'Paytone One', sans-serif;
 }

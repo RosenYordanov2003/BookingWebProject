@@ -1,19 +1,21 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using Contracts;
     using Models.RoomPackage;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using Microsoft.Win32;
 
     public class RoomPackageController : BaseAdminController
     {
         private readonly IRoomPackageAdminService roomPackageAdminService;
-        public RoomPackageController(IRoomPackageAdminService roomPackageAdminService)
+        private readonly IMemoryCache memoryCache;
+        public RoomPackageController(IRoomPackageAdminService roomPackageAdminService, IMemoryCache memoryCache)
         {
             this.roomPackageAdminService = roomPackageAdminService;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -38,6 +40,7 @@
                 }
                 await roomPackageAdminService.DeleteRoomPackageAsync(id);
                 TempData[SuccessMessage] = SuccessfullyDeleteRoomPackage;
+                this.memoryCache.Remove(RoomPackageCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -62,6 +65,7 @@
                 }
                 await roomPackageAdminService.RecoverRoomPackageByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRecoverRoomPackage;
+                this.memoryCache.Remove(RoomPackageCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -99,6 +103,7 @@
             {
                 await roomPackageAdminService.EditRoomPackageAsync(id, editRoomPackageViewModel);
                 TempData[SuccessMessage] = SuccessfullyEditRoomPackage;
+                this.memoryCache.Remove(RoomPackageCacheKey);
                 return RedirectToAction(nameof(Index));
 
             }
@@ -124,6 +129,7 @@
             {
                 await roomPackageAdminService.CreateRoomPackageAsync(roomPackage);
                 TempData[SuccessMessage] = SuccessfullyCreateRoomPackage;
+                this.memoryCache.Remove(RoomPackageCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

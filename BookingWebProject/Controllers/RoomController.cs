@@ -1,25 +1,39 @@
 ﻿namespace BookingWebProject.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Mvc;
-    using static Common.NotificationKeys;
-    using static Common.NotificationMessages;
+    using System.ComponentModel.DataAnnotations;
     using Core.Contracts;
     using Core.Models.Room;
-    using System.ComponentModel.DataAnnotations;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
+    using static Common.GeneralAplicationConstants;
+    using BookingWebProject.Core.Models.RoomPackage;
 
     public class RoomController : Controller
     {
         private readonly IRoomService roomService;
         private readonly IPackageService packageService;
-        public RoomController(IRoomService roomService, IPackageService packageService)
+        private readonly IMemoryCache memoryCache;
+        public RoomController(IRoomService roomService, IPackageService packageService,
+            IMemoryCache memoryCache)
         {
             this.roomService = roomService;
             this.packageService = packageService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> HotelRooms(int id)
         {
-            IEnumerable<RoomViewModel> hotelRooms = await roomService.GetHotelRooms(id);
+            string cacheKey = string.Format(HotelRoomsCacheKey, id);
+            IEnumerable<RoomViewModel> hotelRooms = this.memoryCache.Get<IEnumerable<RoomViewModel>>(cacheKey);
+            if (hotelRooms == null)
+            {
+                hotelRooms = await roomService.GetHotelRooms(id);
+                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(HotelRoomsCacheDuration));
+                this.memoryCache.Set(cacheKey, hotelRooms, opt);
+            }
             hotelRooms = hotelRooms.DistinctBy(hr => hr.RoomType);
             return View(hotelRooms);
         }
@@ -32,9 +46,17 @@
             }
             try
             {
-                RoomOrderInfoViewModel room = await roomService.GetORderRoomInfoAsync(id);
-                room.Packages = await packageService.GetAllPackagesAsync();
 
+                RoomOrderInfoViewModel room = await roomService.GetORderRoomInfoAsync(id);
+                IEnumerable<RoomPackageViewModel> roomPackages = memoryCache.Get<IEnumerable<RoomPackageViewModel>>(RoomPackageCacheKey);
+                if (roomPackages == null)
+                {
+                    roomPackages = await packageService.GetAllPackagesAsync();
+                    MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions().
+                    SetAbsoluteExpiration(TimeSpan.FromMinutes(RoomPackageCacheDuration));
+                    this.memoryCache.Set(RoomPackageCacheKey, roomPackages, opt);
+                }
+                room.Packages = roomPackages;
                 return View(room);
             }
             catch (Exception)
