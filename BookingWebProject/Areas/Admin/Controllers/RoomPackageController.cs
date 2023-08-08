@@ -122,7 +122,9 @@
             }
             try
             {
-
+                await roomPackageAdminService.CreateRoomPackageAsync(roomPackage);
+                TempData[SuccessMessage] = SuccessfullyCreateRoomPackage;
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {

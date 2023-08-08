@@ -11,5 +11,6 @@
         Task RecoverRoomPackageByIdAsync(int roomPackageId);
         Task<EditRoomPackageViewModel> GetRoomPackageToEditByIdAsync(int roomPackageId);
         Task EditRoomPackageAsync(int roomPackageId, EditRoomPackageViewModel editRoomPackageViewModel);
+        Task CreateRoomPackageAsync(EditRoomPackageViewModel roomPackageToCreate);
     }
 }

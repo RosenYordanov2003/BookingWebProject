@@ -62,5 +62,6 @@
         public const string RoomPackageIsAlreadyRecovered = "Room package with this id is already recovered";
         public const string SuccessfullyRecoverRoomPackage = "You have successfully recover room package";
         public const string SuccessfullyEditRoomPackage = "You have successfully edited room package";
+        public const string SuccessfullyCreateRoomPackage = "You have successfully created room package";
     }
 }

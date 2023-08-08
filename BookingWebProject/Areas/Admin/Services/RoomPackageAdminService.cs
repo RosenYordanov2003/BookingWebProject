@@ -69,9 +69,16 @@
             roomPackageToEdit.Price = editRoomPackageViewModel.Price;
             await bookingContext.SaveChangesAsync();
         }
+        public async Task CreateRoomPackageAsync(EditRoomPackageViewModel roomPackageToCreate)
+        {
+            RoomPackage roomPackage = new RoomPackage() { Name = roomPackageToCreate.Name, Price = roomPackageToCreate.Price };
+            await bookingContext.RoomPackages.AddAsync(roomPackage);
+            await bookingContext.SaveChangesAsync();
+        }
         private async Task<RoomPackage> FindRoomPackageByIdAsync(int roomPackageId)
         {
             return await bookingContext.RoomPackages.FirstAsync(rp => rp.Id == roomPackageId);
         }
+
     }
 }
