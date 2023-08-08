@@ -10,7 +10,7 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-
+    using BookingWebProject.Core.Models.Benefits;
 
     [Authorize]
     public class HotelController : Controller
@@ -39,9 +39,33 @@
             hotelQueryViewModel.Pager = pager;
             AllHotelsSortedAndFilteredDataModel sortedHotels = await hotelService.GetAllHotelsSortedAndFilteredAsync(userId, hotelQueryViewModel);
             hotelQueryViewModel.HotelViewModels = sortedHotels.Hotels;
-            hotelQueryViewModel.Benefits = await benefitService.GetAllBenefitsAsync();
-            hotelQueryViewModel.Cities = await hotelService.GetAllHotelCitiesAsync();
-            hotelQueryViewModel.Countries = await hotelService.GetAllHotelCountriesAsync();
+            IEnumerable<BenefitViewModel> benefits = this.memoryCache.Get<IEnumerable<BenefitViewModel>>(HotelBenefitsCacheKey);
+            if (benefits == null)
+            {
+                benefits = await benefitService.GetAllBenefitsAsync();
+                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(HotelBenefitsCacheDuration));
+                this.memoryCache.Set(HotelBenefitsCacheKey, benefits, opt);
+            }
+            IEnumerable<string> cities = this.memoryCache.Get<IEnumerable<string>>(HotelCitisCacheKey);
+            if (cities == null)
+            {
+                cities = await hotelService.GetAllHotelCitiesAsync();
+                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                   .SetAbsoluteExpiration(TimeSpan.FromMinutes(HotelCitiesDuration));
+                this.memoryCache.Set(HotelCitisCacheKey, cities, opt);
+            }
+            IEnumerable<string> countries = this.memoryCache.Get<IEnumerable<string>>(HotelCountriesCacheKey);
+            if (countries == null)
+            {
+                countries = await hotelService.GetAllHotelCountriesAsync();
+                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                   .SetAbsoluteExpiration(TimeSpan.FromMinutes(HotelCountriesDuration));
+                this.memoryCache.Set(HotelCountriesCacheKey, countries, opt);
+            }
+            hotelQueryViewModel.Benefits = benefits;
+            hotelQueryViewModel.Countries = countries;
+            hotelQueryViewModel.Cities = cities;
 
             return View(hotelQueryViewModel);
         }
@@ -57,6 +81,7 @@
             {
                 await hotelService.AddHotelToUserFavoriteHotels(id, User.GetId());
                 TempData[SuccessMessage] = SuccessfullyAddHotelToUserFavorites;
+                this.memoryCache.Remove(string.Format(UserFavoriteHotelsCacheKey, this.User.GetId()));
                 return Ok();
             }
             catch (Exception)
@@ -78,6 +103,7 @@
             {
                 await hotelService.RemoveHotelFromUserFavoriteHotels(id, User.GetId());
                 TempData[SuccessMessage] = SuccessfullyRemoveHotelFromUserFavoriteHotels;
+                this.memoryCache.Remove(string.Format(UserFavoriteHotelsCacheKey, this.User.GetId()));
                 return NoContent();
             }
             catch (Exception)

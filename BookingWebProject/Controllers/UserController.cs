@@ -126,7 +126,15 @@
             }
             try
             {
-                IEnumerable<HotelViewModel> userHotels = await userService.GetUserFavoriteHotelsAsync(id);
+                string cacheKey = string.Format(UserFavoriteHotelsCacheKey, id);
+                IEnumerable<HotelViewModel> userHotels = this.memoryCache.Get<IEnumerable<HotelViewModel>>(cacheKey);
+                if (userHotels == null)
+                {
+                    userHotels = await userService.GetUserFavoriteHotelsAsync(id);
+                    MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserFavoriteHotelsCacheDuration));
+                    this.memoryCache.Set(cacheKey, userHotels, opt);
+                }
                 return View(userHotels);
             }
             catch (Exception)
@@ -144,7 +152,15 @@
             }
             try
             {
-                IEnumerable<UserReservationViewModel> userReservations = await userService.GetUserReservationsAsync(id);
+                string cacheKey = string.Format(UserReservationsCacheKey, id);
+                IEnumerable<UserReservationViewModel> userReservations = this.memoryCache.Get<IEnumerable<UserReservationViewModel>>(cacheKey);
+                if (userReservations == null)
+                {
+                    userReservations = await userService.GetUserReservationsAsync(id);
+                    MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserReservationsCacheDuration));
+                    this.memoryCache.Set(cacheKey, userReservations, opt);
+                }
                 return View(userReservations);
             }
             catch (Exception)

@@ -27,7 +27,15 @@
             carQuerViewModel.Pager = pager;
             AllCarsSortedAndFilteredDataModel allCarsSortedAndFilteredDataModel = await carService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
             carQuerViewModel.Cars = allCarsSortedAndFilteredDataModel.Cars;
-            carQuerViewModel.Brands = await carService.GetAllBrandsAsync();
+            IEnumerable<string> brands = this.memoryCache.Get<IEnumerable<string>>(RentCarBrandsCacheKey);
+            if (brands == null)
+            {
+                brands = await carService.GetAllBrandsAsync();
+                MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(RentCarBrandsCacheDuration));
+                this.memoryCache.Set(RentCarBrandsCacheKey, brands, opt);
+            }
+            carQuerViewModel.Brands = brands;
             return View(carQuerViewModel);
         }
         [HttpGet]

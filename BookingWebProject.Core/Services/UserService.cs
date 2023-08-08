@@ -51,7 +51,7 @@
                     IsFavorite = true,
                     PicturePath = fvh.Hotel.Pictures.First().Path,
                     CheapestHotelRoomViewModel = fvh.Hotel.Rooms
-                   .Where(r => r.IsDeleted && !r.RoomType.IsDeleted)
+                   .Where(r => !r.IsDeleted && !r.RoomType.IsDeleted)
                    .Select(r => new CheapestHotelRoomViewModel() { Id = r.Id, PricePerNight = r.PricePerNight })
                    .OrderBy(r => r.PricePerNight)
                    .FirstOrDefault()

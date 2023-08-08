@@ -20,5 +20,17 @@
         public const int AdminUsersDuration = 2;
         public const string UserInfoCacheKey = "UserInfoCacheKey-{0}";
         public const int UserInfoCacheDuration = 5;
+        public const string HotelBenefitsCacheKey = "HotelBenefitsCacheKey";
+        public const int HotelBenefitsCacheDuration = 5;
+        public const string HotelCitisCacheKey = "HotelCities";
+        public const int HotelCitiesDuration = 5;
+        public const string HotelCountriesCacheKey = "HotelCountries";
+        public const int HotelCountriesDuration = 5;
+        public const string RentCarBrandsCacheKey = "BrandCacheKey";
+        public const int RentCarBrandsCacheDuration = 5;
+        public const string UserFavoriteHotelsCacheKey = "FavortieHotelsCacheKey-{0}";
+        public const int UserFavoriteHotelsCacheDuration = 5;
+        public const string UserReservationsCacheKey = "UserReservationCacheKey-{0}";
+        public const int UserReservationsCacheDuration = 5;
     }
 }

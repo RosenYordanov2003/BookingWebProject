@@ -9,6 +9,8 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
+    using Microsoft.Extensions.Caching.Memory;
+
     public class HotelController : BaseAdminController
     {
         private readonly IHotelAdminService hotelAdminService;
@@ -16,15 +18,17 @@
         private readonly IBenefitAdminService benefitAdminService;
         private readonly IBenefitService benefitService;
         private readonly IRoomAdminService roomAdminService;
+        private readonly IMemoryCache memoryCache;
         public HotelController(IHotelAdminService hotelAdminService, IHotelService hotelService
             , IBenefitAdminService benefitAdminService, IBenefitService benefitService,
-            IRoomAdminService roomAdminService)
+            IRoomAdminService roomAdminService, IMemoryCache memoryCache)
         {
             this.hotelService = hotelService;
             this.hotelAdminService = hotelAdminService;
             this.benefitAdminService = benefitAdminService;
             this.benefitService = benefitService;
             this.roomAdminService = roomAdminService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Index(int pg = 1)
@@ -66,6 +70,8 @@
                 else
                 {
                     await hotelAdminService.DeleteHotelByIdAsync(hotelId);
+                    this.memoryCache.Remove(HotelCountriesCacheKey);
+                    this.memoryCache.Remove(HotelCitisCacheKey);
                     TempData[SuccessMessage] = SuccessfullyDeletedHotel;
                 }
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
@@ -86,6 +92,8 @@
             try
             {
                 await hotelAdminService.RecoverHotelByIdAsync(hotelId);
+                this.memoryCache.Remove(HotelCountriesCacheKey);
+                this.memoryCache.Remove(HotelCitisCacheKey);
                 TempData[SuccessMessage] = SuccessfullyRecoveredHotel;
 
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
@@ -131,6 +139,8 @@
             {
                 await hotelAdminService.EditHotelByIdAsync(id, editHotelViewModel);
                 TempData[SuccessMessage] = SuccesfullyEditedHotel;
+                this.memoryCache.Remove(HotelCountriesCacheKey);
+                this.memoryCache.Remove(HotelCitisCacheKey);
                 return RedirectToAction("Index", "Hotel", new { Area = AdminAreaName });
 
             }
@@ -184,6 +194,8 @@
             {
                 await hotelAdminService.CreateHotelAsync(createHotelViewModel);
                 TempData[SuccessMessage] = SuccessfullyCreatedHotel;
+                this.memoryCache.Remove(HotelCountriesCacheKey);
+                this.memoryCache.Remove(HotelCitisCacheKey);
                 if (createHotelViewModel.PicturesFileProvider != null && createHotelViewModel.PicturesFileProvider.Count > 0)
                 {
                     await hotelAdminService.CreateHotelImgsAsync(createHotelViewModel);

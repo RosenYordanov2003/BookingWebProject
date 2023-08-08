@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Mvc;
     using Core.Models.Benefits;
     using Contracts;
@@ -11,10 +12,12 @@
     public class HotelBenefitController : BaseAdminController
     {
         private readonly IBenefitAdminService benefitAdminService;
+        private readonly IMemoryCache memoryCache;
 
-        public HotelBenefitController(IBenefitAdminService benefitAdminService)
+        public HotelBenefitController(IBenefitAdminService benefitAdminService, IMemoryCache memoryCache)
         {
             this.benefitAdminService = benefitAdminService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -38,6 +41,7 @@
                 }
                 await benefitAdminService.DeleteBenefitAsync(id);
                 TempData[SuccessMessage] = SuccessfullyDeleteHotelBenefit;
+                this.memoryCache.Remove(HotelBenefitsCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -61,6 +65,7 @@
                     return RedirectToAction(nameof(Index));
                 }
                 await benefitAdminService.RecoverBenefitAsync(id);
+                this.memoryCache.Remove(HotelBenefitsCacheKey);
                 TempData[SuccessMessage] = SuccessfullyRecoverHotelBenefit;
                 return RedirectToAction(nameof(Index));
             }
@@ -103,6 +108,7 @@
                 }
                 await benefitAdminService.EditBenefitByIdAsync(id, editBenefitViewModel);
                 TempData[SuccessMessage] = SuccessfullyUpdateBenefit;
+                this.memoryCache.Remove(HotelBenefitsCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -127,6 +133,7 @@
             {
                 await benefitAdminService.CreateBenefitAsync(editBenefitViewModel);
                 TempData[SuccessMessage] = SuccessfullyCreateBenefit;
+                this.memoryCache.Remove(HotelBenefitsCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

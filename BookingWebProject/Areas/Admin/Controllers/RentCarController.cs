@@ -71,6 +71,7 @@
                 await rentCarAdminService.EditCarAsync(id, editRentCarViewModel);
                 TempData[SuccessMessage] = SuccessfullyEditedCar;
                 this.memoryCache.Remove(string.Format(RentCarCacheKey, id));
+                this.memoryCache.Remove(RentCarBrandsCacheKey);
                 return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
             }
             catch (Exception)
@@ -95,6 +96,7 @@
                 }
                 await rentCarAdminService.DeleteCarByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfulyDeleteCar;
+                this.memoryCache.Remove(RentCarBrandsCacheKey);
                 return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
             }
             catch (Exception)
@@ -119,6 +121,7 @@
                 }
                 await rentCarAdminService.RecoverCarByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRecoverCar;
+                this.memoryCache.Remove(RentCarBrandsCacheKey);
                 return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
             }
             catch (Exception)
@@ -143,6 +146,7 @@
             {
                 await rentCarAdminService.CreateCarAsync(editRentCarViewModel);
                 TempData[SuccessMessage] = SuccessfullyCreateCar;
+                this.memoryCache.Remove(RentCarBrandsCacheKey);
                 return RedirectToAction("Index", "RentCar", new { Area = AdminAreaName });
             }
             catch (Exception)
