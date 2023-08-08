@@ -1,70 +1,9 @@
 ﻿@media screen and (min-width:450px) and (max-width:700px) {
 
     header {
-       display: flex;
-       align-items: center;
-       justify-content: center
-    }
-
-    .navigation {
-       display: none;
-    }
-
-    #menu-btn, #logo2 {
-       display: block;
-    }
-
-    .content-logo {
-       font-size: 1.5rem;
-    }
-
-    .content-title {
-      font-size: 1.4rem;
-    }
-
-    .title {
-       font-size: 1.6rem;
-    }
-    .content-section p {
-        font-size: 1.2rem;
-    }
-
-    .input-container label {
-       font-size: 1.3rem;
-    }
-
-    .input-container input {
-       width: auto;
-       font-size: 0.9rem
-    }
-
-    input::placeholder {
-       opacity: 0.5;
-    }
-
-    .form-container {
-       width: 90%;
-       margin-top: 4rem;
-       flex-direction: column;
-       gap: 2rem;
-    }
-
-    .register-form {
-       width: 60%;
-       margin-bottom: 2rem;
-    }
-    .submit-btn{
-      padding: 0.8rem 0rem 0.8rem 0rem;
-      width: 80%;
-    }
-}
-/*under 450px*/
-@media screen and (min-width:280px) and (max-width:450px) {
-
-    header {
-       display: flex;
-       align-items: center;
-       justify-content: center
+        display: flex;
+        align-items: center;
+        justify-content: center
     }
 
     .navigation {
@@ -72,26 +11,77 @@
     }
 
     #menu-btn, #logo2 {
-       display: block;
+        display: block;
     }
 
     .content-logo {
-       font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .content-title {
-       font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .title {
-       font-size: 1rem;
+        font-size: 1.6rem;
     }
 
     .input-container label {
-       font-size: 1rem;
+        font-size: 1.3rem;
     }
-    .content-section p {
-       font-size: 1rem;
+
+    .input-container input {
+        width: auto;
+        font-size: 0.9rem
+    }
+
+    input::placeholder {
+        opacity: 0.5;
+    }
+
+    .form-container {
+        width: 90%;
+        margin-top: 4rem;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .register-form {
+        width: 60%;
+        margin-bottom: 2rem;
+    }
+}
+/*under 450px*/
+@media screen and (min-width:280px) and (max-width:450px) {
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    #menu-btn, #logo2 {
+        display: block;
+    }
+
+    .content-logo {
+        font-size: 2rem;
+    }
+
+    .content-title {
+        font-size: 1.9rem;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .input-container label {
+        font-size: 1.3rem;
     }
 
     .input-container input {
@@ -116,7 +106,7 @@
     }
 }
 /*between 701px command 1000px*/
-@media screen and (min-width:701px) and (max-width:1200px) {
+@media screen and (min-width:701px) and (max-width:1100px) {
 
     header {
         display: flex;
@@ -152,7 +142,7 @@
     }
 }
 
-@media screen and (min-width:1201px) {
+@media screen and (min-width:1101px) {
     .drop-down-menu {
         display: none;
     }

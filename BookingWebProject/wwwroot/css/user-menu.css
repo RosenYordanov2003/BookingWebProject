@@ -1,0 +1,13 @@
+﻿.user-menu li a {
+    color: white;
+}
+
+.user-menu {
+    gap: 0rem;
+}
+
+.user-menu li {
+    border-bottom: 1px solid white;
+    padding: 1rem;
+    background-color: darkblue;
+}

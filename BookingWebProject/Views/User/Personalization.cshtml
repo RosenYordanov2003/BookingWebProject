@@ -1,0 +1,57 @@
+﻿@model UserInfoViewModel
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/user-menu.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/UserStyles/Personalization.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/UserStyles/Responsive/Personalization.css" asp-append-version="true" />
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="user-info-container">
+    <form class="user-info" method="post" enctype="multipart/form-data">
+        <div class="input-container">
+            <label asp-for="@Model.FirstName"></label>
+            <input asp-for="@Model.FirstName" value="@Model.FirstName" />
+            <span asp-validation-for="@Model.FirstName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.LastName"></label>
+            <input asp-for="@Model.LastName" value="@Model.LastName" />
+            <span asp-validation-for="@Model.LastName"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.PhoneNumber"></label>
+            <input asp-for="@Model.PhoneNumber" value="@Model.PhoneNumber" />
+            <span asp-validation-for="@Model.PhoneNumber"></span>
+        </div>
+        <div class="input-container">
+            <label asp-for="@Model.Email"></label>
+            <input asp-for="@Model.Email" value="@Model.Email" />
+            <span asp-validation-for="@Model.Email"></span>
+        </div>
+        <input type="hidden" asp-for="@Model.ProfilePicturePath" value="@Model.ProfilePicturePath" class="file-input" />
+        <div class="file-container">
+            <input type="file" name="ProfilePictureFile" />
+        </div>
+        <button type="submit">Edit</button>
+    </form>
+
+    <div class="profile-img-container">
+        @if (!string.IsNullOrWhiteSpace(Model.ProfilePicturePath))
+        {
+            <img src="~/@Model.ProfilePicturePath" alt="Profile Picture">
+            <p class="profile-picture-content">Profile Picture</p>
+            <form method="post">
+                <input type="hidden" name="path" value="@Model.ProfilePicturePath">
+                <button type="submit" class="remove-button" asp-controller="User" asp-action="RemoveProfilePicture">Remove ProfilePicture</button>
+            </form>
+        }
+    </div>
+</div>
+
+<script src="~/js/account.js"></script>

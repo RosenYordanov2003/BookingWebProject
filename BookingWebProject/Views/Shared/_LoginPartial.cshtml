@@ -1,18 +1,40 @@
-﻿
+﻿@using BookingWebProject.Extensions
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
 <ul class="nav-list">
     @if (User?.Identity?.IsAuthenticated ?? false)
     {
         <li>
-            <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+            <div class="user-container">
+                @if (string.IsNullOrWhiteSpace(""))
+                {
+                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><i class="fa-regular fa-user" id="user-icon"></i> </a>
+
+                }
+              @*  else
+                {
+                    <a id="user-tag" asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id="@this.User.GetId()"><img src="~/@this.User.GetProfilePicturePath()"> </a>
+                }*@
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <ul class="user-menu">
+                <li>
+                    <a asp-controller="User" asp-action="Personalization" asp-route-id="@User.GetId()">Profile</a>
+                </li>
+                <li>
+                    <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@User.GetId()">Favorite Hotels</a>
+                </li>
+                <li>
+                    <a asp-controller="User" asp-action="UserReservations" asp-route-id="@User.GetId()">Your Reservations</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a asp-action="Logout" asp-controller="Account">Logout</a>

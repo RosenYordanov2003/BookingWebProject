@@ -1,0 +1,107 @@
+﻿
+main {
+    margin: 15rem 5rem 2rem 5rem;
+    max-width: 1900px;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.input-container input {
+    margin-bottom: 1rem;
+    border: none;
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    transition: all 0.1s ease;
+    margin-top: 0.5rem;
+    transition: 0.5s ease all;
+}
+
+.input-container span {
+    color: red;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-container label {
+    transition: 0.5s ease all;
+}
+
+.shift {
+    transform: translateY(-10px);
+    font-size: 1.1rem;
+}
+
+input:focus {
+    border: 2px solid #cee3d1;
+}
+
+.profile-img-container {
+    max-width: 400px;
+}
+
+.profile-img-container img {
+    width: 100%;
+    border-radius: 50%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 3rem;
+    height: 400px;
+}
+
+.user-info button {
+    border: none;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 1.1rem;
+    color: black;
+    background-color: rgb(244,202,22);
+    letter-spacing: 1px;
+    border-radius: 6px;
+    min-width: 100px;
+    transition: 0.5s ease all;
+    margin-top: 2rem;
+}
+
+.user-info button:hover {
+    opacity: 0.8;
+    transform: scale(1.050);
+}
+
+input[type = file] {
+    border: none;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    padding: 10px 16px;
+}
+
+.profile-picture-content {
+    font-size: 1.7rem;
+}
+
+.remove-button {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: 0.5s ease all;
+    letter-spacing: 2px;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.remove-button:hover {
+    opacity: 0.7;
+}
