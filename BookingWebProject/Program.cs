@@ -1,10 +1,7 @@
-using BookingWebProject.Areas.Admin.Contracts;
-using BookingWebProject.Areas.Admin.Services;
-using BookingWebProject.Core.Contracts;
-using BookingWebProject.Core.Services;
 using BookingWebProject.Data;
 using BookingWebProject.Extensions;
 using BookingWebProject.Infrastructure.Data.Models;
+using BookingWebProject.ModelBinders.DecimalModelBinder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,28 +26,12 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
-        //This filter adds a guid to the forms
+        //This filter adds a guid on the forms
         options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+        options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
     });
-builder.Services.AddScoped<IHotelService, HotelService>();
-builder.Services.AddScoped<IRentCarService, RentCarService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
-builder.Services.AddScoped<IBenefitService, BenefitService>();
-builder.Services.AddScoped<ICommentService, CommentService>();
-builder.Services.AddScoped<IPackageService, PackageService>();
-builder.Services.AddScoped<IRoomService, RoomService>();
-builder.Services.AddScoped<IUserAdminService, UserAdminService>();
-builder.Services.AddScoped<IAdminService, AdminService>();
-builder.Services.AddScoped<IHotelAdminService, HotelAdminService>();
-builder.Services.AddScoped<IPictureService, PictureService>();
-builder.Services.AddScoped<IBenefitAdminService, BenefitAdminService>();
-builder.Services.AddScoped<IRentCarAdminService, RentCarAdminService>();
-builder.Services.AddScoped<IRoomAdminService, RoomAdminService>();
-builder.Services.AddScoped<IRoomBasesAdminService, RoomBasesAdminService>();
-builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
-builder.Services.AddScoped<IRoomBasisService, RoomBasisService>();
-builder.Services.AddScoped<IRoomPackageAdminService, RoomPackageAdminService>();
+
+ builder.Services.AddServices();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
