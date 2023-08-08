@@ -1,0 +1,45 @@
+﻿main {
+    margin-top: 10rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin: 0rem 0rem 5rem 0rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+table,
+th,
+td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+    text-transform: capitalize;
+}
+a{
+    text-decoration: none;
+}
+
+table {
+    text-align: center;
+    margin: 1rem 0rem 3rem 0rem;
+    overflow-x: auto;
+}
+
+table th {
+    padding: 1rem;
+    width: 300px;
+    background-color: #f7f7f7;
+    color: #1e1f24;
+    font-size: 1.7rem;
+}
+
+table td {
+    font-size: 1.4rem;
+    padding: 0.5rem;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}

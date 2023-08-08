@@ -1,6 +1,6 @@
 ﻿namespace BookingWebProject.Core.Contracts
 {
-    using BookingWebProject.Core.Models.Pager;
+    using Models.Pager;
     using Models.Hotel;
     public interface IHotelService
     {

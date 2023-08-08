@@ -1,6 +1,6 @@
 ﻿namespace BookingWebProject.Core.Contracts
 {
-    using Core.Models.Reservation;
+    using Models.Reservation;
     public interface IReservationService
     {
         public Task<bool> CheckCarIsAlreadyReservedAsync(int carId, DateTime startDate, DateTime endDate);

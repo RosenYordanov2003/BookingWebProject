@@ -9,6 +9,7 @@
     using Core.Models.Room;
     using BookingWebProject.Infrastructure.Data.Models;
     using Microsoft.AspNetCore.Hosting;
+    using BookingWebProject.Core.Models.Reservation;
 
     public class UserService : IUserService
     {
@@ -39,7 +40,7 @@
         {
             IEnumerable<HotelViewModel> userHotels = await bookingContext
                 .FavoriteHotels
-                .Where(fv => fv.UserId == userId)
+                .Where(fv => fv.UserId == userId && !fv.Hotel.IsDeleted)
                 .Select(fvh => new HotelViewModel()
                 {
                     Id = fvh.Hotel.Id,
@@ -116,6 +117,22 @@
                 await userInfo.ProfilePictureFile.CopyToAsync(stream);
             }
             return newFilePath;
+        }
+        public async Task<IEnumerable<UserReservationViewModel>> GetUserReservationsAsync(Guid userId)
+        {
+            IEnumerable<UserReservationViewModel> userReservations = await bookingContext
+                .Reservations
+                .Where(r => r.UserId == userId)
+                .Select(r => new UserReservationViewModel()
+                {
+                    Id = r.Id,
+                    StartDate = r.StartDate,
+                    EndDate = r.EndDate,
+                    Price = r.TotalPrice,
+                })
+                .OrderByDescending(r => r.StartDate)
+                .ToArrayAsync();
+            return userReservations;
         }
     }
 }

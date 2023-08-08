@@ -7,9 +7,10 @@
     using Infrastructure.Data.Models;
     using Extensions;
     using Core.Models.User;
+    using Core.Models.Hotel;
+    using Core.Models.Reservation;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
-    using BookingWebProject.Core.Models.Hotel;
 
     public class UserController : Controller
     {
@@ -114,6 +115,24 @@
             {
                 IEnumerable<HotelViewModel> userHotels = await userService.GetUserFavoriteHotelsAsync(id);
                 return View(userHotels);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> UserReservations(Guid id)
+        {
+            if (this.User.GetId() != id)
+            {
+                return Unauthorized();
+            }
+            try
+            {
+                IEnumerable<UserReservationViewModel> userReservations = await userService.GetUserReservationsAsync(id);
+                return View(userReservations);
             }
             catch (Exception)
             {

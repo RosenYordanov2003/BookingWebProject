@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
     using Extensions;
     using Core.Contracts;
     using Core.Models.Reservation;
@@ -10,6 +11,7 @@
     using static BookingWebProject.Common.NotificationMessages;
     using System.ComponentModel.DataAnnotations;
 
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly IRentCarService rentCarService;

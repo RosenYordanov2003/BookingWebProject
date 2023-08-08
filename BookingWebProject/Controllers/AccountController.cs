@@ -58,9 +58,9 @@
         }
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = "")
         {
-            return View(new LoginViewModel());
+            return View(new LoginViewModel() { ReturnUrl = returnUrl });
         }
         [HttpPost]
         [AllowAnonymous]
@@ -73,6 +73,10 @@
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl) && Url.IsLocalUrl(loginViewModel.ReturnUrl))
+                    {
+                        return Redirect(loginViewModel.ReturnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
             }

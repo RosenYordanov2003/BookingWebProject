@@ -15,7 +15,7 @@
             Thank you for choosing our reservation platform.
         </p>
     </section>
-    <form class="register-form" method="post">
+    <form class="register-form" method="post" asp-route-returnUrl="@Model.ReturnUrl">
         <h1 class="title">@ViewData["Title"]</h1>
         <section class="input-container">
             <label asp-for="@Model.Username">Username</label>

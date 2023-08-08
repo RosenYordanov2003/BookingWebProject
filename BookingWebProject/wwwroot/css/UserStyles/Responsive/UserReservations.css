@@ -1,0 +1,49 @@
+﻿@media all and (min-width: 280px) and (max-width: 750px) {
+    .title {
+        font-size: 1.1rem;
+    }
+
+    table {
+        width: 50%;
+    }
+
+    table th {
+        font-size: 1rem;
+        width: 100px;
+        padding: 0.4rem;
+    }
+
+    table td {
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
+
+    .table-container {
+        justify-content: flex-start;
+    }
+}
+
+@media all and (min-width: 751px) and (max-width: 1200px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    table {
+        width: 75%;
+    }
+
+    table th {
+        font-size: 1.4rem;
+        width: 300px;
+        padding: 1rem;
+    }
+
+    table td {
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+
+    .table-container {
+        justify-content: center;
+    }
+}

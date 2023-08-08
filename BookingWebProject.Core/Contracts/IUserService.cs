@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Core.Contracts
 {
-    using Core.Models.Hotel;
+    using Models.Reservation;
+    using Models.Hotel;
     using Models.User;
     public interface IUserService
     {
@@ -10,5 +11,6 @@
         Task SaveUserInfoAsync(Guid userId, UserInfoViewModel userInfo);
         Task DeleteUserProfilePictureAsync(Guid userId, string path);
         Task<string> UploadUserImageAsync(UserInfoViewModel userInfo, Guid userId);
+        Task<IEnumerable<UserReservationViewModel>> GetUserReservationsAsync(Guid userId);
     }
 }
