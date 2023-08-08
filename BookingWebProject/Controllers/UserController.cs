@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Caching.Memory;
     using System.Security.Claims;
     using Core.Contracts;
     using Infrastructure.Data.Models;
@@ -11,17 +12,20 @@
     using Core.Models.Reservation;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
-
+    using static Common.GeneralAplicationConstants;
     public class UserController : Controller
     {
         private readonly IUserService userService;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        public UserController(IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IMemoryCache memoryCache;
+        public UserController(IUserService userService, UserManager<User> userManager,
+            SignInManager<User> signInManager, IMemoryCache memoryCache)
         {
             this.userService = userService;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Personalization(Guid id)
@@ -32,7 +36,15 @@
             }
             try
             {
-                UserInfoViewModel userInfoViewModel = await userService.GetUserInfoByIdAsync(id);
+                string cacheKey = string.Format(UserInfoCacheKey, id);
+                UserInfoViewModel userInfoViewModel = this.memoryCache.Get<UserInfoViewModel>(cacheKey);
+                if (userInfoViewModel == null)
+                {
+                    userInfoViewModel = await userService.GetUserInfoByIdAsync(id);
+                    MemoryCacheEntryOptions opt = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(UserInfoCacheDuration));
+                    this.memoryCache.Set(cacheKey, userInfoViewModel, opt);
+                }
                 return View(userInfoViewModel);
             }
             catch (Exception)
@@ -66,7 +78,6 @@
                     TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
                     await userManager.AddClaimAsync(user, userNameClaim);
                     await signInManager.SignInAsync(user, isPersistent: false);
-
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception)
@@ -79,6 +90,8 @@
             {
                 await userService.SaveUserInfoAsync(this.User.GetId(), userInfoViewModel);
                 TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
+                string cacheKey = string.Format(UserInfoCacheKey, userInfoViewModel.Id);
+                this.memoryCache.Remove(cacheKey);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)

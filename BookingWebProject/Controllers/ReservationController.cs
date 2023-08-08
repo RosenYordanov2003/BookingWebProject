@@ -69,6 +69,7 @@
             {
                 await reservationService.RentCarAsync(id, model);
                 TempData[SuccessMessage] = string.Format(SuccessfullRentCarMsg, model.StartRentDate.ToString("dd/MM/yyyy"), model.EndRentDate.ToString("dd/MM/yyyy"));
+                this.memoryCache.Remove(AdminDashBoardCacheKey);
                 return RedirectToAction("All", "RentCar");
             }
             catch (Exception)
@@ -127,6 +128,7 @@
                 await reservationService.BookRoomAsync(roomReservationViewModel, this.User.GetId());
                 TempData[SuccessMessage] = SuccessBookedRoom;
                 this.memoryCache.Remove(HomePageCacheKey);
+                this.memoryCache.Remove(AdminDashBoardCacheKey);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)

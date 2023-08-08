@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using Models.Room;
     using Contracts;
     using Models.Room.DataModels;
@@ -8,8 +9,6 @@
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using Microsoft.Extensions.Caching.Memory;
-    using BookingWebProject.Infrastructure.Data.Models;
 
     public class RoomController : BaseAdminController
     {

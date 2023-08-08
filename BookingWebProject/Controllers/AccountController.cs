@@ -2,12 +2,12 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.AspNetCore.Identity;
     using Infrastructure.Data.Models;
     using Core.Models.Account;
+    using Data;
     using static Common.GeneralAplicationConstants;
-    using Microsoft.EntityFrameworkCore;
-    using BookingWebProject.Data;
 
     [Authorize]
     public class AccountController : Controller
@@ -15,16 +15,19 @@
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole<Guid>> roleManager;
+        private readonly IMemoryCache memoryCache;
         //To save the changes on SeedUsers
         private readonly BookingContext bookingContext;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
-            RoleManager<IdentityRole<Guid>> roleManager, BookingContext bookingContext)
+            RoleManager<IdentityRole<Guid>> roleManager, BookingContext bookingContext,
+            IMemoryCache memoryCache)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.bookingContext = bookingContext;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -48,6 +51,7 @@
             var result = await userManager.CreateAsync(user, registerViewModel.Password);
             if (result.Succeeded)
             {
+                memoryCache.Remove(AdminUsersCacheKey);
                 return RedirectToAction(nameof(Login));
             }
             foreach (var error in result.Errors)
