@@ -66,7 +66,7 @@
             </div>
         }
         <h4 class="filter-title"><img src="~/img/FilterIcon.png" /> Filter by country</h4>
-        <select asp-for="@Model.Country">
+        <select class="country-select" asp-for="@Model.Country">
             @foreach (string country in Model.Countries)
             {
                 <option value="@country">@country</option>
@@ -74,7 +74,7 @@
             <option value="all">All</option>
         </select>
         <h4 class="filter-title"><img src="~/img/FilterIcon.png" /> Filter by city</h4>
-        <select asp-for="@Model.City">
+        <select class="city-select" asp-for="@Model.City">
             @foreach (string city in Model.Cities)
             {
                 <option value="@city">@city</option>
@@ -161,6 +161,18 @@
 </div>
 <script>
     const csrfToken = '@GetAntiXsrfRequestToken()';
+</script>
+
+<script>
+    const cityProp = '@Model.City';
+    const countryProp = '@Model.Country';
+    const sortOption = '@Model.HotelSortOption';
+    if(!cityProp){
+        document.querySelector(".city-select").value = 'all';
+    }
+    if(!countryProp){
+        document.querySelector('.country-select').value = 'all';
+    }
 </script>
 
 <script src="~/js/Hotel/All.js"></script>

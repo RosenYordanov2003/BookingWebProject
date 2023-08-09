@@ -1,24 +1,35 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
     using Models.RoomType;
+    using Microsoft.Extensions.Caching.Memory;
     using Contracts;
     using Microsoft.AspNetCore.Mvc;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
+
     public class RoomTypeController : BaseAdminController
     {
         private readonly IRoomTypeService roomTypeService;
-        public RoomTypeController(IRoomTypeService roomTypeService)
+        private readonly IMemoryCache memoryCache;
+        public RoomTypeController(IRoomTypeService roomTypeService, IMemoryCache memoryCache)
         {
             this.roomTypeService = roomTypeService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             try
             {
-                IEnumerable<RoomTypeAdminViewModel> roomTypes = await roomTypeService.GetAllRomTypes();
+                IEnumerable<RoomTypeAdminViewModel> roomTypes = this.memoryCache.Get<IEnumerable<RoomTypeAdminViewModel>>(AdminRoomTypesCacheKey);
+                if (roomTypes == null)
+                {
+                    roomTypes = await roomTypeService.GetAllRomTypes();
+                    MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(AdminRoomTypesCacheDuration));
+                    this.memoryCache.Set(AdminRoomTypesCacheKey, roomTypes, memoryCacheEntryOptions);
+                }
                 return View(roomTypes);
             }
             catch (Exception)
@@ -42,6 +53,7 @@
                     return RedirectToAction(nameof(Index));
                 }
                 await roomTypeService.DeleteRoomTypeAsync(id);
+                this.memoryCache.Remove(AdminRoomTypesCacheKey);
                 TempData[SuccessMessage] = SuccessfullyDeleteRoomType;
                 return RedirectToAction(nameof(Index));
             }
@@ -66,6 +78,7 @@
                     return RedirectToAction(nameof(Index));
                 }
                 await roomTypeService.RecoverRoomTypeAsync(id);
+                this.memoryCache.Remove(AdminRoomTypesCacheKey);
                 TempData[SuccessMessage] = SuccessfullyRecoveredRoomType;
                 return RedirectToAction(nameof(Index));
             }
@@ -103,6 +116,7 @@
             try
             {
                 await roomTypeService.EditRoomTypeAsync(id, editRoomTypeViewModel);
+                this.memoryCache.Remove(AdminRoomTypesCacheKey);
                 TempData[SuccessMessage] = SuccessfullyEditRoomType;
                 return RedirectToAction(nameof(Index));
             }
@@ -127,6 +141,7 @@
             try
             {
                 await roomTypeService.CreateRoomTypeAsync(editRoomTypeViewModel);
+                this.memoryCache.Remove(AdminRoomTypesCacheKey);
                 TempData[SuccessMessage] = SuccessfullyCreateRoomType;
                 return RedirectToAction(nameof(Index));
             }

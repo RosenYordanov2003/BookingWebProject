@@ -1,28 +1,37 @@
 ﻿namespace BookingWebProject.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using Contracts;
+    using Models.RoomBasis;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using Contracts;
-    using Models.RoomBasis;
-    using BookingWebProject.Areas.Admin.Models.Benefit;
 
     public class RoomBasisController : BaseAdminController
     {
         private readonly IRoomBasisService roomBasisService;
-        public RoomBasisController(IRoomBasisService roomBasisService)
+        private readonly IMemoryCache memoryCache;
+        public RoomBasisController(IRoomBasisService roomBasisService, IMemoryCache memoryCache)
         {
             this.roomBasisService = roomBasisService;
+            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<RoomBasisAdminViewModel> allRoomBasis = await roomBasisService.GetAllRoomBasisAsync();
+            IEnumerable<RoomBasisAdminViewModel> allRoomBasis = this.memoryCache.Get<IEnumerable<RoomBasisAdminViewModel>>(AdminRoomBasisCacheKey);
+            if (allRoomBasis == null)
+            {
+                allRoomBasis = await roomBasisService.GetAllRoomBasisAsync();
+                MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(AdminRoomBasisCacheDuration));
+                this.memoryCache.Set(AdminRoomBasisCacheKey, allRoomBasis, memoryCacheEntryOptions);
+            }
             return View(allRoomBasis);
         }
         [HttpPost]
-        public async Task<IActionResult>Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
@@ -37,6 +46,7 @@
                 }
                 await roomBasisService.DeleteRoomBasisByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRemoveRoomBasis;
+                this.memoryCache.Remove(AdminRoomBasisCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -46,7 +56,7 @@
             }
         }
         [HttpPost]
-        public async Task<IActionResult>Recover(int id)
+        public async Task<IActionResult> Recover(int id)
         {
             try
             {
@@ -61,6 +71,7 @@
                 }
                 await roomBasisService.RecoverRoomBasisByIdAsync(id);
                 TempData[SuccessMessage] = SuccessfullyRecoveredRoomBasis;
+                this.memoryCache.Remove(AdminRoomBasisCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -70,7 +81,7 @@
             }
         }
         [HttpGet]
-        public async Task<IActionResult>Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             try
             {
@@ -88,7 +99,7 @@
             }
         }
         [HttpPost]
-        public async Task<IActionResult>Edit(int id, EditRoomBasisViewModel editRoomBasisViewModel)
+        public async Task<IActionResult> Edit(int id, EditRoomBasisViewModel editRoomBasisViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -102,6 +113,7 @@
                 }
                 await roomBasisService.EditRoomBasisAsync(id, editRoomBasisViewModel);
                 TempData[SuccessMessage] = SuccessfullyEditRoomBasis;
+                this.memoryCache.Remove(AdminRoomBasisCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)
@@ -116,7 +128,7 @@
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult>Create(EditRoomBasisViewModel roomBasis)
+        public async Task<IActionResult> Create(EditRoomBasisViewModel roomBasis)
         {
             if (!ModelState.IsValid)
             {
@@ -126,6 +138,7 @@
             {
                 await roomBasisService.CreateRoomBasisAsync(roomBasis);
                 TempData[SuccessMessage] = SuccessfullyCreateRoomBasis;
+                this.memoryCache.Remove(AdminRoomBasisCacheKey);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

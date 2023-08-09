@@ -89,7 +89,7 @@
     </div>
     <div class="container">
         <label asp-for="@Model.Brand">Brand</label>
-        <select asp-for="@Model.Brand">
+        <select class="brand-select" asp-for="@Model.Brand">
             @foreach (string brand in Model.Brands)
             {
                 <option value="@brand">@brand</option>
@@ -109,7 +109,6 @@
     {
         <h1 class="title">Our Offers</h1>
     }
-    @* May become partial view*@
     <div class="cars-container">
         @foreach (CarViewModel car in Model.Cars)
         {
@@ -187,3 +186,10 @@
         </ul>
     }
 </div>
+
+<script>
+    const brandProp = '@Model.Brand';
+    if(!brandProp){
+        document.querySelector('.brand-select').value = 'default';
+    }
+</script>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BookingWebProject.Extensions
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -112,7 +113,7 @@
                 <i class="fa-solid fa-bars sidebar-toggle"></i>
 
                 <div class="img-container">
-                    <a asp-area="" asp-action="Personalization" asp-controller="User"><i class="fa-regular fa-user" id="user-icon"></i></a>
+                    <a asp-area="" asp-action="Personalization" asp-controller="User" asp-route-id = "@this.User.GetId()"><i class="fa-regular fa-user" id="user-icon"></i></a>
                 </div>
             </div>
             @RenderBody()

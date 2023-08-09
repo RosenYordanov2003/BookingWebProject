@@ -30,5 +30,13 @@
         public const int UserFavoriteHotelsCacheDuration = 5;
         public const string UserReservationsCacheKey = "UserReservationCacheKey-{0}";
         public const int UserReservationsCacheDuration = 5;
+        public const string AdminHotelBenefitsCacheKey = "AdminBenefitsCacheKey";
+        public const int AdminHotelBenefitsCacheDuration = 5;
+        public const string AdminRoomBasisCacheKey = "AdminRoomBasisCacheKey";
+        public const int AdminRoomBasisCacheDuration = 5;
+        public const string AdminRoomTypesCacheKey = "AdminRoomTypesCacheKey";
+        public const int AdminRoomTypesCacheDuration = 5;
+        public const string AdminRoomPackagesCacheKey = "AdminRoomPackagesCacheKey";
+        public const int AdminRoomPackagesCacheDuration = 5;
     }
 }

@@ -64,14 +64,14 @@
                         }
                         else
                         {
-                            value = "Member";
+                            value = "User";
                         }
                     }
                     <td>@value</td>
                     <td>@user.ReservationsCount</td>
                     @if (this.User.IsInRole(AdminRoleName))
                     {
-                        @if (value == "Member")
+                        @if (value == "User")
                         {
                             <td>
                                 <form method="post" asp-area="" asp-controller="Account" asp-action="ChangeRole" asp-route-id="@user.Id" asp-route-role="Moderator">

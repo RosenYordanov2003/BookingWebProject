@@ -72,7 +72,7 @@
                     Claim userNameClaim = new Claim("ProfilePicturePath", userInfoViewModel.ProfilePicturePath);
                     if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
                     {
-                        Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath");
+                        Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")!;
                         await userManager.RemoveClaimAsync(user, claim);
                     }
                     TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
@@ -108,7 +108,7 @@
             User user = await userManager.FindByIdAsync(this.User.GetId().ToString());
             if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
             {
-                Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath");
+                Claim claim = this.User.Claims.FirstOrDefault(c => c.Type == "ProfilePicturePath")!;
                 TempData[SuccessMessage] = SuccessfullyRemovedProfilePicture;
 
                 await userManager.RemoveClaimAsync(user, claim);

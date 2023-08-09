@@ -18,15 +18,13 @@
         private readonly IRoomTypeService roomTypeService;
         private readonly IRoomBasisService roomBasisService;
         public RoomController(IRoomAdminService roomAdminService, IRoomBasesAdminService roomBasisAdminService,
-            IHotelAdminService hotelService, IRoomTypeService roomTypeService, IRoomBasisService roomBasisService,
-            IMemoryCache memoryCache)
+            IHotelAdminService hotelService, IRoomTypeService roomTypeService, IRoomBasisService roomBasisService)
         {
             this.roomAdminService = roomAdminService;
             this.roomBasisAdminService = roomBasisAdminService;
             this.hotelAdminService = hotelService;
             this.roomTypeService = roomTypeService;
             this.roomBasisService = roomBasisService;
-            this.memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int roomTypeId, int hotelId)
