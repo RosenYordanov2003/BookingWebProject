@@ -1,4 +1,4 @@
-﻿namespace BookingWebProject.Services.Tests
+﻿namespace BookingWebProject.Services.Tests.Comparators
 {
     using Core.Models.Hotel;
     using System.Collections;

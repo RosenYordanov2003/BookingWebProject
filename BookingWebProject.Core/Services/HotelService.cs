@@ -36,7 +36,7 @@
                       StarRating = h.StarRating,
                       City = h.City,
                       Country = h.Country,
-                      PicturePath = h.Pictures.Where(p => !p.IsDeleted).First().Path,
+                      PicturePath = h.Pictures.Where(p => !p.IsDeleted).FirstOrDefault().Path,
                       IsFavorite = h.FavoriteHotels.Any(fv => fv.HotelId == h.Id && fv.UserId == userId),
                       CheapestHotelRoomViewModel = h.Rooms
                      .Where(r => !r.IsDeleted && !r.RoomType.IsDeleted)

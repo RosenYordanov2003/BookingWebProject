@@ -14,7 +14,7 @@ namespace BookingWebProject.Core.Models.Hotel
         public bool IsFavorite { get; set; }
         public string City { get; set; } = null!;
         public string Country { get; set; } = null!;
-        public string PicturePath { get; set; } = null!;
+        public string? PicturePath { get; set; }
 
         public CheapestHotelRoomViewModel? CheapestHotelRoomViewModel { get; set; }
     }

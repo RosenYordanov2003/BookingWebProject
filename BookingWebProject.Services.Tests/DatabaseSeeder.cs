@@ -38,7 +38,8 @@
                 IsDeleted = false,
                 HotelBenefits = new List<HotelBenefits>()
                 {
-                    new HotelBenefits() { BenefitId = 10, HotelId = 1 }
+                    new HotelBenefits() { BenefitId = 1, HotelId = 1 },
+                    new HotelBenefits() { BenefitId = 2, HotelId = 1 }
                 },
                 Reservations = new List<Reservation>()
                 {
@@ -148,7 +149,12 @@
                         UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"),
                         EmailAddress = "testuser123@gmail.com"
                     }
-                }
+                },
+                HotelBenefits = new List<HotelBenefits>()
+                {
+                    new HotelBenefits() { BenefitId = 1, HotelId = 3 },
+                    new HotelBenefits() { BenefitId = 2, HotelId = 3 }
+                },
             };
             hotel4 = new Hotel()
             {
