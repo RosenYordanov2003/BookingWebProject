@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
+    using System.Net;
     using Microsoft.EntityFrameworkCore;
     using Data;
     using Contracts;
@@ -76,7 +77,7 @@
         public async Task EditRoomTypeAsync(int roomTypeId, EditRoomTypeViewModel editRoomTypeViewModel)
         {
             RoomType roomTypeToEdit = await FindRoomTypeByIdAsync(roomTypeId);
-            roomTypeToEdit.Name = editRoomTypeViewModel.Name;
+            roomTypeToEdit.Name = WebUtility.HtmlEncode(editRoomTypeViewModel.Name);
             roomTypeToEdit.IncreasePercentage = editRoomTypeViewModel.PercentageIncrease;
             await bookingContext.SaveChangesAsync();
         }
@@ -84,7 +85,7 @@
         {
             RoomType roomType = new RoomType()
             {
-                Name = editRoomTypeViewModel.Name,
+                Name = WebUtility.HtmlEncode(editRoomTypeViewModel.Name),
                 IncreasePercentage = editRoomTypeViewModel.PercentageIncrease
             };
             await bookingContext.RoomTypes.AddAsync(roomType);

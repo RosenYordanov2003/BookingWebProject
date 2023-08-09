@@ -2,9 +2,10 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Infrastructure.Data.Models;
+    using System.Net;
     using Data;
     using Contracts;
-    using BookingWebProject.Core.Models.Reservation;
+    using Core.Models.Reservation;
 
     public class ReservationService : IReservationService
     {
@@ -33,11 +34,11 @@
             Reservation reservation = new Reservation()
             {
                 UserId = model.User.Id,
-                EmailAddress = model.User.Email,
+                EmailAddress = WebUtility.HtmlEncode(model.User.Email),
                 StartDate = model.StartRentDate,
                 EndDate = model.EndRentDate,
-                FirstName = model.User.FirstName,
-                LastName = model.User.LastName,
+                FirstName = WebUtility.HtmlEncode(model.User.FirstName),
+                LastName = WebUtility.HtmlEncode(model.User.LastName),
                 CountNights = countDays,
                 RentCarId = carId,
                 TotalPrice = model.CarlViewModel.PricePerDay * countDays,
@@ -81,9 +82,9 @@
                 RoomId = roomId,
                 CountNights = countDays,
                 TotalPrice = roomReservation.Room.Price * countDays,
-                FirstName = roomReservation.User.FirstName,
-                LastName = roomReservation.User.LastName,
-                EmailAddress = roomReservation.User.Email,
+                FirstName = WebUtility.HtmlEncode(roomReservation.User.FirstName),
+                LastName = WebUtility.HtmlEncode(roomReservation.User.LastName),
+                EmailAddress = WebUtility.HtmlEncode(roomReservation.User.Email),
                 PeopleCount = roomReservation.Room.AdultsCount + roomReservation.Room.ChildrenCount,
                 RoomPackageId = roomReservation.Room.SelectedPackage.Id
 

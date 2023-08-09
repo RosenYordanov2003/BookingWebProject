@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using System.Net;
     using Data;
     using Contracts;
     using Core.Models.RoomBasis;
@@ -81,8 +82,8 @@
         public async Task EditRoomBasisAsync(int roomBasisId, EditRoomBasisViewModel editRoomBasisViewModel)
         {
             RoomBasis roomBasisToEdit = await FindRoomBasisByIdAsync(roomBasisId);
-            roomBasisToEdit.Name = editRoomBasisViewModel.Name;
-            roomBasisToEdit.ClassIcon = editRoomBasisViewModel.ClassIcon;
+            roomBasisToEdit.Name = WebUtility.HtmlEncode(editRoomBasisViewModel.Name);
+            roomBasisToEdit.ClassIcon = WebUtility.HtmlEncode(editRoomBasisViewModel.ClassIcon);
             await bookingContext.SaveChangesAsync();
         }
 
@@ -90,8 +91,8 @@
         {
             RoomBasis roomBais = new RoomBasis()
             {
-                Name = editRoomBasisViewModel.Name,
-                ClassIcon = editRoomBasisViewModel.ClassIcon
+                Name = WebUtility.HtmlEncode(editRoomBasisViewModel.Name),
+                ClassIcon = WebUtility.HtmlEncode(editRoomBasisViewModel.ClassIcon)
             };
             await bookingContext.RoomBasis.AddAsync(roomBais);
             await bookingContext.SaveChangesAsync();

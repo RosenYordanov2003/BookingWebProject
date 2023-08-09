@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using System.Net;
     using Infrastructure.Data.Models;
     using Core.Models.Benefits;
     using Contracts;
@@ -105,11 +106,11 @@
         public async Task EditHotelByIdAsync(int hotelId, EditHotelViewModel editHotelViewModel)
         {
             Hotel hotelToEdit = await FindHotelByIdAsync(hotelId);
-            hotelToEdit.Name = editHotelViewModel.HotelName;
+            hotelToEdit.Name = WebUtility.HtmlEncode(editHotelViewModel.HotelName);
             hotelToEdit.StarRating = editHotelViewModel.StarRating;
-            hotelToEdit.City = editHotelViewModel.City;
-            hotelToEdit.Country = editHotelViewModel.Country;
-            hotelToEdit.Description = editHotelViewModel.Description;
+            hotelToEdit.City = WebUtility.HtmlEncode(editHotelViewModel.City);
+            hotelToEdit.Country = WebUtility.HtmlEncode(editHotelViewModel.Country);
+            hotelToEdit.Description = WebUtility.HtmlEncode(editHotelViewModel.Description);
             hotelToEdit.Longitude = editHotelViewModel.Longitude;
             hotelToEdit.Latitude = editHotelViewModel.Latitude;
 
@@ -119,7 +120,7 @@
             }
             if (!string.IsNullOrWhiteSpace(editHotelViewModel.ImgUrl))
             {
-                await bookingContext.Pictures.AddAsync(new Picture() { HotelId = editHotelViewModel.Id, Path = editHotelViewModel.ImgUrl });
+                await bookingContext.Pictures.AddAsync(new Picture() { HotelId = editHotelViewModel.Id, Path = WebUtility.HtmlEncode(editHotelViewModel.ImgUrl) });
                 await bookingContext.SaveChangesAsync();
             }
             await bookingContext.SaveChangesAsync();
@@ -150,13 +151,13 @@
         {
             Hotel hotel = new Hotel()
             {
-                Name = createHotelViewModel.Name,
-                Country = createHotelViewModel.Country,
+                Name = WebUtility.HtmlEncode(createHotelViewModel.Name),
+                Country = WebUtility.HtmlEncode(createHotelViewModel.Country),
                 Longitude = createHotelViewModel.Longitude,
                 Latitude = createHotelViewModel.Latitude,
                 IsDeleted = false,
-                City = createHotelViewModel.City,
-                Description = createHotelViewModel.Description,
+                City = WebUtility.HtmlEncode(createHotelViewModel.City),
+                Description = WebUtility.HtmlEncode(createHotelViewModel.Description),
                 StarRating = createHotelViewModel.StarRating,
             };
 

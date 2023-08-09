@@ -5,6 +5,7 @@
     using Contracts;
     using Models.RoomPackage;
     using Infrastructure.Data.Models;
+    using System.Net;
 
     public class RoomPackageAdminService : IRoomPackageAdminService
     {
@@ -65,13 +66,17 @@
         public async Task EditRoomPackageAsync(int roomPackageId, EditRoomPackageViewModel editRoomPackageViewModel)
         {
             RoomPackage roomPackageToEdit = await FindRoomPackageByIdAsync(roomPackageId);
-            roomPackageToEdit.Name = editRoomPackageViewModel.Name;
+            roomPackageToEdit.Name = WebUtility.HtmlEncode(editRoomPackageViewModel.Name);
             roomPackageToEdit.Price = editRoomPackageViewModel.Price;
             await bookingContext.SaveChangesAsync();
         }
         public async Task CreateRoomPackageAsync(EditRoomPackageViewModel roomPackageToCreate)
         {
-            RoomPackage roomPackage = new RoomPackage() { Name = roomPackageToCreate.Name, Price = roomPackageToCreate.Price };
+            RoomPackage roomPackage = new RoomPackage()
+            {
+                Name = WebUtility.HtmlEncode(roomPackageToCreate.Name),
+                Price = roomPackageToCreate.Price
+            };
             await bookingContext.RoomPackages.AddAsync(roomPackage);
             await bookingContext.SaveChangesAsync();
         }
@@ -79,6 +84,5 @@
         {
             return await bookingContext.RoomPackages.FirstAsync(rp => rp.Id == roomPackageId);
         }
-
     }
 }

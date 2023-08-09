@@ -7,6 +7,7 @@
     using Infrastructure.Data.Models;
     using Models;
     using BookingWebProject.Areas.Admin.Models.Benefit;
+    using System.Net;
 
     public class BenefitAdminService : IBenefitAdminService
     {
@@ -87,8 +88,8 @@
         public async Task EditBenefitByIdAsync(int benefitId, EditBenefitViewModel editBenefitViewModel)
         {
             Benefit benefitToEdit = await FindBenefitByIdAsync(benefitId);
-            benefitToEdit.Name = editBenefitViewModel.BenefitName;
-            benefitToEdit.ClassIcon = editBenefitViewModel.BenefitClassIcon;
+            benefitToEdit.Name = WebUtility.HtmlEncode(editBenefitViewModel.BenefitName);
+            benefitToEdit.ClassIcon = WebUtility.HtmlEncode(editBenefitViewModel.BenefitClassIcon);
             await bookingContext.SaveChangesAsync();
         }
 
@@ -96,8 +97,8 @@
         {
            Benefit benefitToCreate = new Benefit()
            {
-               Name = benefit.BenefitName,
-               ClassIcon = benefit.BenefitClassIcon,
+               Name = WebUtility.HtmlEncode(benefit.BenefitName),
+               ClassIcon = WebUtility.HtmlEncode(benefit.BenefitClassIcon),
            };
             await bookingContext.Benefits.AddAsync(benefitToCreate);
             await bookingContext.SaveChangesAsync();

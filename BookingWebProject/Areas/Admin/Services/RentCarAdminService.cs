@@ -1,6 +1,7 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using System.Net;
     using Data;
     using Contracts;
     using Models.RentCar;
@@ -74,17 +75,17 @@
         public async Task EditCarAsync(int cardId, EditRentCarViewModel editRentCarViewModel)
         {
             RentCar carToEdit = await FindCarByIdAsync(cardId);
-            carToEdit.MakeType = editRentCarViewModel.MakeType;
-            carToEdit.ModelType = editRentCarViewModel.Model;
+            carToEdit.MakeType = WebUtility.HtmlEncode(editRentCarViewModel.MakeType);
+            carToEdit.ModelType = WebUtility.HtmlEncode(editRentCarViewModel.Model);
             carToEdit.DoorsCount = editRentCarViewModel.DoorsCount;
             carToEdit.PeopleCapacity = editRentCarViewModel.PeopleCapacity;
-            carToEdit.Location = editRentCarViewModel.Location;
+            carToEdit.Location = WebUtility.HtmlEncode(editRentCarViewModel.Location);
             carToEdit.Longitude = editRentCarViewModel.Longitude;
             carToEdit.Lattitude = editRentCarViewModel.Lattitude;
             carToEdit.PricePerDay = editRentCarViewModel.Price;
             carToEdit.FuelConsumption = editRentCarViewModel.FuelConsumption;
             carToEdit.FuelCapacity = editRentCarViewModel.FuelCapacity;
-            carToEdit.CarImg = editRentCarViewModel.CarImg;
+            carToEdit.CarImg = WebUtility.HtmlEncode(editRentCarViewModel.CarImg);
             carToEdit.TransmissionType = editRentCarViewModel.Transmission;
             carToEdit.Year = editRentCarViewModel.Year;
 
@@ -118,17 +119,17 @@
         {
             RentCar rentCar = new RentCar()
             {
-                CarImg = editRentCarViewModel.CarImg,
+                CarImg = WebUtility.HtmlEncode(editRentCarViewModel.CarImg),
                 DoorsCount = editRentCarViewModel.DoorsCount,
                 FuelCapacity = editRentCarViewModel.FuelCapacity,
                 FuelConsumption = editRentCarViewModel.FuelConsumption,
                 IsDeleted = false,
                 Lattitude = editRentCarViewModel.Lattitude,
                 Longitude = editRentCarViewModel.Longitude,
-                Location = editRentCarViewModel.Location,
+                Location = WebUtility.HtmlEncode(editRentCarViewModel.Location),
                 PeopleCapacity = editRentCarViewModel.PeopleCapacity,
-                MakeType = editRentCarViewModel.MakeType,
-                ModelType = editRentCarViewModel.Model,
+                MakeType = WebUtility.HtmlEncode(editRentCarViewModel.MakeType),
+                ModelType = WebUtility.HtmlEncode(editRentCarViewModel.Model),
                 PricePerDay = editRentCarViewModel.Price,
                 Year = editRentCarViewModel.Year,
                 TransmissionType = editRentCarViewModel.Transmission

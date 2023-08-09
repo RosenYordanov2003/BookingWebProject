@@ -1,5 +1,6 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
+    using System.Net;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -10,7 +11,6 @@
     using Infrastructure.Data.Models;
     using Core.Models.RoomBasis;
     using Core.Models.Pager;
-    using BookingWebProject.Core.Models.Hotel;
 
     public class RoomAdminService : IRoomAdminService
     {
@@ -82,7 +82,7 @@
             {
                 room.PricePerNight = editRoomViewModel.PricePerNight;
                 room.Capacity = editRoomViewModel.PeopleCapacity;
-                room.Description = editRoomViewModel.Description;
+                room.Description = WebUtility.HtmlEncode(editRoomViewModel.Description);
                 if (editRoomViewModel.SelectedRoomBasisIds.Any())
                 {
                     foreach (int roomBasisId in editRoomViewModel.SelectedRoomBasisIds)
@@ -109,7 +109,7 @@
             {
                 PricePerNight = roomToAddCoppy.PricePerNight,
                 Capacity = roomToAddCoppy.Capacity,
-                Description = roomToAddCoppy.Description,
+                Description = WebUtility.HtmlEncode(roomToAddCoppy.Description),
                 HotelId = roomToAddCoppy.HotelId,
                 RoomTypeId = roomToAddCoppy.RoomTypeId,
                 IsDeleted = false
@@ -218,7 +218,7 @@
                 Capacity = createRoomViewModel.PeopleCapacity,
                 RoomTypeId = createRoomViewModel.RoomTypeId,
                 HotelId = createRoomViewModel.HotelId,
-                Description = createRoomViewModel.Description,
+                Description = WebUtility.HtmlEncode(createRoomViewModel.Description),
                 PricePerNight = createRoomViewModel.PricePerNight + (createRoomViewModel.PricePerNight * roomType.IncreasePercentage) / 100,
                 IsDeleted = false,
             };

@@ -39,7 +39,7 @@
         {
             if (!await rentCarService.IsCarExistAsync(id))
             {
-                return RedirectToAction("All", "Car");
+                return NotFound();
             }
             RentCarReservationViewModel rentCarReservation = new RentCarReservationViewModel();
             rentCarReservation.CarlViewModel = await rentCarService.GetOrderCarAsync(id);
