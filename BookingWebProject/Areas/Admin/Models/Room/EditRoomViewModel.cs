@@ -26,5 +26,6 @@
         public List<int> SelectedRoomBasisIds { get; set; }
         public IEnumerable<RoomBasisViewModel> OtherRoomBasis { get; set; }
         public IEnumerable<PictureAdminViewModel> Pictures { get; set; }
+        public string? ImgUrl { get; set; }
     }
 }

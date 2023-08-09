@@ -17,6 +17,10 @@
             <span asp-validation-for="@Model.PricePerNight"></span>
         </div>
         <div class="input-container">
+            <label asp-for="@Model.ImgUrl">Add Image Url</label>
+            <input asp-for="@Model.ImgUrl" />
+        </div>
+        <div class="input-container">
             <label asp-for="@Model.Description">Room Description</label>
             <textarea asp-for="@Model.Description" rows="10" cols="60"></textarea>
             <span asp-validation-for="@Model.Description"></span>

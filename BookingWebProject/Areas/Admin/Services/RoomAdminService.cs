@@ -83,6 +83,15 @@
                 room.PricePerNight = editRoomViewModel.PricePerNight;
                 room.Capacity = editRoomViewModel.PeopleCapacity;
                 room.Description = WebUtility.HtmlEncode(editRoomViewModel.Description);
+                if (!string.IsNullOrWhiteSpace(editRoomViewModel.ImgUrl))
+                {
+                    room.Pictures.Add(new Picture()
+                    {
+                        Path = WebUtility.HtmlEncode(editRoomViewModel.ImgUrl),
+                        IsDeleted = false,
+                        RoomId = room.Id
+                    });
+                }
                 if (editRoomViewModel.SelectedRoomBasisIds.Any())
                 {
                     foreach (int roomBasisId in editRoomViewModel.SelectedRoomBasisIds)
