@@ -192,7 +192,10 @@
             }
             if (hotelQueryViewModel.SelectedBenefitIds.Any())
             {
-                hotels = hotels.Where(h => h.HotelBenefits.Any(hb => hotelQueryViewModel.SelectedBenefitIds.Contains(hb.BenefitId)));
+                foreach (var selectedBenefitId in hotelQueryViewModel.SelectedBenefitIds)
+                {
+                    hotels = hotels.Where(h => h.HotelBenefits.Any(hb => hb.BenefitId == selectedBenefitId));
+                }
             }
 
 
