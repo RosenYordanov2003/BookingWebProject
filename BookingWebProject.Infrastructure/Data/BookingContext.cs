@@ -7,7 +7,8 @@
     using Microsoft.EntityFrameworkCore;
     public class BookingContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public BookingContext(DbContextOptions<BookingContext> options)
+        private readonly bool seedDb;
+        public BookingContext(DbContextOptions<BookingContext> options, bool seedDb = true)
             : base(options)
         {
 
@@ -24,26 +25,33 @@
         public DbSet<HotelBenefits> HotelBenefits { get; set; } = null!;
         public DbSet<RoomPackage> RoomPackages { get; set; } = null!;
         public DbSet<RoomsBases> RoomsBases { get; set; } = null!;
-        public DbSet<FavoriteHotels> FavoriteHotels { get; set; }
+        public DbSet<FavoriteHotels> FavoriteHotels { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.ApplyConfiguration(new HotelBenefitsConfiguration());
-            builder.ApplyConfiguration(new RoomBasisEntityConfiguration());
-            builder.ApplyConfiguration(new HotelEntityConfiguration());
-            builder.ApplyConfiguration(new PackageEntityConfiguration());
-            builder.ApplyConfiguration(new RentCarEntityConfiguration());
-            builder.ApplyConfiguration(new RoomTypeEntityConfiguration());
-            builder.ApplyConfiguration(new BenefitEntityConfiguration());
-            builder.ApplyConfiguration(new RoomEntityConfiguration());
-            builder.ApplyConfiguration(new RoomBasesConfiguration());
-            builder.ApplyConfiguration(new PictureEntityConfiguration());
-            builder.ApplyConfiguration(new FavoriteHotelsEntityConfiguration());
             builder.ApplyConfiguration(new UserEntityConfiguration());
-            builder.ApplyConfiguration(new CommentEntityConfiguration());
+            builder.ApplyConfiguration(new FavoriteHotelsEntityConfiguration());
+            if (this.seedDb)
+            {
+                builder.ApplyConfiguration(new HotelBenefitsConfiguration());
+                builder.ApplyConfiguration(new RoomBasisEntityConfiguration());
+                builder.ApplyConfiguration(new HotelEntityConfiguration());
+                builder.ApplyConfiguration(new PackageEntityConfiguration());
+                builder.ApplyConfiguration(new RentCarEntityConfiguration());
+                builder.ApplyConfiguration(new RoomTypeEntityConfiguration());
+                builder.ApplyConfiguration(new BenefitEntityConfiguration());
+                builder.ApplyConfiguration(new RoomEntityConfiguration());
+                builder.ApplyConfiguration(new RoomBasesConfiguration());
+                builder.ApplyConfiguration(new PictureEntityConfiguration());
+                builder.ApplyConfiguration(new CommentEntityConfiguration());
+            }
+            else
+            {
+                builder.Entity<RoomsBases>().HasKey(ck => new { ck.RoomBasisId, ck.RoomId });
+                builder.Entity<HotelBenefits>().HasKey(ck => new { ck.HotelId, ck.BenefitId });
+            }
         }
     }
 }

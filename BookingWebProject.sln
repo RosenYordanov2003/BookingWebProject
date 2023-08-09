@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingWebProject.Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingWebProject.Core", "BookingWebProject.Core\BookingWebProject.Core.csproj", "{5A56DA0C-F96D-4C97-B422-1197BDAD235D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingWebProject.Services.Tests", "BookingWebProject.Services.Tests\BookingWebProject.Services.Tests.csproj", "{99314A83-4DC8-4D35-BADC-DEDE73D099EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5A56DA0C-F96D-4C97-B422-1197BDAD235D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A56DA0C-F96D-4C97-B422-1197BDAD235D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A56DA0C-F96D-4C97-B422-1197BDAD235D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99314A83-4DC8-4D35-BADC-DEDE73D099EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99314A83-4DC8-4D35-BADC-DEDE73D099EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99314A83-4DC8-4D35-BADC-DEDE73D099EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99314A83-4DC8-4D35-BADC-DEDE73D099EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

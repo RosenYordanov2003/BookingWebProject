@@ -82,7 +82,7 @@
         {
             IEnumerable<HotelCardViewModel> hotels = await bookingContext.Hotels.
                 Include(h => h.Reservations).
-                OrderByDescending(h => h.Reservations.Count)
+                 OrderByDescending(h => h.Reservations.Count)
                 .ThenByDescending(h => h.StarRating)
                 .Where(h => !h.IsDeleted)
                 .Select(h => new HotelCardViewModel()
