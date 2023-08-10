@@ -16,9 +16,8 @@ namespace BookingWebProject.Services.Tests
         private BookingContext dbContext;
         private IHotelService hotelService;
 
-        //[OneTimeSetUp]
         [SetUp]
-        public void OneTimeSetUp()
+        public void SetUp()
         {
             this.dbOptions = new DbContextOptionsBuilder<BookingContext>()
                 .UseInMemoryDatabase("BookingSystemInMemory" + Guid.NewGuid().ToString())

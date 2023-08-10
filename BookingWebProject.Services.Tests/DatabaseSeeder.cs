@@ -228,6 +228,7 @@
 
             comment1 = new Comment()
             {
+                Id = 1,
                 HotelId = 1,
                 Description = "Test comment1",
                 CreatedDate = DateTime.Now,
@@ -238,6 +239,7 @@
 
             comment2 = new Comment()
             {
+                Id = 2,
                 HotelId = 1,
                 Description = "Test comment2",
                 CreatedDate = DateTime.Now,

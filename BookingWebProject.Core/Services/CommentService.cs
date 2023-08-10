@@ -26,7 +26,7 @@
             await bookingContext.Comments.AddAsync(comment);
             await bookingContext.SaveChangesAsync();
         }
-        public async Task<bool> IsExist(int commentId)
+        public async Task<bool> CheckIfCommentExistsByIdAsync(int commentId)
         {
             return await bookingContext.Comments.AnyAsync(c => c.Id == commentId && !c.IsDeleted);
         }

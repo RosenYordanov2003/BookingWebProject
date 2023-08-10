@@ -44,7 +44,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await commentService.IsExist(id))
+            if (!await commentService.CheckIfCommentExistsByIdAsync(id))
             {
                 TempData[ErrorMessage] = CommentDoesNotExist;
                 return Json(new { success = false });
@@ -72,7 +72,7 @@
                .ToList();
                 return Json(new { success = false, errors = errors });
             }
-            if (!await commentService.IsExist(model.Id))
+            if (!await commentService.CheckIfCommentExistsByIdAsync(model.Id))
             {
                 TempData[ErrorMessage] = CommentDoesNotExist;
                 return Json(new { success = false });
