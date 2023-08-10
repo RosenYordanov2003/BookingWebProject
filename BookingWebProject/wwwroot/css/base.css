@@ -24,12 +24,12 @@ header {
     z-index: 100;
 }
 
-    header .user-container img {
-        max-width: 60px;
-        height: auto;
-        object-fit: cover;
-        border-radius: 50%;
-    }
+ header .user-container img {
+     max-width: 60px;
+     height: auto;
+     object-fit: cover;
+     border-radius: 50%;
+ }
 
 .sticky {
     background-color: white;
@@ -37,31 +37,31 @@ header {
     margin-right: 1rem;
 }
 
-    .sticky .user-menu li {
-        background-color: white;
-        padding: 0.9rem;
-        border-bottom: 1px solid black;
-    }
+.sticky .user-menu li {
+    background-color: white;
+    padding: 0.9rem;
+    border-bottom: 1px solid black;
+}
 
-    .sticky .user-menu {
-        gap: 0rem;
-    }
+.sticky .user-menu {
+    gap: 0rem;
+}
 
-        .sticky .user-menu li a {
-            color: black;
-        }
+.sticky .user-menu li a {
+    color: black;
+}
 
-    .sticky .fa-caret-down {
-        color: black;
-    }
+.sticky .fa-caret-down {
+    color: black;
+}
 
-    .sticky #logo, .sticky #logo2, .sticky #menu-btn {
-        color: black;
-    }
+.sticky #logo, .sticky #logo2, .sticky #menu-btn {
+    color: black;
+}
 
-    .sticky .navigation .nav-list li a {
-        color: black;
-    }
+.sticky .navigation .nav-list li a {
+    color: black;
+}
 
 .navigation {
     display: flex;
@@ -76,13 +76,13 @@ header {
     gap: 1.4rem;
 }
 
-    .nav-list li a {
-        text-decoration: none;
-        color: white;
-        font-size: 2.4rem;
-        position: relative;
-        padding: 0.4rem;
-    }
+.nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-size: 2.4rem;
+    position: relative;
+    padding: 0.4rem;
+}
 
 #logo2 {
     display: none;
@@ -147,28 +147,28 @@ header {
     z-index: 10;
 }
 
-    .drop-down-menu li {
-        border-bottom: 2px solid black;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 0.4rem;
-    }
+.drop-down-menu li {
+    border-bottom: 2px solid black;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.4rem;
+}
 
-        .drop-down-menu li a {
-            color: black;
-            padding: 1.2rem;
-            font-size: 1.2rem;
-            transition: 0.5s ease;
-            text-decoration: none;
-        }
+.drop-down-menu li a {
+    color: black;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    transition: 0.5s ease;
+    text-decoration: none;
+}
 
-            .drop-down-menu li a:hover {
-                opacity: 0.7;
-            }
+.drop-down-menu li a:hover {
+    opacity: 0.7;
+}
 
-    .drop-down-menu a:not(:last-of-type) {
-        border-bottom: 1px solid black;
-    }
+.drop-down-menu a:not(:last-of-type) {
+    border-bottom: 1px solid black;
+}
 
 .not-active {
     height: 0px;
@@ -182,9 +182,9 @@ header {
     border-radius: 40px;
 }
 
-    #user-icon :before {
-        height: 0px;
-    }
+#user-icon :before {
+    height: 0px;
+}
 
 #toast-container {
     font-size: 1.4rem;
@@ -285,3 +285,37 @@ body > header > div > ul > li:nth-child(2) > ul > li:nth-child(2) {
     height: auto;
     opacity: 1;
 }
+footer {
+    margin-top: 3rem;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: darkblue;
+}
+.footer-logo{
+    display: block;
+    font-size: 2.3rem;
+    margin: 1rem 0rem 2rem 0rem;
+}
+footer ul{
+    display: flex;
+    gap: 1.1rem;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    transition: 0.3s ease all;
+}
+.system{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+footer a:hover{
+    opacity: 0.7;
+}
+

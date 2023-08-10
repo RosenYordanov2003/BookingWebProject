@@ -33,7 +33,7 @@
                 <li>
                     @if (User?.Identity?.IsAuthenticated ?? false)
                     {
-                      <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                                  <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
                     }
                 </li>
             </ul>
@@ -49,39 +49,39 @@
                 </li>
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
-                    <li>
-                        <div class="user-container">
-                            <a asp-action="Personalization" asp-controller="User">Profile</a>
-                            <i class="fa-solid fa-caret-right"></i>
-                        </div>
-                        <ul class="user-menu-list">
-                            <li>
-                                <a asp-controller="User" asp-action="UserReservations" asp-route-id="@this.User.GetId()">Reservations</a>
-                            </li>
-                            <li>
-                                <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@this.User.GetId()">Favorite Hotels</a>
-                            </li>
-                        </ul>
-                    </li>
+                                <li>
+                                    <div class="user-container">
+                                        <a asp-action="Personalization" asp-controller="User">Profile</a>
+                                        <i class="fa-solid fa-caret-right"></i>
+                                    </div>
+                                    <ul class="user-menu-list">
+                                        <li>
+                                            <a asp-controller="User" asp-action="UserReservations" asp-route-id="@this.User.GetId()">Reservations</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@this.User.GetId()">Favorite Hotels</a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                    <li>
-                        <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
-                    </li>
+                                <li>
+                                    <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
+                                </li>
                 }
                 else
                 {
-                    <li>
-                        <a asp-area="" asp-action="Register" asp-controller="Account">Register</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
-                    </li>
+                                <li>
+                                    <a asp-area="" asp-action="Register" asp-controller="Account">Register</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
+                                </li>
                 }
                 <li>
                     <a asp-area="" asp-action="Index" asp-controller="Home">Home</a>
@@ -94,11 +94,25 @@
     </header>
     <partial name="_NotificationPartial" />
         <main role="main" class="pb-3">
-            @RenderBody()
+        @RenderBody()
         </main>
 
-    <footer class="border-top footer text-muted">
-    </footer>
+    @if (this.User?.Identity?.IsAuthenticated ?? false)
+    {
+           <footer>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="footer-logo">Travel</a>
+                <ul>
+                   <li class="footer-item">
+                       <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                   </li>
+                    <li class="footer-item">
+                       <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
+                   </li>
+                </ul>
+                <p class="system">Booking System</p>
+           </footer>
+    }
+
     <script src="~/js/base.js" asp-append-version="true"></script>
 
     <script>
