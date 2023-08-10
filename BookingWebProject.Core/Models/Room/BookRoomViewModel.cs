@@ -11,6 +11,6 @@
         public RoomPackageViewModel SelectedPackage { get; set; } = null!;
         public int HotelId { get; set; }
         public decimal Price { get; set; }
-        public PictureViewModel RoomPicture { get; set; } = null!;
+        public PictureViewModel? RoomPicture { get; set; }
     }
 }

@@ -75,7 +75,7 @@
                 {
                     Path = p.Path
                 })
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             return roomToBook;
         }

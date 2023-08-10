@@ -25,6 +25,14 @@
         public static Benefit benefit3;
         public static Benefit benefit4;
 
+        public static Room room1;
+        public static Room room2;
+        public static Room room3;
+
+        public static RoomType roomType1;
+        public static RoomType roomType2;
+        public static RoomType roomType3;
+
         public static void SeedDatabase(BookingContext bookingContext)
         {
 
@@ -34,6 +42,8 @@
             bookingContext.Comments.AddRange(SeedComments());
             bookingContext.RoomPackages.AddRange(SeedRoomPackages());
             bookingContext.Benefits.AddRange(SeedBenefits());
+            bookingContext.RoomTypes.AddRange(SeedRoomTypes());
+            bookingContext.Rooms.AddRange(SeedRooms());
             bookingContext.SaveChanges();
         }
 
@@ -327,6 +337,72 @@
             benefits.Add(benefit4);
 
             return benefits;
+        }
+        private static IEnumerable<RoomType> SeedRoomTypes()
+        {
+            List<RoomType> roomTypes = new List<RoomType>();
+
+            roomType1 = new RoomType()
+            {
+                Id = 1,
+                Name = "Apartment",
+                IncreasePercentage = 40,
+            };
+            roomType2 = new RoomType()
+            {
+                Id = 2,
+                Name = "Studio",
+                IncreasePercentage = 35
+            };
+            roomType3 = new RoomType()
+            {
+                Id = 3,
+                Name = "Double bed",
+                IncreasePercentage = 30
+            };
+            roomTypes.Add(roomType1);
+            roomTypes.Add(roomType2);
+            roomTypes.Add(roomType3);
+
+            return roomTypes;
+        }
+        private static IEnumerable<Room> SeedRooms()
+        {
+            List<Room> rooms = new List<Room>();
+
+            room1 = new Room()
+            {
+                Id = 1,
+                RoomTypeId = 1,
+                PricePerNight = 190,
+                HotelId = 1,
+                Capacity = 2,
+                Description = "Test description"
+            };
+            room2 = new Room()
+            {
+                Id = 2,
+                RoomTypeId = 2,
+                PricePerNight = 190,
+                HotelId = 1,
+                Capacity = 4,
+                Description = "Test description"
+            };
+            room3 = new Room()
+            {
+                Id = 3,
+                HotelId = 1,
+                RoomTypeId = 3,
+                PricePerNight = 200,
+                Capacity = 2,
+                Description = "Test description"
+            };
+
+            rooms.Add(room1);
+            rooms.Add(room2);
+            rooms.Add(room3);
+
+            return rooms;
         }
     }
 }

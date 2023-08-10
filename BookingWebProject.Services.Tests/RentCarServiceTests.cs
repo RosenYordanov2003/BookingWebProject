@@ -1,4 +1,6 @@
-﻿namespace BookingWebProject.Services.Tests.Comparators
+﻿using BookingWebProject.Services.Tests.Comparators;
+
+namespace BookingWebProject.Services.Tests
 {
     using Microsoft.EntityFrameworkCore;
     using Core.Contracts;
@@ -7,8 +9,8 @@
     using Core.Models.RentCar;
     using Core.Models.RentCar.Enums;
     using Core.Models.Pager;
+    using Infrastructure.Data.Enums;
     using static DatabaseSeeder;
-    using BookingWebProject.Infrastructure.Data.Enums;
 
     public class RentCarServiceTests
     {
@@ -19,13 +21,13 @@
         [SetUp]
         public void SetUp()
         {
-            this.dbOptions = new DbContextOptionsBuilder<BookingContext>()
+            dbOptions = new DbContextOptionsBuilder<BookingContext>()
                 .UseInMemoryDatabase("BookingSystemInMemory" + Guid.NewGuid().ToString())
                 .Options;
-            this.dbContext = new BookingContext(this.dbOptions, false);
-            this.dbContext.Database.EnsureCreated();
+            dbContext = new BookingContext(dbOptions, false);
+            dbContext.Database.EnsureCreated();
             SeedDatabase(dbContext);
-            this.rentCarService = new RentCarService(dbContext);
+            rentCarService = new RentCarService(dbContext);
         }
         [Test]
         public async Task TestGetRentCarsCountShouldReturn2()
@@ -38,7 +40,7 @@
                 CurrentPage = 1,
                 Pager = new Pager(10, 1),
             };
-            int actualCount = await this.rentCarService.GetCarsCountAsync(carQuerViewModel);
+            int actualCount = await rentCarService.GetCarsCountAsync(carQuerViewModel);
             Assert.AreEqual(expectedCountRentCars, actualCount);
         }
         [Test]
@@ -53,7 +55,7 @@
                 Pager = new Pager(10, 1),
                 MinYear = 2020
             };
-            int actualCount = await this.rentCarService.GetCarsCountAsync(carQuerViewModel);
+            int actualCount = await rentCarService.GetCarsCountAsync(carQuerViewModel);
             Assert.AreEqual(expectedCountRentCars, actualCount);
         }
         [Test]
@@ -94,7 +96,7 @@
                 MinYear = 2015
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -136,7 +138,7 @@
                 MinYear = 2015
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -178,7 +180,7 @@
                 MinYear = 2015
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -189,7 +191,7 @@
             {
                 Cars = new List<CarViewModel>()
                 {
-                 
+
                 }
             };
             CarQuerViewModel carQuerViewModel = new CarQuerViewModel()
@@ -201,7 +203,7 @@
                 MinPrice = 200,
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -234,7 +236,7 @@
                 MaxPrice = 170
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -266,7 +268,7 @@
                 MaxYear = 2019
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -297,10 +299,10 @@
                 CarSortOption = CarSortOption.PriceAscending,
                 CurrentPage = 1,
                 Pager = new Pager(10, 1),
-               DoorsCount = 4,
+                DoorsCount = 4,
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -314,7 +316,7 @@
             {
                 Cars = new List<CarViewModel>()
                 {
-                   
+
                     new CarViewModel()
                     {
                         Id = car2.Id,
@@ -344,7 +346,7 @@
                 Pager = new Pager(10, 1),
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -387,7 +389,7 @@
                 Pager = new Pager(10, 1),
             };
 
-            AllCarsSortedAndFilteredDataModel actualModel = await this.rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
+            AllCarsSortedAndFilteredDataModel actualModel = await rentCarService.AllCarsSortedAndFilteredDataModelAsync(carQuerViewModel);
 
             CollectionAssert.AreEqual(expectedModel.Cars, actualModel.Cars, new CarViewModelComparer());
         }
@@ -406,20 +408,20 @@
                 Year = car1.Year
             };
 
-            CarViewModel actualModel = await this.rentCarService.GetOrderCarAsync(car1.Id);
+            CarViewModel actualModel = await rentCarService.GetOrderCarAsync(car1.Id);
             Assert.AreEqual(0, new CarViewModelComparer().Compare(expectedModel, actualModel));
         }
         [Test]
         public async Task TestCheckIfCarExistByShouldReturnTrue()
         {
-            bool actualResult = await this.rentCarService.CheckIfCarExistByIdAsync(1);
+            bool actualResult = await rentCarService.CheckIfCarExistByIdAsync(1);
 
             Assert.IsTrue(actualResult);
         }
         [Test]
         public async Task TestCheckIfCarExistByShouldReturnFalse()
         {
-            bool actualResult = await this.rentCarService.CheckIfCarExistByIdAsync(11);
+            bool actualResult = await rentCarService.CheckIfCarExistByIdAsync(11);
 
             Assert.IsFalse(actualResult);
         }
@@ -428,7 +430,7 @@
         {
             IEnumerable<string> expectedBrands = new List<string>() { "Bmw" };
 
-            IEnumerable<string> actualBrands = await this.rentCarService.GetAllBrandsAsync();
+            IEnumerable<string> actualBrands = await rentCarService.GetAllBrandsAsync();
 
             CollectionAssert.AreEqual(expectedBrands, actualBrands);
         }
@@ -437,11 +439,11 @@
         {
             car1.IsDeleted = true;
             car2.IsDeleted = true;
-            this.dbContext.SaveChanges();
+            dbContext.SaveChanges();
 
-            IEnumerable<string> expectedBrands = new List<string>() {};
+            IEnumerable<string> expectedBrands = new List<string>() { };
 
-            IEnumerable<string> actualBrands = await this.rentCarService.GetAllBrandsAsync();
+            IEnumerable<string> actualBrands = await rentCarService.GetAllBrandsAsync();
 
             CollectionAssert.AreEqual(expectedBrands, actualBrands);
         }
@@ -467,7 +469,7 @@
                 TransmissionType = car1.TransmissionType == TransmissionType.AutomaticTransmission ? "Automatic Transmission" : "Manual Transmission"
             };
 
-            CarDetailsViewModel actualModel = await this.rentCarService.FindCarByIdAsync(car1.Id);
+            CarDetailsViewModel actualModel = await rentCarService.FindCarByIdAsync(car1.Id);
 
             Assert.AreEqual(expectedResult, new CarDetailsViewModelComparer().Compare(expectedModel, actualModel));
         }
@@ -485,7 +487,7 @@
                 }
             };
 
-            IEnumerable<CarBrandViewModel> actualCarBrandViewModels = await this.rentCarService.GetCarsByBrandAsync(car1.MakeType, car1.Id);
+            IEnumerable<CarBrandViewModel> actualCarBrandViewModels = await rentCarService.GetCarsByBrandAsync(car1.MakeType, car1.Id);
 
             CollectionAssert.AreEqual(expectedCarBrandViewModels, actualCarBrandViewModels, new CarBrandViewModelComparer());
         }

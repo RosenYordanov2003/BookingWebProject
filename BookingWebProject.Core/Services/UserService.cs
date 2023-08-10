@@ -1,15 +1,15 @@
 ﻿namespace BookingWebProject.Core.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Hosting;
     using System.Collections.Generic;
     using Data;
     using Contracts;
     using Models.User;
     using Core.Models.Hotel;
     using Core.Models.Room;
-    using BookingWebProject.Infrastructure.Data.Models;
-    using Microsoft.AspNetCore.Hosting;
-    using BookingWebProject.Core.Models.Reservation;
+    using Infrastructure.Data.Models;
+    using Core.Models.Reservation;
 
     public class UserService : IUserService
     {
