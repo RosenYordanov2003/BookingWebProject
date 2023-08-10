@@ -6,8 +6,8 @@
     using Core.Services;
     using Core.Models.Room;
     using Services.Tests.Comparators;
+    using Core.Models.RoomPackage;
     using static DatabaseSeeder;
-    using BookingWebProject.Core.Models.RoomPackage;
 
     public class RoomServiceTests
     {

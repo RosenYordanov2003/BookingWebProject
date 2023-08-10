@@ -81,6 +81,19 @@
                         UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"),
                         EmailAddress = "testuser123@gmail.com"
                     },
+                    new Reservation()
+                    {
+                        Id = Guid.Parse("0FA904EF-7DE8-49BA-986F-9ECB1580A195"),
+                        CountNights = 3,
+                        StartDate = DateTime.Parse("2023-08-06 00:00:00.0000000"),
+                        EndDate = DateTime.Parse("2023-08-09 00:00:00.0000000"),
+                        FirstName = "Rosen",
+                        LastName = "Yordanov",
+                        PeopleCount = 3,
+                        RoomId = 1,
+                        UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"),
+                        EmailAddress = "testuser123@gmail.com"
+                    },
                      new Reservation()
                      {
                         Id = Guid.Parse("10672AC6-1BF2-4FED-A4DF-09CC18298D07"),
