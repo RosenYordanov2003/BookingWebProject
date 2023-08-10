@@ -13,12 +13,16 @@
         public static RentCar car1;
         public static RentCar car2;
 
+        public static Comment comment1;
+        public static Comment comment2;
+
         public static void SeedDatabase(BookingContext bookingContext)
         {
 
 
             bookingContext.Hotels.AddRange(SeedHotels());
             bookingContext.RentCars.AddRange(SeedRentCars());
+            bookingContext.Comments.AddRange(SeedComments());
             bookingContext.SaveChanges();
         }
 
@@ -217,6 +221,35 @@
             rentCars.Add(car1);
             rentCars.Add(car2);
             return rentCars;
+        }
+        private static IEnumerable<Comment> SeedComments()
+        {
+            List<Comment> comments = new List<Comment>();
+
+            comment1 = new Comment()
+            {
+                HotelId = 1,
+                Description = "Test comment1",
+                CreatedDate = DateTime.Now,
+                UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"),
+                IsDeleted = false,
+                UserName = "Test User"
+            };
+
+            comment2 = new Comment()
+            {
+                HotelId = 1,
+                Description = "Test comment2",
+                CreatedDate = DateTime.Now,
+                UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"),
+                IsDeleted = false,
+                UserName = "Test User"
+            };
+
+            comments.Add(comment1);
+            comments.Add(comment2);
+
+            return comments;
         }
     }
 }

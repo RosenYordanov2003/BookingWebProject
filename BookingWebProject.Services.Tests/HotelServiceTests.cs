@@ -7,8 +7,8 @@ namespace BookingWebProject.Services.Tests
     using Core.Models.Hotel;
     using Core.Models.Hotel.Enums;
     using Comparators;
+    using Core.Models.Pager;
     using static DatabaseSeeder;
-    using BookingWebProject.Core.Models.Pager;
 
     public class HotelServiceTests
     {
@@ -28,7 +28,7 @@ namespace BookingWebProject.Services.Tests
             SeedDatabase(dbContext);
             this.hotelService = new HotelService(this.dbContext);
         }
-        
+
 
         [Test]
         public async Task TestIsHotelExistsByHotelIdShouldReturnTrue()
@@ -296,6 +296,307 @@ namespace BookingWebProject.Services.Tests
             CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
         }
         [Test]
+        public async Task TestHotelsFiltering5()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+                  new HotelViewModel()
+                  {
+                    Id = hotel4.Id,
+                    City = hotel4.City,
+                    Country = hotel4.Country,
+                    Name = hotel4.Name,
+                    StarRating = hotel4.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel1.Id,
+                    City = hotel1.City,
+                    Country = hotel1.Country,
+                    Name = hotel1.Name,
+                    StarRating = hotel1.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel2.Id,
+                    City = hotel2.City,
+                    Country = hotel2.Country,
+                    Name = hotel2.Name,
+                    StarRating = hotel2.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel3.Id,
+                    City = hotel3.City,
+                    Country = hotel3.Country,
+                    Name = hotel3.Name,
+                    StarRating = hotel3.StarRating
+                  },
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "all",
+                Country = "all",
+                SelectedBenefitIds = new List<int>(),
+                HotelSortOption = HotelSortOption.ByCountryDescending,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+        [Test]
+        public async Task TestHotelsFiltering6()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel1.Id,
+                    City = hotel1.City,
+                    Country = hotel1.Country,
+                    Name = hotel1.Name,
+                    StarRating = hotel1.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel2.Id,
+                    City = hotel2.City,
+                    Country = hotel2.Country,
+                    Name = hotel2.Name,
+                    StarRating = hotel2.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel3.Id,
+                    City = hotel3.City,
+                    Country = hotel3.Country,
+                    Name = hotel3.Name,
+                    StarRating = hotel3.StarRating
+                  },
+                  new HotelViewModel()
+                  {
+                    Id = hotel4.Id,
+                    City = hotel4.City,
+                    Country = hotel4.Country,
+                    Name = hotel4.Name,
+                    StarRating = hotel4.StarRating
+                  }
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "all",
+                Country = "all",
+                SelectedBenefitIds = new List<int>(),
+                HotelSortOption = HotelSortOption.ByCountryAscending,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+        [Test]
+        public async Task TestHotelsFiltering7()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel1.Id,
+                    City = hotel1.City,
+                    Country = hotel1.Country,
+                    Name = hotel1.Name,
+                    StarRating = hotel1.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel2.Id,
+                    City = hotel2.City,
+                    Country = hotel2.Country,
+                    Name = hotel2.Name,
+                    StarRating = hotel2.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel3.Id,
+                    City = hotel3.City,
+                    Country = hotel3.Country,
+                    Name = hotel3.Name,
+                    StarRating = hotel3.StarRating
+                  },
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "all",
+                Country = "all",
+                SelectedBenefitIds = new List<int>(),
+                MinStarsCountFilter = 5,
+                HotelSortOption = HotelSortOption.ByCountryAscending,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+        [Test]
+        public async Task TestHotelsFiltering8()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel4.Id,
+                    City = hotel4.City,
+                    Country = hotel4.Country,
+                    Name = hotel4.Name,
+                    StarRating = hotel4.StarRating
+                  }
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "all",
+                Country = "all",
+                SelectedBenefitIds = new List<int>(),
+                HotelSortOption = HotelSortOption.ByCountryAscending,
+                MinStarsCountFilter = 2,
+                MaxStarsCountFilter = 4,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+
+        [Test]
+        public async Task TestHotelsFiltering9()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel4.Id,
+                    City = hotel4.City,
+                    Country = hotel4.Country,
+                    Name = hotel4.Name,
+                    StarRating = hotel4.StarRating
+                  }
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "Milan",
+                Country = "Italy",
+                SelectedBenefitIds = new List<int>(),
+                HotelSortOption = HotelSortOption.ByCountryAscending,
+                MinStarsCountFilter = 2,
+                MaxStarsCountFilter = 4,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+        [Test]
+        public async Task TestHotelsFiltering10()
+        {
+            AllHotelsSortedAndFilteredDataModel expectedHotels = new AllHotelsSortedAndFilteredDataModel()
+            {
+                Hotels = new List<HotelViewModel>()
+                {
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel1.Id,
+                    City = hotel1.City,
+                    Country = hotel1.Country,
+                    Name = hotel1.Name,
+                    StarRating = hotel1.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel2.Id,
+                    City = hotel2.City,
+                    Country = hotel2.Country,
+                    Name = hotel2.Name,
+                    StarRating = hotel2.StarRating
+                  },
+
+                  new HotelViewModel()
+                  {
+                    Id = hotel3.Id,
+                    City = hotel3.City,
+                    Country = hotel3.Country,
+                    Name = hotel3.Name,
+                    StarRating = hotel3.StarRating
+                  },
+                  new HotelViewModel()
+                  {
+                    Id = hotel4.Id,
+                    City = hotel4.City,
+                    Country = hotel4.Country,
+                    Name = hotel4.Name,
+                    StarRating = hotel4.StarRating
+                  }
+
+                }
+            };
+
+            HotelQueryViewModel hotelQueryViewModel = new HotelQueryViewModel()
+            {
+                City = "all",
+                Country = "all",
+                SelectedBenefitIds = new List<int>(),
+                HotelSortOption = HotelSortOption.ByStarRatingDescending,
+                Pager = new Pager(4, 1)
+            };
+
+            AllHotelsSortedAndFilteredDataModel actualHotels = await this.hotelService.GetAllHotelsSortedAndFilteredAsync(Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"), hotelQueryViewModel);
+
+            CollectionAssert.AreEqual(expectedHotels.Hotels, actualHotels.Hotels, new HotelViewModelComparer());
+        }
+
+        [Test]
         public async Task TestGetAllHotelCities()
         {
             IEnumerable<string> expectedCities = new List<string>() { "Velingrad", "Sofia", "Milan" };
@@ -333,7 +634,34 @@ namespace BookingWebProject.Services.Tests
 
             Assert.AreEqual(expectedFavoriteHotelsRecordsCount, this.dbContext.FavoriteHotels.Count());
         }
+        [Test]
+        public async Task TestGetHotelById()
+        {
+            HotelInfoViewModel expectedHotelViewModel = new HotelInfoViewModel()
+            {
+                Id = hotel4.Id,
+                City = hotel4.City,
+                Country = hotel4.Country,
+                Name = hotel4.Name,
+                Description = hotel4.Description,
+                StarRating = hotel4.StarRating,
+                Latitude = hotel4.Latitude,
+                Longitude = hotel4.Longitude,
+            };
 
+            HotelInfoViewModel actualHotelViewModel = await this.hotelService.GetHotelByIdAsync(4, new Pager(5, 1));
+
+            Assert.AreEqual(expectedHotelViewModel.Id, actualHotelViewModel.Id);
+        }
+        [Test]
+        public async Task TestHotelCommentsCountShouldReturn2()
+        {
+            int expectedCommentsCount = 2;
+
+            int actualCommentsCount = await this.hotelService.GetHotelCommentsCountAsync(1);
+
+            Assert.AreEqual(expectedCommentsCount, actualCommentsCount);
+        }
         [TearDown]
         public void TearDown()
         {

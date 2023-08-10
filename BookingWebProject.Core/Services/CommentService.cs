@@ -1,10 +1,10 @@
 ﻿namespace BookingWebProject.Core.Services
 {
+    using Microsoft.EntityFrameworkCore;
     using Infrastructure.Data.Models;
     using Data;
     using Contracts;
     using Models.Comment;
-    using Microsoft.EntityFrameworkCore;
 
     public class CommentService : ICommentService
     {

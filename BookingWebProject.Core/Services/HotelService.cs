@@ -8,10 +8,10 @@
     using Data;
     using Infrastructure.Data.Models;
     using Models.Hotel.Enums;
-    using BookingWebProject.Core.Models.Pager;
-    using BookingWebProject.Core.Models.Benefits;
-    using BookingWebProject.Core.Models.Comment;
-    using BookingWebProject.Core.Models.Room;
+    using Core.Models.Pager;
+    using Core.Models.Benefits;
+    using Core.Models.Comment;
+    using Core.Models.Room;
 
     public class HotelService : IHotelService
     {
