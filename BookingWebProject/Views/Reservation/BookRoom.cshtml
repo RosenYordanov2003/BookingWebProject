@@ -58,9 +58,12 @@
     </form>
     <section class="order-info">
         <h2 class="order-title">@Model.Room.Name with @Model.Room.SelectedPackage.Name Package</h2>
-        <div class="img-container">
-            <img src="@Model.Room.RoomPicture.Path" />
-        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Room.RoomPicture.Path))
+        {
+            <div class="img-container">
+                <img src="@Model.Room.RoomPicture.Path" />
+            </div>
+        }
         <p class="book-guests-title">Your Book is for: @Model.Room.AdultsCount adults @(Model.Room.ChildrenCount > 0 ? string.Format(" " + "and" + " " + Model.Room.ChildrenCount.ToString() + " " + "children") : "") </p>
         <hr />
         <p class="price">Price per day: @($"{Model.Room.Price:F2}")$</p>

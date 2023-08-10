@@ -56,13 +56,16 @@
         @foreach (HotelCardViewModel hotel in Model)
         {
             <div class="hotel-container">
-                <div class="hotel-img-container">
-                    <a asp-area="" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
-                    <p class="original-img-path" style="display:none">@hotel.Pictures[0].Path</p>
-                    <p class="second-img-path" style="display:none">@hotel.Pictures[1].Path</p>
-                    <p class="country">@hotel.Country</p>
-                    <p class="hotel-name">@hotel.Name</p>
-                </div>
+                @if (hotel.Pictures.Any())
+                {
+                   <div class="hotel-img-container">
+                       <a asp-area="" asp-controller="Hotel" asp-action="Info" asp-route-id="@hotel.Id"><img src="@hotel.Pictures[0].Path"></a>
+                       <p class="original-img-path" style="display:none">@hotel.Pictures[0].Path</p>
+                       <p class="second-img-path" style="display:none">@hotel.Pictures[1].Path</p>
+                       <p class="country">@hotel.Country</p>
+                       <p class="hotel-name">@hotel.Name</p>
+                   </div>
+                }
                 <div class="content">
                     <p class="hotel-city"><i class="fa-solid fa-location-dot"></i>@hotel.City</p>
                     <ul class="star-list">

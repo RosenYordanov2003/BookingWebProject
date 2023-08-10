@@ -15,14 +15,17 @@
 
 <div class="room-order-container">
     <section class="room-info">
-        <div class="img-container">
-            <i class="fa-solid fa-arrow-left"></i>
-            @foreach (PictureViewModel picture in Model.RoomPictures)
-            {
-                <img src="@picture.Path" />
-            }
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
+        @if (Model.RoomPictures.Any())
+        {
+            <div class="img-container">
+               <i class="fa-solid fa-arrow-left"></i>
+               @foreach (PictureViewModel picture in Model.RoomPictures)
+               {
+                       <img src="@picture.Path" />
+               }
+              <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        }
         <div class="content">
             <p class="room-description">@Model.Description</p>
         </div>

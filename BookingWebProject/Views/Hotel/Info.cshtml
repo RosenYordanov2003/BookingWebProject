@@ -34,26 +34,28 @@
     </ul>
 </section>
 <section class="hotel-card">
-    <div class="img-container">
-        <i class="fa-solid fa-arrow-left"></i>
-        @{
-            int count = 1;
-            @foreach (PictureViewModel picture in Model.Pictures)
-            {
-                if (count == 1)
+    @if (Model.Pictures.Any())
+    {
+          <div class="img-container">
+            <i class="fa-solid fa-arrow-left"></i>
+            @{
+                int count = 1;
+                @foreach (PictureViewModel picture in Model.Pictures)
                 {
-
-                    <img class="active" src="@picture.Path">
+                    if (count == 1)
+                    {
+                       <img class="active" src="@picture.Path">
+                    }
+                    else
+                    {
+                       <img src="@picture.Path">
+                    }
+                    count++;
                 }
-                else
-                {
-                    <img src="@picture.Path">
-                }
-                count++;
             }
-        }
-        <i class="fa-solid fa-arrow-right"></i>
-    </div>
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>   
+    }
     <div class="benefits">
         <h2 class="title">@Model.Name benefits</h2>
         <ul class="benefit-list">

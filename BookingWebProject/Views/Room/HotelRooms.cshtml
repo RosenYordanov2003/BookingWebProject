@@ -24,9 +24,12 @@ else
     @foreach (RoomViewModel room in Model)
     {
         <div class="room-card">
-            <div class="img-container">
-                <img src="@room.RoomPictures.First().Path" />
-            </div>
+            @if (room.RoomPictures.Any())
+            {
+               <div class="img-container">
+                   <img src="@room.RoomPictures.First().Path" />
+               </div>
+            }
             <div class="content">
                 <div class="title-container">
                     <h2>@room.RoomType</h2>
