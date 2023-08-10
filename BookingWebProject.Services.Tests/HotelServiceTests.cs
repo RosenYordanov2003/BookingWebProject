@@ -10,6 +10,7 @@ namespace BookingWebProject.Services.Tests
     using Core.Models.Pager;
     using static DatabaseSeeder;
 
+    [TestFixture]
     public class HotelServiceTests
     {
         private DbContextOptions<BookingContext> dbOptions;
@@ -617,19 +618,19 @@ namespace BookingWebProject.Services.Tests
         [Test]
         public async Task TestAddHotelToUserFavorites()
         {
-            int expectedFavoriteHotelRecordsCount = 1;
+            int expectedFavoriteHotelRecordsCount = 3;
 
-            await this.hotelService.AddHotelToUserFavoriteHotels(1, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
+            await this.hotelService.AddHotelToUserFavoriteHotels(3, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
 
             Assert.AreEqual(expectedFavoriteHotelRecordsCount, this.dbContext.FavoriteHotels.Count());
         }
         [Test]
         public async Task TestRemoveHotelFromUserFavorites()
         {
-            int expectedFavoriteHotelsRecordsCount = 0;
+            int expectedFavoriteHotelsRecordsCount = 2;
 
-            await this.hotelService.AddHotelToUserFavoriteHotels(1, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
-            await this.hotelService.RemoveHotelFromUserFavoriteHotels(1, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
+            await this.hotelService.AddHotelToUserFavoriteHotels(3, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
+            await this.hotelService.RemoveHotelFromUserFavoriteHotels(3, Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254"));
 
             Assert.AreEqual(expectedFavoriteHotelsRecordsCount, this.dbContext.FavoriteHotels.Count());
         }

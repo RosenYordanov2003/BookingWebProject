@@ -8,6 +8,7 @@
     using Comparators;
     using static DatabaseSeeder;
 
+    [TestFixture]
     public class PackageServiceTests
     {
         private DbContextOptions<BookingContext> dbOptions;

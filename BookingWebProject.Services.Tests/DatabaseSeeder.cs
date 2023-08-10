@@ -44,6 +44,7 @@
             bookingContext.Benefits.AddRange(SeedBenefits());
             bookingContext.RoomTypes.AddRange(SeedRoomTypes());
             bookingContext.Rooms.AddRange(SeedRooms());
+            bookingContext.FavoriteHotels.AddRange(SeedFavoriteHotels());
             bookingContext.SaveChanges();
         }
 
@@ -416,6 +417,24 @@
             rooms.Add(room3);
 
             return rooms;
+        }
+        private static IEnumerable<FavoriteHotels> SeedFavoriteHotels()
+        {
+            List<FavoriteHotels> favoriteHotels = new List<FavoriteHotels>()
+            {
+                new FavoriteHotels()
+                {
+                    HotelId = 1,
+                    UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254")
+                },
+                new FavoriteHotels()
+                {
+                    HotelId = 2,
+                    UserId = Guid.Parse("E7D6EE68-2A6D-4A1A-B640-B26FCEB74254")
+                }
+            };
+
+            return favoriteHotels;
         }
     }
 }

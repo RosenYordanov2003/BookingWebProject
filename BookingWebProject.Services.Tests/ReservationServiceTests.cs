@@ -11,6 +11,7 @@
     using BookingWebProject.Core.Models.Room;
     using BookingWebProject.Core.Models.RoomPackage;
 
+    [TestFixture]
     public class ReservationServiceTests
     {
         private DbContextOptions<BookingContext> dbOptions;

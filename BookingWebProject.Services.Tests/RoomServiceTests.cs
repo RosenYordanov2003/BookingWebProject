@@ -9,6 +9,7 @@
     using Core.Models.RoomPackage;
     using static DatabaseSeeder;
 
+    [TestFixture]
     public class RoomServiceTests
     {
         private BookingContext dbContext;

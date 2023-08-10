@@ -12,6 +12,7 @@ namespace BookingWebProject.Services.Tests
     using Infrastructure.Data.Enums;
     using static DatabaseSeeder;
 
+    [TestFixture]
     public class RentCarServiceTests
     {
         private DbContextOptions<BookingContext> dbOptions;

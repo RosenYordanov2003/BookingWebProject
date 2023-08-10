@@ -7,13 +7,13 @@
     using static DatabaseSeeder;
     using BookingWebProject.Core.Models.Comment;
 
+    [TestFixture]
     public class CommentServiceTests
     {
         private DbContextOptions<BookingContext> dbOptions;
         private BookingContext dbContext;
         private ICommentService commentService;
 
-        //[OneTimeSetUp]
         [SetUp]
         public void SetUp()
         {
