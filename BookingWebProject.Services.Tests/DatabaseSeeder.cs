@@ -1,7 +1,7 @@
 ﻿namespace BookingWebProject.Services.Tests
 {
-    using BookingWebProject.Infrastructure.Data.Enums;
     using Data;
+    using Infrastructure.Data.Enums;
     using Infrastructure.Data.Models;
     public static class DatabaseSeeder
     {
@@ -16,6 +16,15 @@
         public static Comment comment1;
         public static Comment comment2;
 
+        public static RoomPackage roomPackage1;
+        public static RoomPackage roomPackage2;
+        public static RoomPackage roomPackage3;
+
+        public static Benefit benefit1;
+        public static Benefit benefit2;
+        public static Benefit benefit3;
+        public static Benefit benefit4;
+
         public static void SeedDatabase(BookingContext bookingContext)
         {
 
@@ -23,6 +32,8 @@
             bookingContext.Hotels.AddRange(SeedHotels());
             bookingContext.RentCars.AddRange(SeedRentCars());
             bookingContext.Comments.AddRange(SeedComments());
+            bookingContext.RoomPackages.AddRange(SeedRoomPackages());
+            bookingContext.Benefits.AddRange(SeedBenefits());
             bookingContext.SaveChanges();
         }
 
@@ -252,6 +263,70 @@
             comments.Add(comment2);
 
             return comments;
+        }
+        private static IEnumerable<RoomPackage> SeedRoomPackages()
+        {
+            List<RoomPackage> roomPackages = new List<RoomPackage>();
+
+            roomPackage1 = new RoomPackage()
+            {
+                Id = 1,
+                Name = "Breakfast",
+                Price = 0,
+            };
+            roomPackage2 = new RoomPackage()
+            {
+                Id = 2,
+                Name = "Breakfast and Dinner",
+                Price = 70,
+            };
+            roomPackage3 = new RoomPackage()
+            {
+                Id = 3,
+                Name = "All Inclusive",
+                Price = 100
+            };
+
+            roomPackages.Add(roomPackage1);
+            roomPackages.Add(roomPackage2);
+            roomPackages.Add(roomPackage3);
+
+            return roomPackages;
+        }
+        private static IEnumerable<Benefit> SeedBenefits()
+        {
+            List<Benefit> benefits = new List<Benefit>();
+
+            benefit1 = new Benefit()
+            {
+                Id = 1,
+                Name = "Allow pets",
+                ClassIcon = "fa-solid fa-dog",
+            };
+            benefit2 = new Benefit()
+            {
+                Id = 2,
+                Name = "Spa",
+                ClassIcon = "fa-solid fa-hot-tub-person",
+            };
+            benefit3 = new Benefit()
+            {
+                Id = 3,
+                Name = "Room service",
+                ClassIcon = "fa-solid fa-bell-concierge"
+            };
+            benefit4 = new Benefit()
+            {
+                Id = 4,
+                Name = "Gym",
+                ClassIcon = "fa-solid fa-dumbbell"
+            };
+            benefits.Add(benefit1);
+            benefits.Add(benefit2);
+            benefits.Add(benefit3);
+            benefits.Add(benefit4);
+
+            return benefits;
         }
     }
 }
