@@ -49,7 +49,7 @@
 
         public async Task<IEnumerable<string>> GetAllBrandsAsync()
         {
-            IEnumerable<string> brands = await bookingContext.RentCars.Select(rc => rc.MakeType).Distinct()
+            IEnumerable<string> brands = await bookingContext.RentCars.Where(rc => !rc.IsDeleted).Select(rc => rc.MakeType).Distinct()
                 .ToArrayAsync();
             return brands;
         }
@@ -76,7 +76,7 @@
                 .FirstAsync(c => c.Id == carId);
             return carToFind;
         }
-        public async Task<bool> IsCarExistAsync(int carId)
+        public async Task<bool> CheckIfCarExistByIdAsync(int carId)
         {
             return await bookingContext.RentCars.AnyAsync(c => !c.IsDeleted && c.Id == carId);
         }

@@ -41,7 +41,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            if (!await carService.IsCarExistAsync(id))
+            if (!await carService.CheckIfCarExistByIdAsync(id))
             {
                 return RedirectToAction(nameof(All));
             }

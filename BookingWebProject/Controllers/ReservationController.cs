@@ -37,7 +37,7 @@
         [HttpGet]
         public async Task<IActionResult> RentCar(int id)
         {
-            if (!await rentCarService.IsCarExistAsync(id))
+            if (!await rentCarService.CheckIfCarExistByIdAsync(id))
             {
                 return NotFound();
             }
@@ -55,7 +55,7 @@
             {
                 return View(model);
             }
-            if (!await rentCarService.IsCarExistAsync(id))
+            if (!await rentCarService.CheckIfCarExistByIdAsync(id))
             {
                 TempData[ErrorMessage] = CarDoesNotExist;
                 return NotFound();
