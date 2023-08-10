@@ -92,11 +92,17 @@
         public async Task DeleteUserProfilePictureAsync(Guid userId, string path)
         {
             string profilePictureName = path.Split("\\")[2];
-            string profilePicturesFolderPath = Path.GetFullPath(@"C:\\Users\\Home\\Desktop\\Booking App4\\BookingSystemProject\\wwwroot\\img\\ProfilePictures\\");
-            string[] files = Directory.GetFiles(profilePicturesFolderPath, profilePictureName);
+            //Set your path when use the application;
+            string profilePicturesFolderPath = Path.GetFullPath(@"C:\Users\Home\Desktop\Booking Web Project C# Web\BookingWebProject\BookingWebProject\wwwroot\img\ProfilePictures\");
+            string[] files = Directory.GetFiles(profilePicturesFolderPath);
             if (files.Length > 0)
             {
-                File.Delete(files[0]);
+
+                string fileToDelete = files.FirstOrDefault(f => f.EndsWith(profilePictureName));
+                if (fileToDelete != null)
+                {
+                    File.Delete(fileToDelete);
+                }
             }
             User user = await bookingContext.Users
                 .FirstAsync(u => u.Id == userId);

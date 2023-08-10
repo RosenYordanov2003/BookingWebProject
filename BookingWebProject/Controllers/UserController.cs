@@ -78,6 +78,7 @@
                     TempData[SuccessMessage] = SuccessfullyUpdatedAccount;
                     await userManager.AddClaimAsync(user, userNameClaim);
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    this.memoryCache.Remove(string.Format(UserInfoCacheKey, userInfoViewModel.Id));
                     return RedirectToAction("Index", "Home");
                 }
                 catch (Exception)
@@ -104,7 +105,7 @@
         public async Task<IActionResult> RemoveProfilePicture(string path)
         {
             await userService.DeleteUserProfilePictureAsync(this.User.GetId(), path);
-
+            this.memoryCache.Remove(string.Format(UserInfoCacheKey, this.User.GetId()));
             User user = await userManager.FindByIdAsync(this.User.GetId().ToString());
             if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
             {
@@ -113,9 +114,10 @@
 
                 await userManager.RemoveClaimAsync(user, claim);
                 await signInManager.SignInAsync(user, isPersistent: false);
+                this.memoryCache.Remove(string.Format(UserInfoCacheKey, this.User.GetId()));
                 return RedirectToAction("Index", "Home");
             }
-            return NotFound();
+            return NoContent();
         }
         [HttpGet]
         public async Task<IActionResult> UserFavoriteHotels(Guid id)
