@@ -69,6 +69,10 @@
             {
                 return this.View("Error404");
             }
+            else if (statusCode == 401)
+            {
+                return View("Unauthorized");
+            }
             return View();
         }
     }
