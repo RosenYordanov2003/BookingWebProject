@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using static Services.Tests.Moq.HotelServiceMoq;
-    using BookingWebProject.Core.Models.Hotel;
+    using Core.Models.Hotel;
     using Microsoft.Extensions.DependencyInjection;
 
     [TestFixture]
@@ -64,7 +64,7 @@
             bookingContextMock.Object);
         }
         [Test]
-        public async Task TestWhenReturnRedirectToAdminAreaIndexAction()
+        public async Task TestWhenReturnRedirectToAdminAreaIndexAction1()
         {
             ClaimsIdentity adminClaimsIdentity = new ClaimsIdentity(new[]
             {
@@ -73,6 +73,41 @@
                 new Claim(ClaimTypes.Role, "Administrator"),
             }, "mock");
             adminClaimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Administrator"));
+
+            ClaimsPrincipal principal = new ClaimsPrincipal(adminClaimsIdentity);
+
+            // Set up the HttpContext with the authenticated user
+            DefaultHttpContext httpContext = new DefaultHttpContext();
+            httpContext.User = principal;
+
+            // set ControllerContext
+            // controller context and the http request that will be processed
+            ControllerContext controllerContext = new ControllerContext
+            {
+                HttpContext = httpContext
+            };
+
+            homeController.ControllerContext = controllerContext;
+
+            IActionResult result = await homeController.Index();
+
+
+            Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
+            RedirectToActionResult redirectResult = result as RedirectToActionResult;
+            Assert.AreEqual("Index", redirectResult.ActionName);
+            Assert.AreEqual("Home", redirectResult.ControllerName);
+            Assert.AreEqual("Admin", redirectResult.RouteValues["Area"]);
+        }
+        [Test]
+        public async Task TestWhenReturnRedirectToAdminAreaIndexAction2()
+        {
+            ClaimsIdentity adminClaimsIdentity = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, "Administrator"),
+            }, "mock");
+            adminClaimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Moderator"));
 
             ClaimsPrincipal principal = new ClaimsPrincipal(adminClaimsIdentity);
 

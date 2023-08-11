@@ -42,9 +42,9 @@
             bookingContext.Comments.AddRange(SeedComments());
             bookingContext.RoomPackages.AddRange(SeedRoomPackages());
             bookingContext.Benefits.AddRange(SeedBenefits());
-            bookingContext.RoomTypes.AddRange(SeedRoomTypes());
             bookingContext.Rooms.AddRange(SeedRooms());
             bookingContext.FavoriteHotels.AddRange(SeedFavoriteHotels());
+            bookingContext.RoomTypes.AddRange(SeedRoomTypes());
             bookingContext.SaveChanges();
         }
 
@@ -361,18 +361,21 @@
                 Id = 1,
                 Name = "Apartment",
                 IncreasePercentage = 40,
+                IsDeleted = false,
             };
             roomType2 = new RoomType()
             {
                 Id = 2,
                 Name = "Studio",
-                IncreasePercentage = 35
+                IncreasePercentage = 35,
+                IsDeleted = false,
             };
             roomType3 = new RoomType()
             {
                 Id = 3,
                 Name = "Double bed",
-                IncreasePercentage = 30
+                IncreasePercentage = 30,
+                IsDeleted = false,
             };
             roomTypes.Add(roomType1);
             roomTypes.Add(roomType2);

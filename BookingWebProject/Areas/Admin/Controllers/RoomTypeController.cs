@@ -77,7 +77,7 @@
                     TempData[WarningMessage] = RoomTypeIsAlreadyRecovered;
                     return RedirectToAction(nameof(Index));
                 }
-                await roomTypeService.RecoverRoomTypeAsync(id);
+                await roomTypeService.RecoverRoomTypeByIdAsync(id);
                 this.memoryCache.Remove(AdminRoomTypesCacheKey);
                 TempData[SuccessMessage] = SuccessfullyRecoveredRoomType;
                 return RedirectToAction(nameof(Index));
@@ -97,7 +97,7 @@
                 {
                     return NotFound();
                 }
-                EditRoomTypeViewModel editRoomTypeViewModel = await roomTypeService.GetRoomTypeToEditAsync(id);
+                EditRoomTypeViewModel editRoomTypeViewModel = await roomTypeService.GetRoomTypeToEditByIdAsync(id);
                 return View(editRoomTypeViewModel);
             }
             catch (Exception)

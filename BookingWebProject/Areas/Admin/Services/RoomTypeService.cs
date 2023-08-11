@@ -16,6 +16,7 @@
         }
         public async Task<IEnumerable<RoomTypeViewModel>> GetAllAvailableRoomTypesAsync()
         {
+            int count = bookingContext.RoomTypes.Count();
             IEnumerable<RoomTypeViewModel> roomTypes = await bookingContext.RoomTypes
                 .Where(rt => !rt.IsDeleted)
                  .Select(rt => new RoomTypeViewModel()
@@ -61,14 +62,14 @@
             return await bookingContext.RoomTypes.AnyAsync(rt => rt.Id == roomTypeId && !rt.IsDeleted);
         }
 
-        public async Task RecoverRoomTypeAsync(int roomTypeId)
+        public async Task RecoverRoomTypeByIdAsync(int roomTypeId)
         {
             RoomType roomType = await FindRoomTypeByIdAsync(roomTypeId);
             roomType.IsDeleted = false;
             await bookingContext.SaveChangesAsync();
         }
 
-        public async Task<EditRoomTypeViewModel> GetRoomTypeToEditAsync(int roomTypeId)
+        public async Task<EditRoomTypeViewModel> GetRoomTypeToEditByIdAsync(int roomTypeId)
         {
             RoomType roomTypeToEdit = await FindRoomTypeByIdAsync(roomTypeId);
             return new EditRoomTypeViewModel { Name = roomTypeToEdit.Name, PercentageIncrease = roomTypeToEdit.IncreasePercentage };
