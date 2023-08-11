@@ -1,13 +1,12 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using System.Net;
     using Data;
     using Contracts;
     using Core.Models.Benefits;
     using Infrastructure.Data.Models;
-    using Models;
-    using BookingWebProject.Areas.Admin.Models.Benefit;
-    using System.Net;
+    using Areas.Admin.Models.Benefit;
 
     public class BenefitAdminService : IBenefitAdminService
     {
