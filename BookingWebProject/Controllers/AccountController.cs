@@ -116,6 +116,15 @@
                 if (await userManager.IsInRoleAsync(userToFind, ModeratorRoleName))
                 {
                     await userManager.RemoveFromRoleAsync(userToFind, ModeratorRoleName);
+                    if (!await roleManager.RoleExistsAsync(UserRoleName))
+                    {
+                        IdentityRole<Guid> userRole = new IdentityRole<Guid>(UserRoleName);
+                        await roleManager.CreateAsync(userRole);
+                    }
+                    if (!await userManager.IsInRoleAsync(userToFind, UserRoleName))
+                    {
+                        await userManager.AddToRoleAsync(userToFind, UserRoleName);
+                    }
                     //To save the changes on SeedUsers
                     await bookingContext.SaveChangesAsync();
                 }

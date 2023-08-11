@@ -2,10 +2,15 @@
 {
     public static class GeneralAplicationConstants
     {
+        //Pager page size
         public const int DefaultPageSize = 5;
+        //Roles
         public const string AdminRoleName = "Administrator";
         public const string AdminAreaName = "Admin";
         public const string ModeratorRoleName = "Moderator";
+        public const string UserRoleName = "User";
+
+        //Cache keys and duration
         public const string HomePageCacheKey = "HomeCache";
         public const int HomePageCacheDurationMinuties = 5;
         public const string RentCarCacheKey = "Details-{0}";
