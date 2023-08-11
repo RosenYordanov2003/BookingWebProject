@@ -4,9 +4,9 @@
     using Areas.Admin.Contracts;
     using Data;
     using Areas.Admin.Services;
+    using Areas.Admin.Models.RoomPackage;
+    using Comparators;
     using static DatabaseSeeder;
-    using BookingWebProject.Areas.Admin.Models.RoomPackage;
-    using BookingWebProject.Services.Tests.Comparators;
 
     [TestFixture]
     public class RoomPackageAdminServiceTestscs

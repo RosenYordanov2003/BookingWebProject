@@ -33,10 +33,11 @@
         public static RoomType roomType2;
         public static RoomType roomType3;
 
+        public static RoomBasis roomBasis1;
+        public static RoomBasis roomBasis2;
+
         public static void SeedDatabase(BookingContext bookingContext)
         {
-
-
             bookingContext.Hotels.AddRange(SeedHotels());
             bookingContext.RentCars.AddRange(SeedRentCars());
             bookingContext.Comments.AddRange(SeedComments());
@@ -45,6 +46,7 @@
             bookingContext.Rooms.AddRange(SeedRooms());
             bookingContext.FavoriteHotels.AddRange(SeedFavoriteHotels());
             bookingContext.RoomTypes.AddRange(SeedRoomTypes());
+            bookingContext.RoomBasis.AddRange(SeedRoomBasis());
             bookingContext.SaveChanges();
         }
 
@@ -438,6 +440,30 @@
             };
 
             return favoriteHotels;
+        }
+        private static IEnumerable<RoomBasis> SeedRoomBasis()
+        {
+
+            List<RoomBasis> roomBasisCollection = new List<RoomBasis>();
+
+            roomBasis1 = new RoomBasis()
+            {
+                Id = 1,
+                Name = "Tv",
+                ClassIcon = "fa-solid fa-tv"
+            };
+
+            roomBasis2 = new RoomBasis()
+            {
+                Id = 2,
+                Name = "Free WiFi",
+                ClassIcon = "fa-solid fa-wifi"
+            };
+
+            roomBasisCollection.Add(roomBasis1);
+            roomBasisCollection.Add(roomBasis2);
+
+            return roomBasisCollection;
         }
     }
 }
