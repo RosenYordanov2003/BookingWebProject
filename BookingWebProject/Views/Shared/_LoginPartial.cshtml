@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@using static BookingWebProject.Common.GeneralAplicationConstants;
 <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -36,6 +37,12 @@
                 </li>
             </ul>
         </li>
+        @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
+        {
+          <li>
+               <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
+          </li>
+        }
         <li>
             <a asp-action="Logout" asp-controller="Account">Logout</a>
         </li>

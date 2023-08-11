@@ -146,6 +146,9 @@ header {
     list-style: none;
     z-index: 10;
 }
+.drop-down-container{
+    overflow-y: scroll;
+}
 
 .drop-down-menu li {
     border-bottom: 2px solid black;

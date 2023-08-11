@@ -106,7 +106,7 @@
     }
 }
 /*between 701px command 1000px*/
-@media screen and (min-width:701px) and (max-width:1100px) {
+@media screen and (min-width:701px) and (max-width:1300px) {
 
     header {
         display: flex;
@@ -142,7 +142,7 @@
     }
 }
 
-@media screen and (min-width:1101px) {
+@media screen and (min-width:1301px) {
     .drop-down-menu {
         display: none;
     }

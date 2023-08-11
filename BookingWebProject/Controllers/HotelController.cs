@@ -6,11 +6,11 @@
     using Core.Contracts;
     using Core.Models.Hotel;
     using Core.Models.Pager;
+    using Core.Models.Benefits;
     using Extensions;
     using static Common.NotificationKeys;
     using static Common.NotificationMessages;
     using static Common.GeneralAplicationConstants;
-    using BookingWebProject.Core.Models.Benefits;
 
     [Authorize]
     public class HotelController : Controller
@@ -94,13 +94,13 @@
         [HttpPost]
         public async Task<IActionResult> RemoveFromFavorite(int id)
         {
-            if (!await hotelService.CheckIsHotelExistAsync(id))
-            {
-                TempData[ErrorMessage] = HotelDoesNotExist;
-                return RedirectToAction(nameof(All));
-            }
             try
             {
+                if (!await hotelService.CheckIsHotelExistAsync(id))
+                {
+                    TempData[ErrorMessage] = HotelDoesNotExist;
+                    return RedirectToAction(nameof(All));
+                }
                 await hotelService.RemoveHotelFromUserFavoriteHotels(id, User.GetId());
                 TempData[SuccessMessage] = SuccessfullyRemoveHotelFromUserFavoriteHotels;
                 this.memoryCache.Remove(string.Format(UserFavoriteHotelsCacheKey, this.User.GetId()));
@@ -119,15 +119,15 @@
             {
                 pg = 1;
             }
-            int hotelCommentsCount = await hotelService.GetHotelCommentsCountAsync(id);
-            Pager pager = new Pager(hotelCommentsCount, pg);
-            if (!await hotelService.CheckIsHotelExistAsync(id))
-            {
-                TempData[ErrorMessage] = HotelDoesNotExist;
-                return RedirectToAction(nameof(All));
-            }
             try
             {
+                int hotelCommentsCount = await hotelService.GetHotelCommentsCountAsync(id);
+                Pager pager = new Pager(hotelCommentsCount, pg);
+                if (!await hotelService.CheckIsHotelExistAsync(id))
+                {
+                    TempData[ErrorMessage] = HotelDoesNotExist;
+                    return RedirectToAction(nameof(All));
+                }
                 HotelInfoViewModel hotel = await hotelService.GetHotelByIdAsync(id, pager);
                 hotel.CommentsPager = pager;
                 return View(hotel);

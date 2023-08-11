@@ -6,6 +6,9 @@
     using Core.Models.Pager;
     using Core.Models.RentCar;
     using static Common.GeneralAplicationConstants;
+    using static Common.NotificationKeys;
+    using static Common.NotificationMessages;
+    using static Common.GeneralAplicationConstants;
 
     public class RentCarController : Controller
     {
@@ -41,26 +44,43 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            if (!await carService.CheckIfCarExistByIdAsync(id))
+            try
             {
+                if (!await carService.CheckIfCarExistByIdAsync(id))
+                {
+                    return RedirectToAction(nameof(All));
+                }
+                string key = string.Format(RentCarCacheKey, id);
+                CarDetailsViewModel carDetailsViewModel = memoryCache.Get<CarDetailsViewModel>(key);
+                if (carDetailsViewModel == null)
+                {
+                    carDetailsViewModel = await carService.FindCarByIdAsync(id);
+                    MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(RentCarDetailsCacheTimeDuration));
+                    memoryCache.Set(key, carDetailsViewModel, memoryCacheEntryOptions);
+                }
+                return View(carDetailsViewModel);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
                 return RedirectToAction(nameof(All));
             }
-            string key = string.Format(RentCarCacheKey, id);
-            CarDetailsViewModel carDetailsViewModel = memoryCache.Get<CarDetailsViewModel>(key);
-            if (carDetailsViewModel == null)
-            {
-                carDetailsViewModel = await carService.FindCarByIdAsync(id);
-                MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(RentCarDetailsCacheTimeDuration));
-                memoryCache.Set(key,carDetailsViewModel, memoryCacheEntryOptions);
-            }
-            return View(carDetailsViewModel);
+           
         }
         [HttpGet]
         public async Task<IActionResult>CarsByBrand(string brand = "", int id = 0)
         {
-            IEnumerable<CarBrandViewModel> carsByBrand = await carService.GetCarsByBrandAsync(brand, id);
-            return PartialView("_CarsByBrand", carsByBrand);
+            try
+            {
+                IEnumerable<CarBrandViewModel> carsByBrand = await carService.GetCarsByBrandAsync(brand, id);
+                return PartialView("_CarsByBrand", carsByBrand);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction(nameof(All));
+            }
         }
     }
 }

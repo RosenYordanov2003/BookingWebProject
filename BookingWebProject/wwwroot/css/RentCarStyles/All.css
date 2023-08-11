@@ -1,5 +1,4 @@
-﻿
-header {
+﻿header {
     background-color: transparent;
 }
 
@@ -164,6 +163,12 @@ header {
     padding: 0rem 4rem;
     margin-bottom: 2.8rem;
 }
+.filter-container{
+    border: 1px solid black;
+    width: 20%;
+    margin-left: 2rem;
+    padding: 1.4rem 2rem;
+}
 
 .form-container p, .filter-title {
     font-size: 1.4rem;
@@ -239,7 +244,7 @@ header {
 .filter-container .container {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 90%;
 }
 
 .filter-container label {

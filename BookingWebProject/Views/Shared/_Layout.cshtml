@@ -1,4 +1,5 @@
 ﻿@using BookingWebProject.Extensions
+@using static BookingWebProject.Common.GeneralAplicationConstants;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,7 @@
                 <li>
                     @if (User?.Identity?.IsAuthenticated ?? false)
                     {
-                                  <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                        <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
                     }
                 </li>
             </ul>
@@ -49,46 +50,46 @@
                 </li>
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
-                                <li>
-                                    <div class="user-container">
-                                        <a asp-action="Personalization" asp-controller="User">Profile</a>
-                                        <i class="fa-solid fa-caret-right"></i>
-                                    </div>
-                                    <ul class="user-menu-list">
-                                        <li>
-                                            <a asp-controller="User" asp-action="UserReservations" asp-route-id="@this.User.GetId()">Reservations</a>
-                                        </li>
-                                        <li>
-                                            <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@this.User.GetId()">Favorite Hotels</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                    <li>
+                        <div class="user-container">
+                            <a asp-action="Personalization" asp-controller="User">Profile</a>
+                            <i class="fa-solid fa-caret-right"></i>
+                        </div>
+                        <ul class="user-menu-list">
+                            <li>
+                                <a asp-controller="User" asp-action="UserReservations" asp-route-id="@this.User.GetId()">Reservations</a>
+                            </li>
+                            <li>
+                                <a asp-controller="User" asp-action="UserFavoriteHotels" asp-route-id="@this.User.GetId()">Favorite Hotels</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                                <li>
-                                    <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
-                                </li>
-                                <li>
-                                    <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
-                                </li>
-                                <li>
-                                    <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
-                                </li>
+                   <li>
+                       <a asp-area="" asp-action="Logout" asp-controller="Account">Logout</a>
+                   </li>
+                   <li>
+                       <a asp-area="" asp-controller="Hotel" asp-action="All">Hotels</a>
+                   </li>
+                   <li>
+                       <a asp-area="" asp-controller="RentCar" asp-action="All">Cars</a>
+                   </li>
+                   @if (this.User.IsInRole(AdminRoleName) || this.User.IsInRole(ModeratorRoleName))
+                   {
+                        <li>
+                            <a asp-area="@AdminAreaName" asp-controller="Home" asp-action="Index">Admin Panel</a>
+                        </li>
+                   }
                 }
                 else
                 {
-                                <li>
-                                    <a asp-area="" asp-action="Register" asp-controller="Account">Register</a>
-                                </li>
-                                <li>
-                                    <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
-                                </li>
+                    <li>
+                        <a asp-area="" asp-action="Register" asp-controller="Account">Register</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-action="Login" asp-controller="Account">Login</a>
+                    </li>
                 }
-                <li>
-                    <a asp-area="" asp-action="Index" asp-controller="Home">Home</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Car" asp-action="All">Cars</a>
-                </li>
             </ul>
         </div>
     </header>

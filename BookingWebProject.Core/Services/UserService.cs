@@ -94,6 +94,7 @@
             if (!string.IsNullOrWhiteSpace(path))
             {
                 string profilePictureName = path.Split("\\")[2];
+
                 //Set your path when use the application;
                 string profilePicturesFolderPath = Path.GetFullPath(@"C:\Users\Home\Desktop\Booking Web Project C# Web\BookingWebProject\BookingWebProject\wwwroot\img\ProfilePictures\");
                 string[] files = Directory.GetFiles(profilePicturesFolderPath);

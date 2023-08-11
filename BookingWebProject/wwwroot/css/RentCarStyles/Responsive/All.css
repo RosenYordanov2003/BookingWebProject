@@ -103,6 +103,12 @@
     .page-list .page-link {
         padding: 0.6rem 0.9rem;
     }
+    .filter-container {
+        width: 90%;
+        margin-left: 0.5rem;
+        text-align: center;
+        padding: 1rem 2rem;
+    }
 }
 
 @media all and (min-width: 701px) and (max-width:1000px) {
@@ -144,5 +150,8 @@
     .card .car-img-container {
         width: 400px;
         text-align: center;
+    }
+    .filter-container{
+        width: 60%;
     }
 }

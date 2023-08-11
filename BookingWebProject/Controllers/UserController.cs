@@ -105,7 +105,6 @@
         public async Task<IActionResult> RemoveProfilePicture(string path)
         {
             await userService.DeleteUserProfilePictureAsync(this.User.GetId(), path);
-            this.memoryCache.Remove(string.Format(UserInfoCacheKey, this.User.GetId()));
             User user = await userManager.FindByIdAsync(this.User.GetId().ToString());
             if (this.User.HasClaim(c => c.Type == "ProfilePicturePath"))
             {
@@ -117,6 +116,7 @@
                 this.memoryCache.Remove(string.Format(UserInfoCacheKey, this.User.GetId()));
                 return RedirectToAction("Index", "Home");
             }
+            this.memoryCache.Remove(string.Format(UserInfoCacheKey, this.User.GetId()));
             return NoContent();
         }
         [HttpGet]
