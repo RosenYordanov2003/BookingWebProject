@@ -73,7 +73,7 @@
             {
                 return View("Unauthorized");
             }
-            return View();
+            return View("Error");
         }
     }
 }

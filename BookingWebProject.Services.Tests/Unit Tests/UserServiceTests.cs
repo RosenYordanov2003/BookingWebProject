@@ -9,9 +9,10 @@
     using Data;
     using Core.Models.Hotel;
     using Comparators;
-    using static DatabaseSeeder;
     using BookingWebProject.Core.Models.Reservation;
     using Microsoft.AspNetCore.Http;
+    using global::Moq;
+    using static DatabaseSeeder;
 
     [TestFixture]
     public class UserServiceTest

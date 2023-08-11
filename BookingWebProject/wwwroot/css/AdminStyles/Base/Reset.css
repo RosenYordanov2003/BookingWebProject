@@ -61,9 +61,6 @@ body.dark {
     transition: all 0.3s ease;
 }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: #0b3cc1;
-    }
 
 .dark h1,
 .dark h2,

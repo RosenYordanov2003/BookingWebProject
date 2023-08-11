@@ -98,7 +98,6 @@
             {
                 if (!await hotelService.CheckIsHotelExistAsync(id))
                 {
-                    TempData[ErrorMessage] = HotelDoesNotExist;
                     return NotFound();
                 }
                 await hotelService.RemoveHotelFromUserFavoriteHotels(id, User.GetId());
@@ -125,7 +124,6 @@
                 Pager pager = new Pager(hotelCommentsCount, pg);
                 if (!await hotelService.CheckIsHotelExistAsync(id))
                 {
-                    TempData[ErrorMessage] = HotelDoesNotExist;
                     return NotFound();
                 }
                 HotelInfoViewModel hotel = await hotelService.GetHotelByIdAsync(id, pager);
