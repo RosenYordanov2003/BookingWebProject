@@ -1,11 +1,11 @@
 ﻿namespace BookingWebProject.Areas.Admin.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using System.Net;
     using Data;
     using Contracts;
     using Models.RoomPackage;
     using Infrastructure.Data.Models;
-    using System.Net;
 
     public class RoomPackageAdminService : IRoomPackageAdminService
     {

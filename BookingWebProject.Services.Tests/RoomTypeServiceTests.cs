@@ -7,7 +7,6 @@
     using Data;
     using Comparators;
     using static DatabaseSeeder;
-    using BookingWebProject.Infrastructure.Migrations;
 
     [TestFixture]
     public class RoomTypeServiceTests
@@ -24,7 +23,7 @@
                .Options;
             this.dbContext = new BookingContext(this.dbOptions, false);
             this.dbContext.Database.EnsureCreated();
-            DatabaseSeeder.SeedDatabase(dbContext);
+            SeedDatabase(dbContext);
             roomTypeService = new RoomTypeService(dbContext);
         }
         [Test]
