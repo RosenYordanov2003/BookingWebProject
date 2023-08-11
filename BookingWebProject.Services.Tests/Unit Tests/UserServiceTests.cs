@@ -95,29 +95,29 @@
             Assert.AreEqual(userInfoToUpdate.FirstName, updateUserInfo.FirstName);
             Assert.AreEqual(userInfoToUpdate.LastName, updateUserInfo.LastName);
         }
-        //[Test]
-        //public async Task TestUploadUserImgAsync()
-        //{
-        //    var userId = Guid.NewGuid();
-        //    var userInfo = new UserInfoViewModel
-        //    {
-        //        ProfilePictureFile = new Mock<IFormFile>().Object
-        //    };
+        [Test]
+        public async Task TestUploadUserImgAsync()
+        {
+            var userId = Guid.NewGuid();
+            var userInfo = new UserInfoViewModel
+            {
+                ProfilePictureFile = new Mock<IFormFile>().Object
+            };
 
-        //    var memoryStream = new MemoryStream(new byte[0]);
-        //    var fileMock = new Mock<IFormFile>();
-        //    fileMock.Setup(f => f.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None))
-        //            .Returns(Task.CompletedTask)
-        //            .Callback((Stream stream, CancellationToken token) => memoryStream.CopyTo(stream));
+            var memoryStream = new MemoryStream(new byte[0]);
+            var fileMock = new Mock<IFormFile>();
+            fileMock.Setup(f => f.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None))
+                    .Returns(Task.CompletedTask)
+                    .Callback((Stream stream, CancellationToken token) => memoryStream.CopyTo(stream));
 
-        //    userInfo.ProfilePictureFile = fileMock.Object;
+            userInfo.ProfilePictureFile = fileMock.Object;
 
-        //    string actualPath = await userService.UploadUserImageAsync(userInfo, userId);
-        //    actualPath = actualPath.Replace(Path.DirectorySeparatorChar, '/');
+            string actualPath = await userService.UploadUserImageAsync(userInfo, userId);
+            actualPath = actualPath.Replace(Path.DirectorySeparatorChar, '/');
 
 
-        //    Assert.AreEqual("img/ProfilePictures/" + userId.ToString() + "_" + userInfo.ProfilePictureFile.FileName, actualPath);
-        //}
+            Assert.AreEqual("img/ProfilePictures/" + userId.ToString() + "_" + userInfo.ProfilePictureFile.FileName, actualPath);
+        }
         [Test]
         public async Task TestGetUserFavoriteHotels1()
         {

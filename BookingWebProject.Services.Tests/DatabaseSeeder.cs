@@ -47,6 +47,7 @@
             bookingContext.FavoriteHotels.AddRange(SeedFavoriteHotels());
             bookingContext.RoomTypes.AddRange(SeedRoomTypes());
             bookingContext.RoomBasis.AddRange(SeedRoomBasis());
+            bookingContext.Pictures.Add(new Picture() { Id = 1, Path = "test/path", HotelId = 2 , IsDeleted = false});
             bookingContext.SaveChanges();
         }
 

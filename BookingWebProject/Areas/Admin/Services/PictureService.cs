@@ -15,7 +15,7 @@
 
         public async Task<bool> CheckIsPictureAlreadyDeleted(int pictureId)
         {
-            return await bookingContext.Pictures.AnyAsync(p => p.Id == pictureId);
+            return await bookingContext.Pictures.AnyAsync(p => p.Id == pictureId && p.IsDeleted);
         }
 
         public async Task<bool> CheckIsPictureExistByIdAsync(int pictureId)
