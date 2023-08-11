@@ -104,6 +104,12 @@
         width: 60%;
         margin-bottom: 2rem;
     }
+    footer{
+        text-align: center;
+    }
+    footer ul {
+        flex-direction: column;
+    }
 }
 /*between 701px command 1000px*/
 @media screen and (min-width:701px) and (max-width:1300px) {

@@ -48,7 +48,7 @@
             {
                 if (!await carService.CheckIfCarExistByIdAsync(id))
                 {
-                    return RedirectToAction(nameof(All));
+                    return NotFound();
                 }
                 string key = string.Format(RentCarCacheKey, id);
                 CarDetailsViewModel carDetailsViewModel = memoryCache.Get<CarDetailsViewModel>(key);

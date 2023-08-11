@@ -1,0 +1,18 @@
+﻿main{
+    margin-top: 7rem;
+}
+
+.exception-container{
+   text-align: center;
+}
+.title{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+.exception-container p{
+    font-size: 1.2rem;
+}
+.exception-container p a{
+    color: black;
+}

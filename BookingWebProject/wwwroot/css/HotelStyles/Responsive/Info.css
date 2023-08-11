@@ -65,10 +65,12 @@
 
     .hotel-card {
         flex-direction: column;
+        padding: 0.4rem;
+        margin-bottom: 2rem;
     }
 
     .hotel-card .img-container {
-        width: 90%;
+        width: 95%;
     }
 
     .rooms-link {

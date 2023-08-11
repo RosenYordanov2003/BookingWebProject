@@ -7,7 +7,7 @@ header {
 
 
 body {
-    background-image: url('../../img/Booking project register-background img.jpg');
+    background-image: url('../../img/RegisterWallpaper2.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
@@ -86,18 +86,17 @@ span {
 }
 
 .submit-btn {
-    background: #00BFFF;
-    font-size: 16px;
-    color: #fff;
-    box-shadow: rgba(0,0,0,0.4);
-    border: 1px solid black;
+    background-color: transparent;
+    border: 2px solid orange;
+    font-size: 1.2rem;
+    color: #ff8f00;
     margin-top: 1.6rem;
     margin-bottom: 2rem;
     width: 90%;
     padding: 1rem 0rem 1rem 0rem;
     border-radius: 8px;
     font-weight: bold;
-    transition: 0.7s ease;
+    transition: all 0.7s ease;
 }
 
 input::placeholder {
@@ -126,7 +125,10 @@ section:not(:last-of-type) {
 }
 
 .submit-btn:hover {
-  opacity: 0.9;
+    opacity: 0.9;
+    transform: scale(1.050);
+    background-color: #ff8f00;
+    color: white;
 }
 
 .submit-btn:active {

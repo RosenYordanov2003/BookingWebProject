@@ -38,7 +38,6 @@
             }
             try
             {
-
                 RoomOrderInfoViewModel room = await roomService.GetORderRoomInfoAsync(id);
                 IEnumerable<RoomPackageViewModel> roomPackages = memoryCache.Get<IEnumerable<RoomPackageViewModel>>(RoomPackageCacheKey);
                 if (roomPackages == null)
@@ -76,7 +75,6 @@
                         ModelState.AddModelError(memberName, validationResult.ErrorMessage);
                     }
                 }
-
                 return View(model);
             }
             return RedirectToAction("BookRoom", "Reservation", roomOrderInfoViewModel);
