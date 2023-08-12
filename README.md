@@ -1,8 +1,8 @@
 # Booking Web Project
 
 ## About
+### The application design is custom created from me and is fully responsive for all devices. From 280px width to 1920px width.
 This is educational web project for Asp.Net Advanced course in SoftUni.
-The application design is custom created from me and is fully responsive for all devices. From 280px width to 1920px width
 The application represents booking system where the users can book rooms in hotels or rent a car.
 Every hotel has hotel benefits for example: spa, room service, allow pets and etc. Hotels also have list of room types. Every room type has diiferent capacity and different price, depends on the room type.
 Every room type has different packages for example: bed and breakfast, bed, breakfast and dinner and all inclusive package. Every room package has a different price depends on the package.
