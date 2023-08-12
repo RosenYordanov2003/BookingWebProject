@@ -2,7 +2,7 @@
 
 ## About
 This is educational web project for Asp.Net Advanced course in SoftUni.
-
+The application design is custom created from me and is fully responsive for all devices. From 280px width to 1920px width
 The application represents booking system where the users can book rooms in hotels or rent a car.
 Every hotel has hotel benefits for example: spa, room service, allow pets and etc. Hotels also have list of room types. Every room type has diiferent capacity and different price, depends on the room type.
 Every room type has different packages for example: bed and breakfast, bed, breakfast and dinner and all inclusive package. Every room package has a different price depends on the package.
@@ -88,8 +88,19 @@ I have used local storage to save the state of the color, when switching the lig
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/6acfef5f-da70-4e21-ad6c-f21d5b7b3316)
 
-Too see more download the project and ejoy :)
+Too see more download the project and enjoy :)
 
+## Тechnologies I have used
+- C#
+- ASP.NET with MVC pattern
+- Entity Framework core
+- Microsoft SQL Server
+- JavaScript
+- Html
+- Css
+- Ajax
+- Git
+  
 
 
 
