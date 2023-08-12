@@ -96,6 +96,8 @@ I have used local storage to save the state of the color, when switching the lig
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/b960d5bc-e04d-442e-a081-2c4fa4bf3a8f)
 
+User menu state only with icons
+
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/3fcfbc02-c678-4d88-9017-81edf8eb2aa3)
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/6acfef5f-da70-4e21-ad6c-f21d5b7b3316)
