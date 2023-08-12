@@ -30,4 +30,17 @@ These are the registration and login pages
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/66c59eb0-3f4d-40e5-8595-ef352d9ae3e2)
 
+This is the Home Page: 
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/ad9ae066-e4e2-4d9a-ad42-7284987804f1)
+
+Hotels which are visualized are the hotels with the most reservations count.
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/3da7b00e-b44c-480c-95b5-c0d81f022d89)
+
+Only not deleted hotels and cars are accessible for the user.
+If user tries to reserve car or room from particular room type and car or room is already reserved warning message is visualized to the user with message: (Car or Room) is already reserved for this period.
+For the room reservation all rooms by given type are checked for reservation that may cause а conflic with the dates which are given from the user.
+Only not deleted room packages are available form the rooms and only not deleted room types are accessible for the users. If room type is deleted, all rooms by this type are automatically not available
+
 
