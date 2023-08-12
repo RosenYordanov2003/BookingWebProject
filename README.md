@@ -38,9 +38,39 @@ Hotels which are visualized are the hotels with the most reservations count.
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/3da7b00e-b44c-480c-95b5-c0d81f022d89)
 
-Only not deleted hotels and cars are accessible for the user.
+- Only not deleted hotels and cars are accessible for the user.
 If user tries to reserve car or room from particular room type and car or room is already reserved warning message is visualized to the user with message: (Car or Room) is already reserved for this period.
-For the room reservation all rooms by given type are checked for reservation that may cause а conflic with the dates which are given from the user.
-Only not deleted room packages are available form the rooms and only not deleted room types are accessible for the users. If room type is deleted, all rooms by this type are automatically not available
+- For the room reservation all rooms by given type are checked for reservation that may cause а conflic with the dates which are given from the user.
+- Only not deleted room packages are available form the rooms and only not deleted room types are accessible for the users. If room type is deleted, all rooms by this type are automatically not available
+- If user search for not existing rent car, hotel or room type, NotFound response is returned with custom excpetion page for 404. (Chane environment if you want to see custom error  pages)
+- Hotel All, RentCar All, Hotel Details and some admin pages have pagination.
+RentCar All page
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/d5a45338-9eea-44b6-aa46-756aba01e770)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/23d6040f-5628-4fcb-81bb-01cc487df5a9)
+
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/67e2d580-9d9b-4de5-b44d-4f11b70c9d0a)
+
+Hotel All page
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/7a06c723-cc42-4684-a0ae-6a5f3a05f02c)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/58cc07c7-0cad-4291-83e1-69bb0d0b18b9)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/a28e918d-b40d-43b2-a96e-b7de9f27ad99)
+
+I have used Leaflet appi for visualizing hotel location, also for car location where car have to be picked up.
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/7d055f37-1a19-4ddd-a5c4-93013dfb69b1)
+
+I have used geolocation if user allows to get his location, for calculating the distance between (hotel, car) location adn user current location
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/bffece16-a91e-4bf0-a54c-bf7c0ae3a7e0)
+
+
+
+
 
 
