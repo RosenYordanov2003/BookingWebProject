@@ -69,6 +69,32 @@ I have used geolocation if user allows to get his location, for calculating the 
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/bffece16-a91e-4bf0-a54c-bf7c0ae3a7e0)
 
+User personal info page:
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/65a8783d-b7c1-4083-bd38-1b55f85ba735)
+
+Room page by given hotel id
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/730098ad-8036-4e4e-a33f-d90914a2bd8d)
+
+Admin page
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/3274e04f-58e5-4193-93bf-0f3a8d67b5e1)
+
+I have used local storage to save the state of the color, when switching the light modes and for menu state.
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/b960d5bc-e04d-442e-a081-2c4fa4bf3a8f)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/3fcfbc02-c678-4d88-9017-81edf8eb2aa3)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/6acfef5f-da70-4e21-ad6c-f21d5b7b3316)
+
+Too see more download the project and ejoy :)
+
+
+
+
+
+
 
 
 
