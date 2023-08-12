@@ -69,7 +69,8 @@ I have used geolocation if user allows to get his location, for calculating the 
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/bffece16-a91e-4bf0-a54c-bf7c0ae3a7e0)
 
-User personal info page:
+User personal info page
+Set your path when you decide to delete your profile picture, becase can throw an exception
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/65a8783d-b7c1-4083-bd38-1b55f85ba735)
 
