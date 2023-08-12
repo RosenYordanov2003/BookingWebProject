@@ -20,3 +20,14 @@ Only the admin user can change the roles of other users.
 ## Modeator
 Moderator user can modify: hotels, room basis, rooms, hotel benefits, room packages and cars.
 Moderator user can see all statistics about the app for example total reservations made in the application and can see total hotel reservations count and total reservations made cars.
+
+## Functuonality
+Authenticated users can see: hoome page, all hotle pages, all room pages, personalization page, user favorite hotels page, user reservation pages, all reservation pages and all car pages.
+The anonymous ones ca see: home page, car pages and register, login pages.
+These are the registration and login pages
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/65ed8384-b8db-459b-911a-02b605290e8b)
+
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/66c59eb0-3f4d-40e5-8595-ef352d9ae3e2)
+
+
