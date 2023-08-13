@@ -52,7 +52,7 @@
                 {
                     <li>
                         <div class="user-container">
-                            <a asp-action="Personalization" asp-controller="User">Profile</a>
+                                <a asp-controller="User" asp-action="Personalization" asp-route-id="@User.GetId()">Profile</a>
                             <i class="fa-solid fa-caret-right"></i>
                         </div>
                         <ul class="user-menu-list">

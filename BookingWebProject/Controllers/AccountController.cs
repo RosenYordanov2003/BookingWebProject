@@ -92,6 +92,8 @@
             await signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
+
+
         [HttpPost]
         [Authorize(Roles = AdminRoleName)]
         public async Task<IActionResult> ChangeRole(Guid id, string? role = null)
