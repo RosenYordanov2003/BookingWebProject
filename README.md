@@ -102,6 +102,10 @@ User menu state only with icons
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/6acfef5f-da70-4e21-ad6c-f21d5b7b3316)
 
+
+## Notes
+- When you creating or editing lattitude and longitude please enter a number with 17,15 digit precision.
+- Set your rooth path wnen you are creating or editing profile pictures
 Too see more download the project and enjoy :)
 
 ## Тechnologies I have used
