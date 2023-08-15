@@ -1,0 +1,25 @@
+﻿@media screen and (min-width: 280px) and (max-width: 700px){
+   .title, 
+   .owner-title, 
+   .content-title{
+       font-size: 1rem;
+   }
+   .reservation-section,
+   .capacity{
+       flex-direction: column;
+       text-align: center;
+   }
+   .reservation-date,
+   .location, 
+   .capacity,
+   .content{
+       font-size: 1.1rem;
+   }
+}
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+    .reservation-section,
+    .capacity {
+        flex-direction: column;
+        text-align: center;
+    }
+}

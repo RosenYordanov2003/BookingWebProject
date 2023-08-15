@@ -1,0 +1,56 @@
+﻿@model ReservationInfoViewModel
+
+
+<link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/responsive-base.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/user-menu.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/ReservationStyles/Details.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/ReservationStyles/Responsive/Details.css" asp-append-version="true" />
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Paytone+One&family=Poppins&display=swap" rel="stylesheet">
+
+<h1 class="title">Reservation Id: @Model.ReservationId</h1>
+
+<section class="reservation-section">
+    <div class="about-reservation">
+        <h2 class="owner-title">Made from: @Model.FirstName  @Model.LastName</h2>
+        <p class="reservation-date">Your period is from: <i class="fa-solid fa-calendar-days"></i> @(string.Format($"{Model.StartDate.ToString("yyyy-MM-dd")} to  {Model.EndDate.ToString("yyyy-MM-dd")}")) <i class="fa-solid fa-calendar-days"></i></p>
+        <div class="capacity">
+            <p>Reservation People Count:</p>
+            <ul>
+                @for (int i = 1; i <= Model.PeopleCount; i++)
+                {
+                     <li><i class="fa-solid fa-user"></i></li>
+                }
+            </ul>
+        </div>
+        <p class="location">In @Model.Country <i class="fa-solid fa-location-dot"></i> @Model.City</p>
+    </div>
+    <div class="reservation-order">
+        @if (!string.IsNullOrWhiteSpace(Model.CarPicture))
+        {
+                <section class="reservation-order-content">
+                    <h2 class="content-title">@Model.CarMakeType @Model.CarModel</h2>
+                    <p class="content">Car year: @Model.Year</p>
+                    <p class="content">Car transmission: @Model.TransimssionType</p>
+                    <div class="img-container">
+                        <img src="@Model.CarPicture">
+                    </div>
+                </section>
+        }
+        else
+        {
+                <section class="reservation-order-content">
+                    <h2 class="content-title">@Model.RoomName</h2>
+                    <p class="content">Room package: @Model.RoomPackage</p>
+                    <p class="content">In @(Model.HotelName.Contains("Hotel") ? "" : "hotel") @Model.HotelName</p>
+                    <div class="img-container">
+                        <img src="@Model.RoomPicture">
+                    </div>
+                </section>
+        }
+    </div>
+</section>

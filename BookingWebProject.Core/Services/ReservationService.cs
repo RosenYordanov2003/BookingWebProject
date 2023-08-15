@@ -92,6 +92,60 @@
             await bookingContext.Reservations.AddAsync(reservation);
             await bookingContext.SaveChangesAsync();
         }
+        public async Task<bool> IsReservationExistAsync(Guid reservationId)
+        {
+            return await bookingContext.Reservations.AnyAsync(r => r.Id == reservationId);
+        }
+        public async Task<ReservationInfoViewModel> GetReservationByIdAsync(Guid reservationId)
+        {
+            Reservation reservationToFind = await bookingContext.Reservations
+                 .Include(r => r.Hotel)
+                 .Include(r => r.Room)
+                 .ThenInclude(r => r.Pictures)
+                 .Include(r => r.Room.RoomType)
+                 .Include(r => r.RentCar)
+                 .Include(r => r.RoomPackage)
+                .FirstAsync(r => r.Id == reservationId);
+            ReservationInfoViewModel reservationInfoViewModel = null;
+            if (reservationToFind.RentCar == null)
+            {
+                reservationInfoViewModel = new ReservationInfoViewModel()
+                {
+                    ReservationId = reservationId,
+                    PeopleCount = reservationToFind.PeopleCount,
+                    StartDate = reservationToFind.StartDate,
+                    EndDate = reservationToFind.EndDate,
+                    HotelName = reservationToFind.Hotel.Name,
+                    RoomName = reservationToFind.Room.RoomType.Name,
+                    RoomPicture = reservationToFind.Room.Pictures.First().Path,
+                    City = reservationToFind.Hotel.City,
+                    Country = reservationToFind.Hotel.Country,
+                    TotalPrice = reservationToFind.TotalPrice,
+                    RoomPackage = reservationToFind?.RoomPackage?.Name ?? "Bed and Breakfast",
+                    FirstName = reservationToFind.FirstName,
+                    LastName = reservationToFind.LastName,
+
+                };
+                return reservationInfoViewModel;
+            }
+            reservationInfoViewModel = new ReservationInfoViewModel()
+            {
+                ReservationId = reservationId,
+                PeopleCount = reservationToFind.PeopleCount,
+                StartDate = reservationToFind.StartDate,
+                EndDate = reservationToFind.EndDate,
+                TotalPrice = reservationToFind.TotalPrice,
+                City = reservationToFind.RentCar.Location,
+                CarModel = reservationToFind.RentCar.ModelType,
+                CarMakeType = reservationToFind.RentCar.MakeType,
+                CarPicture = reservationToFind.RentCar.CarImg,
+                Year = reservationToFind.RentCar.Year,
+                TransimssionType = reservationToFind.RentCar.TransmissionType.ToString(),
+                FirstName = reservationToFind.FirstName,
+                LastName = reservationToFind.LastName,
+            };
+            return reservationInfoViewModel;
+        }
         private async Task<int> GetRoomId(int hotelId, string roomType, DateTime startDate, DateTime endDate)
         {
             ICollection<Room> roomsWithParticularType = await bookingContext

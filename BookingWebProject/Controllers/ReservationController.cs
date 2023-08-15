@@ -139,5 +139,23 @@
                 return RedirectToAction("Index", "Home");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            if (!await reservationService.IsReservationExistAsync(id))
+            {
+                return NotFound();
+            }
+            try
+            {
+                ReservationInfoViewModel reservationInfo = await reservationService.GetReservationByIdAsync(id);
+                return View(reservationInfo);
+            }
+            catch (Exception)
+            {
+                TempData[ErrorMessage] = DefaultErrorMessage;
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }
