@@ -104,6 +104,11 @@ User menu state only with icons
 
 Too see more download the project and enjoy :)
 
+## Notes
+- When you creating or editing lattitude and longitude please enter a number with 17,15 digit precision.
+- Set your rooth path wnen you are creating or editing profile pictures
+
+
 ## Тechnologies I have used
 - C#
 - ASP.NET with MVC pattern
