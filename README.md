@@ -33,7 +33,7 @@ Moderator user can see all statistics about the app for example total reservatio
 
 
 ## Functuonality
-Authenticated users can see: hoome page, all hotle pages, all room pages, personalization page, user favorite hotels page, user reservation pages, all reservation pages and all car pages.
+Authenticated users can see: home page, all hotle pages, all room pages, personalization page, user favorite hotels page, user reservation pages, all reservation pages and all car pages.
 The anonymous ones ca see: home page, car pages and register, login pages.
 These are the registration and login pages
 
