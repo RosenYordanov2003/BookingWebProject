@@ -53,7 +53,7 @@ Hotels which are visualized are the hotels with the most reservations count.
 If user tries to reserve car or room from particular room type and (car or room) is already reserved warning message is visualized to the user with message: (Car or Room) is already reserved for this period.
 - For the room reservation all rooms by given type are checked for reservation that may cause а conflict with the dates which are given from the user.
 - Only not deleted room packages are available for the rooms and only not deleted room types are accessible for the users. If room type is deleted, all rooms by this type are automatically not available
-- If user search for not existing rent car, hotel or room type, NotFound response is returned with custom excpetion page for 404. (Change environment if you want to see custom error  pages)
+- If user searches for not existing rent car, hotel or room type, NotFound response is returned with custom excpetion page for 404. (Change environment if you want to see custom error  pages)
 - Hotel All, RentCar All, Hotel Details and some admin pages have pagination.
 RentCar All page
 
