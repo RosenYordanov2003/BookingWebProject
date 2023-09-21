@@ -8,6 +8,7 @@
     using Core.Models.Account;
     using Data;
     using static Common.GeneralAplicationConstants;
+    using Microsoft.EntityFrameworkCore;
 
     [Authorize]
     public class AccountController : Controller
@@ -41,6 +42,16 @@
         {
             if (!ModelState.IsValid)
             {
+                return View(registerViewModel);
+            }
+            if ( await bookingContext.Users.AnyAsync(u => u.UserName == registerViewModel.Username))
+            {
+                ModelState.AddModelError(nameof(registerViewModel.Username), "User with this username already exists");
+                return View(registerViewModel);
+            }
+            if (await bookingContext.Users.AnyAsync(u => u.Email == registerViewModel.Email))
+            {
+                ModelState.AddModelError(nameof(registerViewModel.Email), "User with this email already exists");
                 return View(registerViewModel);
             }
             var user = new User()
