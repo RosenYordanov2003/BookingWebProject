@@ -117,6 +117,8 @@ Too see more download the project and enjoy :)
 - JavaScript
 - Html
 - Css
+- NUnit
+- Moq
 - Ajax
 - Git
 
