@@ -17,7 +17,7 @@ Every user has a reservation history where are all user reservations and every r
 Admin user can modify: hotels, room basis, rooms, hotel benefits, room packages and cars.
 Admin user can see all statistics about the app for example total reservations made in the application and can see total hotel reservations count and total reservations tnaht include cars.
 Only the admin user can change the roles of other users.
-## Modeator
+## Moderator
 Moderator user can modify: hotels, room basis, rooms, hotel benefits, room packages and cars.
 Moderator user can see all statistics about the app for example total reservations made in the application and can see total hotel reservations count and total reservations that include cars.
 
@@ -32,7 +32,7 @@ Moderator user can see all statistics about the app for example total reservatio
 
 
 
-## Functuonality
+## Functionality
 Authenticated users can see: home page, all hotle pages, all room pages, personalization page, user favorite hotels page, user reservation pages, all reservation pages and all car pages.
 The anonymous ones ca see: home page, car pages and register, login pages.
 These are the registration and login pages
