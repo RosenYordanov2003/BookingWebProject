@@ -182,8 +182,6 @@
             Assert.IsTrue(hotels.SequenceEqual(hotels));
         }
 
-
-
         [Test]
         public void Error_With404StatusCode_ReturnsError404View()
         {

@@ -25,18 +25,27 @@ body {
 
 .form-container {
     position: absolute;
-    max-height: 90vh;
-    width: 95%;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 3rem;
+    margin: 3rem 1rem 3rem 0rem;
     position: relative;
     z-index: 2;
 }
+.register-form{
+    backdrop-filter:blur(8px);
+    background: transparent;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    border: 1px solid white;
+    width: 40%;
+}
+
+
 
 .content-section {
-    width: 60%;
+    width: 50%;
 }
 
 .content-title {
@@ -80,7 +89,7 @@ span {
     border: none;
     border-bottom: 2px solid white;
     background-color: transparent;
-    width: 300px;
+    width: 90%;
     font-size: 1.3rem;
     color: white;
 }
@@ -91,7 +100,7 @@ span {
     font-size: 1.2rem;
     color: #ff8f00;
     margin-top: 1.6rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem 0rem;
     width: 90%;
     padding: 1rem 0rem 1rem 0rem;
     border-radius: 8px;

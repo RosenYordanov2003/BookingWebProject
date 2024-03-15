@@ -19,7 +19,6 @@ function changeImg(event) {
         event.target.src = secondPicturesPath[index];
         event.target.style.opacity = 1;
     }, 200);
-
 }
 
 function restoreImg(event) {

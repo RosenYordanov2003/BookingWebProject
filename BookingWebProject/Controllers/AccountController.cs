@@ -3,12 +3,15 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
+    using System.Net.Mail;
+    using System.Net;
     using Microsoft.AspNetCore.Identity;
     using Infrastructure.Data.Models;
     using Core.Models.Account;
     using Data;
     using static Common.GeneralAplicationConstants;
     using Microsoft.EntityFrameworkCore;
+    using System.Text;
 
     [Authorize]
     public class AccountController : Controller
@@ -44,33 +47,34 @@
             {
                 return View(registerViewModel);
             }
-            if ( await bookingContext.Users.AnyAsync(u => u.UserName == registerViewModel.Username))
-            {
-                ModelState.AddModelError(nameof(registerViewModel.Username), "User with this username already exists");
-                return View(registerViewModel);
-            }
-            if (await bookingContext.Users.AnyAsync(u => u.Email == registerViewModel.Email))
-            {
-                ModelState.AddModelError(nameof(registerViewModel.Email), "User with this email already exists");
-                return View(registerViewModel);
-            }
-            var user = new User()
+            //if ( await bookingContext.Users.AnyAsync(u => u.UserName == registerViewModel.Username))
+            //{
+            //    ModelState.AddModelError(nameof(registerViewModel.Username), "User with this username already exists");
+            //    return View(registerViewModel);
+            //}
+            //if (await bookingContext.Users.AnyAsync(u => u.Email == registerViewModel.Email))
+            //{
+            //    ModelState.AddModelError(nameof(registerViewModel.Email), "User with this email already exists");
+            //    return View(registerViewModel);
+            //}
+            User user = new User()
             {
                 Email = registerViewModel.Email,
                 UserName = registerViewModel.Username
             };
-            var result = await userManager.CreateAsync(user, registerViewModel.Password);
-            if (result.Succeeded)
+            //var result = await userManager.CreateAsync(user, registerViewModel.Password);
+            if (/*result.Succeeded*/ true)
             {
                 memoryCache.Remove(AdminUsersCacheKey);
                 return RedirectToAction(nameof(Login));
             }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
+            //foreach (var error in result.Errors)
+            //{
+            //    ModelState.AddModelError("", error.Description);
+            //}
             return View(registerViewModel);
         }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = "")
