@@ -37,9 +37,10 @@ Authenticated users can see: home page, all hotle pages, all room pages, persona
 The anonymous ones ca see: home page, car pages and register, login pages.
 These are the registration and login pages
 
-![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/65ed8384-b8db-459b-911a-02b605290e8b)
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/c38867af-f6ff-456b-9890-2b8c932743b4)
 
-![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/66c59eb0-3f4d-40e5-8595-ef352d9ae3e2)
+![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/4040166a-54d8-46bf-9753-5b4e7d6b2451)
+
 
 This is the Home Page: 
 
