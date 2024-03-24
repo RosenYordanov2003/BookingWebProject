@@ -159,6 +159,7 @@ section:not(:last-of-type) {
   font-size: 1.6rem;
   color: white;
   font-weight: bold;
+  margin-top: 2rem;
 }
 
 .create-account-msg a {

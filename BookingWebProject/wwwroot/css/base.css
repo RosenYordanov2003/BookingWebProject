@@ -10,6 +10,7 @@
 
 body {
     margin: 0px;
+    overflow-x:hidden;
 }
 
 header {
@@ -142,13 +143,11 @@ header {
     justify-content: flex-start;
     gap: 1.2rem;
     padding: 4rem 2rem;
-    transition: height 0.5s ease all;
+    transition: 0.5s ease-in all;
     list-style: none;
     z-index: 10;
 }
-.drop-down-container{
-    overflow-y: scroll;
-}
+
 
 .drop-down-menu li {
     border-bottom: 2px solid black;
@@ -174,8 +173,7 @@ header {
 }
 
 .not-active {
-    height: 0px;
-    display: none;
+    transform: translateX(200%);
 }
 
 #user-icon {
