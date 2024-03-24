@@ -73,7 +73,7 @@ Hotel All page
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/a28e918d-b40d-43b2-a96e-b7de9f27ad99)
 
-I have used Leaflet appi for visualizing hotel location, also for car location where car have to be picked up.
+I have used Leaflet API for visualizing hotel location, also for car location where car have to be picked up.
 
 ![image](https://github.com/RosenYordanov2003/BookingWebProject/assets/107473016/7d055f37-1a19-4ddd-a5c4-93013dfb69b1)
 
